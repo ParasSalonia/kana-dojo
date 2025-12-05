@@ -61,6 +61,21 @@ const nextConfig: NextConfig = {
   // Skip ESLint during dev builds
   eslint: {
     ignoreDuringBuilds: isDev
+  },
+
+  // Cache headers for static assets
+  async headers() {
+    return [
+      {
+        source: '/sounds/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      }
+    ];
   }
 };
 

@@ -1,82 +1,71 @@
 'use client';
-import { useCallback } from 'react';
-import useSound from 'use-sound';
+import { useCallback, useRef, useMemo } from 'react';
 import { Random } from 'random-js';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
 
 const random = new Random();
 
 const clickSoundUrls = [
-  /* '/sounds/click/click9/click9_1.wav',
-  '/sounds/click/click9/click9_2.wav',
-  '/sounds/click/click9/click9_3.wav',
-  '/sounds/click/click9/click9_4.wav',
-  '/sounds/click/click9/click9_5.wav'
- */
   '/sounds/click/click4/click4_11.wav',
   '/sounds/click/click4/click4_22.wav',
   '/sounds/click/click4/click4_33.wav',
   '/sounds/click/click4/click4_44.wav'
 ];
 
+// Lazy audio loader with caching
+const useAudioLoader = (url: string, volume: number = 1) => {
+  const silentMode = usePreferencesStore(state => state.silentMode);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const play = useCallback(() => {
+    if (silentMode) return;
+
+    if (!audioRef.current) {
+      audioRef.current = new Audio(url);
+      audioRef.current.volume = volume;
+    }
+
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch(() => {
+      // Ignore autoplay errors
+    });
+  }, [url, volume, silentMode]);
+
+  return play;
+};
+
 export const useClick = () => {
   const silentMode = usePreferencesStore(state => state.silentMode);
-
-  // Instead of mapping, call each useSound explicitly:
-  const [play1] = useSound(clickSoundUrls[0], {
-    volume: 1,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
-  const [play2] = useSound(clickSoundUrls[1], {
-    volume: 1,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
-  const [play3] = useSound(clickSoundUrls[2], {
-    volume: 1,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
-  const [play4] = useSound(clickSoundUrls[3], {
-    volume: 1,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
+  const audioCache = useRef<Map<string, HTMLAudioElement>>(new Map());
 
   const playClick = useCallback(() => {
-    const playFns = [play1, play2, play3, play4];
-    const idx = random.integer(0, playFns.length - 1);
-    playFns[idx]();
-  }, [play1, play2, play3, play4]);
+    if (silentMode) return;
+
+    const url = clickSoundUrls[random.integer(0, clickSoundUrls.length - 1)];
+
+    let audio = audioCache.current.get(url);
+    if (!audio) {
+      audio = new Audio(url);
+      audio.volume = 1;
+      audioCache.current.set(url, audio);
+    }
+
+    audio.currentTime = 0;
+    audio.play().catch(() => {
+      // Ignore autoplay errors
+    });
+  }, [silentMode]);
 
   return { playClick };
 };
 
 export const useCorrect = () => {
-  const silentMode = usePreferencesStore(state => state.silentMode);
-
-  const successSoundUrl = '/sounds/correct.wav';
-
-  const [play] = useSound(successSoundUrl, {
-    volume: 0.7,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
-
+  const play = useAudioLoader('/sounds/correct.wav', 0.7);
   return { playCorrect: play };
 };
 
 export const useError = () => {
-  const silentMode = usePreferencesStore(state => state.silentMode);
-
-  const errorSoundUrl = '/sounds/error/error1/error1_1.wav';
-
-  const [play] = useSound(errorSoundUrl, {
-    volume: 1,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
+  const play = useAudioLoader('/sounds/error/error1/error1_1.wav', 1);
 
   const playErrorTwice = useCallback(() => {
     play();
@@ -90,15 +79,6 @@ export const useError = () => {
 };
 
 export const useLong = () => {
-  const silentMode = usePreferencesStore(state => state.silentMode);
-
-  const longSoundUrl = '/sounds/long.wav';
-
-  const [play] = useSound(longSoundUrl, {
-    volume: 0.2,
-    interrupt: true,
-    soundEnabled: !silentMode
-  });
-
+  const play = useAudioLoader('/sounds/long.wav', 0.2);
   return { playLong: play };
 };
