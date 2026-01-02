@@ -19,7 +19,10 @@ const StatCard = ({ value, label, index }: StatCardProps) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.1 * (index + 1) }}
-    className={clsx('p-6 text-center', cardBorderStyles)}
+    className={clsx(
+      'border border-[var(--border-color)] p-6 text-center',
+      cardBorderStyles
+    )}
   >
     <div className='mb-1 text-3xl font-bold text-[var(--main-color)]'>
       {value}

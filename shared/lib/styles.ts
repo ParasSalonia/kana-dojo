@@ -1,8 +1,6 @@
 import clsx from 'clsx';
 
-export const cardBorderStyles = clsx(
-  'rounded-xl bg-[var(--card-color)] border border-[var(--border-color)]'
-);
+export const cardBorderStyles = clsx('rounded-xl bg-[var(--card-color)]');
 
 export const buttonBorderStyles = clsx(
   'rounded-xl bg-[var(--card-color)] hover:cursor-pointer',
