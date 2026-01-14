@@ -242,6 +242,12 @@ const baseThemeSets: BaseThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: 'matcha-cream',
+        backgroundColor: 'oklch(92.0% 0.025 140.0 / 1)',
+        mainColor: 'oklch(55.0% 0.180 140.0 / 1)',
+        secondaryColor: 'oklch(70.0% 0.120 80.0 / 1)'
+      },
+      {
         id: 'bamboo-mist',
         backgroundColor: 'oklch(24.0% 0.032 150.0 / 1)',
         mainColor: 'oklch(78.0% 0.145 145.0 / 1)',
