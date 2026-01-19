@@ -12,7 +12,7 @@ export interface HistoryFilters {
  */
 export function filterHistory(
   entries: TranslationEntry[],
-  filters: HistoryFilters
+  filters: HistoryFilters,
 ): TranslationEntry[] {
   let filtered = [...entries];
 
@@ -23,21 +23,22 @@ export function filterHistory(
       entry =>
         entry.sourceText.toLowerCase().includes(query) ||
         entry.translatedText.toLowerCase().includes(query) ||
-        (entry.romanization && entry.romanization.toLowerCase().includes(query))
+        (entry.romanization &&
+          entry.romanization.toLowerCase().includes(query)),
     );
   }
 
   // Source language filter
   if (filters.sourceLanguage !== 'all') {
     filtered = filtered.filter(
-      entry => entry.sourceLanguage === filters.sourceLanguage
+      entry => entry.sourceLanguage === filters.sourceLanguage,
     );
   }
 
   // Target language filter
   if (filters.targetLanguage !== 'all') {
     filtered = filtered.filter(
-      entry => entry.targetLanguage === filters.targetLanguage
+      entry => entry.targetLanguage === filters.targetLanguage,
     );
   }
 
@@ -47,7 +48,7 @@ export function filterHistory(
     const ranges = {
       today: 24 * 60 * 60 * 1000, // 1 day
       week: 7 * 24 * 60 * 60 * 1000, // 7 days
-      month: 30 * 24 * 60 * 60 * 1000 // 30 days
+      month: 30 * 24 * 60 * 60 * 1000, // 30 days
     };
 
     const rangeMs = ranges[filters.dateRange];
@@ -67,7 +68,7 @@ export function getDefaultFilters(): HistoryFilters {
     searchQuery: '',
     sourceLanguage: 'all',
     targetLanguage: 'all',
-    dateRange: 'all'
+    dateRange: 'all',
   };
 }
 
@@ -89,7 +90,7 @@ export function hasActiveFilters(filters: HistoryFilters): boolean {
 export function getFilterSummary(
   filters: HistoryFilters,
   totalCount: number,
-  filteredCount: number
+  filteredCount: number,
 ): string {
   if (!hasActiveFilters(filters)) {
     return `${totalCount} ${totalCount === 1 ? 'translation' : 'translations'}`;

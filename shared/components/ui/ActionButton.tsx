@@ -9,11 +9,11 @@ const actionButtonVariants = cva(
     variants: {
       colorScheme: {
         main: 'bg-[var(--main-color)] text-[var(--background-color)]',
-        secondary: 'bg-[var(--secondary-color)] text-[var(--background-color)]'
+        secondary: 'bg-[var(--secondary-color)] text-[var(--background-color)]',
       },
       borderColorScheme: {
         main: 'border-[var(--main-color-accent)]',
-        secondary: 'border-[var(--secondary-color-accent)]'
+        secondary: 'border-[var(--secondary-color-accent)]',
       },
       borderRadius: {
         sm: 'rounded-sm',
@@ -23,7 +23,7 @@ const actionButtonVariants = cva(
         '2xl': 'rounded-2xl',
         '3xl': 'rounded-3xl',
         '4xl': 'rounded-[2rem]',
-        full: 'rounded-full'
+        full: 'rounded-full',
       },
       borderBottomThickness: {
         0: 'border-b-0 active:border-b-0 active:translate-y-0',
@@ -36,16 +36,16 @@ const actionButtonVariants = cva(
         14: 'border-b-14 active:border-b-0 active:translate-y-[14px] active:mb-[14px]',
         16: 'border-b-16 active:border-b-0 active:translate-y-[16px] active:mb-[16px]',
         18: 'border-b-18 active:border-b-0 active:translate-y-[18px] active:mb-[18px]',
-        20: 'border-b-20 active:border-b-0 active:translate-y-[20px] active:mb-[20px]'
-      }
+        20: 'border-b-20 active:border-b-0 active:translate-y-[20px] active:mb-[20px]',
+      },
     },
     defaultVariants: {
       colorScheme: 'main',
       borderColorScheme: 'main',
       borderRadius: '2xl',
-      borderBottomThickness: 6
-    }
-  }
+      borderBottomThickness: 6,
+    },
+  },
 );
 
 export interface ActionButtonProps
@@ -71,7 +71,7 @@ const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const gradientClass = gradientReversed
       ? 'bg-gradient-to-r from-[var(--secondary-color)] to-[var(--main-color)]'
@@ -93,9 +93,9 @@ const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>(
             borderColorScheme: effectiveBorderColorScheme,
             borderRadius,
             borderBottomThickness,
-            className
+            className,
           }),
-          gradient && `${gradientClass} text-[var(--background-color)]`
+          gradient && `${gradientClass} text-[var(--background-color)]`,
         )}
         ref={ref}
         {...props}
@@ -103,7 +103,7 @@ const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 ActionButton.displayName = 'ActionButton';

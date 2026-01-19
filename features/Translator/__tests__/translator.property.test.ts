@@ -5,13 +5,13 @@ import {
   TranslationEntry,
   TranslationAPIError,
   TranslationAPIResponse,
-  getOppositeLanguage
+  getOppositeLanguage,
 } from '../types';
 import {
   loadHistory,
   saveEntry,
   deleteEntry,
-  clearAll
+  clearAll,
 } from '../services/historyService';
 import { ERROR_CODES, getErrorMessage } from '../services/translationAPI';
 import useTranslatorStore from '../store/useTranslatorStore';
@@ -27,9 +27,9 @@ const translationEntryArb = fc.record({
   sourceLanguage: languageArb,
   targetLanguage: languageArb,
   romanization: fc.option(fc.string({ minLength: 1, maxLength: 50 }), {
-    nil: undefined
+    nil: undefined,
   }),
-  timestamp: fc.integer({ min: 0, max: Date.now() + 1000000 })
+  timestamp: fc.integer({ min: 0, max: Date.now() + 1000000 }),
 });
 
 /**
@@ -43,7 +43,7 @@ describe('Property 4: Japanese output shows romanization', () => {
   // This mirrors the logic in TranslatorOutput component
   const shouldShowRomanization = (
     targetLanguage: Language,
-    romanization: string | null | undefined
+    romanization: string | null | undefined,
   ): boolean => {
     return targetLanguage === 'ja' && !!romanization;
   };
@@ -55,9 +55,9 @@ describe('Property 4: Japanese output shows romanization', () => {
         (romanization: string) => {
           const result = shouldShowRomanization('ja', romanization);
           expect(result).toBe(true);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -68,9 +68,9 @@ describe('Property 4: Japanese output shows romanization', () => {
         (romanization: string | null) => {
           const result = shouldShowRomanization('en', romanization);
           expect(result).toBe(false);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -81,9 +81,9 @@ describe('Property 4: Japanese output shows romanization', () => {
         (romanization: string | null | undefined) => {
           const result = shouldShowRomanization('ja', romanization);
           expect(result).toBe(false);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -102,9 +102,9 @@ describe('Property 4: Japanese output shows romanization', () => {
             romanization !== undefined &&
             romanization.length > 0;
           expect(result).toBe(expected);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });
@@ -132,7 +132,7 @@ describe('Translator Property Tests', () => {
             expect(targetLang).toBe('en');
           }
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -143,7 +143,7 @@ describe('Translator Property Tests', () => {
           const backToOriginal = getOppositeLanguage(opposite);
           expect(backToOriginal).toBe(lang);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -153,7 +153,7 @@ describe('Translator Property Tests', () => {
           const result = getOppositeLanguage(lang);
           expect(['en', 'ja']).toContain(result);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -199,9 +199,9 @@ describe('History Service Property Tests', () => {
             expect(savedEntry!.targetLanguage).toBe(entry.targetLanguage);
             expect(savedEntry!.timestamp).toBe(entry.timestamp);
             expect(savedEntry!.romanization).toBe(entry.romanization);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -235,7 +235,7 @@ describe('Property 7: History delete removes entry', () => {
         // Entry should no longer exist
         expect(history.some(e => e.id === entry.id)).toBe(false);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -250,7 +250,7 @@ describe('Property 7: History delete removes entry', () => {
           // Ensure unique IDs
           const uniqueEntries = entries.map((e, i) => ({
             ...e,
-            id: `${e.id}-${i}`
+            id: `${e.id}-${i}`,
           }));
 
           // Save all entries
@@ -272,9 +272,9 @@ describe('Property 7: History delete removes entry', () => {
           for (let i = 1; i < uniqueEntries.length; i++) {
             expect(history.some(e => e.id === uniqueEntries[i].id)).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });
@@ -296,7 +296,7 @@ describe('Property 8: Clear all empties history', () => {
           // Ensure unique IDs
           const uniqueEntries = entries.map((e, i) => ({
             ...e,
-            id: `${e.id}-${i}`
+            id: `${e.id}-${i}`,
           }));
 
           // Save all entries
@@ -316,9 +316,9 @@ describe('Property 8: Clear all empties history', () => {
 
           // History should be empty
           expect(history.length).toBe(0);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });
@@ -336,14 +336,14 @@ describe('Property 11: API errors show messages', () => {
     ERROR_CODES.API_ERROR,
     ERROR_CODES.AUTH_ERROR,
     ERROR_CODES.NETWORK_ERROR,
-    ERROR_CODES.OFFLINE
+    ERROR_CODES.OFFLINE,
   );
 
   // Arbitrary for generating TranslationAPIError objects
   const apiErrorArb = fc.record({
     code: errorCodeArb,
     message: fc.string({ minLength: 1, maxLength: 200 }),
-    status: fc.integer({ min: 0, max: 599 })
+    status: fc.integer({ min: 0, max: 599 }),
   }) as fc.Arbitrary<TranslationAPIError>;
 
   it('getErrorMessage always returns a non-empty string for known error codes', () => {
@@ -355,7 +355,7 @@ describe('Property 11: API errors show messages', () => {
         expect(typeof message).toBe('string');
         expect(message.length).toBeGreaterThan(0);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -373,7 +373,7 @@ describe('Property 11: API errors show messages', () => {
       '__defineGetter__',
       '__defineSetter__',
       '__lookupGetter__',
-      '__lookupSetter__'
+      '__lookupSetter__',
     ];
 
     fc.assert(
@@ -383,8 +383,8 @@ describe('Property 11: API errors show messages', () => {
           .filter(
             s =>
               !Object.values(ERROR_CODES).includes(
-                s as (typeof ERROR_CODES)[keyof typeof ERROR_CODES]
-              ) && !reservedProps.includes(s)
+                s as (typeof ERROR_CODES)[keyof typeof ERROR_CODES],
+              ) && !reservedProps.includes(s),
           ),
         (unknownCode: string) => {
           const message = getErrorMessage(unknownCode);
@@ -392,9 +392,9 @@ describe('Property 11: API errors show messages', () => {
           // Should return a non-empty fallback message
           expect(typeof message).toBe('string');
           expect(message.length).toBeGreaterThan(0);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -436,7 +436,7 @@ describe('Property 11: API errors show messages', () => {
         expect(error.status).toBeDefined();
         expect(typeof error.status).toBe('number');
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });
@@ -458,9 +458,9 @@ describe('Property 10: Character count accuracy', () => {
         (text: string) => {
           const count = getCharacterCount(text);
           expect(count).toBe(text.length);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -478,9 +478,9 @@ describe('Property 10: Character count accuracy', () => {
             .map(n => String.fromCharCode(n)), // Katakana
           fc
             .integer({ min: 0x4e00, max: 0x9faf })
-            .map(n => String.fromCharCode(n)) // CJK
+            .map(n => String.fromCharCode(n)), // CJK
         ),
-        { minLength: 0, maxLength: 500 }
+        { minLength: 0, maxLength: 500 },
       )
       .map(arr => arr.join(''));
 
@@ -489,7 +489,7 @@ describe('Property 10: Character count accuracy', () => {
         const count = getCharacterCount(text);
         expect(count).toBe(text.length);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -504,15 +504,15 @@ describe('Property 10: Character count accuracy', () => {
         fc
           .array(fc.constantFrom(' ', '\t', '\n', '\r'), {
             minLength: 0,
-            maxLength: 100
+            maxLength: 100,
           })
           .map(arr => arr.join('')),
         (whitespace: string) => {
           const count = getCharacterCount(whitespace);
           expect(count).toBe(whitespace.length);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });
@@ -529,7 +529,7 @@ describe('Translator Store Property Tests', () => {
       isLoading: false,
       error: null,
       isOffline: false,
-      history: []
+      history: [],
     });
   });
 
@@ -549,7 +549,7 @@ describe('Translator Store Property Tests', () => {
           (
             sourceText: string,
             translatedText: string,
-            sourceLang: Language
+            sourceLang: Language,
           ) => {
             const targetLang = getOppositeLanguage(sourceLang);
 
@@ -558,7 +558,7 @@ describe('Translator Store Property Tests', () => {
               sourceText,
               translatedText,
               sourceLanguage: sourceLang,
-              targetLanguage: targetLang
+              targetLanguage: targetLang,
             });
 
             // Perform swap
@@ -574,9 +574,9 @@ describe('Translator Store Property Tests', () => {
             // Text should be swapped
             expect(state.sourceText).toBe(translatedText);
             expect(state.translatedText).toBe(sourceText);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -589,7 +589,7 @@ describe('Translator Store Property Tests', () => {
           (
             sourceText: string,
             translatedText: string,
-            sourceLang: Language
+            sourceLang: Language,
           ) => {
             const targetLang = getOppositeLanguage(sourceLang);
 
@@ -598,7 +598,7 @@ describe('Translator Store Property Tests', () => {
               sourceText,
               translatedText,
               sourceLanguage: sourceLang,
-              targetLanguage: targetLang
+              targetLanguage: targetLang,
             });
 
             // Perform double swap
@@ -613,9 +613,9 @@ describe('Translator Store Property Tests', () => {
             expect(state.targetLanguage).toBe(targetLang);
             expect(state.sourceText).toBe(sourceText);
             expect(state.translatedText).toBe(translatedText);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -636,13 +636,13 @@ describe('Translator Store Property Tests', () => {
           (
             sourceText: string,
             translatedText: string,
-            romanization: string | null
+            romanization: string | null,
           ) => {
             // Set initial state with some content
             useTranslatorStore.setState({
               sourceText,
               translatedText,
-              romanization
+              romanization,
             });
 
             // Call clearInput
@@ -656,9 +656,9 @@ describe('Translator Store Property Tests', () => {
             expect(state.translatedText).toBe('');
             expect(state.romanization).toBeNull();
             expect(state.error).toBeNull();
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -679,7 +679,7 @@ describe('Translator Store Property Tests', () => {
             translatedText: 'different translation',
             sourceLanguage: entry.sourceLanguage === 'en' ? 'ja' : 'en',
             targetLanguage: entry.targetLanguage === 'en' ? 'ja' : 'en',
-            romanization: null
+            romanization: null,
           });
 
           // Restore from history entry
@@ -696,7 +696,7 @@ describe('Translator Store Property Tests', () => {
           expect(state.romanization).toBe(entry.romanization || null);
           expect(state.error).toBeNull();
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -721,7 +721,7 @@ describe('Property 1: Translation produces result', () => {
   // Arbitrary for valid TranslationAPIResponse
   const validResponseArb: fc.Arbitrary<TranslationAPIResponse> = fc.record({
     translatedText: fc.string({ minLength: 1, maxLength: 5000 }),
-    detectedSourceLanguage: fc.option(languageArb, { nil: undefined })
+    detectedSourceLanguage: fc.option(languageArb, { nil: undefined }),
   });
 
   it('valid API response always has non-empty translatedText', () => {
@@ -732,7 +732,7 @@ describe('Property 1: Translation produces result', () => {
         expect(typeof response.translatedText).toBe('string');
         expect(response.translatedText.length).toBeGreaterThan(0);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -745,7 +745,7 @@ describe('Property 1: Translation produces result', () => {
         (
           sourceText: string,
           response: TranslationAPIResponse,
-          sourceLang: Language
+          sourceLang: Language,
         ) => {
           const targetLang = getOppositeLanguage(sourceLang);
 
@@ -759,7 +759,7 @@ describe('Property 1: Translation produces result', () => {
             isLoading: false,
             error: null,
             isOffline: false,
-            history: []
+            history: [],
           });
 
           // Simulate receiving a successful translation response
@@ -769,7 +769,7 @@ describe('Property 1: Translation produces result', () => {
             translatedText: response.translatedText,
             romanization: targetLang === 'ja' ? response.translatedText : null,
             isLoading: false,
-            error: null
+            error: null,
           });
 
           // Get new state
@@ -780,9 +780,9 @@ describe('Property 1: Translation produces result', () => {
           expect(state.translatedText.length).toBeGreaterThan(0);
           expect(state.isLoading).toBe(false);
           expect(state.error).toBeNull();
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -795,7 +795,7 @@ describe('Property 1: Translation produces result', () => {
         // Valid input must be within 5000 character limit
         expect(text.length).toBeLessThanOrEqual(5000);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -805,7 +805,7 @@ describe('Property 1: Translation produces result', () => {
         // translatedText must be a string
         expect(typeof response.translatedText).toBe('string');
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

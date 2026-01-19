@@ -5,7 +5,7 @@ import {
   MASTERED_MIN_ATTEMPTS,
   MASTERED_MIN_ACCURACY,
   NEEDS_PRACTICE_MIN_ATTEMPTS,
-  NEEDS_PRACTICE_MAX_ACCURACY
+  NEEDS_PRACTICE_MAX_ACCURACY,
 } from '../lib/classifyCharacter';
 
 describe('Character Classification', () => {
@@ -24,15 +24,15 @@ describe('Character Classification', () => {
             const minCorrect = Math.ceil(total * MASTERED_MIN_ACCURACY);
             const correct = fc.sample(
               fc.integer({ min: minCorrect, max: total }),
-              1
+              1,
             )[0];
             const incorrect = total - correct;
 
             const result = classifyCharacter(correct, incorrect);
             expect(result).toBe('mastered');
-          }
+          },
         ),
-        { numRuns: 25 }
+        { numRuns: 25 },
       );
     });
 
@@ -43,9 +43,9 @@ describe('Character Classification', () => {
           total => {
             const result = classifyCharacter(total, 0);
             expect(result).not.toBe('mastered');
-          }
+          },
         ),
-        { numRuns: 9 }
+        { numRuns: 9 },
       );
     });
   });
@@ -72,15 +72,15 @@ describe('Character Classification', () => {
 
             const correct = fc.sample(
               fc.integer({ min: 0, max: maxCorrect }),
-              1
+              1,
             )[0];
             const incorrect = total - correct;
 
             const result = classifyCharacter(correct, incorrect);
             expect(result).toBe('needs-practice');
-          }
+          },
         ),
-        { numRuns: 25 }
+        { numRuns: 25 },
       );
     });
 
@@ -91,9 +91,9 @@ describe('Character Classification', () => {
           total => {
             const result = classifyCharacter(0, total);
             expect(result).not.toBe('needs-practice');
-          }
+          },
         ),
-        { numRuns: 4 }
+        { numRuns: 4 },
       );
     });
   });

@@ -38,7 +38,7 @@ export const TRANSLATE_RATE_LIMIT_CONFIG: RateLimitConfig = {
   maxRequests: 10, // 10 requests per minute per IP
   windowMs: 60 * 1000, // 1 minute window
   dailyLimit: 200, // 200 requests per day per IP
-  maxTrackedIPs: 10000 // Track up to 10k unique IPs
+  maxTrackedIPs: 10000, // Track up to 10k unique IPs
 };
 
 // Stricter config for text analysis (since it's computationally expensive)
@@ -46,13 +46,13 @@ export const ANALYZE_RATE_LIMIT_CONFIG: RateLimitConfig = {
   maxRequests: 15, // 15 requests per minute per IP
   windowMs: 60 * 1000, // 1 minute window
   dailyLimit: 300, // 300 requests per day per IP
-  maxTrackedIPs: 10000
+  maxTrackedIPs: 10000,
 };
 
 // Global rate limiting (fallback when IP tracking fails)
 export const GLOBAL_RATE_LIMIT_CONFIG: RateLimitConfig = {
   maxRequests: 100, // 100 total requests per minute globally
-  windowMs: 60 * 1000
+  windowMs: 60 * 1000,
 };
 
 /**
@@ -96,7 +96,7 @@ export class RateLimiter {
       ) {
         // Don't track new IPs, but still allow the request with stricter global limiting
         console.warn(
-          `Rate limiter: Max tracked IPs (${this.config.maxTrackedIPs}) reached`
+          `Rate limiter: Max tracked IPs (${this.config.maxTrackedIPs}) reached`,
         );
         return this.checkGlobalLimit(now);
       }
@@ -104,7 +104,7 @@ export class RateLimiter {
       record = {
         timestamps: [],
         dailyCount: 0,
-        dailyResetAt: this.getNextMidnight(now)
+        dailyResetAt: this.getNextMidnight(now),
       };
       this.records.set(identifier, record);
     }
@@ -122,7 +122,7 @@ export class RateLimiter {
         remaining: 0,
         resetAt: record.dailyResetAt,
         retryAfter: Math.ceil((record.dailyResetAt - now) / 1000),
-        reason: 'daily_quota'
+        reason: 'daily_quota',
       };
     }
 
@@ -139,7 +139,7 @@ export class RateLimiter {
         remaining: 0,
         resetAt,
         retryAfter: Math.ceil((resetAt - now) / 1000),
-        reason: 'rate_limit'
+        reason: 'rate_limit',
       };
     }
 
@@ -151,7 +151,7 @@ export class RateLimiter {
     return {
       allowed: true,
       remaining: this.config.maxRequests - record.timestamps.length,
-      resetAt: now + this.config.windowMs
+      resetAt: now + this.config.windowMs,
     };
   }
 
@@ -166,7 +166,7 @@ export class RateLimiter {
       return {
         allowed: true,
         remaining: this.config.maxRequests,
-        resetAt: now + this.config.windowMs
+        resetAt: now + this.config.windowMs,
       };
     }
 
@@ -184,7 +184,7 @@ export class RateLimiter {
         allowed: false,
         remaining: 0,
         resetAt: record.dailyResetAt,
-        reason: 'daily_quota'
+        reason: 'daily_quota',
       };
     }
 
@@ -195,7 +195,7 @@ export class RateLimiter {
       resetAt:
         activeTimestamps.length > 0
           ? activeTimestamps[0] + this.config.windowMs
-          : now + this.config.windowMs
+          : now + this.config.windowMs,
     };
   }
 
@@ -205,12 +205,10 @@ export class RateLimiter {
   private checkGlobalLimit(now: number): RateLimitResult {
     const windowStart = now - GLOBAL_RATE_LIMIT_CONFIG.windowMs;
     this.globalTimestamps = this.globalTimestamps.filter(
-      ts => ts > windowStart
+      ts => ts > windowStart,
     );
 
-    if (
-      this.globalTimestamps.length >= GLOBAL_RATE_LIMIT_CONFIG.maxRequests
-    ) {
+    if (this.globalTimestamps.length >= GLOBAL_RATE_LIMIT_CONFIG.maxRequests) {
       const oldestInWindow = this.globalTimestamps[0];
       const resetAt = oldestInWindow + GLOBAL_RATE_LIMIT_CONFIG.windowMs;
       return {
@@ -218,7 +216,7 @@ export class RateLimiter {
         remaining: 0,
         resetAt,
         retryAfter: Math.ceil((resetAt - now) / 1000),
-        reason: 'global_limit'
+        reason: 'global_limit',
       };
     }
 
@@ -226,7 +224,7 @@ export class RateLimiter {
       allowed: true,
       remaining:
         GLOBAL_RATE_LIMIT_CONFIG.maxRequests - this.globalTimestamps.length,
-      resetAt: now + GLOBAL_RATE_LIMIT_CONFIG.windowMs
+      resetAt: now + GLOBAL_RATE_LIMIT_CONFIG.windowMs,
     };
   }
 
@@ -255,7 +253,7 @@ export class RateLimiter {
 
     // Clean global timestamps
     this.globalTimestamps = this.globalTimestamps.filter(
-      ts => ts > windowStart
+      ts => ts > windowStart,
     );
   }
 
@@ -279,13 +277,13 @@ export class RateLimiter {
     const now = Date.now();
     const windowStart = now - GLOBAL_RATE_LIMIT_CONFIG.windowMs;
     const activeGlobal = this.globalTimestamps.filter(
-      ts => ts > windowStart
+      ts => ts > windowStart,
     ).length;
 
     return {
       trackedIPs: this.records.size,
       globalRequestsInWindow: activeGlobal,
-      maxTrackedIPs: this.config.maxTrackedIPs || 0
+      maxTrackedIPs: this.config.maxTrackedIPs || 0,
     };
   }
 }

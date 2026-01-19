@@ -22,18 +22,18 @@ const MASTERY_CONFIG = {
   mastered: {
     label: 'Mastered',
     colorVar: '--main-color',
-    description: '90%+ accuracy'
+    description: '90%+ accuracy',
   },
   learning: {
     label: 'Learning',
     colorVar: '--secondary-color',
-    description: 'In progress'
+    description: 'In progress',
   },
   needsPractice: {
     label: 'Needs Practice',
     colorVar: '--border-color',
-    description: '<70% accuracy'
-  }
+    description: '<70% accuracy',
+  },
 } as const;
 
 /**
@@ -51,7 +51,7 @@ function calculatePercentage(value: number, total: number): number {
  */
 export default function MasteryDistributionChart({
   distribution,
-  className
+  className,
 }: MasteryDistributionChartProps) {
   const { mastered, learning, needsPractice, total } = distribution;
 
@@ -66,20 +66,20 @@ export default function MasteryDistributionChart({
       key: 'mastered',
       value: mastered,
       percent: masteredPercent,
-      config: MASTERY_CONFIG.mastered
+      config: MASTERY_CONFIG.mastered,
     },
     {
       key: 'learning',
       value: learning,
       percent: learningPercent,
-      config: MASTERY_CONFIG.learning
+      config: MASTERY_CONFIG.learning,
     },
     {
       key: 'needsPractice',
       value: needsPractice,
       percent: needsPracticePercent,
-      config: MASTERY_CONFIG.needsPractice
-    }
+      config: MASTERY_CONFIG.needsPractice,
+    },
   ];
 
   return (
@@ -91,7 +91,7 @@ export default function MasteryDistributionChart({
         'group relative overflow-hidden rounded-3xl',
         'border border-[var(--border-color)]/50 bg-[var(--card-color)]',
         'p-6',
-        className
+        className,
       )}
     >
       {/* Decorative element */}
@@ -150,7 +150,7 @@ export default function MasteryDistributionChart({
                           transition={{
                             duration: 0.8,
                             delay: 0.3 + idx * 0.1,
-                            ease: [0.25, 0.46, 0.45, 0.94]
+                            ease: [0.25, 0.46, 0.45, 0.94],
                           }}
                           style={{ backgroundColor: `var(${config.colorVar})` }}
                         >
@@ -165,7 +165,7 @@ export default function MasteryDistributionChart({
                             </motion.span>
                           )}
                         </motion.div>
-                      )
+                      ),
                   )}
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function MasteryDistributionChart({
                     'bg-[var(--background-color)]',
                     'border border-transparent',
                     'transition-colors duration-300',
-                    'hover:border-[var(--main-color)]/20'
+                    'hover:border-[var(--main-color)]/20',
                   )}
                 >
                   <div className='flex items-center gap-3'>
@@ -223,7 +223,7 @@ export default function MasteryDistributionChart({
  * Helper function to get mastery distribution display values for testing
  */
 export function getMasteryDistributionDisplayValues(
-  distribution: MasteryDistribution
+  distribution: MasteryDistribution,
 ): {
   mastered: number;
   learning: number;
@@ -248,6 +248,6 @@ export function getMasteryDistributionDisplayValues(
     masteredPercent: `${masteredPercent.toFixed(1)}%`,
     learningPercent: `${learningPercent.toFixed(1)}%`,
     needsPracticePercent: `${needsPracticePercent.toFixed(1)}%`,
-    percentageSum: masteredPercent + learningPercent + needsPracticePercent
+    percentageSum: masteredPercent + learningPercent + needsPracticePercent,
   };
 }

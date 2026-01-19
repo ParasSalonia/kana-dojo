@@ -138,12 +138,12 @@ Compares user strokes against reference data.
 interface StrokeValidator {
   calculateSimilarity(
     userStrokes: StrokeData[],
-    referenceStrokes: StrokeOrderData
+    referenceStrokes: StrokeOrderData,
   ): SimilarityResult;
 
   compareStrokeCounts(
     userCount: number,
-    referenceCount: number
+    referenceCount: number,
   ): StrokeCountComparison;
 }
 
@@ -173,7 +173,7 @@ Loads and caches stroke order data for characters.
 interface StrokeDataService {
   getStrokeOrder(
     character: string,
-    type: CharacterType
+    type: CharacterType,
   ): Promise<StrokeOrderData>;
   preloadKanaStrokes(): Promise<void>;
   preloadKanjiStrokes(level: JLPTLevel): Promise<void>;
@@ -450,9 +450,9 @@ describe('Calligraphy Properties', () => {
         (userStrokes, refStrokes) => {
           const result = calculateSimilarity(userStrokes, refStrokes);
           return result.score >= 0 && result.score <= 100;
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

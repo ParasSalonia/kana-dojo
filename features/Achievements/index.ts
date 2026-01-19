@@ -4,7 +4,7 @@ export type {
   AchievementCategory,
   AchievementRequirement,
   AchievementRequirementType,
-  AchievementRequirementAdditional
+  AchievementRequirementAdditional,
 } from './store/useAchievementStore';
 
 export { default as useAchievementStore } from './store/useAchievementStore';

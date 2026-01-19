@@ -34,7 +34,7 @@ export const achievementApi = {
     achievementEvents.emit({
       type: 'unlock',
       achievementId,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
-  }
+  },
 };

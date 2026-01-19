@@ -51,9 +51,9 @@ export async function analyzeText(text: string): Promise<AnalyzedToken[]> {
     const response = await fetch('/api/analyze-text', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ text })
+      body: JSON.stringify({ text }),
     });
 
     if (!response.ok) {
@@ -66,7 +66,7 @@ export async function analyzeText(text: string): Promise<AnalyzedToken[]> {
     // Cache the result
     clientCache.set(text, {
       tokens: data.tokens,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
     cleanupClientCache();
 

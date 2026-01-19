@@ -16,18 +16,18 @@ interface GauntletKanaProps {
 const GauntletKana: React.FC<GauntletKanaProps> = ({ onCancel }) => {
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
   const selectedGameModeKana = useKanaStore(
-    state => state.selectedGameModeKana
+    state => state.selectedGameModeKana,
   );
 
   const selectedKana = React.useMemo(
     () => flattenKanaGroups(kanaGroupIndices) as unknown as KanaCharacter[],
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
 
   // Convert indices to group names for display
   const selectedKanaGroups = React.useMemo(
     () => getSelectionLabels('kana', kanaGroupIndices).full.split(', '),
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
 
   const config: GauntletConfig<KanaCharacter> = {
@@ -51,7 +51,7 @@ const GauntletKana: React.FC<GauntletKanaProps> = ({ onCancel }) => {
       if (isReverse) {
         const correctAnswer = question.kana;
         const incorrectOptions = shuffle(
-          items.filter(item => item.kana !== correctAnswer)
+          items.filter(item => item.kana !== correctAnswer),
         )
           .slice(0, count - 1)
           .map(item => item.kana);
@@ -59,7 +59,7 @@ const GauntletKana: React.FC<GauntletKanaProps> = ({ onCancel }) => {
       }
       const correctAnswer = question.romaji;
       const incorrectOptions = shuffle(
-        items.filter(item => item.romaji !== correctAnswer)
+        items.filter(item => item.romaji !== correctAnswer),
       )
         .slice(0, count - 1)
         .map(item => item.romaji);
@@ -67,7 +67,7 @@ const GauntletKana: React.FC<GauntletKanaProps> = ({ onCancel }) => {
     },
     getCorrectOption: (question, isReverse) =>
       isReverse ? question.kana : question.romaji,
-    supportsReverseMode: true
+    supportsReverseMode: true,
   };
 
   return <Gauntlet config={config} onCancel={onCancel} />;

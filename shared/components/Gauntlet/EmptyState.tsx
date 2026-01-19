@@ -35,7 +35,7 @@ export default function EmptyState({ dojoType, dojoLabel }: EmptyStateProps) {
           'rounded-2xl transition-colors duration-200',
           'bg-[var(--main-color)] text-[var(--background-color)]',
           'border-b-4 border-[var(--main-color-accent)]',
-          'hover:opacity-90'
+          'hover:opacity-90',
         )}
       >
         <ArrowLeft size={20} />

@@ -33,7 +33,7 @@ export function useGameEngine<T>({
   content,
   mode,
   adapter,
-  contentType
+  contentType,
 }: GameEngineConfig<T>): GameState<T> {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
@@ -69,7 +69,7 @@ export function useGameEngine<T>({
       setQuestionsAnswered(prev => prev + 1);
       return isCorrect;
     },
-    [currentItem, adapter, mode, contentType]
+    [currentItem, adapter, mode, contentType],
   );
 
   const nextQuestion = useCallback(() => {
@@ -86,6 +86,6 @@ export function useGameEngine<T>({
     questionsAnswered,
     handleAnswer,
     nextQuestion,
-    isComplete
+    isComplete,
   };
 }

@@ -20,7 +20,7 @@ interface IKanjiState {
   addKanjiObjs: (kanjis: IKanjiObj[]) => void;
   clearKanjiObjs: () => void;
   setSelectedKanjiCollection: (
-    collection: 'n5' | 'n4' | 'n3' | 'n2' | 'n1'
+    collection: 'n5' | 'n4' | 'n3' | 'n2' | 'n1',
   ) => void;
   setSelectedKanjiSets: (sets: string[]) => void;
   clearKanjiSets: () => void;
@@ -36,7 +36,7 @@ const sameKanjiArray = (a: IKanjiObj[], b: IKanjiObj[]) =>
 const toggleKanji = (array: IKanjiObj[], kanjiObj: IKanjiObj): IKanjiObj[] => {
   if (!kanjiObj || !kanjiObj.kanjiChar) return array;
   const kanjiIndex = array.findIndex(
-    item => item.kanjiChar === kanjiObj.kanjiChar
+    item => item.kanjiChar === kanjiObj.kanjiChar,
   );
   if (kanjiIndex >= 0) {
     if (array.length === 1) return [];
@@ -47,7 +47,7 @@ const toggleKanji = (array: IKanjiObj[], kanjiObj: IKanjiObj): IKanjiObj[] => {
 
 const toggleKanjis = (
   array: IKanjiObj[],
-  kanjiObjects: IKanjiObj[]
+  kanjiObjects: IKanjiObj[],
 ): IKanjiObj[] => {
   if (!kanjiObjects.length) return array;
 
@@ -67,7 +67,7 @@ const toggleKanjis = (
   const incomingChars = new Set(dedupIncoming.map(item => item.kanjiChar));
 
   const allPresent = dedupIncoming.every(obj =>
-    currentChars.has(obj.kanjiChar)
+    currentChars.has(obj.kanjiChar),
   );
   if (allPresent) {
     let changed = false;
@@ -130,9 +130,9 @@ const useKanjiStore = create<IKanjiState>(set => ({
     set(state => ({
       collapsedRowsByUnit: {
         ...state.collapsedRowsByUnit,
-        [unit]: rows
-      }
-    }))
+        [unit]: rows,
+      },
+    })),
 }));
 
 export default useKanjiStore;

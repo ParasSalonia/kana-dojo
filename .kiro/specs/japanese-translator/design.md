@@ -337,8 +337,8 @@ export const metadata: Metadata = {
     'romaji translator',
     'hiragana translator',
     'katakana translator',
-    'free japanese translator'
-  ]
+    'free japanese translator',
+  ],
   // ... additional metadata
 };
 ```

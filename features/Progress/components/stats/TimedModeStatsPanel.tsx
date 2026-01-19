@@ -27,7 +27,7 @@ export interface TimedModeStatsPanelProps {
 const CONTENT_TABS: { value: ContentType; label: string }[] = [
   { value: 'kana', label: 'Kana' },
   { value: 'kanji', label: 'Kanji' },
-  { value: 'vocabulary', label: 'Vocab' }
+  { value: 'vocabulary', label: 'Vocab' },
 ];
 
 /**
@@ -38,7 +38,7 @@ function StatItem({
   label,
   value,
   subValue,
-  index
+  index,
 }: {
   icon: typeof Clock;
   label: string;
@@ -56,7 +56,7 @@ function StatItem({
         'bg-[var(--background-color)]',
         'border border-transparent',
         'transition-colors duration-300',
-        'hover:border-[var(--main-color)]/20'
+        'hover:border-[var(--main-color)]/20',
       )}
     >
       <div className='flex items-center gap-4'>
@@ -66,7 +66,7 @@ function StatItem({
             'bg-gradient-to-br from-[var(--main-color)]/10 to-[var(--secondary-color)]/5',
             'text-[var(--main-color)]',
             'transition-colors duration-300',
-            'group-hover/item:from-[var(--main-color)]/15 group-hover/item:to-[var(--secondary-color)]/10'
+            'group-hover/item:from-[var(--main-color)]/15 group-hover/item:to-[var(--secondary-color)]/10',
           )}
         >
           <Icon className='h-5 w-5' />
@@ -115,7 +115,7 @@ function ContentTypeStats({ stats }: { stats: TimedModeStats }) {
     { icon: Target, label: 'Correct', value: stats.correct },
     { icon: Clock, label: 'Wrong', value: stats.wrong },
     { icon: Zap, label: 'Streak', value: stats.streak },
-    { icon: Trophy, label: 'Best', value: stats.bestStreak }
+    { icon: Trophy, label: 'Best', value: stats.bestStreak },
   ];
 
   return (
@@ -151,14 +151,14 @@ export default function BlitzStatsPanel({
   kanaStats,
   kanjiStats,
   vocabularyStats,
-  className
+  className,
 }: TimedModeStatsPanelProps) {
   const [activeTab, setActiveTab] = useState<ContentType>('kana');
 
   const statsMap: Record<ContentType, TimedModeStats> = {
     kana: kanaStats,
     kanji: kanjiStats,
-    vocabulary: vocabularyStats
+    vocabulary: vocabularyStats,
   };
 
   const currentStats = statsMap[activeTab];
@@ -172,7 +172,7 @@ export default function BlitzStatsPanel({
         'group relative overflow-hidden rounded-3xl',
         'border border-[var(--border-color)]/50 bg-[var(--card-color)]',
         'p-6',
-        className
+        className,
       )}
     >
       {/* Decorative gradient */}
@@ -213,7 +213,7 @@ export default function BlitzStatsPanel({
                       transition={{
                         type: 'spring',
                         stiffness: 300,
-                        damping: 30
+                        damping: 30,
                       }}
                     />
                   )}
@@ -223,7 +223,7 @@ export default function BlitzStatsPanel({
                       'relative z-10 cursor-pointer rounded-2xl px-5 pt-2 pb-4 text-sm font-semibold transition-colors duration-300',
                       isSelected
                         ? 'text-[var(--background-color)]'
-                        : 'text-[var(--secondary-color)]/70 hover:text-[var(--main-color)]'
+                        : 'text-[var(--secondary-color)]/70 hover:text-[var(--main-color)]',
                     )}
                   >
                     {tab.label}
@@ -268,6 +268,6 @@ export function getTimedModeDisplayValues(stats: TimedModeStats): {
     streak: stats.streak,
     bestStreak: stats.bestStreak,
     accuracy: `${stats.accuracy.toFixed(1)}%`,
-    total: stats.correct + stats.wrong
+    total: stats.correct + stats.wrong,
   };
 }

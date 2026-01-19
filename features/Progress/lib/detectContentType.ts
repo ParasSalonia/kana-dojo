@@ -109,7 +109,7 @@ export function detectContentType(character: string): ContentType {
  */
 export function filterByContentType(
   characters: string[],
-  contentType: ContentType
+  contentType: ContentType,
 ): string[] {
   return characters.filter(char => detectContentType(char) === contentType);
 }

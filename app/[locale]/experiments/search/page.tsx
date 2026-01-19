@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Kana Search - Grid Challenge | KanaDojo',
   description:
-    'Find the target Japanese character in a grid of similar-looking ones.'
+    'Find the target Japanese character in a grid of similar-looking ones.',
 };
 
 export default function SearchPage() {

@@ -19,8 +19,8 @@ export function LanguageSelector() {
     <select
       value={currentLocale}
       onChange={e => changeLocale(e.target.value as Locale)}
-      className="px-3 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
-      aria-label="Select language"
+      className='rounded-lg border bg-white px-3 py-2 dark:border-gray-700 dark:bg-gray-800'
+      aria-label='Select language'
     >
       {routing.locales.map(locale => (
         <option key={locale} value={locale}>

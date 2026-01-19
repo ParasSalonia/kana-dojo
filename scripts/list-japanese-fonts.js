@@ -17,7 +17,7 @@ const fontTypesPath = path.join(
   'font',
   'dist',
   'google',
-  'index.d.ts'
+  'index.d.ts',
 );
 
 try {
@@ -59,7 +59,7 @@ try {
       'BIZ_UD',
       'Rampart',
       'WDXL_Lubrifont',
-      'IBM_Plex_Sans_JP'
+      'IBM_Plex_Sans_JP',
     ];
 
     const japanesePatterns = [
@@ -88,11 +88,11 @@ try {
       /^Mochiy_/,
       /^Rampart_/,
       /^Murecho/,
-      /^WDXL_Lubrifont/
+      /^WDXL_Lubrifont/,
     ];
 
     const japaneseFonts = allFonts.filter(font =>
-      japanesePatterns.some(pattern => pattern.test(font))
+      japanesePatterns.some(pattern => pattern.test(font)),
     );
 
     console.log('\n=== Japanese Fonts in next/font/google ===\n');
@@ -103,7 +103,7 @@ try {
 
     console.log('\n=== Import Statement ===\n');
     console.log(
-      `import {\n  ${japaneseFonts.join(',\n  ')}\n} from 'next/font/google';`
+      `import {\n  ${japaneseFonts.join(',\n  ')}\n} from 'next/font/google';`,
     );
   }
 } catch (error) {

@@ -68,13 +68,13 @@ const usePreferencesStore = create<PreferencesState>()(
 
       // Theme preview
       themePreview: false,
-      setThemePreview: enabled => set({ themePreview: enabled })
+      setThemePreview: enabled => set({ themePreview: enabled }),
     }),
 
     {
-      name: 'theme-storage'
-    }
-  )
+      name: 'theme-storage',
+    },
+  ),
 );
 
 export default usePreferencesStore;

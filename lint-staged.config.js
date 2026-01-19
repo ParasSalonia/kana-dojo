@@ -11,5 +11,5 @@ export default {
 
   // TypeScript type checking on the entire project when TS files change
   // This runs tsc on the whole project because type errors can cascade
-  '*.{ts,tsx}': () => 'tsc --noEmit'
+  '*.{ts,tsx}': () => 'tsc --noEmit',
 };

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import useAchievementStore, {
-  ACHIEVEMENTS
+  ACHIEVEMENTS,
 } from '@/features/Achievements/store/useAchievementStore';
 import { useStatsStore } from '@/features/Progress';
 import { useClick } from '@/shared/hooks/useAudio';
@@ -15,7 +15,7 @@ export const useAchievementProgress = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryId>('all');
 
   const unlockedAchievements = useAchievementStore(
-    state => state.unlockedAchievements
+    state => state.unlockedAchievements,
   );
   const totalPoints = useAchievementStore(state => state.totalPoints);
   const level = useAchievementStore(state => state.level);
@@ -54,7 +54,7 @@ export const useAchievementProgress = () => {
 
       return Math.min((current / target) * 100, 100);
     },
-    [stats.allTimeStats]
+    [stats.allTimeStats],
   );
 
   /**
@@ -64,7 +64,7 @@ export const useAchievementProgress = () => {
     selectedCategory === 'all'
       ? ACHIEVEMENTS
       : ACHIEVEMENTS.filter(
-          achievement => achievement.category === selectedCategory
+          achievement => achievement.category === selectedCategory,
         );
 
   const unlockedCount = Object.keys(unlockedAchievements).length;
@@ -79,7 +79,7 @@ export const useAchievementProgress = () => {
       playClick();
       setSelectedCategory(categoryId);
     },
-    [playClick]
+    [playClick],
   );
 
   /**
@@ -92,11 +92,11 @@ export const useAchievementProgress = () => {
           ? ACHIEVEMENTS
           : ACHIEVEMENTS.filter(a => a.category === categoryId);
       const categoryUnlocked = categoryAchievements.filter(
-        a => unlockedAchievements[a.id]
+        a => unlockedAchievements[a.id],
       ).length;
       return { total: categoryAchievements.length, unlocked: categoryUnlocked };
     },
-    [unlockedAchievements]
+    [unlockedAchievements],
   );
 
   return {
@@ -113,6 +113,6 @@ export const useAchievementProgress = () => {
     // Actions
     handleCategorySelect,
     getAchievementProgress,
-    getCategoryStats
+    getCategoryStats,
   };
 };

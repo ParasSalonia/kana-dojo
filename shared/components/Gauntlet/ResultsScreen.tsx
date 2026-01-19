@@ -15,7 +15,7 @@ import {
   ChevronUp,
   Skull,
   Crown,
-  Sparkles
+  Sparkles,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { DIFFICULTY_CONFIG, type GauntletSessionStats } from './types';
@@ -35,7 +35,7 @@ export default function ResultsScreen({
   stats,
   isNewBest,
   onRestart,
-  onChangeSettings
+  onChangeSettings,
 }: ResultsScreenProps) {
   const { playClick } = useClick();
   const [showCharacterBreakdown, setShowCharacterBreakdown] = useState(false);
@@ -50,7 +50,7 @@ export default function ResultsScreen({
       confetti({
         particleCount: 100,
         spread: 70,
-        origin: { y: 0.6 }
+        origin: { y: 0.6 },
       });
 
       if (isNewBest) {
@@ -59,13 +59,13 @@ export default function ResultsScreen({
             particleCount: 50,
             angle: 60,
             spread: 55,
-            origin: { x: 0 }
+            origin: { x: 0 },
           });
           confetti({
             particleCount: 50,
             angle: 120,
             spread: 55,
-            origin: { x: 1 }
+            origin: { x: 1 },
           });
         }, 250);
       }
@@ -80,7 +80,7 @@ export default function ResultsScreen({
         stats.difficulty,
         stats.repetitionsPerChar,
         stats.gameMode,
-        stats.totalCharacters
+        stats.totalCharacters,
       );
       if (best && !isNewBest) {
         setPreviousBest(best);
@@ -97,7 +97,7 @@ export default function ResultsScreen({
       accuracy:
         data.correct + data.wrong > 0
           ? data.correct / (data.correct + data.wrong)
-          : 0
+          : 0,
     }))
     .sort((a, b) => a.accuracy - b.accuracy);
 
@@ -132,7 +132,7 @@ export default function ResultsScreen({
               <p className='mt-2 text-[var(--muted-color)]'>
                 You got{' '}
                 {Math.round(
-                  (stats.questionsCompleted / stats.totalQuestions) * 100
+                  (stats.questionsCompleted / stats.totalQuestions) * 100,
                 )}
                 % through the gauntlet
               </p>
@@ -145,7 +145,7 @@ export default function ResultsScreen({
           <span
             className={clsx(
               'inline-flex items-center gap-2 rounded-full px-4 py-1',
-              'bg-[var(--card-color)] text-sm text-[var(--secondary-color)]'
+              'bg-[var(--card-color)] text-sm text-[var(--secondary-color)]',
             )}
           >
             <span>{difficultyConfig.icon}</span>
@@ -278,14 +278,14 @@ export default function ResultsScreen({
                             'text-sm font-medium',
                             accuracy >= 0.8
                               ? 'text-[var(--main-color)]'
-                              : 'text-[var(--secondary-color)]'
+                              : 'text-[var(--secondary-color)]',
                           )}
                         >
                           {Math.round(accuracy * 100)}%
                         </span>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -304,7 +304,7 @@ export default function ResultsScreen({
                 'flex flex-1 items-center justify-center gap-2 rounded-2xl py-3',
                 'bg-[var(--main-color)] text-[var(--background-color)]',
                 'border-b-4 border-[var(--main-color-accent)]',
-                'transition-opacity hover:opacity-90'
+                'transition-opacity hover:opacity-90',
               )}
             >
               <RotateCcw size={20} />
@@ -320,7 +320,7 @@ export default function ResultsScreen({
                 'flex flex-1 items-center justify-center gap-2 rounded-2xl py-3',
                 'bg-[var(--secondary-color)] text-[var(--background-color)]',
                 'border-b-4 border-[var(--secondary-color-accent)]',
-                'transition-opacity hover:opacity-90'
+                'transition-opacity hover:opacity-90',
               )}
             >
               Settings
@@ -334,7 +334,7 @@ export default function ResultsScreen({
                 'flex w-full items-center justify-center gap-2 rounded-2xl py-3',
                 'bg-[var(--card-color)] text-[var(--secondary-color)]',
                 'border-b-4 border-[var(--border-color)]',
-                'transition-colors hover:bg-[var(--border-color)]/50'
+                'transition-colors hover:bg-[var(--border-color)]/50',
               )}
             >
               <ArrowLeft size={20} />

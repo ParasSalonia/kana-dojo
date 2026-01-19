@@ -31,10 +31,10 @@ const DailyHaiku = () => {
   if (!isMounted || !haiku) return null;
 
   return (
-    <div className='flex flex-col items-center justify-center gap-8 flex-1 min-h-[80vh]'>
+    <div className='flex min-h-[80vh] flex-1 flex-col items-center justify-center gap-8'>
       {/* Title */}
       <div className='text-center'>
-        <h1 className='text-xl md:text-2xl text-[var(--secondary-color)]'>
+        <h1 className='text-xl text-[var(--secondary-color)] md:text-2xl'>
           {isDaily ? "Today's Haiku" : 'Random Haiku'}
         </h1>
       </div>
@@ -42,9 +42,9 @@ const DailyHaiku = () => {
       {/* Haiku card */}
       <div
         className={clsx(
-          'bg-[var(--card-color)] border border-[var(--border-color)]',
-          'rounded-2xl p-8 md:p-12 w-full max-w-xl',
-          'flex flex-col items-center gap-6'
+          'border border-[var(--border-color)] bg-[var(--card-color)]',
+          'w-full max-w-xl rounded-2xl p-8 md:p-12',
+          'flex flex-col items-center gap-6',
         )}
       >
         {/* Japanese lines */}
@@ -53,12 +53,12 @@ const DailyHaiku = () => {
             <div key={i} className='text-center'>
               <p
                 lang='ja'
-                className='text-2xl md:text-3xl text-[var(--main-color)] tracking-wider'
+                className='text-2xl tracking-wider text-[var(--main-color)] md:text-3xl'
               >
                 {line}
               </p>
               {showRomanji && (
-                <p className='text-sm text-[var(--secondary-color)] mt-1 italic'>
+                <p className='mt-1 text-sm text-[var(--secondary-color)] italic'>
                   {haiku.romanji[i]}
                 </p>
               )}
@@ -67,14 +67,14 @@ const DailyHaiku = () => {
         </div>
 
         {/* Divider */}
-        <div className='w-16 h-px bg-[var(--border-color)]' />
+        <div className='h-px w-16 bg-[var(--border-color)]' />
 
         {/* English translation */}
         <div className='flex flex-col items-center gap-1'>
           {haiku.english.map((line, i) => (
             <p
               key={i}
-              className='text-base md:text-lg text-[var(--secondary-color)] text-center italic'
+              className='text-center text-base text-[var(--secondary-color)] italic md:text-lg'
             >
               {line}
             </p>
@@ -82,7 +82,7 @@ const DailyHaiku = () => {
         </div>
 
         {/* Author */}
-        <div className='text-center mt-4'>
+        <div className='mt-4 text-center'>
           <p className='text-sm text-[var(--secondary-color)]'>
             — {haiku.author}
           </p>
@@ -97,12 +97,13 @@ const DailyHaiku = () => {
         <button
           onClick={toggleRomanji}
           className={clsx(
-            'px-4 py-2 rounded-lg',
-            'bg-[var(--card-color)] border border-[var(--border-color)]',
+            'rounded-lg px-4 py-2',
+            'border border-[var(--border-color)] bg-[var(--card-color)]',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-            'hover:cursor-pointer transition-all duration-250',
+            'transition-all duration-250 hover:cursor-pointer',
             'active:scale-95',
-            showRomanji && 'border-[var(--main-color)] text-[var(--main-color)]'
+            showRomanji &&
+              'border-[var(--main-color)] text-[var(--main-color)]',
           )}
         >
           {showRomanji ? 'Hide' : 'Show'} Romanji
@@ -110,11 +111,11 @@ const DailyHaiku = () => {
         <button
           onClick={handleNewHaiku}
           className={clsx(
-            'px-4 py-2 rounded-lg flex items-center gap-2',
-            'bg-[var(--card-color)] border border-[var(--border-color)]',
+            'flex items-center gap-2 rounded-lg px-4 py-2',
+            'border border-[var(--border-color)] bg-[var(--card-color)]',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-            'hover:cursor-pointer transition-all duration-250',
-            'active:scale-95'
+            'transition-all duration-250 hover:cursor-pointer',
+            'active:scale-95',
           )}
         >
           <RefreshCw size={16} />

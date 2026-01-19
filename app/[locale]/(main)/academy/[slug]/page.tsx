@@ -10,7 +10,7 @@ import {
   generateHreflang,
   getPostLocales,
   BlogPostComponent,
-  mdxComponents
+  mdxComponents,
 } from '@/features/Blog';
 import { StructuredData } from '@/shared/components/SEO/StructuredData';
 import { routing, type Locale as _Locale } from '@/core/i18n/routing';
@@ -46,7 +46,7 @@ export async function generateStaticParams() {
  * _Requirements: 4.1_
  */
 export async function generateMetadata({
-  params
+  params,
 }: AcademyPostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = getBlogPost(slug, locale as BlogLocale);
@@ -54,7 +54,7 @@ export async function generateMetadata({
   if (!post) {
     return {
       title: 'Post Not Found | KanaDojo Academy',
-      description: 'The requested article could not be found.'
+      description: 'The requested article could not be found.',
     };
   }
 
@@ -73,7 +73,7 @@ export async function generateMetadata({
     }
     metadata.alternates = {
       ...metadata.alternates,
-      languages
+      languages,
     };
   }
 
@@ -150,7 +150,7 @@ const components = {
   ),
   code: ({
     children,
-    className
+    className,
   }: {
     children: React.ReactNode;
     className?: string;
@@ -196,7 +196,7 @@ const components = {
     <strong className='font-semibold text-[var(--main-color)]'>
       {children}
     </strong>
-  )
+  ),
 };
 
 /**
@@ -207,7 +207,7 @@ const components = {
  * _Requirements: 3.1, 3.4, 4.1, 4.2, 4.3_
  */
 export default async function AcademyPostPage({
-  params
+  params,
 }: AcademyPostPageProps) {
   const { locale, slug } = await params;
   const post = getBlogPost(slug, locale as BlogLocale);
@@ -223,7 +223,7 @@ export default async function AcademyPostPage({
   // Get related posts metadata
   const relatedPostsMeta = post.relatedPosts
     ? getBlogPosts(locale as BlogLocale).filter(p =>
-        post.relatedPosts?.includes(p.slug)
+        post.relatedPosts?.includes(p.slug),
       )
     : [];
 

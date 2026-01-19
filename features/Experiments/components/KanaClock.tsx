@@ -34,7 +34,7 @@ const KanaClock = () => {
     'はち',
     'く',
     'じゅう',
-    'じゅういち'
+    'じゅういち',
   ];
 
   return (
@@ -55,7 +55,7 @@ const KanaClock = () => {
               style={{
                 left: `${50 + radius * Math.cos(angle)}%`,
                 top: `${50 + radius * Math.sin(angle)}%`,
-                transform: 'translate(-50%, -50%)'
+                transform: 'translate(-50%, -50%)',
               }}
             >
               {kana}
@@ -67,7 +67,7 @@ const KanaClock = () => {
         <div
           className='absolute top-1/2 left-1/2 h-20 w-1.5 origin-bottom rounded-full bg-[var(--main-color)]'
           style={{
-            transform: `translateX(-50%) translateY(-100%) rotate(${hourAngle}deg)`
+            transform: `translateX(-50%) translateY(-100%) rotate(${hourAngle}deg)`,
           }}
         />
 
@@ -75,7 +75,7 @@ const KanaClock = () => {
         <div
           className='absolute top-1/2 left-1/2 h-28 w-1 origin-bottom rounded-full bg-[var(--accent-color)]'
           style={{
-            transform: `translateX(-50%) translateY(-100%) rotate(${minuteAngle}deg)`
+            transform: `translateX(-50%) translateY(-100%) rotate(${minuteAngle}deg)`,
           }}
         />
 
@@ -84,7 +84,7 @@ const KanaClock = () => {
           className='absolute top-1/2 left-1/2 h-32 w-0.5 origin-bottom rounded-full bg-red-500'
           style={{
             transform: `translateX(-50%) translateY(-100%) rotate(${secondAngle}deg)`,
-            transition: 'none'
+            transition: 'none',
           }}
         />
 

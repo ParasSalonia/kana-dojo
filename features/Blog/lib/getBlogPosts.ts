@@ -37,7 +37,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPostMeta | null {
     const validation = validateFrontmatter(frontmatter);
     if (!validation.success) {
       console.error(
-        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`
+        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`,
       );
       return null;
     }
@@ -61,7 +61,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPostMeta | null {
       readingTime,
       difficulty: frontmatter.difficulty as BlogPostMeta['difficulty'],
       relatedPosts: frontmatter.relatedPosts as string[] | undefined,
-      locale
+      locale,
     };
   } catch (error) {
     console.error(`Error parsing post file ${filePath}:`, error);

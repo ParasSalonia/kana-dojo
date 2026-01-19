@@ -15,8 +15,8 @@ const gauntletStatsArb = fc
     bestStreak: fc.integer({ min: 0, max: 1000 }),
     fastestTime: fc.oneof(
       fc.constant(null),
-      fc.integer({ min: 1000, max: 600000 })
-    )
+      fc.integer({ min: 1000, max: 600000 }),
+    ),
   })
   .chain(
     ({
@@ -25,7 +25,7 @@ const gauntletStatsArb = fc
       totalCorrect,
       totalWrong,
       bestStreak,
-      fastestTime
+      fastestTime,
     }) => {
       // Ensure completedSessions <= totalSessions
       const validCompletedSessions = Math.min(completedSessions, totalSessions);
@@ -42,9 +42,9 @@ const gauntletStatsArb = fc
         totalWrong,
         bestStreak,
         fastestTime,
-        accuracy
+        accuracy,
       } as GauntletOverallStats);
-    }
+    },
   );
 
 describe('Gauntlet Stats Display', () => {
@@ -76,7 +76,7 @@ describe('Gauntlet Stats Display', () => {
           // Verify best streak is displayed
           expect(displayValues.bestStreak).toBe(stats.bestStreak);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -92,10 +92,10 @@ describe('Gauntlet Stats Display', () => {
               : 0;
 
           expect(displayValues.completionRate).toBe(
-            `${expectedRate.toFixed(1)}%`
+            `${expectedRate.toFixed(1)}%`,
           );
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -110,11 +110,11 @@ describe('Gauntlet Stats Display', () => {
           } else {
             const expectedAccuracy = (stats.totalCorrect / total) * 100;
             expect(displayValues.accuracy).toBe(
-              `${expectedAccuracy.toFixed(1)}%`
+              `${expectedAccuracy.toFixed(1)}%`,
             );
           }
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -130,7 +130,7 @@ describe('Gauntlet Stats Display', () => {
             expect(displayValues.fastestTime).toMatch(/^\d+[ms]|\d+m \d+s$/);
           }
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -139,13 +139,13 @@ describe('Gauntlet Stats Display', () => {
         fc.property(gauntletStatsArb, stats => {
           const displayValues = getGauntletDisplayValues(stats);
           const rateValue = parseFloat(
-            displayValues.completionRate.replace('%', '')
+            displayValues.completionRate.replace('%', ''),
           );
 
           expect(rateValue).toBeGreaterThanOrEqual(0);
           expect(rateValue).toBeLessThanOrEqual(100);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -154,13 +154,13 @@ describe('Gauntlet Stats Display', () => {
         fc.property(gauntletStatsArb, stats => {
           const displayValues = getGauntletDisplayValues(stats);
           const accuracyValue = parseFloat(
-            displayValues.accuracy.replace('%', '')
+            displayValues.accuracy.replace('%', ''),
           );
 
           expect(accuracyValue).toBeGreaterThanOrEqual(0);
           expect(accuracyValue).toBeLessThanOrEqual(100);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -178,7 +178,7 @@ describe('Gauntlet Stats Display', () => {
         totalWrong: 0,
         bestStreak: 0,
         fastestTime: null,
-        accuracy: 0
+        accuracy: 0,
       };
 
       const displayValues = getGauntletDisplayValues(stats);
@@ -198,7 +198,7 @@ describe('Gauntlet Stats Display', () => {
         totalWrong: 0,
         bestStreak: 100,
         fastestTime: 60000,
-        accuracy: 100
+        accuracy: 100,
       };
 
       const displayValues = getGauntletDisplayValues(stats);
@@ -216,7 +216,7 @@ describe('Gauntlet Stats Display', () => {
         totalWrong: 0,
         bestStreak: 10,
         fastestTime: 45000, // 45 seconds
-        accuracy: 100
+        accuracy: 100,
       };
 
       const displayValues = getGauntletDisplayValues(stats);
@@ -233,7 +233,7 @@ describe('Gauntlet Stats Display', () => {
         totalWrong: 0,
         bestStreak: 10,
         fastestTime: 125000, // 2 minutes 5 seconds
-        accuracy: 100
+        accuracy: 100,
       };
 
       const displayValues = getGauntletDisplayValues(stats);
@@ -250,7 +250,7 @@ describe('Gauntlet Stats Display', () => {
         totalWrong: 1,
         bestStreak: 500,
         fastestTime: 30000,
-        accuracy: 99.99
+        accuracy: 99.99,
       };
 
       const displayValues = getGauntletDisplayValues(stats);

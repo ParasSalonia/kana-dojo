@@ -56,9 +56,7 @@ Claude Code will automatically run allowed commands without asking for permissio
 ```json
 {
   "permissions": {
-    "allow": [
-      "Bash(your-command:*)"
-    ]
+    "allow": ["Bash(your-command:*)"]
   }
 }
 ```
@@ -66,6 +64,7 @@ Claude Code will automatically run allowed commands without asking for permissio
 ### Wildcard Patterns
 
 Use `:*` to allow all variations of a command:
+
 - `Bash(npm:*)` - Allows all npm commands
 - `Bash(git status:*)` - Allows git status with any flags
 

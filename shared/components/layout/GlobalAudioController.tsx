@@ -28,7 +28,7 @@ export default function GlobalAudioController() {
       () => {
         resetTimer();
       },
-      2 * 60 * 1000
+      2 * 60 * 1000,
     );
 
     return () => clearTimeout(timeout);
@@ -38,7 +38,7 @@ export default function GlobalAudioController() {
     playChristmas,
     pauseChristmas,
     isPlaying,
-    resetTimer
+    resetTimer,
   ]);
 
   return null;

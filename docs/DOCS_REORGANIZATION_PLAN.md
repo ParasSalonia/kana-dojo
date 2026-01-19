@@ -9,24 +9,26 @@ The current README.md is 657 lines and contains extensive duplicate content that
 ## Current State Analysis
 
 ### README.md Problems
-| Section | Lines | Issue |
-|---------|-------|-------|
-| Language translations list | 20 | Keep (but simplify) |
-| About KanaDojo | 90 | Too verbose, trim to essentials |
-| Screenshots | 20 | Keep |
-| UI & Design Philosophy | 30 | **DUPLICATE** - Already in `docs/UI_DESIGN.md` |
-| Tech Stack | 40 | **DUPLICATE** - Already in `docs/ARCHITECTURE.md` |
-| Architecture | 15 | **DUPLICATE** - Already in `docs/ARCHITECTURE.md` |
-| Getting Started | 150 | **EXCESSIVE** - Move to `CONTRIBUTING.md` or separate doc |
-| Project Structure | 100 | **DUPLICATE** - Already in `docs/ARCHITECTURE.md` |
-| Contributing (translation section) | 120 | **DUPLICATE** - Already in `docs/TRANSLATION_GUIDE.md` |
-| License/Contact | 30 | Keep |
+
+| Section                            | Lines | Issue                                                     |
+| ---------------------------------- | ----- | --------------------------------------------------------- |
+| Language translations list         | 20    | Keep (but simplify)                                       |
+| About KanaDojo                     | 90    | Too verbose, trim to essentials                           |
+| Screenshots                        | 20    | Keep                                                      |
+| UI & Design Philosophy             | 30    | **DUPLICATE** - Already in `docs/UI_DESIGN.md`            |
+| Tech Stack                         | 40    | **DUPLICATE** - Already in `docs/ARCHITECTURE.md`         |
+| Architecture                       | 15    | **DUPLICATE** - Already in `docs/ARCHITECTURE.md`         |
+| Getting Started                    | 150   | **EXCESSIVE** - Move to `CONTRIBUTING.md` or separate doc |
+| Project Structure                  | 100   | **DUPLICATE** - Already in `docs/ARCHITECTURE.md`         |
+| Contributing (translation section) | 120   | **DUPLICATE** - Already in `docs/TRANSLATION_GUIDE.md`    |
+| License/Contact                    | 30    | Keep                                                      |
 
 **Total duplicated/excessive content: ~455 lines (69%)**
 
 ### Current Documentation Files
 
 **Root level (keep):**
+
 - `README.md` - Project introduction (needs trimming)
 - `CONTRIBUTING.md` - How to contribute (well structured)
 - `SECURITY.md` - Security policy (fine as-is)
@@ -35,6 +37,7 @@ The current README.md is 657 lines and contains extensive duplicate content that
 - `CLAUDE.md` - AI assistant instructions (internal tooling)
 
 **docs/ folder (current):**
+
 - `ARCHITECTURE.md` ✅ Comprehensive, keep
 - `UI_DESIGN.md` ✅ Comprehensive, keep
 - `TRANSLATION_GUIDE.md` ✅ Comprehensive, keep
@@ -48,11 +51,13 @@ The current README.md is 657 lines and contains extensive duplicate content that
 - `MIGRATION_SUMMARY.md` → Archive (completed migration)
 
 **docs/archived/ folder:**
+
 - `ARCHITECTURE_DIAGRAM.md` ✅ Good to keep archived
 - `HYBRID_MODULAR_MIGRATION_PLAN.md` ✅ Good to keep archived
 - `MIGRATION_QUICK_REFERENCE.md` ✅ Good to keep archived
 
 **docs/translations/:**
+
 - All README translations ✅ Keep as-is
 
 ---
@@ -102,13 +107,13 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## Documentation
 
-| Document | Description |
-|----------|-------------|
-| [Architecture](./docs/ARCHITECTURE.md) | Project structure and patterns |
-| [UI Design](./docs/UI_DESIGN.md) | Theming, styling, and component guidelines |
-| [Translation Guide](./docs/TRANSLATION_GUIDE.md) | How to add translations |
-| [Troubleshooting](./docs/TROUBLESHOOTING.md) | Common issues and solutions |
-| [Contributing](./CONTRIBUTING.md) | How to contribute |
+| Document                                         | Description                                |
+| ------------------------------------------------ | ------------------------------------------ |
+| [Architecture](./docs/ARCHITECTURE.md)           | Project structure and patterns             |
+| [UI Design](./docs/UI_DESIGN.md)                 | Theming, styling, and component guidelines |
+| [Translation Guide](./docs/TRANSLATION_GUIDE.md) | How to add translations                    |
+| [Troubleshooting](./docs/TROUBLESHOOTING.md)     | Common issues and solutions                |
+| [Contributing](./CONTRIBUTING.md)                | How to contribute                          |
 
 ## Tech Stack
 
@@ -134,6 +139,7 @@ AGPL 3.0 - see [LICENSE.md](./LICENSE.md)
 ### 2. Update CONTRIBUTING.md
 
 Move the detailed "Getting Started" setup instructions from README to CONTRIBUTING.md. Currently CONTRIBUTING.md already has good setup instructions, so we mainly need to:
+
 - Ensure the troubleshooting section links to `docs/TROUBLESHOOTING.md`
 - Remove any duplicate content
 
@@ -145,37 +151,45 @@ Create a central index for all documentation:
 # KanaDojo Documentation
 
 ## Getting Started
+
 - [Contributing Guide](../CONTRIBUTING.md) - Setup and contribution workflow
 - [Troubleshooting](./TROUBLESHOOTING.md) - Common issues and solutions
 
 ## Architecture & Development
+
 - [Architecture](./ARCHITECTURE.md) - Project structure, patterns, and conventions
 - [UI Design](./UI_DESIGN.md) - Theming, styling, and component guidelines
 - [Performance](./PERFORMANCE_OPTIMIZATIONS.md) - Performance optimization details
 - [Audio](./AUDIO_OPTIMIZATION.md) - Audio system documentation
 
 ## Features
+
 - [Achievements](./ACHIEVEMENTS.md) - Achievement system documentation
 - [SEO](./SEO.md) - SEO implementation guide
 
 ## Internationalization
+
 - [Translation Guide](./TRANSLATION_GUIDE.md) - How to translate the app
 - [Adding Languages](./ADDING_LANGUAGES.md) - How to add new language support
 
 ## Archives
+
 Historical documentation for completed migrations:
+
 - [archived/](./archived/) - Migration plans and historical docs
 ```
 
 ### 4. Archive Completed Migration Docs
 
 Move to `docs/archived/`:
+
 - `MIGRATION_SUMMARY.md` → `docs/archived/MIGRATION_SUMMARY.md`
 - `FACADE_ARCHITECTURE_COMPARISON.md` → `docs/archived/FACADE_ARCHITECTURE_COMPARISON.md`
 
 ### 5. Files to Delete (Duplicates)
 
 None - all existing docs serve a purpose. The cleanup is about:
+
 1. Trimming README.md
 2. Proper linking between docs
 3. Creating the docs index
@@ -186,17 +200,17 @@ None - all existing docs serve a purpose. The cleanup is about:
 
 ### From README.md → Delete (exists elsewhere)
 
-| README Section | Existing Location | Action |
-|---------------|-------------------|--------|
-| UI & Design Philosophy | `docs/UI_DESIGN.md` | Delete from README, link to doc |
-| Tech Stack (detailed) | `docs/ARCHITECTURE.md` | Keep 1-line version, link to doc |
-| Architecture | `docs/ARCHITECTURE.md` | Delete from README, link to doc |
-| Getting Started (troubleshooting) | `docs/TROUBLESHOOTING.md` | Delete from README, link to doc |
-| Project Structure | `docs/ARCHITECTURE.md` | Delete from README, link to doc |
-| Key Concepts | `docs/ARCHITECTURE.md` | Delete from README, link to doc |
-| Translation Contributions | `docs/TRANSLATION_GUIDE.md` | Delete from README, link to doc |
-| i18n System Status | `docs/TRANSLATION_GUIDE.md` | Delete from README |
-| Language Expansion for SEO | `docs/ADDING_LANGUAGES.md` | Delete from README |
+| README Section                    | Existing Location           | Action                           |
+| --------------------------------- | --------------------------- | -------------------------------- |
+| UI & Design Philosophy            | `docs/UI_DESIGN.md`         | Delete from README, link to doc  |
+| Tech Stack (detailed)             | `docs/ARCHITECTURE.md`      | Keep 1-line version, link to doc |
+| Architecture                      | `docs/ARCHITECTURE.md`      | Delete from README, link to doc  |
+| Getting Started (troubleshooting) | `docs/TROUBLESHOOTING.md`   | Delete from README, link to doc  |
+| Project Structure                 | `docs/ARCHITECTURE.md`      | Delete from README, link to doc  |
+| Key Concepts                      | `docs/ARCHITECTURE.md`      | Delete from README, link to doc  |
+| Translation Contributions         | `docs/TRANSLATION_GUIDE.md` | Delete from README, link to doc  |
+| i18n System Status                | `docs/TRANSLATION_GUIDE.md` | Delete from README               |
+| Language Expansion for SEO        | `docs/ADDING_LANGUAGES.md`  | Delete from README               |
 
 ---
 

@@ -17,8 +17,8 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url
-    }))
+      item: item.url,
+    })),
   };
 }
 

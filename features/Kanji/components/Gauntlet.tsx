@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useKanjiStore, {
-  type IKanjiObj
+  type IKanjiObj,
 } from '@/features/Kanji/store/useKanjiStore';
 import Gauntlet, { type GauntletConfig } from '@/shared/components/Gauntlet';
 import { getSelectionLabels } from '@/shared/lib/selectionFormatting';
@@ -16,7 +16,7 @@ const GauntletKanji: React.FC<GauntletKanjiProps> = ({ onCancel }) => {
   const selectedKanjiObjs = useKanjiStore(state => state.selectedKanjiObjs);
   const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
   const selectedGameModeKanji = useKanjiStore(
-    state => state.selectedGameModeKanji
+    state => state.selectedGameModeKanji,
   );
 
   // Format selected sets for display
@@ -38,13 +38,18 @@ const GauntletKanji: React.FC<GauntletKanjiProps> = ({ onCancel }) => {
     checkAnswer: (question, answer, isReverse) => {
       if (!isReverse) {
         // Reverse: answer should be the kanji character or kunyomi or onyomi
-        return (answer.trim() === question.kanjiChar ||  question.kunyomi.some(k => k.split(' ')[0] === answer)||question.onyomi.some(k => k.split(' ')[0] === answer)||question.meanings.some(
-        meaning => answer.toLowerCase() === meaning.toLowerCase()
-      ));
-    }
+        return (
+          answer.trim() === question.kanjiChar ||
+          question.kunyomi.some(k => k.split(' ')[0] === answer) ||
+          question.onyomi.some(k => k.split(' ')[0] === answer) ||
+          question.meanings.some(
+            meaning => answer.toLowerCase() === meaning.toLowerCase(),
+          )
+        );
+      }
       // Normal: answer should match any meaning
       return question.meanings.some(
-        meaning => answer.toLowerCase() === meaning.toLowerCase()
+        meaning => answer.toLowerCase() === meaning.toLowerCase(),
       );
     },
     getCorrectAnswer: (question, isReverse) =>
@@ -55,7 +60,7 @@ const GauntletKanji: React.FC<GauntletKanjiProps> = ({ onCancel }) => {
         // Reverse: options are kanji characters
         const correctAnswer = question.kanjiChar;
         const incorrectOptions = shuffle(
-          items.filter(item => item.kanjiChar !== question.kanjiChar)
+          items.filter(item => item.kanjiChar !== question.kanjiChar),
         )
           .slice(0, count - 1)
           .map(item => item.kanjiChar);
@@ -64,7 +69,7 @@ const GauntletKanji: React.FC<GauntletKanjiProps> = ({ onCancel }) => {
       // Normal: options are meanings
       const correctAnswer = question.meanings[0];
       const incorrectOptions = shuffle(
-        items.filter(item => item.kanjiChar !== question.kanjiChar)
+        items.filter(item => item.kanjiChar !== question.kanjiChar),
       )
         .slice(0, count - 1)
         .map(item => item.meanings[0]);
@@ -72,7 +77,7 @@ const GauntletKanji: React.FC<GauntletKanjiProps> = ({ onCancel }) => {
     },
     getCorrectOption: (question, isReverse) =>
       isReverse ? question.kanjiChar : question.meanings[0],
-    supportsReverseMode: true
+    supportsReverseMode: true,
   };
 
   return <Gauntlet config={config} onCancel={onCancel} />;

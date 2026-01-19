@@ -22,7 +22,7 @@ export const kanaAdapter: ContentAdapter<KanaCharacter> = {
     kana: KanaCharacter,
     pool: KanaCharacter[],
     mode: GameMode,
-    count: number
+    count: number,
   ): string[] {
     const correct = this.getCorrectAnswer(kana, mode);
 
@@ -41,7 +41,7 @@ export const kanaAdapter: ContentAdapter<KanaCharacter> = {
   validateAnswer(
     userAnswer: string,
     kana: KanaCharacter,
-    mode: GameMode
+    mode: GameMode,
   ): boolean {
     const correct = this.getCorrectAnswer(kana, mode);
     return userAnswer.toLowerCase().trim() === correct.toLowerCase().trim();
@@ -50,7 +50,7 @@ export const kanaAdapter: ContentAdapter<KanaCharacter> = {
   getMetadata(kana: KanaCharacter) {
     return {
       primary: kana.kana,
-      secondary: kana.romaji
+      secondary: kana.romaji,
     };
-  }
+  },
 };

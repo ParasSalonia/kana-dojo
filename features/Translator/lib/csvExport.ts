@@ -15,7 +15,7 @@ export function translateHistoryToCSV(entries: TranslationEntry[]): string {
     'Target Language',
     'Source Text',
     'Translated Text',
-    'Romanization'
+    'Romanization',
   ];
 
   // Create CSV rows
@@ -27,14 +27,12 @@ export function translateHistoryToCSV(entries: TranslationEntry[]): string {
       entry.targetLanguage === 'en' ? 'English' : 'Japanese',
       escapeCSVField(entry.sourceText),
       escapeCSVField(entry.translatedText),
-      entry.romanization ? escapeCSVField(entry.romanization) : ''
+      entry.romanization ? escapeCSVField(entry.romanization) : '',
     ];
   });
 
   // Combine headers and rows
-  const csvContent = [headers, ...rows]
-    .map(row => row.join(','))
-    .join('\n');
+  const csvContent = [headers, ...rows].map(row => row.join(',')).join('\n');
 
   return csvContent;
 }
@@ -53,7 +51,10 @@ function escapeCSVField(field: string): string {
 /**
  * Download CSV file
  */
-export function downloadCSV(csvContent: string, filename: string = 'translation-history.csv'): void {
+export function downloadCSV(
+  csvContent: string,
+  filename: string = 'translation-history.csv',
+): void {
   // Create blob
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
 

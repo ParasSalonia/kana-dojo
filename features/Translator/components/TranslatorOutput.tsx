@@ -10,7 +10,7 @@ import {
   VolumeX,
   Pause,
   Play,
-  Info
+  Info,
 } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import type { Language } from '../types';
@@ -33,7 +33,7 @@ export default function TranslatorOutput({
   sourceText,
   sourceLanguage,
   targetLanguage,
-  isLoading
+  isLoading,
 }: TranslatorOutputProps) {
   const [copied, setCopied] = useState(false);
   const [showBreakdown, setShowBreakdown] = useState(false);
@@ -53,7 +53,7 @@ export default function TranslatorOutput({
     stop,
     pause,
     resume,
-    isPaused
+    isPaused,
   } = useVoiceOutput({
     language: targetLanguage,
     onEnd: () => {
@@ -61,7 +61,7 @@ export default function TranslatorOutput({
     },
     onError: err => {
       console.error('Voice output error:', err);
-    }
+    },
   });
 
   const handleCopy = useCallback(async () => {
@@ -97,22 +97,22 @@ export default function TranslatorOutput({
   return (
     <div
       className={cn(
-        'flex flex-col gap-3 w-full p-4 sm:p-5 rounded-2xl',
-        'bg-[var(--card-color)] border border-[var(--border-color)]',
-        'shadow-lg shadow-black/5'
+        'flex w-full flex-col gap-3 rounded-2xl p-4 sm:p-5',
+        'border border-[var(--border-color)] bg-[var(--card-color)]',
+        'shadow-lg shadow-black/5',
       )}
     >
       {/* Header with language label */}
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='text-xs font-medium text-[var(--secondary-color)] uppercase tracking-wider'>
+          <span className='text-xs font-medium tracking-wider text-[var(--secondary-color)] uppercase'>
             To
           </span>
           <span
             className={cn(
-              'px-3 py-1.5 rounded-lg text-sm font-medium',
-              'bg-[var(--background-color)] border border-[var(--border-color)]',
-              'text-[var(--main-color)]'
+              'rounded-lg px-3 py-1.5 text-sm font-medium',
+              'border border-[var(--border-color)] bg-[var(--background-color)]',
+              'text-[var(--main-color)]',
             )}
           >
             {targetLanguage === 'en' ? '🇺🇸 English' : '🇯🇵 日本語'}
@@ -128,13 +128,13 @@ export default function TranslatorOutput({
                 <button
                   onClick={handleSpeak}
                   className={cn(
-                    'h-9 w-9 rounded-lg cursor-pointer',
+                    'h-9 w-9 cursor-pointer rounded-lg',
                     'flex items-center justify-center',
-                    'bg-[var(--background-color)] border border-[var(--border-color)]',
-                    'hover:border-[var(--main-color)] transition-all duration-200',
+                    'border border-[var(--border-color)] bg-[var(--background-color)]',
+                    'transition-all duration-200 hover:border-[var(--main-color)]',
                     isSpeaking && !isPaused
-                      ? 'text-[var(--main-color)] border-[var(--main-color)]'
-                      : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                      ? 'border-[var(--main-color)] text-[var(--main-color)]'
+                      : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                   )}
                   aria-label={
                     isSpeaking
@@ -166,11 +166,11 @@ export default function TranslatorOutput({
                   <button
                     onClick={handleStop}
                     className={cn(
-                      'h-9 w-9 rounded-lg cursor-pointer',
+                      'h-9 w-9 cursor-pointer rounded-lg',
                       'flex items-center justify-center',
-                      'bg-[var(--background-color)] border border-[var(--border-color)]',
-                      'hover:border-red-500 transition-all duration-200',
-                      'text-[var(--secondary-color)] hover:text-red-500'
+                      'border border-[var(--border-color)] bg-[var(--background-color)]',
+                      'transition-all duration-200 hover:border-red-500',
+                      'text-[var(--secondary-color)] hover:text-red-500',
                     )}
                     aria-label='Stop speaking'
                     title='Stop'
@@ -186,13 +186,13 @@ export default function TranslatorOutput({
               <button
                 onClick={() => setShowBreakdown(!showBreakdown)}
                 className={cn(
-                  'h-9 w-9 rounded-lg cursor-pointer',
+                  'h-9 w-9 cursor-pointer rounded-lg',
                   'flex items-center justify-center',
-                  'bg-[var(--background-color)] border border-[var(--border-color)]',
-                  'hover:border-[var(--main-color)] transition-all duration-200',
+                  'border border-[var(--border-color)] bg-[var(--background-color)]',
+                  'transition-all duration-200 hover:border-[var(--main-color)]',
                   showBreakdown
-                    ? 'text-[var(--main-color)] border-[var(--main-color)]'
-                    : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                    ? 'border-[var(--main-color)] text-[var(--main-color)]'
+                    : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                 )}
                 aria-label={
                   showBreakdown
@@ -200,7 +200,9 @@ export default function TranslatorOutput({
                     : 'Show word-by-word analysis'
                 }
                 title={
-                  showBreakdown ? 'Hide breakdown' : 'Show word-by-word analysis'
+                  showBreakdown
+                    ? 'Hide breakdown'
+                    : 'Show word-by-word analysis'
                 }
               >
                 <Info className='h-4 w-4' />
@@ -211,13 +213,13 @@ export default function TranslatorOutput({
             <button
               onClick={handleCopy}
               className={cn(
-                'h-9 w-9 rounded-lg cursor-pointer',
+                'h-9 w-9 cursor-pointer rounded-lg',
                 'flex items-center justify-center',
-                'bg-[var(--background-color)] border border-[var(--border-color)]',
-                'hover:border-[var(--main-color)] transition-all duration-200',
+                'border border-[var(--border-color)] bg-[var(--background-color)]',
+                'transition-all duration-200 hover:border-[var(--main-color)]',
                 copied
-                  ? 'text-green-500 border-green-500'
-                  : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  ? 'border-green-500 text-green-500'
+                  : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
               )}
               aria-label={copied ? 'Copied!' : 'Copy translation'}
             >
@@ -234,19 +236,19 @@ export default function TranslatorOutput({
       {/* Output area */}
       <div
         className={cn(
-          'w-full min-h-[180px] sm:min-h-[220px] p-3 sm:p-4 rounded-xl',
-          'bg-[var(--background-color)] border border-[var(--border-color)]',
+          'min-h-[180px] w-full rounded-xl p-3 sm:min-h-[220px] sm:p-4',
+          'border border-[var(--border-color)] bg-[var(--background-color)]',
           'text-[var(--main-color)]',
-          'relative'
+          'relative',
         )}
       >
         {isLoading ? (
-          <div className='flex flex-col items-center justify-center h-full min-h-[188px] gap-3'>
+          <div className='flex h-full min-h-[188px] flex-col items-center justify-center gap-3'>
             <div
               className={cn(
-                'p-4 rounded-full',
+                'rounded-full p-4',
                 'bg-[var(--main-color)]/10',
-                'animate-pulse'
+                'animate-pulse',
               )}
             >
               <Loader2 className='h-8 w-8 animate-spin text-[var(--main-color)]' />
@@ -258,13 +260,13 @@ export default function TranslatorOutput({
         ) : translation ? (
           <div className='flex flex-col gap-4'>
             {/* Main translation */}
-            <p className='text-xl sm:text-2xl whitespace-pre-wrap break-words leading-relaxed font-medium'>
+            <p className='text-xl leading-relaxed font-medium break-words whitespace-pre-wrap sm:text-2xl'>
               {translation}
             </p>
 
             {/* Romaji pronunciation (when translating TO Japanese) */}
             {showRomanization && (
-              <p className='text-sm sm:text-base text-[var(--secondary-color)] whitespace-pre-wrap break-words leading-relaxed italic'>
+              <p className='text-sm leading-relaxed break-words whitespace-pre-wrap text-[var(--secondary-color)] italic sm:text-base'>
                 {romanization}
               </p>
             )}
@@ -273,13 +275,13 @@ export default function TranslatorOutput({
             {showBreakdown && canShowBreakdown && (
               <div
                 className={cn(
-                  'pt-4 border-t border-[var(--border-color)]',
-                  'flex flex-col gap-2'
+                  'border-t border-[var(--border-color)] pt-4',
+                  'flex flex-col gap-2',
                 )}
               >
                 <div className='flex items-center gap-2'>
                   <Info className='h-4 w-4 text-[var(--secondary-color)]' />
-                  <span className='text-xs font-medium text-[var(--secondary-color)] uppercase tracking-wider'>
+                  <span className='text-xs font-medium tracking-wider text-[var(--secondary-color)] uppercase'>
                     Word-by-Word Analysis (hover for details)
                   </span>
                 </div>
@@ -292,11 +294,7 @@ export default function TranslatorOutput({
 
             {/* Translation alternatives */}
             {!isLoading && translation && sourceText && (
-              <div
-                className={cn(
-                  'pt-4 border-t border-[var(--border-color)]'
-                )}
-              >
+              <div className={cn('border-t border-[var(--border-color)] pt-4')}>
                 <TranslationAlternatives
                   sourceText={sourceText}
                   mainTranslation={translation}
@@ -306,16 +304,16 @@ export default function TranslatorOutput({
             )}
           </div>
         ) : (
-          <div className='flex flex-col items-center justify-center h-full min-h-[188px] gap-3'>
+          <div className='flex h-full min-h-[188px] flex-col items-center justify-center gap-3'>
             <div
               className={cn(
-                'p-4 rounded-full',
-                'bg-[var(--secondary-color)]/10'
+                'rounded-full p-4',
+                'bg-[var(--secondary-color)]/10',
               )}
             >
               <FileText className='h-8 w-8 text-[var(--secondary-color)]/50' />
             </div>
-            <p className='text-[var(--secondary-color)]/60 text-sm text-center'>
+            <p className='text-center text-sm text-[var(--secondary-color)]/60'>
               {targetLanguage === 'en'
                 ? 'Translation will appear here...'
                 : '翻訳がここに表示されます...'}
@@ -328,9 +326,9 @@ export default function TranslatorOutput({
       {copied && (
         <div
           className={cn(
-            'flex items-center gap-2 px-3 py-2 rounded-lg',
-            'bg-green-500/10 border border-green-500/30',
-            'text-green-500 text-sm font-medium'
+            'flex items-center gap-2 rounded-lg px-3 py-2',
+            'border border-green-500/30 bg-green-500/10',
+            'text-sm font-medium text-green-500',
           )}
           role='status'
         >

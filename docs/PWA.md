@@ -81,15 +81,15 @@ const OFFLINE_TRANSLATIONS = {
   'en:ja': {
     hello: 'こんにちは',
     'thank you': 'ありがとう',
-    goodbye: 'さようなら'
+    goodbye: 'さようなら',
     // ... more phrases
   },
   'ja:en': {
     こんにちは: 'hello',
     ありがとう: 'thank you',
-    さようなら: 'goodbye'
+    さようなら: 'goodbye',
     // ... more phrases
-  }
+  },
 };
 ```
 
@@ -214,7 +214,7 @@ self.addEventListener('push', function (event) {
   self.registration.showNotification(data.title, {
     body: data.body,
     icon: '/icons/icon-192.png',
-    badge: '/icons/badge-72.png'
+    badge: '/icons/badge-72.png',
   });
 });
 ```

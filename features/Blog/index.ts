@@ -10,21 +10,21 @@ export type {
   Category,
   Difficulty,
   Heading,
-  Locale
+  Locale,
 } from './types/blog';
 
 export {
   REQUIRED_FRONTMATTER_FIELDS,
   VALID_CATEGORIES,
   VALID_DIFFICULTIES,
-  VALID_LOCALES
+  VALID_LOCALES,
 } from './types/blog';
 
 // Lib functions
 export { calculateReadingTime } from './lib/calculateReadingTime';
 export {
   validateFrontmatter,
-  type ValidationResult
+  type ValidationResult,
 } from './lib/validateFrontmatter';
 export { getBlogPosts, sortPostsByDate } from './lib/getBlogPosts';
 export { getBlogPost, postExists, getPostLocales } from './lib/getBlogPost';
@@ -33,24 +33,24 @@ export { extractHeadings, generateHeadingId } from './lib/extractHeadings';
 // SEO and Structured Data
 export {
   generateBlogMetadata,
-  type MetadataOptions
+  type MetadataOptions,
 } from './lib/generateBlogMetadata';
 export {
   generateArticleSchema,
   type ArticleSchema,
-  type ArticleSchemaOptions
+  type ArticleSchemaOptions,
 } from './lib/generateArticleSchema';
 export {
   generateBreadcrumbSchema,
   type BreadcrumbSchema,
   type BreadcrumbSchemaOptions,
-  type BreadcrumbListItem
+  type BreadcrumbListItem,
 } from './lib/generateBreadcrumbSchema';
 export {
   generateHreflang,
   generateHreflangLinks,
   type HreflangTag,
-  type HreflangOptions
+  type HreflangOptions,
 } from './lib/generateHreflang';
 
 // Components
@@ -71,5 +71,5 @@ export {
   BASE_CHARACTER_COUNT,
   EXTENDED_CHARACTER_COUNT,
   VALID_INFOBOX_TYPES,
-  type InfoBoxType
+  type InfoBoxType,
 } from './components/mdx';

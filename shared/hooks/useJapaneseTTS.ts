@@ -24,7 +24,7 @@ export const useJapaneseTTS = () => {
     isSupported: false,
     availableVoices: [],
     currentVoice: null,
-    hasJapaneseVoices: false
+    hasJapaneseVoices: false,
   });
 
   // Use ref to store current voice for access in callbacks without stale closures
@@ -81,7 +81,7 @@ export const useJapaneseTTS = () => {
           .map(voice => ({
             name: voice.name,
             lang: voice.lang,
-            voice: voice
+            voice: voice,
           }))
           .sort((a, b) => {
             // Prioritize actual Japanese voices
@@ -106,7 +106,7 @@ export const useJapaneseTTS = () => {
           isSupported: true,
           availableVoices: japaneseVoices,
           currentVoice: newCurrentVoice,
-          hasJapaneseVoices
+          hasJapaneseVoices,
         }));
 
         // Update ref immediately to avoid race conditions
@@ -115,21 +115,21 @@ export const useJapaneseTTS = () => {
         // Fallback: If no Japanese voices found, use any available voice but log warning
         if (voices.length > 0 && japaneseVoices.length === 0) {
           console.warn(
-            'No Japanese voices found. Using fallback voice. Pronunciation may not be accurate.'
+            'No Japanese voices found. Using fallback voice. Pronunciation may not be accurate.',
           );
           const fallbackVoice =
             voices.find(v => v.lang.startsWith('ja')) || voices[0];
           const fallbackJapaneseVoice = {
             name: fallbackVoice.name,
             lang: fallbackVoice.lang,
-            voice: fallbackVoice
+            voice: fallbackVoice,
           };
           setState((prev: TTSState) => ({
             ...prev,
             isSupported: true,
             availableVoices: [fallbackJapaneseVoice],
             currentVoice: fallbackJapaneseVoice,
-            hasJapaneseVoices: false
+            hasJapaneseVoices: false,
           }));
           currentVoiceRef.current = fallbackJapaneseVoice;
         }
@@ -167,7 +167,7 @@ export const useJapaneseTTS = () => {
         pitch?: number;
         volume?: number;
         voice?: JapaneseVoice;
-      }
+      },
     ) => {
       if (!isClient || silentMode) {
         return Promise.resolve();
@@ -191,7 +191,7 @@ export const useJapaneseTTS = () => {
                 // Wait for voices to load (Firefox can take time)
                 setTimeout(
                   () => attemptSpeak(retries + 1),
-                  isFirefox.current ? 200 : 100
+                  isFirefox.current ? 200 : 100,
                 );
                 return;
               } else {
@@ -229,14 +229,15 @@ export const useJapaneseTTS = () => {
                 v.lang === 'ja-JP' ||
                 v.lang === 'ja' ||
                 v.name.toLowerCase().includes('japanese') ||
-                v.name.toLowerCase().includes('japan')
+                v.name.toLowerCase().includes('japan'),
             );
 
             if (selectedVoice) {
               // Try to match selected voice from current voices list (Firefox requirement)
               const matchedVoice = voices.find(
                 v =>
-                  v.name === selectedVoice.name && v.lang === selectedVoice.lang
+                  v.name === selectedVoice.name &&
+                  v.lang === selectedVoice.lang,
               );
 
               // Check if matched voice is Japanese
@@ -278,7 +279,7 @@ export const useJapaneseTTS = () => {
                 // Fallback if no Japanese voices
                 utterance.voice = voices[0];
                 console.warn(
-                  'No Japanese voices available, using fallback voice'
+                  'No Japanese voices available, using fallback voice',
                 );
               }
             }
@@ -323,7 +324,7 @@ export const useJapaneseTTS = () => {
         attemptSpeak();
       });
     },
-    [isClient, silentMode]
+    [isClient, silentMode],
   );
 
   const stop = useCallback(() => {
@@ -340,7 +341,7 @@ export const useJapaneseTTS = () => {
       // Update ref immediately to avoid race conditions
       currentVoiceRef.current = voice;
     },
-    [setPronunciationVoiceName]
+    [setPronunciationVoiceName],
   );
 
   // Method to refresh voices
@@ -367,7 +368,7 @@ export const useJapaneseTTS = () => {
       .map(voice => ({
         name: voice.name,
         lang: voice.lang,
-        voice: voice
+        voice: voice,
       }))
       .sort((a, b) => {
         if (a.lang === 'ja-JP' && b.lang !== 'ja-JP') return -1;
@@ -390,7 +391,7 @@ export const useJapaneseTTS = () => {
       isSupported: true,
       availableVoices: japaneseVoices,
       currentVoice: newCurrentVoice,
-      hasJapaneseVoices
+      hasJapaneseVoices,
     }));
 
     // Update ref immediately to avoid race conditions
@@ -399,21 +400,21 @@ export const useJapaneseTTS = () => {
     // Fallback: If no Japanese voices found, use any available voice but log warning
     if (voices.length > 0 && japaneseVoices.length === 0) {
       console.warn(
-        'No Japanese voices found. Using fallback voice. Pronunciation may not be accurate.'
+        'No Japanese voices found. Using fallback voice. Pronunciation may not be accurate.',
       );
       const fallbackVoice =
         voices.find(v => v.lang.startsWith('ja')) || voices[0];
       const fallbackJapaneseVoice = {
         name: fallbackVoice.name,
         lang: fallbackVoice.lang,
-        voice: fallbackVoice
+        voice: fallbackVoice,
       };
       setState((prev: TTSState) => ({
         ...prev,
         isSupported: true,
         availableVoices: [fallbackJapaneseVoice],
         currentVoice: fallbackJapaneseVoice,
-        hasJapaneseVoices: false
+        hasJapaneseVoices: false,
       }));
       currentVoiceRef.current = fallbackJapaneseVoice;
     }
@@ -428,6 +429,6 @@ export const useJapaneseTTS = () => {
     isSupported: state.isSupported,
     availableVoices: state.availableVoices,
     currentVoice: state.currentVoice,
-    hasJapaneseVoices: state.hasJapaneseVoices
+    hasJapaneseVoices: state.hasJapaneseVoices,
   };
 };

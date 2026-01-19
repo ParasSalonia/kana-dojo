@@ -20,12 +20,12 @@ export default function KanjiPage() {
   return (
     <>
       <CourseSchema
-        name="Japanese Kanji Learning Course (JLPT N5-N1)"
-        description="Learn Japanese Kanji characters organized by JLPT levels from N5 to N1. Master over 2,000 essential kanji with readings, meanings, and example words through interactive training modes and spaced repetition."
-        url="https://kanadojo.com/en/kanji"
-        educationalLevel="Beginner to Advanced"
-        skillLevel="All Levels"
-        learningResourceType="Interactive Exercise and Games"
+        name='Japanese Kanji Learning Course (JLPT N5-N1)'
+        description='Learn Japanese Kanji characters organized by JLPT levels from N5 to N1. Master over 2,000 essential kanji with readings, meanings, and example words through interactive training modes and spaced repetition.'
+        url='https://kanadojo.com/en/kanji'
+        educationalLevel='Beginner to Advanced'
+        skillLevel='All Levels'
+        learningResourceType='Interactive Exercise and Games'
       />
       <DojoMenu />
     </>

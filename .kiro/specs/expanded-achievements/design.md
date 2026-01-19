@@ -163,8 +163,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 50,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'hiragana_adept',
@@ -176,8 +176,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 200,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'hiragana_master',
@@ -189,8 +189,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 500,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'katakana_apprentice',
@@ -202,8 +202,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 50,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
   {
     id: 'katakana_adept',
@@ -215,8 +215,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 200,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
   {
     id: 'katakana_master',
@@ -228,8 +228,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 500,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
   {
     id: 'hiragana_perfectionist',
@@ -241,8 +241,8 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 100,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'katakana_perfectionist',
@@ -254,9 +254,9 @@ const KANA_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 100,
-      additional: { contentType: 'katakana' }
-    }
-  }
+      additional: { contentType: 'katakana' },
+    },
+  },
 ];
 ```
 
@@ -274,8 +274,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N5' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N5' },
+    },
   },
   {
     id: 'n4_explorer',
@@ -287,8 +287,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N4' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N4' },
+    },
   },
   {
     id: 'n3_explorer',
@@ -300,8 +300,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N3' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N3' },
+    },
   },
   {
     id: 'n2_explorer',
@@ -313,8 +313,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N2' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N2' },
+    },
   },
   {
     id: 'n1_explorer',
@@ -326,8 +326,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N1' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N1' },
+    },
   },
   {
     id: 'n5_graduate',
@@ -339,8 +339,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N5' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N5' },
+    },
   },
   {
     id: 'n4_graduate',
@@ -352,8 +352,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N4' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N4' },
+    },
   },
   {
     id: 'n3_graduate',
@@ -365,8 +365,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N3' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N3' },
+    },
   },
   {
     id: 'n2_graduate',
@@ -378,8 +378,8 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N2' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N2' },
+    },
   },
   {
     id: 'n1_graduate',
@@ -391,9 +391,9 @@ const KANJI_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N1' }
-    }
-  }
+      additional: { contentType: 'kanji', jlptLevel: 'N1' },
+    },
+  },
 ];
 ```
 
@@ -411,8 +411,8 @@ const VOCABULARY_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'lexicon_builder',
@@ -424,8 +424,8 @@ const VOCABULARY_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 500,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'dictionary_devotee',
@@ -437,8 +437,8 @@ const VOCABULARY_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 1000,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'vocabulary_virtuoso',
@@ -450,8 +450,8 @@ const VOCABULARY_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 2500,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'word_wizard',
@@ -463,8 +463,8 @@ const VOCABULARY_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 90,
-      additional: { contentType: 'vocabulary', minAnswers: 50 }
-    }
+      additional: { contentType: 'vocabulary', minAnswers: 50 },
+    },
   },
   {
     id: 'linguistic_legend',
@@ -476,9 +476,9 @@ const VOCABULARY_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 90,
-      additional: { contentType: 'vocabulary', minAnswers: 200 }
-    }
-  }
+      additional: { contentType: 'vocabulary', minAnswers: 200 },
+    },
+  },
 ];
 ```
 
@@ -493,7 +493,7 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 50,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_completion', value: 1 }
+    requirements: { type: 'gauntlet_completion', value: 1 },
   },
   {
     id: 'gauntlet_survivor',
@@ -505,8 +505,8 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_difficulty',
       value: 1,
-      additional: { difficulty: 'normal' }
-    }
+      additional: { difficulty: 'normal' },
+    },
   },
   {
     id: 'gauntlet_warrior',
@@ -518,8 +518,8 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_difficulty',
       value: 1,
-      additional: { difficulty: 'hard' }
-    }
+      additional: { difficulty: 'hard' },
+    },
   },
   {
     id: 'gauntlet_legend',
@@ -531,8 +531,8 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_difficulty',
       value: 1,
-      additional: { difficulty: 'instant-death' }
-    }
+      additional: { difficulty: 'instant-death' },
+    },
   },
   {
     id: 'gauntlet_veteran',
@@ -541,7 +541,7 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 150,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_completion', value: 10 }
+    requirements: { type: 'gauntlet_completion', value: 10 },
   },
   {
     id: 'gauntlet_champion',
@@ -550,7 +550,7 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 400,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_completion', value: 50 }
+    requirements: { type: 'gauntlet_completion', value: 50 },
   },
   {
     id: 'flawless_victory',
@@ -559,7 +559,7 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_perfect', value: 1 }
+    requirements: { type: 'gauntlet_perfect', value: 1 },
   },
   {
     id: 'untouchable',
@@ -571,8 +571,8 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_lives',
       value: 0,
-      additional: { type: 'no_lives_lost' }
-    }
+      additional: { type: 'no_lives_lost' },
+    },
   },
   {
     id: 'phoenix_rising',
@@ -584,8 +584,8 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_lives',
       value: 5,
-      additional: { type: 'lives_regenerated' }
-    }
+      additional: { type: 'lives_regenerated' },
+    },
   },
   {
     id: 'gauntlet_streak_master',
@@ -597,9 +597,9 @@ const GAUNTLET_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'streak',
       value: 50,
-      additional: { gameMode: 'gauntlet' }
-    }
-  }
+      additional: { gameMode: 'gauntlet' },
+    },
+  },
 ];
 ```
 
@@ -614,7 +614,7 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 50,
     category: 'blitz',
-    requirements: { type: 'blitz_session', value: 1 }
+    requirements: { type: 'blitz_session', value: 1 },
   },
   {
     id: 'blitz_warrior',
@@ -623,7 +623,7 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 150,
     category: 'blitz',
-    requirements: { type: 'blitz_score', value: 50 }
+    requirements: { type: 'blitz_score', value: 50 },
   },
   {
     id: 'blitz_champion',
@@ -632,7 +632,7 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 300,
     category: 'blitz',
-    requirements: { type: 'blitz_score', value: 100 }
+    requirements: { type: 'blitz_score', value: 100 },
   },
   {
     id: 'lightning_reflexes',
@@ -644,8 +644,8 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'streak',
       value: 25,
-      additional: { gameMode: 'blitz' }
-    }
+      additional: { gameMode: 'blitz' },
+    },
   },
   {
     id: 'blitz_legend',
@@ -657,8 +657,8 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'streak',
       value: 50,
-      additional: { gameMode: 'blitz' }
-    }
+      additional: { gameMode: 'blitz' },
+    },
   },
   {
     id: 'precision_under_pressure',
@@ -670,8 +670,8 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'accuracy',
       value: 90,
-      additional: { gameMode: 'blitz', minAnswers: 100 }
-    }
+      additional: { gameMode: 'blitz', minAnswers: 100 },
+    },
   },
   {
     id: 'speed_addict',
@@ -680,7 +680,7 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'blitz',
-    requirements: { type: 'blitz_session', value: 10 }
+    requirements: { type: 'blitz_session', value: 10 },
   },
   {
     id: 'blitz_master',
@@ -689,8 +689,8 @@ const BLITZ_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 400,
     category: 'blitz',
-    requirements: { type: 'blitz_session', value: 50 }
-  }
+    requirements: { type: 'blitz_session', value: 50 },
+  },
 ];
 ```
 
@@ -708,8 +708,8 @@ const SPEED_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 30000,
-      additional: { minAnswers: 10 }
-    }
+      additional: { minAnswers: 10 },
+    },
   },
   {
     id: 'speed_reader',
@@ -721,8 +721,8 @@ const SPEED_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 60000,
-      additional: { minAnswers: 25 }
-    }
+      additional: { minAnswers: 25 },
+    },
   },
   {
     id: 'instant_recognition',
@@ -734,8 +734,8 @@ const SPEED_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 1000,
-      additional: { type: 'single_answer' }
-    }
+      additional: { type: 'single_answer' },
+    },
   },
   {
     id: 'rapid_fire',
@@ -747,8 +747,8 @@ const SPEED_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 2000,
-      additional: { type: 'average', minAnswers: 50 }
-    }
+      additional: { type: 'average', minAnswers: 50 },
+    },
   },
   {
     id: 'efficient_learner',
@@ -760,9 +760,9 @@ const SPEED_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 300000,
-      additional: { type: 'session', minAccuracy: 90 }
-    }
-  }
+      additional: { type: 'session', minAccuracy: 90 },
+    },
+  },
 ];
 ```
 
@@ -777,7 +777,7 @@ const EXTENDED_STREAK_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 400,
     category: 'streak',
-    requirements: { type: 'streak', value: 75 }
+    requirements: { type: 'streak', value: 75 },
   },
   {
     id: 'century_streak',
@@ -786,7 +786,7 @@ const EXTENDED_STREAK_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 600,
     category: 'streak',
-    requirements: { type: 'streak', value: 100 }
+    requirements: { type: 'streak', value: 100 },
   },
   {
     id: 'streak_titan',
@@ -795,7 +795,7 @@ const EXTENDED_STREAK_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 800,
     category: 'streak',
-    requirements: { type: 'streak', value: 150 }
+    requirements: { type: 'streak', value: 150 },
   },
   {
     id: 'streak_immortal',
@@ -804,7 +804,7 @@ const EXTENDED_STREAK_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1000,
     category: 'streak',
-    requirements: { type: 'streak', value: 200 }
+    requirements: { type: 'streak', value: 200 },
   },
   {
     id: 'streak_god',
@@ -813,8 +813,8 @@ const EXTENDED_STREAK_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 2000,
     category: 'streak',
-    requirements: { type: 'streak', value: 500 }
-  }
+    requirements: { type: 'streak', value: 500 },
+  },
 ];
 ```
 
@@ -832,8 +832,8 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'variety',
       value: 3,
-      additional: { dojos: ['kana', 'kanji', 'vocabulary'] }
-    }
+      additional: { dojos: ['kana', 'kanji', 'vocabulary'] },
+    },
   },
   {
     id: 'mode_explorer',
@@ -845,8 +845,8 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'variety',
       value: 4,
-      additional: { modes: ['pick', 'reverse-pick', 'input', 'reverse-input'] }
-    }
+      additional: { modes: ['pick', 'reverse-pick', 'input', 'reverse-input'] },
+    },
   },
   {
     id: 'triple_threat',
@@ -858,8 +858,8 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'variety',
       value: 3,
-      additional: { challengeModes: ['classic', 'gauntlet', 'blitz'] }
-    }
+      additional: { challengeModes: ['classic', 'gauntlet', 'blitz'] },
+    },
   },
   {
     id: 'consistent_learner',
@@ -868,7 +868,7 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 75,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 5 }
+    requirements: { type: 'days_trained', value: 5 },
   },
   {
     id: 'monthly_dedication',
@@ -877,7 +877,7 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 300,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 30 }
+    requirements: { type: 'days_trained', value: 30 },
   },
   {
     id: 'century_of_learning',
@@ -886,7 +886,7 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 600,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 100 }
+    requirements: { type: 'days_trained', value: 100 },
   },
   {
     id: 'year_of_mastery',
@@ -895,8 +895,8 @@ const EXPLORATION_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1500,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 365 }
-  }
+    requirements: { type: 'days_trained', value: 365 },
+  },
 ];
 ```
 
@@ -911,7 +911,7 @@ const EXTENDED_MILESTONE_ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 350,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 2500 }
+    requirements: { type: 'total_correct', value: 2500 },
   },
   {
     id: 'grand_master',
@@ -920,7 +920,7 @@ const EXTENDED_MILESTONE_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1500,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 10000 }
+    requirements: { type: 'total_correct', value: 10000 },
   },
   {
     id: 'legendary_scholar',
@@ -929,7 +929,7 @@ const EXTENDED_MILESTONE_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 3000,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 25000 }
+    requirements: { type: 'total_correct', value: 25000 },
   },
   {
     id: 'session_veteran',
@@ -938,7 +938,7 @@ const EXTENDED_MILESTONE_ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 400,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 250 }
+    requirements: { type: 'sessions', value: 250 },
   },
   {
     id: 'session_legend',
@@ -947,7 +947,7 @@ const EXTENDED_MILESTONE_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 700,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 500 }
+    requirements: { type: 'sessions', value: 500 },
   },
   {
     id: 'eternal_student',
@@ -956,8 +956,8 @@ const EXTENDED_MILESTONE_ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1200,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 1000 }
-  }
+    requirements: { type: 'sessions', value: 1000 },
+  },
 ];
 ```
 
@@ -972,7 +972,7 @@ const POINT_ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'milestone',
-    requirements: { type: 'total_points', value: 1000 }
+    requirements: { type: 'total_points', value: 1000 },
   },
   {
     id: 'point_hoarder',
@@ -981,7 +981,7 @@ const POINT_ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 250,
     category: 'milestone',
-    requirements: { type: 'total_points', value: 5000 }
+    requirements: { type: 'total_points', value: 5000 },
   },
   {
     id: 'point_master',
@@ -990,8 +990,8 @@ const POINT_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'milestone',
-    requirements: { type: 'total_points', value: 10000 }
-  }
+    requirements: { type: 'total_points', value: 10000 },
+  },
 ];
 ```
 
@@ -1007,7 +1007,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     points: 10,
     category: 'fun',
     requirements: { type: 'total_incorrect', value: 1 },
-    hidden: false
+    hidden: false,
   },
   {
     id: 'perseverance',
@@ -1016,7 +1016,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 50,
     category: 'fun',
-    requirements: { type: 'wrong_streak', value: 5 }
+    requirements: { type: 'wrong_streak', value: 5 },
   },
   {
     id: 'night_owl',
@@ -1028,9 +1028,9 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'time_of_day',
       value: 1,
-      additional: { hourStart: 0, hourEnd: 1 }
+      additional: { hourStart: 0, hourEnd: 1 },
     },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'early_bird',
@@ -1042,9 +1042,9 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'time_of_day',
       value: 1,
-      additional: { hourStart: 5, hourEnd: 6 }
+      additional: { hourStart: 5, hourEnd: 6 },
     },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'answer_to_everything',
@@ -1054,7 +1054,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     points: 142,
     category: 'fun',
     requirements: { type: 'exact_count', value: 42 },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'perfect_century',
@@ -1064,7 +1064,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     points: 200,
     category: 'fun',
     requirements: { type: 'exact_count', value: 100 },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'achievement_hunter',
@@ -1073,7 +1073,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'fun',
-    requirements: { type: 'achievement_count', value: 10 }
+    requirements: { type: 'achievement_count', value: 10 },
   },
   {
     id: 'achievement_collector',
@@ -1082,7 +1082,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 250,
     category: 'fun',
-    requirements: { type: 'achievement_count', value: 25 }
+    requirements: { type: 'achievement_count', value: 25 },
   },
   {
     id: 'achievement_enthusiast',
@@ -1091,7 +1091,7 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'fun',
-    requirements: { type: 'achievement_count', value: 50 }
+    requirements: { type: 'achievement_count', value: 50 },
   },
   {
     id: 'completionist',
@@ -1101,8 +1101,8 @@ const FUN_ACHIEVEMENTS: Achievement[] = [
     points: 2000,
     category: 'fun',
     requirements: { type: 'achievement_count', value: -1 },
-    hidden: true
-  } // -1 means all
+    hidden: true,
+  }, // -1 means all
 ];
 ```
 

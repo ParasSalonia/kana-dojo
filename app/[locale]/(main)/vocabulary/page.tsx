@@ -20,12 +20,12 @@ export default function VocabularyPage() {
   return (
     <>
       <CourseSchema
-        name="Japanese Vocabulary Building Course (JLPT N5-N1)"
-        description="Build your Japanese vocabulary with thousands of words organized by JLPT levels. Learn nouns, verbs, adjectives, and adverbs with example sentences, readings, and interactive quizzes from beginner to advanced levels."
-        url="https://kanadojo.com/en/vocabulary"
-        educationalLevel="Beginner to Advanced"
-        skillLevel="All Levels"
-        learningResourceType="Interactive Exercise and Games"
+        name='Japanese Vocabulary Building Course (JLPT N5-N1)'
+        description='Build your Japanese vocabulary with thousands of words organized by JLPT levels. Learn nouns, verbs, adjectives, and adverbs with example sentences, readings, and interactive quizzes from beginner to advanced levels.'
+        url='https://kanadojo.com/en/vocabulary'
+        educationalLevel='Beginner to Advanced'
+        skillLevel='All Levels'
+        learningResourceType='Interactive Exercise and Games'
       />
       <DojoMenu />
     </>

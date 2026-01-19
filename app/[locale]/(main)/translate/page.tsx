@@ -23,16 +23,16 @@ const translatorSchema = {
       description:
         'Free Japanese learning platform with translator, hiragana, katakana, kanji, and vocabulary training',
       publisher: {
-        '@id': 'https://kanadojo.com/#organization'
+        '@id': 'https://kanadojo.com/#organization',
       },
       potentialAction: {
         '@type': 'SearchAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'https://kanadojo.com/translate?q={search_term_string}'
+          urlTemplate: 'https://kanadojo.com/translate?q={search_term_string}',
         },
-        'query-input': 'required name=search_term_string'
-      }
+        'query-input': 'required name=search_term_string',
+      },
     },
     // TranslateAction schema for translation services
     {
@@ -43,24 +43,25 @@ const translatorSchema = {
         'Free online translation between English and Japanese with romaji pronunciation',
       agent: {
         '@type': 'WebApplication',
-        '@id': 'https://kanadojo.com/translate#webapp'
+        '@id': 'https://kanadojo.com/translate#webapp',
       },
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://kanadojo.com/translate?text={text}&from={from}&to={to}',
+        urlTemplate:
+          'https://kanadojo.com/translate?text={text}&from={from}&to={to}',
         actionPlatform: [
           'http://schema.org/DesktopWebPlatform',
-          'http://schema.org/MobileWebPlatform'
-        ]
+          'http://schema.org/MobileWebPlatform',
+        ],
       },
       object: {
         '@type': 'Language',
-        name: ['English', 'Japanese']
+        name: ['English', 'Japanese'],
       },
       result: {
         '@type': 'Language',
-        name: ['Japanese', 'English']
-      }
+        name: ['Japanese', 'English'],
+      },
     },
     {
       '@type': 'BreadcrumbList',
@@ -71,18 +72,18 @@ const translatorSchema = {
           position: 1,
           item: {
             '@id': 'https://kanadojo.com',
-            name: 'Home'
-          }
+            name: 'Home',
+          },
         },
         {
           '@type': 'ListItem',
           position: 2,
           item: {
             '@id': 'https://kanadojo.com/translate',
-            name: 'English to Japanese Translator'
-          }
-        }
-      ]
+            name: 'English to Japanese Translator',
+          },
+        },
+      ],
     },
     {
       '@type': 'WebApplication',
@@ -91,7 +92,7 @@ const translatorSchema = {
       alternateName: [
         'Japanese Translator',
         'Free Japanese to English Translator',
-        'English Japanese Translator'
+        'English Japanese Translator',
       ],
       url: 'https://kanadojo.com/translate',
       applicationCategory: 'UtilityApplication',
@@ -102,7 +103,7 @@ const translatorSchema = {
         '@type': 'Offer',
         price: '0',
         priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock'
+        availability: 'https://schema.org/InStock',
       },
       description:
         'Translate English to Japanese or Japanese to English instantly for free. Features romaji pronunciation, translation history, and support for hiragana, katakana, and kanji.',
@@ -118,7 +119,7 @@ const translatorSchema = {
         'Free unlimited translations',
         'No registration required',
         'Mobile-responsive design',
-        'Privacy-focused local storage'
+        'Privacy-focused local storage',
       ],
       browserRequirements: 'Requires JavaScript',
       softwareVersion: '2.0',
@@ -127,30 +128,30 @@ const translatorSchema = {
       author: {
         '@type': 'Organization',
         name: 'KanaDojo',
-        url: 'https://kanadojo.com'
+        url: 'https://kanadojo.com',
       },
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.8',
         ratingCount: '2847',
         bestRating: '5',
-        worstRating: '1'
+        worstRating: '1',
       },
       review: [
         {
           '@type': 'Review',
           reviewRating: {
             '@type': 'Rating',
-            ratingValue: '5'
+            ratingValue: '5',
           },
           author: {
             '@type': 'Person',
-            name: 'Japanese Learner'
+            name: 'Japanese Learner',
           },
           reviewBody:
-            'Best free Japanese translator with romaji! Perfect for learning pronunciation.'
-        }
-      ]
+            'Best free Japanese translator with romaji! Perfect for learning pronunciation.',
+        },
+      ],
     },
     {
       '@type': 'SoftwareApplication',
@@ -162,8 +163,8 @@ const translatorSchema = {
       offers: {
         '@type': 'Offer',
         price: '0',
-        priceCurrency: 'USD'
-      }
+        priceCurrency: 'USD',
+      },
     },
     {
       '@type': 'FAQPage',
@@ -174,178 +175,178 @@ const translatorSchema = {
           name: 'Is this Japanese translator free?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! Our Japanese to English translator is completely free to use with no registration required. You can translate unlimited text between Japanese and English at no cost.'
-          }
+            text: 'Yes! Our Japanese to English translator is completely free to use with no registration required. You can translate unlimited text between Japanese and English at no cost.',
+          },
         },
         {
           '@type': 'Question',
           name: 'How accurate is the Japanese translation?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Our translator uses Google Cloud Translation API, one of the most accurate machine translation services available. It provides high-quality translations for most everyday use cases, though complex or context-dependent text may require human review.'
-          }
+            text: 'Our translator uses Google Cloud Translation API, one of the most accurate machine translation services available. It provides high-quality translations for most everyday use cases, though complex or context-dependent text may require human review.',
+          },
         },
         {
           '@type': 'Question',
           name: 'What is romanization (romaji)?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Romanization, or romaji, is the representation of Japanese text using the Latin alphabet. It helps non-Japanese speakers read and pronounce Japanese words correctly. Our translator automatically provides Hepburn romanization for all Japanese text.'
-          }
+            text: 'Romanization, or romaji, is the representation of Japanese text using the Latin alphabet. It helps non-Japanese speakers read and pronounce Japanese words correctly. Our translator automatically provides Hepburn romanization for all Japanese text.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Do I need to create an account to use the translator?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'No account or registration is required. You can start translating immediately without signing up. Your translation history is saved locally in your browser for your convenience.'
-          }
+            text: 'No account or registration is required. You can start translating immediately without signing up. Your translation history is saved locally in your browser for your convenience.',
+          },
         },
         {
           '@type': 'Question',
           name: 'What is the maximum text length I can translate?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'You can translate up to 5,000 characters at a time. For longer texts, we recommend breaking them into smaller sections for optimal translation quality.'
-          }
+            text: 'You can translate up to 5,000 characters at a time. For longer texts, we recommend breaking them into smaller sections for optimal translation quality.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Is my translation history saved?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes, your translation history is saved locally in your browser using localStorage. This means your translations are completely private and only accessible on your device. You can view, restore, or clear your history at any time.'
-          }
+            text: 'Yes, your translation history is saved locally in your browser using localStorage. This means your translations are completely private and only accessible on your device. You can view, restore, or clear your history at any time.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I translate from English to Japanese?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! Our translator works bidirectionally. You can translate from English to Japanese or from Japanese to English. Simply select your source language and the target language will automatically adjust.'
-          }
+            text: 'Yes! Our translator works bidirectionally. You can translate from English to Japanese or from Japanese to English. Simply select your source language and the target language will automatically adjust.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Does the translator work offline?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'The translator requires an internet connection to access the Google Cloud Translation API. However, the interface detects offline status and will notify you when translation is unavailable.'
-          }
+            text: 'The translator requires an internet connection to access the Google Cloud Translation API. However, the interface detects offline status and will notify you when translation is unavailable.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I translate Hiragana, Katakana, and Kanji?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! Our translator supports all three Japanese writing systems: Hiragana, Katakana, and Kanji. It automatically detects and translates any combination of these characters.'
-          }
+            text: 'Yes! Our translator supports all three Japanese writing systems: Hiragana, Katakana, and Kanji. It automatically detects and translates any combination of these characters.',
+          },
         },
         {
           '@type': 'Question',
           name: 'How do I copy the translated text?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Click the "Copy" button next to the translated text to copy it to your clipboard. You will see a confirmation message when the text has been successfully copied.'
-          }
+            text: 'Click the "Copy" button next to the translated text to copy it to your clipboard. You will see a confirmation message when the text has been successfully copied.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Are there keyboard shortcuts available?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! Press Ctrl+Enter (or Cmd+Enter on Mac) to quickly translate your text without clicking the translate button. This speeds up your workflow significantly.'
-          }
+            text: 'Yes! Press Ctrl+Enter (or Cmd+Enter on Mac) to quickly translate your text without clicking the translate button. This speeds up your workflow significantly.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I swap the translation direction?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! Click the swap button (arrow icon) between the input and output fields to instantly reverse the translation direction and swap the text between fields.'
-          }
+            text: 'Yes! Click the swap button (arrow icon) between the input and output fields to instantly reverse the translation direction and swap the text between fields.',
+          },
         },
         {
           '@type': 'Question',
           name: 'What translation API does this use?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'We use Google Cloud Translation API, which provides neural machine translation with high accuracy. This is the same technology used by Google Translate.'
-          }
+            text: 'We use Google Cloud Translation API, which provides neural machine translation with high accuracy. This is the same technology used by Google Translate.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Is my data private and secure?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes. Your translation history is stored locally in your browser only. We do not store your translations on our servers. Translations are sent to Google Cloud Translation API for processing according to their privacy policy.'
-          }
+            text: 'Yes. Your translation history is stored locally in your browser only. We do not store your translations on our servers. Translations are sent to Google Cloud Translation API for processing according to their privacy policy.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I use this translator on mobile devices?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! The translator is fully responsive and works perfectly on mobile phones and tablets. The interface adapts to smaller screens for optimal usability.'
-          }
+            text: 'Yes! The translator is fully responsive and works perfectly on mobile phones and tablets. The interface adapts to smaller screens for optimal usability.',
+          },
         },
         {
           '@type': 'Question',
           name: 'How is this different from Google Translate?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'While we use Google Cloud Translation API for accuracy, KanaDojo offers additional features specifically for Japanese learners: automatic romanization (romaji), translation history, keyboard shortcuts, clean interface, and integration with our Japanese learning platform.'
-          }
+            text: 'While we use Google Cloud Translation API for accuracy, KanaDojo offers additional features specifically for Japanese learners: automatic romanization (romaji), translation history, keyboard shortcuts, clean interface, and integration with our Japanese learning platform.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I translate formal vs informal Japanese?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'The translator will preserve the formality level of the input text. However, it may not always distinguish between casual and formal speech perfectly. For best results, provide context or specify the desired formality level in your text.'
-          }
+            text: 'The translator will preserve the formality level of the input text. However, it may not always distinguish between casual and formal speech perfectly. For best results, provide context or specify the desired formality level in your text.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Does it support Japanese dialects?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'The translator is optimized for standard Japanese (Tokyo dialect). Regional dialects and slang may not translate accurately. For standard Japanese text, the translation quality is excellent.'
-          }
+            text: 'The translator is optimized for standard Japanese (Tokyo dialect). Regional dialects and slang may not translate accurately. For standard Japanese text, the translation quality is excellent.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I translate entire documents or only text?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Currently, the translator supports text input only (up to 5,000 characters). Document translation features may be added in future updates. For now, copy and paste text from your documents.'
-          }
+            text: 'Currently, the translator supports text input only (up to 5,000 characters). Document translation features may be added in future updates. For now, copy and paste text from your documents.',
+          },
         },
         {
           '@type': 'Question',
           name: 'How can I learn more about Japanese after translating?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'KanaDojo offers comprehensive Japanese learning tools including Hiragana and Katakana practice, Kanji study by JLPT level, and vocabulary training. Visit our main menu to explore all learning features.'
-          }
+            text: 'KanaDojo offers comprehensive Japanese learning tools including Hiragana and Katakana practice, Kanji study by JLPT level, and vocabulary training. Visit our main menu to explore all learning features.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Is there a limit to how many translations I can make?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'No! You can make unlimited translations completely free. There are no daily limits or restrictions on usage.'
-          }
+            text: 'No! You can make unlimited translations completely free. There are no daily limits or restrictions on usage.',
+          },
         },
         {
           '@type': 'Question',
           name: 'Can I use this for JLPT preparation?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! The translator is an excellent tool for JLPT preparation. Use it to check your understanding of Japanese text, practice translation skills, and verify meanings of unfamiliar words. Combine it with our JLPT Kanji and Vocabulary training for comprehensive preparation.'
-          }
-        }
-      ]
+            text: 'Yes! The translator is an excellent tool for JLPT preparation. Use it to check your understanding of Japanese text, practice translation skills, and verify meanings of unfamiliar words. Combine it with our JLPT Kanji and Vocabulary training for comprehensive preparation.',
+          },
+        },
+      ],
     },
     {
       '@type': 'HowTo',
@@ -358,34 +359,34 @@ const translatorSchema = {
           '@type': 'HowToStep',
           name: 'Enter your text',
           text: 'Enter your text in the input field on the left side of the translator',
-          position: 1
+          position: 1,
         },
         {
           '@type': 'HowToStep',
           name: 'Select source language',
           text: 'Select your source language (English or Japanese) from the language selector',
-          position: 2
+          position: 2,
         },
         {
           '@type': 'HowToStep',
           name: 'Translate',
           text: 'Click the translate button or press Ctrl+Enter (Cmd+Enter on Mac) to translate',
-          position: 3
+          position: 3,
         },
         {
           '@type': 'HowToStep',
           name: 'View results',
           text: 'View your translation with romanization (romaji) displayed for Japanese text',
-          position: 4
+          position: 4,
         },
         {
           '@type': 'HowToStep',
           name: 'Copy or save',
           text: 'Copy the translation to clipboard or it will be automatically saved to your history',
-          position: 5
-        }
+          position: 5,
+        },
       ],
-      totalTime: 'PT1M'
+      totalTime: 'PT1M',
     },
     {
       '@type': 'Article',
@@ -395,18 +396,18 @@ const translatorSchema = {
         'Comprehensive guide to translating Japanese to English and English to Japanese with automatic romaji, translation tips, and common phrases',
       author: {
         '@type': 'Organization',
-        name: 'KanaDojo'
+        name: 'KanaDojo',
       },
       publisher: {
         '@type': 'Organization',
         name: 'KanaDojo',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://kanadojo.com/logo.png'
-        }
+          url: 'https://kanadojo.com/logo.png',
+        },
       },
       datePublished: '2024-01-01',
-      dateModified: '2026-01-08'
+      dateModified: '2026-01-08',
     },
     {
       '@type': 'Organization',
@@ -417,15 +418,13 @@ const translatorSchema = {
         '@type': 'ImageObject',
         url: 'https://kanadojo.com/logo.png',
         width: 512,
-        height: 512
+        height: 512,
       },
       description:
         'Free online Japanese learning platform featuring Hiragana, Katakana, Kanji training, vocabulary building, and Japanese to English translation tools',
-      sameAs: [
-        'https://github.com/lingdojo/kanadojo'
-      ]
-    }
-  ]
+      sameAs: ['https://github.com/lingdojo/kanadojo'],
+    },
+  ],
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -438,9 +437,9 @@ export async function generateMetadata(): Promise<Metadata> {
         en: 'https://kanadojo.com/en/translate',
         es: 'https://kanadojo.com/es/translate',
         ja: 'https://kanadojo.com/ja/translate',
-        'x-default': 'https://kanadojo.com/translate'
-      }
-    }
+        'x-default': 'https://kanadojo.com/translate',
+      },
+    },
   };
 }
 
@@ -467,7 +466,10 @@ export default async function TranslatePage({ params }: TranslatePageProps) {
           itemType='https://schema.org/WebApplication'
           id='translator'
         >
-          <meta itemProp='name' content='KanaDojo English to Japanese Translator' />
+          <meta
+            itemProp='name'
+            content='KanaDojo English to Japanese Translator'
+          />
           <meta itemProp='applicationCategory' content='UtilityApplication' />
           <meta itemProp='operatingSystem' content='Any' />
           <meta

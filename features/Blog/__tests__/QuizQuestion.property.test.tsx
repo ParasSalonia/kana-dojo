@@ -17,7 +17,7 @@ const safeChars =
 const safeStringArb = fc
   .array(fc.constantFrom(...safeChars.split('')), {
     minLength: 1,
-    maxLength: 30
+    maxLength: 30,
   })
   .map(chars => chars.join('').trim())
   .filter(s => s.length > 0);
@@ -31,8 +31,8 @@ const quizPropsArb = optionsArb.chain(options =>
     question: safeStringArb,
     options: fc.constant(options),
     answer: fc.integer({ min: 0, max: options.length - 1 }),
-    explanation: fc.option(safeStringArb, { nil: undefined })
-  })
+    explanation: fc.option(safeStringArb, { nil: undefined }),
+  }),
 );
 
 /**
@@ -52,13 +52,13 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
             options={props.options}
             answer={props.answer}
             explanation={props.explanation}
-          />
+          />,
         );
         const questionText = getByTestId('quiz-question-text');
         expect(questionText.textContent).toBe(props.question);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -70,13 +70,13 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
             question={props.question}
             options={props.options}
             answer={props.answer}
-          />
+          />,
         );
         const optionElements = getAllByTestId('quiz-option');
         expect(optionElements.length).toBe(props.options.length);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -88,7 +88,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
             question={props.question}
             options={props.options}
             answer={props.answer}
-          />
+          />,
         );
         const optionTexts = getAllByTestId('quiz-option-text');
         props.options.forEach((option, index) => {
@@ -96,7 +96,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
         });
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -108,7 +108,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
             question={props.question}
             options={props.options}
             answer={props.answer}
-          />
+          />,
         );
 
         const optionElements = getAllByTestId('quiz-option');
@@ -122,7 +122,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -139,7 +139,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
               question={props.question}
               options={props.options}
               answer={props.answer}
-            />
+            />,
           );
 
           const optionElements = getAllByTestId('quiz-option');
@@ -152,9 +152,9 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
           expect(feedbackText.textContent).toContain('Incorrect');
 
           unmount();
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -166,19 +166,19 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
             question={props.question}
             options={props.options}
             answer={props.answer}
-          />
+          />,
         );
 
         const optionElements = getAllByTestId('quiz-option');
         optionElements.forEach((option, index) => {
           expect(option.getAttribute('data-correct')).toBe(
-            String(index === props.answer)
+            String(index === props.answer),
           );
         });
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -193,7 +193,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
               options={props.options}
               answer={props.answer}
               explanation={props.explanation}
-            />
+            />,
           );
 
           const optionElements = getAllByTestId('quiz-option');
@@ -203,9 +203,9 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
           expect(explanation.textContent).toBe(props.explanation);
 
           unmount();
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -217,7 +217,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
             question={props.question}
             options={props.options}
             answer={props.answer}
-          />
+          />,
         );
 
         const optionElements = getAllByTestId('quiz-option');
@@ -230,7 +230,7 @@ describe('Property 18: QuizQuestion Renders Options and Handles Selection', () =
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

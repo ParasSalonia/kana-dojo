@@ -25,7 +25,7 @@ export function RelatedPosts({ posts, className }: RelatedPostsProps) {
     <aside
       className={cn(
         'rounded-xl border border-[var(--border-color)] bg-[var(--card-color)] p-6',
-        className
+        className,
       )}
       aria-label='Related posts'
       data-testid='related-posts'

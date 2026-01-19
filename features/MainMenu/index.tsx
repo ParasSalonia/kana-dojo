@@ -12,7 +12,7 @@ import {
   Moon,
   Heart,
   Sparkle,
-  FileDiff
+  FileDiff,
 } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -36,10 +36,10 @@ const MainMenu = () => {
   const { playClick } = useClick();
 
   const expandDecorations = useDecorationsStore(
-    state => state.expandDecorations
+    state => state.expandDecorations,
   );
   const toggleExpandDecorations = useDecorationsStore(
-    state => state.toggleExpandDecorations
+    state => state.toggleExpandDecorations,
   );
 
   const [showBanner, setShowBanner] = useState(false);
@@ -64,18 +64,18 @@ const MainMenu = () => {
     {
       name_en: 'Kana',
       name_ja: 'あ',
-      href: '/kana'
+      href: '/kana',
     },
     {
       name_en: 'Vocab',
       name_ja: '語',
-      href: '/vocabulary'
+      href: '/vocabulary',
     },
     {
       name_en: 'Kanji',
       name_ja: '字',
-      href: '/kanji'
-    }
+      href: '/kanji',
+    },
 
     // {
     //   name_en: 'Sentences',
@@ -89,13 +89,13 @@ const MainMenu = () => {
     { name: 'privacy', href: '/privacy', icon: Cookie },
     { name: 'security', href: '/security', icon: FileLock2 },
     { name: 'patch notes', href: '/patch-notes', icon: FileDiff },
-    { name: 'credits', href: '/credits', icon: Sparkle }
+    { name: 'credits', href: '/credits', icon: Sparkle },
   ];
 
   return (
     <div
       className={clsx(
-        'flex flex-row justify-center max-w-[100dvw] min-h-[100dvh]'
+        'flex min-h-[100dvh] max-w-[100dvw] flex-row justify-center',
       )}
     >
       {isMounted && isLG && (
@@ -107,7 +107,7 @@ const MainMenu = () => {
             className={clsx(
               'fixed top-4 right-8 z-50 opacity-90',
               buttonBorderStyles,
-              'transition-transform duration-250 active:scale-95'
+              'transition-transform duration-250 active:scale-95',
             )}
             onClick={() => {
               playClick();
@@ -138,14 +138,14 @@ const MainMenu = () => {
       )}
       <div
         className={clsx(
-          'max-md:pt-4 pb-16 flex flex-col items-center md:justify-center gap-4 px-4 w-full sm:w-3/4 lg:w-1/2 3xl:w-2/5 ',
-          'opacity-90 z-50',
-          expandDecorations && 'hidden'
+          '3xl:w-2/5 flex w-full flex-col items-center gap-4 px-4 pb-16 max-md:pt-4 sm:w-3/4 md:justify-center lg:w-1/2',
+          'z-50 opacity-90',
+          expandDecorations && 'hidden',
         )}
       >
-        <div className='flex flex-row justify-between items-center w-full px-1 gap-2'>
+        <div className='flex w-full flex-row items-center justify-between gap-2 px-1'>
           <Banner />
-          <div className='flex flex-row justify-end gap-2 w-1/2 md:w-1/3'>
+          <div className='flex w-1/2 flex-row justify-end gap-2 md:w-1/3'>
             {theme === 'dark' ? (
               <Moon
                 size={32}
@@ -154,9 +154,9 @@ const MainMenu = () => {
                   setTheme('light');
                 }}
                 className={clsx(
-                  'hover:cursor-pointer duration-250 ',
+                  'duration-250 hover:cursor-pointer',
                   'active:scale-100 active:duration-225',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                 )}
               />
             ) : (
@@ -167,9 +167,9 @@ const MainMenu = () => {
                   setTheme('dark');
                 }}
                 className={clsx(
-                  'hover:cursor-pointer duration-250 ',
+                  'duration-250 hover:cursor-pointer',
                   'active:scale-100 active:duration-225',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                 )}
               />
             )}
@@ -189,10 +189,10 @@ const MainMenu = () => {
               icon={faDiscord}
               size='2x'
               className={clsx(
-                'hover:cursor-pointer duration-250 ',
+                'duration-250 hover:cursor-pointer',
                 'active:scale-100 active:duration-225',
                 'md:hidden',
-                'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
               )}
               onClick={() => {
                 playClick();
@@ -203,9 +203,9 @@ const MainMenu = () => {
               icon={faGithub}
               size='2x'
               className={clsx(
-                'hover:cursor-pointer duration-250 ',
+                'duration-250 hover:cursor-pointer',
                 'active:scale-100 active:duration-225',
-                'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
               )}
               onClick={() => {
                 playClick();
@@ -215,9 +215,9 @@ const MainMenu = () => {
             <Heart
               size={32}
               className={clsx(
-                'hover:cursor-pointer duration-250 ',
+                'duration-250 hover:cursor-pointer',
                 'active:scale-100 active:duration-225',
-                'fill-current animate-bounce text-red-500'
+                'animate-bounce fill-current text-red-500',
               )}
               onClick={() => {
                 playClick();
@@ -234,7 +234,7 @@ const MainMenu = () => {
             'transition-all ease-in-out',
             'flex flex-col md:flex-row',
             'w-full',
-            'max-md:border-b-4 max-md:border-[var(--border-color)]'
+            'max-md:border-b-4 max-md:border-[var(--border-color)]',
           )}
         >
           {links.map((link, i) => (
@@ -242,15 +242,15 @@ const MainMenu = () => {
               <Link href={link.href} className={clsx('w-full overflow-hidden')}>
                 <button
                   className={clsx(
-                    'flex w-full h-full text-2xl',
-                    ' justify-center items-center gap-1.5 border-[var(--border-color)] ',
-                    'md:border-b-4 ',
+                    'flex h-full w-full text-2xl',
+                    'items-center justify-center gap-1.5 border-[var(--border-color)]',
+                    'md:border-b-4',
                     'py-8',
                     'group',
                     i === 0 && 'rounded-tl-2xl rounded-bl-2xl',
                     i === links.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
                     'hover:cursor-pointer md:hover:border-[var(--main-color)]/80',
-                    'hover:bg-[var(--border-color)]'
+                    'hover:bg-[var(--border-color)]',
                   )}
                   onClick={() => playClick()}
                 >
@@ -269,9 +269,9 @@ const MainMenu = () => {
               {i < links.length - 1 && (
                 <div
                   className={clsx(
-                    'md:border-l-1 md:h-auto md:w-0',
+                    'md:h-auto md:w-0 md:border-l-1',
                     'border-[var(--border-color)]',
-                    'border-t-1 w-full border-[var(--border-color)]'
+                    'w-full border-t-1 border-[var(--border-color)]',
                   )}
                 />
               )}
@@ -281,22 +281,22 @@ const MainMenu = () => {
       </div>
       <div
         className={clsx(
-          'fixed bottom-0 md:bottom-6 left-0 right-0 z-50',
-          'max-md:flex justify-center gap-2',
-          'max-md:border-t-2 border-[var(--border-color)]',
-          'px-2 sm:px-4 py-2',
+          'fixed right-0 bottom-0 left-0 z-50 md:bottom-6',
+          'justify-center gap-2 max-md:flex',
+          'border-[var(--border-color)] max-md:border-t-2',
+          'px-2 py-2 sm:px-4',
           'flex items-center justify-between max-md:bg-[var(--background-color)]',
-          expandDecorations && 'hidden'
+          expandDecorations && 'hidden',
         )}
       >
-        <div className='flex justify-evenly items-center w-full lg:w-2/5'>
+        <div className='flex w-full items-center justify-evenly lg:w-2/5'>
           {legalLinks.map((link, i) => (
             <Link
               href={link.href}
               key={i}
               className={clsx(
-                'hover:cursor-pointer flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-                link.name === 'credits' && 'hidden lg:flex'
+                'flex flex-row items-center gap-1 text-[var(--secondary-color)] hover:cursor-pointer hover:text-[var(--main-color)]',
+                link.name === 'credits' && 'hidden lg:flex',
               )}
               onClick={() => playClick()}
             >

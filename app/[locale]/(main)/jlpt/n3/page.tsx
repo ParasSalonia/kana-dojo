@@ -13,7 +13,7 @@ export async function generateMetadata() {
     description:
       'Complete JLPT N3 vocabulary and kanji guide for intermediate Japanese learners. Free interactive practice with ~370 kanji and 3,000+ vocabulary words. Master N3 efficiently!',
     keywords:
-      'jlpt n3, jlpt n3 vocabulary, jlpt n3 kanji, n3 study guide, intermediate japanese, jlpt n3 preparation, n3 exam, japanese n3 words'
+      'jlpt n3, jlpt n3 vocabulary, jlpt n3 kanji, n3 study guide, intermediate japanese, jlpt n3 preparation, n3 exam, japanese n3 words',
   };
 }
 
@@ -141,7 +141,8 @@ export default async function JLPTN3Page() {
                 patterns makes acquisition faster.
               </p>
               <p className='mt-2 text-sm italic'>
-                Example: 生活 (seikatsu - daily life) = 生 (life) + 活 (activity)
+                Example: 生活 (seikatsu - daily life) = 生 (life) + 活
+                (activity)
               </p>
             </div>
 
@@ -188,8 +189,8 @@ export default async function JLPTN3Page() {
                 Similar Meanings
               </h4>
               <p className='text-sm'>
-                Many words have subtle differences (見る vs 観る vs 診る vs 看る).
-                Context determines usage.
+                Many words have subtle differences (見る vs 観る vs 診る vs
+                看る). Context determines usage.
               </p>
             </div>
             <div>
@@ -274,7 +275,10 @@ export default async function JLPTN3Page() {
           </Link>
 
           <div className='mt-6 space-x-4'>
-            <Link href='/jlpt/n4' className='text-sm underline hover:opacity-80'>
+            <Link
+              href='/jlpt/n4'
+              className='text-sm underline hover:opacity-80'
+            >
               ← Back to N4
             </Link>
             <Link href='/kanji' className='text-sm underline hover:opacity-80'>

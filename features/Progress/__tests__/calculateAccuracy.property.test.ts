@@ -3,7 +3,7 @@ import * as fc from 'fast-check';
 import {
   calculateAccuracy,
   calculateAccuracyRounded,
-  formatAccuracy
+  formatAccuracy,
 } from '../lib/calculateAccuracy';
 
 describe('Accuracy Calculation', () => {
@@ -28,9 +28,9 @@ describe('Accuracy Calculation', () => {
             const expected = (correct / total) * 100;
 
             expect(result).toBeCloseTo(expected, 10);
-          }
+          },
         ),
-        { numRuns: 50 }
+        { numRuns: 50 },
       );
     });
 
@@ -47,9 +47,9 @@ describe('Accuracy Calculation', () => {
             const result = calculateAccuracy(correct, incorrect);
             expect(result).toBeGreaterThanOrEqual(0);
             expect(result).toBeLessThanOrEqual(100);
-          }
+          },
         ),
-        { numRuns: 50 }
+        { numRuns: 50 },
       );
     });
 
@@ -59,7 +59,7 @@ describe('Accuracy Calculation', () => {
           const result = calculateAccuracy(correct, 0);
           expect(result).toBe(100);
         }),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -69,7 +69,7 @@ describe('Accuracy Calculation', () => {
           const result = calculateAccuracy(0, incorrect);
           expect(result).toBe(0);
         }),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
   });

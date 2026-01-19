@@ -6,9 +6,13 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from '@/shared/components/ui/tooltip';
-import { analyzeText, needsAnalysis, type AnalyzedToken } from '../services/textAnalysisAPI';
+import {
+  analyzeText,
+  needsAnalysis,
+  type AnalyzedToken,
+} from '../services/textAnalysisAPI';
 import { Loader2 } from 'lucide-react';
 
 interface WordByWordBreakdownProps {
@@ -22,7 +26,7 @@ interface WordByWordBreakdownProps {
  */
 export default function WordByWordBreakdown({
   text,
-  className
+  className,
 }: WordByWordBreakdownProps) {
   const [tokens, setTokens] = useState<AnalyzedToken[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +76,7 @@ export default function WordByWordBreakdown({
         className={cn(
           'flex items-center justify-center gap-2 py-4',
           'text-[var(--secondary-color)]',
-          className
+          className,
         )}
       >
         <Loader2 className='h-4 w-4 animate-spin' />
@@ -85,10 +89,7 @@ export default function WordByWordBreakdown({
   if (error) {
     return (
       <div
-        className={cn(
-          'text-sm text-[var(--secondary-color)] py-2',
-          className
-        )}
+        className={cn('py-2 text-sm text-[var(--secondary-color)]', className)}
       >
         {error}
       </div>
@@ -98,9 +99,7 @@ export default function WordByWordBreakdown({
   // If no tokens (not Japanese text), show regular text
   if (tokens.length === 0) {
     return (
-      <div className={cn('text-[var(--main-color)]', className)}>
-        {text}
-      </div>
+      <div className={cn('text-[var(--main-color)]', className)}>{text}</div>
     );
   }
 
@@ -110,7 +109,7 @@ export default function WordByWordBreakdown({
       <div
         className={cn(
           'flex flex-wrap gap-x-1 gap-y-2 leading-relaxed',
-          className
+          className,
         )}
       >
         {tokens.map((token, index) => (
@@ -118,12 +117,12 @@ export default function WordByWordBreakdown({
             <TooltipTrigger asChild>
               <span
                 className={cn(
-                  'cursor-help inline-block',
+                  'inline-block cursor-help',
                   'hover:bg-[var(--main-color)]/10',
                   'hover:text-[var(--main-color)]',
                   'rounded px-1 py-0.5',
                   'transition-colors duration-150',
-                  'text-[var(--main-color)]'
+                  'text-[var(--main-color)]',
                 )}
               >
                 {token.surface}
@@ -133,14 +132,14 @@ export default function WordByWordBreakdown({
               side='top'
               className={cn(
                 'max-w-xs p-3',
-                'bg-[var(--card-color)] border border-[var(--border-color)]',
-                'rounded-xl shadow-lg'
+                'border border-[var(--border-color)] bg-[var(--card-color)]',
+                'rounded-xl shadow-lg',
               )}
             >
               <div className='flex flex-col gap-2 text-xs'>
                 {/* Surface form (the word itself) */}
                 <div>
-                  <span className='font-bold text-[var(--main-color)] text-base'>
+                  <span className='text-base font-bold text-[var(--main-color)]'>
                     {token.surface}
                   </span>
                 </div>
@@ -148,7 +147,7 @@ export default function WordByWordBreakdown({
                 {/* Reading (hiragana) */}
                 {token.reading && token.reading !== token.surface && (
                   <div className='flex items-baseline gap-2'>
-                    <span className='text-[var(--secondary-color)] font-medium min-w-[60px]'>
+                    <span className='min-w-[60px] font-medium text-[var(--secondary-color)]'>
                       Reading:
                     </span>
                     <span className='text-[var(--main-color)]'>
@@ -162,7 +161,7 @@ export default function WordByWordBreakdown({
                   token.basicForm !== '*' &&
                   token.basicForm !== token.surface && (
                     <div className='flex items-baseline gap-2'>
-                      <span className='text-[var(--secondary-color)] font-medium min-w-[60px]'>
+                      <span className='min-w-[60px] font-medium text-[var(--secondary-color)]'>
                         Base form:
                       </span>
                       <span className='text-[var(--main-color)]'>
@@ -173,14 +172,14 @@ export default function WordByWordBreakdown({
 
                 {/* Part of speech */}
                 <div className='flex items-baseline gap-2'>
-                  <span className='text-[var(--secondary-color)] font-medium min-w-[60px]'>
+                  <span className='min-w-[60px] font-medium text-[var(--secondary-color)]'>
                     Type:
                   </span>
                   <span
                     className={cn(
-                      'text-xs px-2 py-0.5 rounded-md font-medium',
+                      'rounded-md px-2 py-0.5 text-xs font-medium',
                       'bg-[var(--main-color)]/10 text-[var(--main-color)]',
-                      'border border-[var(--main-color)]/20'
+                      'border border-[var(--main-color)]/20',
                     )}
                   >
                     {token.pos}
@@ -188,24 +187,25 @@ export default function WordByWordBreakdown({
                 </div>
 
                 {/* POS details */}
-                {token.posDetail && token.posDetail !== 'No additional info' && (
-                  <div className='flex items-baseline gap-2'>
-                    <span className='text-[var(--secondary-color)] font-medium min-w-[60px]'>
-                      Details:
-                    </span>
-                    <span className='text-[var(--main-color)] text-xs'>
-                      {token.posDetail}
-                    </span>
-                  </div>
-                )}
+                {token.posDetail &&
+                  token.posDetail !== 'No additional info' && (
+                    <div className='flex items-baseline gap-2'>
+                      <span className='min-w-[60px] font-medium text-[var(--secondary-color)]'>
+                        Details:
+                      </span>
+                      <span className='text-xs text-[var(--main-color)]'>
+                        {token.posDetail}
+                      </span>
+                    </div>
+                  )}
 
                 {/* Translation (if available) */}
                 {token.translation && (
-                  <div className='flex items-baseline gap-2 pt-1 border-t border-[var(--border-color)]'>
-                    <span className='text-[var(--secondary-color)] font-medium min-w-[60px]'>
+                  <div className='flex items-baseline gap-2 border-t border-[var(--border-color)] pt-1'>
+                    <span className='min-w-[60px] font-medium text-[var(--secondary-color)]'>
                       Meaning:
                     </span>
-                    <span className='text-[var(--main-color)] font-medium'>
+                    <span className='font-medium text-[var(--main-color)]'>
                       {token.translation}
                     </span>
                   </div>

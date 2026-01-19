@@ -8,7 +8,7 @@ import KanjiSetDictionary from '@/features/Kanji/components/SetDictionary';
 import type { IKanjiObj } from '@/features/Kanji/store/useKanjiStore';
 import {
   kanjiDataService,
-  KanjiLevel
+  KanjiLevel,
 } from '@/features/Kanji/services/kanjiDataService';
 import LevelSetCards from '@/shared/components/Menu/LevelSetCards';
 
@@ -17,25 +17,25 @@ const KANJI_PER_SET = 10;
 
 const KanjiCards = () => {
   const selectedKanjiCollectionName = useKanjiStore(
-    state => state.selectedKanjiCollection
+    state => state.selectedKanjiCollection,
   );
 
   const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
   const setSelectedKanjiSets = useKanjiStore(
-    state => state.setSelectedKanjiSets
+    state => state.setSelectedKanjiSets,
   );
   const { clearKanjiObjs, clearKanjiSets } = useKanjiStore();
   const addKanjiObjs = useKanjiStore(state => state.addKanjiObjs);
   const collapsedRowsByUnit = useKanjiStore(state => state.collapsedRowsByUnit);
   const setCollapsedRowsForUnit = useKanjiStore(
-    state => state.setCollapsedRowsForUnit
+    state => state.setCollapsedRowsForUnit,
   );
   const allTimeStats = useStatsStore(state => state.allTimeStats);
 
   // Get collapsed rows for current unit from store
   const collapsedRows = useMemo(
     () => collapsedRowsByUnit[selectedKanjiCollectionName] || [],
-    [collapsedRowsByUnit, selectedKanjiCollectionName]
+    [collapsedRowsByUnit, selectedKanjiCollectionName],
   );
   const setCollapsedRows = useCallback(
     (updater: number[] | ((prev: number[]) => number[])) => {
@@ -43,16 +43,16 @@ const KanjiCards = () => {
         typeof updater === 'function' ? updater(collapsedRows) : updater;
       setCollapsedRowsForUnit(selectedKanjiCollectionName, newRows);
     },
-    [collapsedRows, selectedKanjiCollectionName, setCollapsedRowsForUnit]
+    [collapsedRows, selectedKanjiCollectionName, setCollapsedRowsForUnit],
   );
 
   const getCollectionName = useCallback(
     (level: KanjiLevel) => level.toUpperCase(),
-    []
+    [],
   );
   const loadItemsByLevel = useCallback(
     (level: KanjiLevel) => kanjiDataService.getKanjiByLevel(level),
-    []
+    [],
   );
 
   return (

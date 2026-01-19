@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import useStatsStore from '../store/useStatsStore';
 import useVisitStore from '../store/useVisitStore';
 import useAchievementStore, {
-  ACHIEVEMENTS
+  ACHIEVEMENTS,
 } from '@/features/Achievements/store/useAchievementStore';
 import { getOverallStats } from '@/shared/lib/gauntletStats';
 import { classifyCharacter } from '../lib/classifyCharacter';
@@ -16,7 +16,7 @@ import type {
   TimedModeStats,
   GauntletOverallStats,
   MasteryDistribution,
-  ContentFilter
+  ContentFilter,
 } from '../types/stats';
 
 /**
@@ -42,7 +42,7 @@ function createDefaultTimedStats(): TimedModeStats {
     wrong: 0,
     streak: 0,
     bestStreak: 0,
-    accuracy: 0
+    accuracy: 0,
   };
 }
 
@@ -54,7 +54,7 @@ function createDefaultMasteryDistribution(): MasteryDistribution {
     mastered: 0,
     learning: 0,
     needsPractice: 0,
-    total: 0
+    total: 0,
   };
 }
 
@@ -79,8 +79,8 @@ function createDefaultStats(): AggregatedStats {
       totalPoints: 0,
       level: 1,
       unlockedCount: 0,
-      totalAchievements: ACHIEVEMENTS.length
-    }
+      totalAchievements: ACHIEVEMENTS.length,
+    },
   };
 }
 
@@ -88,13 +88,13 @@ function createDefaultStats(): AggregatedStats {
  * Calculates mastery distribution from character mastery items
  */
 export function calculateMasteryDistribution(
-  items: CharacterMasteryItem[]
+  items: CharacterMasteryItem[],
 ): MasteryDistribution {
   const distribution: MasteryDistribution = {
     mastered: 0,
     learning: 0,
     needsPractice: 0,
-    total: items.length
+    total: items.length,
   };
 
   for (const item of items) {
@@ -118,7 +118,7 @@ export function calculateMasteryDistribution(
  * Transforms raw character mastery data into CharacterMasteryItem array
  */
 function transformCharacterMastery(
-  rawMastery: Record<string, { correct: number; incorrect: number }>
+  rawMastery: Record<string, { correct: number; incorrect: number }>,
 ): CharacterMasteryItem[] {
   return Object.entries(rawMastery).map(([character, data]) => {
     const total = data.correct + data.incorrect;
@@ -133,7 +133,7 @@ function transformCharacterMastery(
       total,
       accuracy,
       masteryLevel,
-      contentType
+      contentType,
     };
   });
 }
@@ -146,7 +146,7 @@ async function loadGauntletStats(): Promise<GauntletOverallStats | null> {
     const [kanaStats, kanjiStats, vocabStats] = await Promise.all([
       getOverallStats('kana'),
       getOverallStats('kanji'),
-      getOverallStats('vocabulary')
+      getOverallStats('vocabulary'),
     ]);
 
     const totalSessions =
@@ -175,14 +175,14 @@ async function loadGauntletStats(): Promise<GauntletOverallStats | null> {
     const bestStreak = Math.max(
       kanaStats.bestStreak,
       kanjiStats.bestStreak,
-      vocabStats.bestStreak
+      vocabStats.bestStreak,
     );
 
     // Find fastest time across all types (only from completed runs)
     const fastestTimes = [
       kanaStats.fastestTime,
       kanjiStats.fastestTime,
-      vocabStats.fastestTime
+      vocabStats.fastestTime,
     ].filter((t): t is number => t !== null);
 
     const fastestTime =
@@ -201,7 +201,7 @@ async function loadGauntletStats(): Promise<GauntletOverallStats | null> {
       totalWrong,
       bestStreak,
       fastestTime,
-      accuracy
+      accuracy,
     };
   } catch (error) {
     console.warn('[useStatsAggregator] Failed to load gauntlet stats:', error);
@@ -233,26 +233,26 @@ export function useStatsAggregator(): StatsAggregatorState {
   const timedKanaStreak = useStatsStore(state => state.timedStreak);
   const timedKanaBestStreak = useStatsStore(state => state.timedBestStreak);
   const timedKanjiCorrect = useStatsStore(
-    state => state.timedKanjiCorrectAnswers
+    state => state.timedKanjiCorrectAnswers,
   );
   const timedKanjiWrong = useStatsStore(state => state.timedKanjiWrongAnswers);
   const timedKanjiStreak = useStatsStore(state => state.timedKanjiStreak);
   const timedKanjiBestStreak = useStatsStore(
-    state => state.timedKanjiBestStreak
+    state => state.timedKanjiBestStreak,
   );
   const timedVocabCorrect = useStatsStore(
-    state => state.timedVocabCorrectAnswers
+    state => state.timedVocabCorrectAnswers,
   );
   const timedVocabWrong = useStatsStore(state => state.timedVocabWrongAnswers);
   const timedVocabStreak = useStatsStore(state => state.timedVocabStreak);
   const timedVocabBestStreak = useStatsStore(
-    state => state.timedVocabBestStreak
+    state => state.timedVocabBestStreak,
   );
 
   const achievementPoints = useAchievementStore(state => state.totalPoints);
   const achievementLevel = useAchievementStore(state => state.level);
   const unlockedAchievements = useAchievementStore(
-    state => state.unlockedAchievements
+    state => state.unlockedAchievements,
   );
 
   // Load gauntlet stats asynchronously
@@ -277,13 +277,13 @@ export function useStatsAggregator(): StatsAggregatorState {
   // Memoize character mastery transformation
   const characterMastery = useMemo(
     () => transformCharacterMastery(allTimeStats.characterMastery),
-    [allTimeStats.characterMastery]
+    [allTimeStats.characterMastery],
   );
 
   // Memoize mastery distribution calculation
   const masteryDistribution = useMemo(
     () => calculateMasteryDistribution(characterMastery),
-    [characterMastery]
+    [characterMastery],
   );
 
   // Memoize timed stats
@@ -293,9 +293,9 @@ export function useStatsAggregator(): StatsAggregatorState {
       wrong: timedKanaWrong,
       streak: timedKanaStreak,
       bestStreak: timedKanaBestStreak,
-      accuracy: calculateAccuracy(timedKanaCorrect, timedKanaWrong)
+      accuracy: calculateAccuracy(timedKanaCorrect, timedKanaWrong),
     }),
-    [timedKanaCorrect, timedKanaWrong, timedKanaStreak, timedKanaBestStreak]
+    [timedKanaCorrect, timedKanaWrong, timedKanaStreak, timedKanaBestStreak],
   );
 
   const timedKanji: TimedModeStats = useMemo(
@@ -304,9 +304,14 @@ export function useStatsAggregator(): StatsAggregatorState {
       wrong: timedKanjiWrong,
       streak: timedKanjiStreak,
       bestStreak: timedKanjiBestStreak,
-      accuracy: calculateAccuracy(timedKanjiCorrect, timedKanjiWrong)
+      accuracy: calculateAccuracy(timedKanjiCorrect, timedKanjiWrong),
     }),
-    [timedKanjiCorrect, timedKanjiWrong, timedKanjiStreak, timedKanjiBestStreak]
+    [
+      timedKanjiCorrect,
+      timedKanjiWrong,
+      timedKanjiStreak,
+      timedKanjiBestStreak,
+    ],
   );
 
   const timedVocabulary: TimedModeStats = useMemo(
@@ -315,16 +320,21 @@ export function useStatsAggregator(): StatsAggregatorState {
       wrong: timedVocabWrong,
       streak: timedVocabStreak,
       bestStreak: timedVocabBestStreak,
-      accuracy: calculateAccuracy(timedVocabCorrect, timedVocabWrong)
+      accuracy: calculateAccuracy(timedVocabCorrect, timedVocabWrong),
     }),
-    [timedVocabCorrect, timedVocabWrong, timedVocabStreak, timedVocabBestStreak]
+    [
+      timedVocabCorrect,
+      timedVocabWrong,
+      timedVocabStreak,
+      timedVocabBestStreak,
+    ],
   );
 
   // Memoize the final aggregated stats
   const stats: AggregatedStats = useMemo(() => {
     const overallAccuracy = calculateAccuracy(
       allTimeStats.totalCorrect,
-      allTimeStats.totalIncorrect
+      allTimeStats.totalIncorrect,
     );
 
     return {
@@ -353,8 +363,8 @@ export function useStatsAggregator(): StatsAggregatorState {
         totalPoints: achievementPoints,
         level: achievementLevel,
         unlockedCount: Object.keys(unlockedAchievements).length,
-        totalAchievements: ACHIEVEMENTS.length
-      }
+        totalAchievements: ACHIEVEMENTS.length,
+      },
     };
   }, [
     allTimeStats,
@@ -366,14 +376,14 @@ export function useStatsAggregator(): StatsAggregatorState {
     gauntletStats,
     achievementPoints,
     achievementLevel,
-    unlockedAchievements
+    unlockedAchievements,
   ]);
 
   return {
     stats,
     isLoading,
     error,
-    refreshGauntletStats
+    refreshGauntletStats,
   };
 }
 
@@ -382,7 +392,7 @@ export function useStatsAggregator(): StatsAggregatorState {
  */
 export function filterCharacterMasteryByType(
   items: CharacterMasteryItem[],
-  filter: ContentFilter
+  filter: ContentFilter,
 ): CharacterMasteryItem[] {
   if (filter === 'all') {
     return items;
@@ -396,7 +406,7 @@ export function filterCharacterMasteryByType(
 export function getTopDifficultCharacters(
   items: CharacterMasteryItem[],
   count: number = 5,
-  minAttempts: number = 5
+  minAttempts: number = 5,
 ): CharacterMasteryItem[] {
   return items
     .filter(item => item.total >= minAttempts)
@@ -409,7 +419,7 @@ export function getTopDifficultCharacters(
  */
 export function getTopMasteredCharacters(
   items: CharacterMasteryItem[],
-  count: number = 5
+  count: number = 5,
 ): CharacterMasteryItem[] {
   return items
     .filter(item => item.masteryLevel === 'mastered')

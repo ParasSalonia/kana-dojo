@@ -31,12 +31,12 @@ const KanaBounce = () => {
         y: ((clientY - rect.top) / rect.height) * 100,
         vx: (Math.random() - 0.5) * 4,
         vy: (Math.random() - 0.5) * 4,
-        hue: Math.random() * 360
+        hue: Math.random() * 360,
       };
       setBalls(prev => [...prev.slice(-19), newBall]); // Keep max 20 balls
       setIdCounter(i => i + 1);
     },
-    [idCounter]
+    [idCounter],
   );
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const KanaBounce = () => {
           }
 
           return { ...ball, x, y, vx, vy };
-        })
+        }),
       );
     };
 
@@ -108,7 +108,7 @@ const KanaBounce = () => {
             transform: 'translate(-50%, -50%)',
             backgroundColor: `hsla(${ball.hue}, 70%, 50%, 0.3)`,
             border: `2px solid hsl(${ball.hue}, 70%, 50%)`,
-            boxShadow: `0 0 10px hsla(${ball.hue}, 70%, 50%, 0.5)`
+            boxShadow: `0 0 10px hsla(${ball.hue}, 70%, 50%, 0.5)`,
           }}
         >
           <span

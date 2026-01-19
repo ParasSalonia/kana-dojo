@@ -71,12 +71,12 @@ export function createAdaptiveSelector(storageKey?: string) {
             // Filter out stale recentMisses (older than 2 minutes)
             const now = Date.now();
             weight.recentMisses = weight.recentMisses.filter(
-              t => now - t < 120000
+              t => now - t < 120000,
             );
             characterWeights.set(char, weight);
           });
           console.log(
-            `[AdaptiveSelection] Loaded ${characterWeights.size} character weights from storage`
+            `[AdaptiveSelection] Loaded ${characterWeights.size} character weights from storage`,
           );
         }
       } catch (error) {
@@ -102,7 +102,7 @@ export function createAdaptiveSelector(storageKey?: string) {
         const stored: StoredWeights = {
           version: 1,
           lastUpdated: Date.now(),
-          weights: Object.fromEntries(characterWeights)
+          weights: Object.fromEntries(characterWeights),
         };
         await localforage.setItem(persistKey, stored);
       } catch (error) {
@@ -115,7 +115,7 @@ export function createAdaptiveSelector(storageKey?: string) {
   const sigmoid = (
     x: number,
     steepness: number = 1,
-    midpoint: number = 0
+    midpoint: number = 0,
   ): number => {
     return 1 / (1 + Math.exp(-steepness * (x - midpoint)));
   };
@@ -136,7 +136,7 @@ export function createAdaptiveSelector(storageKey?: string) {
       recentMisses,
       lastSeen,
       consecutiveCorrect,
-      consecutiveWrong
+      consecutiveWrong,
     } = weight;
     const totalAttempts = correct + wrong;
 
@@ -203,7 +203,7 @@ export function createAdaptiveSelector(storageKey?: string) {
    */
   const selectWeightedCharacter = (
     chars: string[],
-    excludeChar?: string
+    excludeChar?: string,
   ): string => {
     // Exclude both the explicit excludeChar and the last selected character
     // to prevent the same exercise from appearing twice in a row
@@ -234,7 +234,7 @@ export function createAdaptiveSelector(storageKey?: string) {
     // Calculate weights for all available characters
     const weights = availableChars.map(char => ({
       char,
-      weight: calculateWeight(char, chars)
+      weight: calculateWeight(char, chars),
     }));
 
     // Calculate total weight
@@ -275,7 +275,7 @@ export function createAdaptiveSelector(storageKey?: string) {
         recentMisses: isCorrect ? [] : [now],
         lastSeen: now,
         consecutiveCorrect: isCorrect ? 1 : 0,
-        consecutiveWrong: isCorrect ? 0 : 1
+        consecutiveWrong: isCorrect ? 0 : 1,
       });
     } else {
       // Update stats
@@ -290,7 +290,7 @@ export function createAdaptiveSelector(storageKey?: string) {
         existing.recentMisses.push(now);
         // Keep only misses from last 2 minutes
         existing.recentMisses = existing.recentMisses.filter(
-          t => now - t < 120000
+          t => now - t < 120000,
         );
       }
       existing.lastSeen = now;
@@ -318,7 +318,7 @@ export function createAdaptiveSelector(storageKey?: string) {
         recentMisses: [],
         lastSeen: now,
         consecutiveCorrect: 0,
-        consecutiveWrong: 0
+        consecutiveWrong: 0,
       });
     }
     // Note: We don't save on markCharacterSeen to reduce writes
@@ -364,7 +364,7 @@ export function createAdaptiveSelector(storageKey?: string) {
       accuracy:
         totalCorrect + totalWrong > 0
           ? totalCorrect / (totalCorrect + totalWrong)
-          : 0
+          : 0,
     };
   };
 
@@ -388,7 +388,7 @@ export function createAdaptiveSelector(storageKey?: string) {
       const stored: StoredWeights = {
         version: 1,
         lastUpdated: Date.now(),
-        weights: Object.fromEntries(characterWeights)
+        weights: Object.fromEntries(characterWeights),
       };
       await localforage.setItem(persistKey, stored);
     } catch (error) {
@@ -404,7 +404,7 @@ export function createAdaptiveSelector(storageKey?: string) {
     getCharacterWeight,
     getStats,
     ensureLoaded,
-    forceSave
+    forceSave,
   };
 }
 

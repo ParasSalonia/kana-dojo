@@ -8,12 +8,12 @@ export default function GoogleAnalytics() {
   return (
     <>
       <Script
-        strategy="afterInteractive"
+        strategy='afterInteractive'
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       />
       <Script
-        id="google-analytics"
-        strategy="afterInteractive"
+        id='google-analytics'
+        strategy='afterInteractive'
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -26,8 +26,8 @@ export default function GoogleAnalytics() {
       <noscript>
         <iframe
           src={`https://www.googletagmanager.com/ns.html?id=${GA_ID}`}
-          height="0"
-          width="0"
+          height='0'
+          width='0'
           style={{ display: 'none', visibility: 'hidden' }}
         />
       </noscript>

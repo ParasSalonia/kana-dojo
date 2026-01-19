@@ -4,7 +4,7 @@ import type { BlogPostMeta, Category, Difficulty, Locale } from '../types/blog';
 import {
   VALID_CATEGORIES,
   VALID_DIFFICULTIES,
-  VALID_LOCALES
+  VALID_LOCALES,
 } from '../types/blog';
 
 /**
@@ -23,7 +23,7 @@ function serializeToFrontmatter(meta: BlogPostMeta): string {
   lines.push(`author: "${meta.author.replace(/"/g, '\\"')}"`);
   lines.push(`category: "${meta.category}"`);
   lines.push(
-    `tags: [${meta.tags.map(t => `"${t.replace(/"/g, '\\"')}"`).join(', ')}]`
+    `tags: [${meta.tags.map(t => `"${t.replace(/"/g, '\\"')}"`).join(', ')}]`,
   );
   if (meta.featuredImage) {
     lines.push(`featuredImage: "${meta.featuredImage}"`);
@@ -34,7 +34,7 @@ function serializeToFrontmatter(meta: BlogPostMeta): string {
   }
   if (meta.relatedPosts && meta.relatedPosts.length > 0) {
     lines.push(
-      `relatedPosts: [${meta.relatedPosts.map(p => `"${p}"`).join(', ')}]`
+      `relatedPosts: [${meta.relatedPosts.map(p => `"${p}"`).join(', ')}]`,
     );
   }
   lines.push(`locale: "${meta.locale}"`);
@@ -74,7 +74,7 @@ function parseFrontmatter(frontmatter: string): BlogPostMeta {
             inQuote = !inQuote;
           } else if (char === ',' && !inQuote) {
             items.push(
-              current.trim().replace(/^"|"$/g, '').replace(/\\"/g, '"')
+              current.trim().replace(/^"|"$/g, '').replace(/\\"/g, '"'),
             );
             current = '';
           } else {
@@ -106,10 +106,10 @@ function parseFrontmatter(frontmatter: string): BlogPostMeta {
 
 // Arbitraries for generating valid BlogPostMeta objects
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const difficultyArb: fc.Arbitrary<Difficulty> = fc.constantFrom(
-  ...VALID_DIFFICULTIES
+  ...VALID_DIFFICULTIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -119,11 +119,11 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 }) // Use 28 to avoid invalid dates
+    day: fc.integer({ min: 1, max: 28 }), // Use 28 to avoid invalid dates
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 // Generate valid slugs (lowercase, alphanumeric with hyphens)
@@ -132,8 +132,8 @@ const slugArb = fc
     fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789-'.split('')),
     {
       minLength: 1,
-      maxLength: 50
-    }
+      maxLength: 50,
+    },
   )
   .map(chars => chars.join(''))
   .filter(
@@ -141,7 +141,7 @@ const slugArb = fc
       s.length > 0 &&
       !s.startsWith('-') &&
       !s.endsWith('-') &&
-      !s.includes('--')
+      !s.includes('--'),
   );
 
 // Safe characters for YAML strings (alphanumeric, spaces, basic punctuation)
@@ -152,7 +152,7 @@ const safeChars =
 const safeStringArb = fc
   .array(fc.constantFrom(...safeChars.split('')), {
     minLength: 1,
-    maxLength: 50
+    maxLength: 50,
   })
   .map(chars => chars.join('').trim())
   .filter(s => s.length > 0);
@@ -165,11 +165,11 @@ const tagsArb = fc.array(
   fc
     .array(fc.constantFrom(...tagChars.split('')), {
       minLength: 1,
-      maxLength: 20
+      maxLength: 20,
     })
     .map(chars => chars.join(''))
     .filter(s => s.length > 0 && !s.startsWith('-') && !s.endsWith('-')),
-  { minLength: 1, maxLength: 5 }
+  { minLength: 1, maxLength: 5 },
 );
 
 // Full BlogPostMeta arbitrary
@@ -187,14 +187,14 @@ const blogPostMetaArb: fc.Arbitrary<BlogPostMeta> = fc.record({
       .string({ minLength: 1, maxLength: 50 })
       .filter(s => !s.includes('\n') && !s.includes('"'))
       .map(s => `/blog/${s.replace(/[^a-zA-Z0-9-_.]/g, '')}.jpg`),
-    { nil: undefined }
+    { nil: undefined },
   ),
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(difficultyArb, { nil: undefined }),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
-  locale: localeArb
+  locale: localeArb,
 });
 
 /**
@@ -221,7 +221,7 @@ describe('Property 1: Frontmatter Round-Trip Consistency', () => {
         expect(parsed.readingTime).toBe(meta.readingTime);
         expect(parsed.locale).toBe(meta.locale);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -245,7 +245,7 @@ describe('Property 1: Frontmatter Round-Trip Consistency', () => {
           expect(parsed.relatedPosts).toEqual(meta.relatedPosts);
         }
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -258,7 +258,7 @@ describe('Property 1: Frontmatter Round-Trip Consistency', () => {
 
         expect(serialized2).toBe(serialized1);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

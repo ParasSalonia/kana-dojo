@@ -6,7 +6,7 @@ import type { BlogPostMeta, Category, Difficulty, Locale } from '../types/blog';
 import {
   VALID_CATEGORIES,
   VALID_DIFFICULTIES,
-  VALID_LOCALES
+  VALID_LOCALES,
 } from '../types/blog';
 import { RelatedPosts } from '../components/RelatedPosts';
 
@@ -35,7 +35,7 @@ vi.mock('@/shared/components/navigation/Link', () => ({
     <a href={href} {...props}>
       {children}
     </a>
-  )
+  ),
 }));
 
 // Cleanup after each test
@@ -45,10 +45,10 @@ afterEach(() => {
 
 // Arbitraries for generating valid BlogPostMeta objects
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const difficultyArb: fc.Arbitrary<Difficulty> = fc.constantFrom(
-  ...VALID_DIFFICULTIES
+  ...VALID_DIFFICULTIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -57,18 +57,18 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 // Generate valid slugs
 const slugArb = fc
   .array(fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789'.split('')), {
     minLength: 1,
-    maxLength: 30
+    maxLength: 30,
   })
   .map(chars => chars.join(''))
   .filter(s => s.length > 0);
@@ -81,7 +81,7 @@ const safeChars =
 const safeStringArb = fc
   .array(fc.constantFrom(...safeChars.split('')), {
     minLength: 1,
-    maxLength: 50
+    maxLength: 50,
   })
   .map(chars => chars.join('').trim())
   .filter(s => s.length > 0);
@@ -93,11 +93,11 @@ const tagsArb = fc.array(
       fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789'.split('')),
       {
         minLength: 1,
-        maxLength: 15
-      }
+        maxLength: 15,
+      },
     )
     .map(chars => chars.join('')),
-  { minLength: 1, maxLength: 5 }
+  { minLength: 1, maxLength: 5 },
 );
 
 // Full BlogPostMeta arbitrary
@@ -114,9 +114,9 @@ const blogPostMetaArb: fc.Arbitrary<BlogPostMeta> = fc.record({
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(difficultyArb, { nil: undefined }),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
-  locale: localeArb
+  locale: localeArb,
 });
 
 // Generate array of posts with unique slugs (non-empty)
@@ -154,7 +154,7 @@ describe('Property 8: Related Posts Rendered When Present', () => {
         expect(section).toBeDefined();
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -169,7 +169,7 @@ describe('Property 8: Related Posts Rendered When Present', () => {
         }
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -182,7 +182,7 @@ describe('Property 8: Related Posts Rendered When Present', () => {
         expect(items.length).toBe(posts.length);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -197,7 +197,7 @@ describe('Property 8: Related Posts Rendered When Present', () => {
         }
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -212,7 +212,7 @@ describe('Property 8: Related Posts Rendered When Present', () => {
         }
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

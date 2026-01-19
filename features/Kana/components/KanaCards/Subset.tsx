@@ -34,7 +34,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
     playClick();
     const indices = Array.from(
       { length: sliceRange[1] - sliceRange[0] },
-      (_, i) => sliceRange[0] + i
+      (_, i) => sliceRange[0] + i,
     );
     addKanaGroupIndices(indices);
   };
@@ -71,7 +71,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
               className={clsx(
                 'flex w-full flex-row items-center gap-2',
                 'transition-all duration-200 ease-in-out',
-                'text-[var(--secondary-color)]'
+                'text-[var(--secondary-color)]',
               )}
               onClick={playClick}
             >
@@ -94,7 +94,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
                   className={clsx(
                     'z-10 col-start-1 row-start-1 transition-all duration-200',
                     'flex h-full items-center justify-center pb-1 text-3xl',
-                    getTextOpacity(isFocused, true)
+                    getTextOpacity(isFocused, true),
                   )}
                 >
                   {group.kana.join('・')}
@@ -105,7 +105,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
                   className={clsx(
                     'col-start-1 row-start-1 transition-all duration-200',
                     'flex h-full items-center justify-center pb-1 text-2xl',
-                    getTextOpacity(isFocused, false)
+                    getTextOpacity(isFocused, false),
                   )}
                 >
                   {group.romanji.join('・')}

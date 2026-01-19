@@ -6,13 +6,13 @@ This file provides comprehensive guidance for AI coding assistants (GitHub Copil
 
 ## Quick Reference
 
-| Task | Command |
-|------|---------|
-| **Verify code** | `npm run check` |
-| **Run tests** | `npm run test` |
-| **Lint only** | `npm run lint` |
-| **Type check only** | `npx tsc --noEmit` |
-| **Validate i18n** | `npm run i18n:check` |
+| Task                | Command              |
+| ------------------- | -------------------- |
+| **Verify code**     | `npm run check`      |
+| **Run tests**       | `npm run test`       |
+| **Lint only**       | `npm run lint`       |
+| **Type check only** | `npx tsc --noEmit`   |
+| **Validate i18n**   | `npm run i18n:check` |
 
 **Never use `npm run build` for verification** — it takes 1-2 minutes and adds no validation value.
 
@@ -37,14 +37,14 @@ npm run lint && npm run test
 
 **KanaDojo** is a Japanese learning platform built with Next.js 15, React 19, and TypeScript. It provides gamified training for Hiragana, Katakana, Kanji, and Vocabulary.
 
-| Aspect | Technology |
-|--------|------------|
+| Aspect    | Technology                               |
+| --------- | ---------------------------------------- |
 | Framework | Next.js 15 with App Router and Turbopack |
-| Language | TypeScript (strict mode) |
-| Styling | Tailwind CSS + shadcn/ui |
-| State | Zustand with localStorage persistence |
-| i18n | next-intl (namespace-based) |
-| Testing | Vitest with jsdom |
+| Language  | TypeScript (strict mode)                 |
+| Styling   | Tailwind CSS + shadcn/ui                 |
+| State     | Zustand with localStorage persistence    |
+| i18n      | next-intl (namespace-based)              |
+| Testing   | Vitest with jsdom                        |
 
 **URLs**: [kanadojo.com](https://kanadojo.com) · [GitHub](https://github.com/lingdojo/kanadojo)
 
@@ -202,23 +202,23 @@ interface StoreState {
 
 const useStore = create<StoreState>()(
   persist(
-    (set) => ({
+    set => ({
       data: [],
-      setData: (data) => set({ data }),
+      setData: data => set({ data }),
     }),
-    { name: 'store-key' }
-  )
+    { name: 'store-key' },
+  ),
 );
 ```
 
 ### Main Stores
 
-| Store | Location | Purpose |
-|-------|----------|---------|
-| `useKanaStore` | `features/Kana/store/` | Kana selection |
-| `useKanjiStore` | `features/Kanji/store/` | Kanji selection |
-| `useVocabStore` | `features/Vocabulary/store/` | Vocabulary selection |
-| `useStatsStore` | `features/Progress/store/` | Statistics (persisted) |
+| Store                 | Location                      | Purpose                      |
+| --------------------- | ----------------------------- | ---------------------------- |
+| `useKanaStore`        | `features/Kana/store/`        | Kana selection               |
+| `useKanjiStore`       | `features/Kanji/store/`       | Kanji selection              |
+| `useVocabStore`       | `features/Vocabulary/store/`  | Vocabulary selection         |
+| `useStatsStore`       | `features/Progress/store/`    | Statistics (persisted)       |
 | `usePreferencesStore` | `features/Preferences/store/` | User preferences (persisted) |
 
 ---
@@ -235,6 +235,7 @@ core/i18n/locales/
 ```
 
 **Usage**:
+
 ```typescript
 import { useTranslations } from 'next-intl';
 
@@ -259,6 +260,7 @@ git add -A && git commit -m "<type>(<scope>): <description>"
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
 
 **Example**:
+
 ```bash
 git add -A && git commit -m "feat(kana): add dakuon character support"
 ```

@@ -26,7 +26,7 @@ export const kanjiAdapter: ContentAdapter<IKanjiObj> = {
     kanji: IKanjiObj,
     pool: IKanjiObj[],
     mode: GameMode,
-    count: number
+    count: number,
   ): string[] {
     const correct = this.getCorrectAnswer(kanji, mode);
 
@@ -45,7 +45,7 @@ export const kanjiAdapter: ContentAdapter<IKanjiObj> = {
   validateAnswer(
     userAnswer: string,
     kanji: IKanjiObj,
-    mode: GameMode
+    mode: GameMode,
   ): boolean {
     const correct = this.getCorrectAnswer(kanji, mode);
     return userAnswer.toLowerCase().trim() === correct.toLowerCase().trim();
@@ -58,7 +58,7 @@ export const kanjiAdapter: ContentAdapter<IKanjiObj> = {
       readings: [...kanji.onyomi, ...kanji.kunyomi],
       meanings: kanji.displayMeanings.length
         ? kanji.displayMeanings
-        : kanji.meanings
+        : kanji.meanings,
     };
-  }
+  },
 };

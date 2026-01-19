@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Ambient Mode - Floating Kana Atmosphere | KanaDojo',
-  description: 'Relax with floating Japanese characters in ambient mode.'
+  description: 'Relax with floating Japanese characters in ambient mode.',
 };
 
 export default function AmbientPage() {

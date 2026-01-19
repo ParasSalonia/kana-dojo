@@ -13,18 +13,18 @@ import Blitz, { type BlitzConfig } from '@/shared/components/Blitz';
 export default function BlitzKana() {
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
   const selectedGameModeKana = useKanaStore(
-    state => state.selectedGameModeKana
+    state => state.selectedGameModeKana,
   );
 
   const selectedKana = React.useMemo(
     () => flattenKanaGroups(kanaGroupIndices) as unknown as KanaCharacter[],
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
 
   // Convert indices to group names for display (e.g., "か-group")
   const selectedKanaGroups = React.useMemo(
     () => getSelectionLabels('kana', kanaGroupIndices).full.split(', '),
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
 
   const {
@@ -34,7 +34,7 @@ export default function BlitzKana() {
     timedBestStreak,
     incrementTimedCorrectAnswers,
     incrementTimedWrongAnswers,
-    resetTimedStats
+    resetTimedStats,
   } = useStatsStore();
 
   const config: BlitzConfig<KanaCharacter> = {
@@ -68,7 +68,7 @@ export default function BlitzKana() {
         // Reverse: options are kana characters
         const correctAnswer = question.kana;
         const incorrectOptions = shuffle(
-          items.filter(item => item.kana !== correctAnswer)
+          items.filter(item => item.kana !== correctAnswer),
         )
           .slice(0, count - 1)
           .map(item => item.kana);
@@ -77,7 +77,7 @@ export default function BlitzKana() {
       // Normal: options are romaji
       const correctAnswer = question.romaji;
       const incorrectOptions = shuffle(
-        items.filter(item => item.romaji !== correctAnswer)
+        items.filter(item => item.romaji !== correctAnswer),
       )
         .slice(0, count - 1)
         .map(item => item.romaji);
@@ -93,8 +93,8 @@ export default function BlitzKana() {
       bestStreak: timedBestStreak,
       incrementCorrect: incrementTimedCorrectAnswers,
       incrementWrong: incrementTimedWrongAnswers,
-      reset: resetTimedStats
-    }
+      reset: resetTimedStats,
+    },
   };
 
   return <Blitz config={config} />;

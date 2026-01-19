@@ -20,8 +20,8 @@ export function useInputPreferences(): InputPreferences {
   return useMemo<InputPreferences>(
     () => ({
       hotkeysOn,
-      setHotkeys
+      setHotkeys,
     }),
-    [hotkeysOn, setHotkeys]
+    [hotkeysOn, setHotkeys],
   );
 }

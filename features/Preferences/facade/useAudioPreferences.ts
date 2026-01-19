@@ -24,14 +24,30 @@ export interface AudioPreferences {
 export function useAudioPreferences(): AudioPreferences {
   const silentMode = usePreferencesStore(state => state.silentMode);
   const setSilentMode = usePreferencesStore(state => state.setSilentMode);
-  const pronunciationEnabled = usePreferencesStore(state => state.pronunciationEnabled);
-  const setPronunciationEnabled = usePreferencesStore(state => state.setPronunciationEnabled);
-  const pronunciationSpeed = usePreferencesStore(state => state.pronunciationSpeed);
-  const setPronunciationSpeed = usePreferencesStore(state => state.setPronunciationSpeed);
-  const pronunciationPitch = usePreferencesStore(state => state.pronunciationPitch);
-  const setPronunciationPitch = usePreferencesStore(state => state.setPronunciationPitch);
-  const pronunciationVoiceName = usePreferencesStore(state => state.pronunciationVoiceName);
-  const setPronunciationVoiceName = usePreferencesStore(state => state.setPronunciationVoiceName);
+  const pronunciationEnabled = usePreferencesStore(
+    state => state.pronunciationEnabled,
+  );
+  const setPronunciationEnabled = usePreferencesStore(
+    state => state.setPronunciationEnabled,
+  );
+  const pronunciationSpeed = usePreferencesStore(
+    state => state.pronunciationSpeed,
+  );
+  const setPronunciationSpeed = usePreferencesStore(
+    state => state.setPronunciationSpeed,
+  );
+  const pronunciationPitch = usePreferencesStore(
+    state => state.pronunciationPitch,
+  );
+  const setPronunciationPitch = usePreferencesStore(
+    state => state.setPronunciationPitch,
+  );
+  const pronunciationVoiceName = usePreferencesStore(
+    state => state.pronunciationVoiceName,
+  );
+  const setPronunciationVoiceName = usePreferencesStore(
+    state => state.setPronunciationVoiceName,
+  );
 
   return useMemo<AudioPreferences>(
     () => ({
@@ -44,7 +60,7 @@ export function useAudioPreferences(): AudioPreferences {
       pronunciationPitch,
       setPronunciationPitch,
       pronunciationVoiceName,
-      setPronunciationVoiceName
+      setPronunciationVoiceName,
     }),
     [
       silentMode,
@@ -56,7 +72,7 @@ export function useAudioPreferences(): AudioPreferences {
       pronunciationPitch,
       setPronunciationPitch,
       pronunciationVoiceName,
-      setPronunciationVoiceName
-    ]
+      setPronunciationVoiceName,
+    ],
   );
 }

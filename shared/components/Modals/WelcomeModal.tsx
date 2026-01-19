@@ -12,7 +12,7 @@ import {
   AudioLines,
   VolumeX,
   Joystick,
-  Dice5
+  Dice5,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -20,7 +20,7 @@ import useOnboardingStore from '@/shared/store/useOnboardingStore';
 import {
   themeSets,
   useAudioPreferences,
-  useThemePreferences
+  useThemePreferences,
 } from '@/features/Preferences';
 import { useClick } from '@/shared/hooks/useAudio';
 import { buttonBorderStyles, cardBorderStyles } from '@/shared/lib/styles';
@@ -33,7 +33,7 @@ const WelcomeModal = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const hasSeenWelcome = useOnboardingStore(state => state.hasSeenWelcome);
   const setHasSeenWelcome = useOnboardingStore(
-    state => state.setHasSeenWelcome
+    state => state.setHasSeenWelcome,
   );
 
   const [step, setStep] = useState<
@@ -47,7 +47,7 @@ const WelcomeModal = () => {
     font: currentFont,
     setFont,
     displayKana,
-    setDisplayKana
+    setDisplayKana,
   } = useThemePreferences();
 
   const { silentMode, setSilentMode } = useAudioPreferences();
@@ -228,7 +228,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       !localDisplayKana
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -252,7 +252,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       localDisplayKana
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -286,7 +286,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       !localSilentMode
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -311,7 +311,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       localSilentMode
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -354,7 +354,7 @@ const WelcomeModal = () => {
                   'w-full cursor-pointer rounded-lg border-2 border-black/30 p-3 transition-colors duration-200',
                   'hover:border-[var(--main-color)] hover:bg-[var(--background-color)]',
                   buttonBorderStyles,
-                  'flex items-center justify-center gap-2 text-[var(--main-color)]'
+                  'flex items-center justify-center gap-2 text-[var(--main-color)]',
                 )}
                 onClick={() => {
                   playClick();
@@ -393,7 +393,7 @@ const WelcomeModal = () => {
                           border:
                             localTheme === theme.id
                               ? `1px solid ${theme.mainColor}`
-                              : `1px solid ${theme.borderColor}`
+                              : `1px solid ${theme.borderColor}`,
                         }}
                         onClick={() => {
                           playClick();
@@ -417,7 +417,7 @@ const WelcomeModal = () => {
                             style={
                               {
                                 background: theme.backgroundColor,
-                                '--tw-ring-color': theme.borderColor
+                                '--tw-ring-color': theme.borderColor,
                               } as React.CSSProperties
                             }
                           />
@@ -426,7 +426,7 @@ const WelcomeModal = () => {
                             style={
                               {
                                 background: theme.mainColor,
-                                '--tw-ring-color': theme.borderColor
+                                '--tw-ring-color': theme.borderColor,
                               } as React.CSSProperties
                             }
                           />
@@ -435,7 +435,7 @@ const WelcomeModal = () => {
                             style={
                               {
                                 background: theme.secondaryColor,
-                                '--tw-ring-color': theme.borderColor
+                                '--tw-ring-color': theme.borderColor,
                               } as React.CSSProperties
                             }
                           />
@@ -468,7 +468,7 @@ const WelcomeModal = () => {
                   'w-full cursor-pointer rounded-lg border-2 border-black/30 p-3 transition-colors duration-200',
                   'hover:border-[var(--main-color)] hover:bg-[var(--background-color)]',
                   buttonBorderStyles,
-                  'flex items-center justify-center gap-2 text-[var(--main-color)]'
+                  'flex items-center justify-center gap-2 text-[var(--main-color)]',
                 )}
                 onClick={() => {
                   playClick();
@@ -492,13 +492,13 @@ const WelcomeModal = () => {
                       'flex cursor-pointer items-center justify-center overflow-hidden rounded-xl border-0 px-4 py-4 transition-all duration-200 hover:opacity-90 active:scale-95',
                       localFont === fontObj.name
                         ? 'bg-[var(--background-color)]'
-                        : 'bg-[var(--card-color)]'
+                        : 'bg-[var(--card-color)]',
                     )}
                     style={{
                       border:
                         localFont === fontObj.name
                           ? '1px solid var(--main-color)'
-                          : '1px solid var(--card-color)'
+                          : '1px solid var(--card-color)',
                     }}
                     onClick={() => {
                       playClick();
@@ -509,7 +509,7 @@ const WelcomeModal = () => {
                     <p
                       className={clsx(
                         'text-center text-xl',
-                        fontObj.font.className
+                        fontObj.font.className,
                       )}
                     >
                       <span className='text-[var(--secondary-color)]'>
@@ -591,7 +591,7 @@ const WelcomeModal = () => {
             'max-h-[85vh] w-full overflow-y-auto md:w-4/5 lg:w-3/5',
             'm-3 rounded-2xl bg-[var(--card-color)]',
             'shadow-2xl shadow-black/20',
-            cardBorderStyles
+            cardBorderStyles,
           )}
           onClick={e => e.stopPropagation()}
         >
@@ -608,7 +608,7 @@ const WelcomeModal = () => {
                       'behavior',
                       'themes',
                       'fonts',
-                      'complete'
+                      'complete',
                     ].indexOf(step) + 1
                   }
                   aria-valuemax={5}
@@ -621,7 +621,7 @@ const WelcomeModal = () => {
                           'behavior',
                           'themes',
                           'fonts',
-                          'complete'
+                          'complete',
                         ].indexOf(step) >= index;
                       return (
                         <div
@@ -630,12 +630,12 @@ const WelcomeModal = () => {
                             'h-2 w-2 rounded-full transition-all duration-300',
                             isActive
                               ? 'scale-110 bg-[var(--main-color)]'
-                              : 'scale-100 bg-[var(--border-color)]'
+                              : 'scale-100 bg-[var(--border-color)]',
                           )}
                           title={`Step ${index + 1}: ${stepName}`}
                         />
                       );
-                    }
+                    },
                   )}
                 </div>
               </div>
@@ -645,7 +645,7 @@ const WelcomeModal = () => {
                 className={clsx(
                   'cursor-pointer rounded-lg p-2 transition-colors duration-200',
                   'hover:bg-[var(--background-color)]',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                 )}
               >
                 <X size={20} />
@@ -669,7 +669,7 @@ const WelcomeModal = () => {
                       'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 sm:px-6 sm:py-3',
                       'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                       'transition-all duration-200 hover:bg-[var(--background-color)]',
-                      'text-sm sm:text-base'
+                      'text-sm sm:text-base',
                     )}
                   >
                     <ChevronLeft
@@ -691,7 +691,7 @@ const WelcomeModal = () => {
                     'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-2 sm:px-8 sm:py-3',
                     'text-sm font-medium text-[var(--main-color)] sm:text-base',
                     buttonBorderStyles,
-                    'transition-all duration-200 hover:bg-[var(--background-color)] active:scale-98'
+                    'transition-all duration-200 hover:bg-[var(--background-color)] active:scale-98',
                   )}
                 >
                   <span>

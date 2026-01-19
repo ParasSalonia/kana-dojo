@@ -127,7 +127,7 @@ export default function KanaTrace() {
               'rounded-xl border p-3 transition-all',
               showReference
                 ? 'border-[var(--main-color)] bg-[var(--main-color)] text-white'
-                : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--secondary-color)]'
+                : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--secondary-color)]',
             )}
             title='Toggle Reference'
           >
@@ -215,7 +215,7 @@ export default function KanaTrace() {
                     '#2ecc71',
                     '#3498db',
                     '#f1c40f',
-                    '#e67e22'
+                    '#e67e22',
                   ].map(color => (
                     <button
                       key={color}
@@ -224,7 +224,7 @@ export default function KanaTrace() {
                         'h-8 w-8 rounded-full border-2 transition-transform hover:scale-110',
                         currentColor === color
                           ? 'scale-110 border-white shadow-lg'
-                          : 'border-transparent'
+                          : 'border-transparent',
                       )}
                       style={{ backgroundColor: color }}
                     />

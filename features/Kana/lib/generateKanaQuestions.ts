@@ -10,7 +10,7 @@ export type KanaCharacter = {
 };
 
 export function generateKanaQuestion(
-  selectedKana: KanaCharacter[]
+  selectedKana: KanaCharacter[],
 ): KanaCharacter {
   if (selectedKana.length === 0) {
     throw new Error('No kana selected');

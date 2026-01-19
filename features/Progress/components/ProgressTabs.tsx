@@ -15,18 +15,18 @@ const viewOptions: { value: ViewType; label: string; icon: React.ReactNode }[] =
     {
       value: 'statistics',
       label: 'Stats',
-      icon: <TrendingUp className='h-5 w-5' />
+      icon: <TrendingUp className='h-5 w-5' />,
     },
     {
       value: 'streak',
       label: 'Streak',
-      icon: <Flame className='h-5 w-5' />
+      icon: <Flame className='h-5 w-5' />,
     },
     {
       value: 'achievements',
       label: 'Achievements',
-      icon: <Trophy className='h-5 w-5' />
-    }
+      icon: <Trophy className='h-5 w-5' />,
+    },
   ];
 
 const ProgressTabs = () => {
@@ -40,7 +40,7 @@ const ProgressTabs = () => {
         <div
           className={cn(
             'inline-flex flex-wrap justify-center gap-1 rounded-[22px]',
-            'border border-[var(--border-color)] bg-[var(--card-color)] p-1.5'
+            'border border-[var(--border-color)] bg-[var(--card-color)] p-1.5',
           )}
         >
           {viewOptions.map(option => {
@@ -55,7 +55,7 @@ const ProgressTabs = () => {
                     transition={{
                       type: 'spring',
                       stiffness: 300,
-                      damping: 30
+                      damping: 30,
                     }}
                   />
                 )}
@@ -68,7 +68,7 @@ const ProgressTabs = () => {
                     'relative z-10 flex cursor-pointer items-center gap-2 rounded-2xl px-6 pt-3 pb-5 text-sm font-semibold transition-colors duration-300',
                     isSelected
                       ? 'text-[var(--background-color)]'
-                      : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                      : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                   )}
                 >
                   {option.icon}

@@ -4,23 +4,23 @@ import type { BlogPostMeta, Category, Difficulty, Locale } from '../types/blog';
 import {
   VALID_CATEGORIES,
   VALID_DIFFICULTIES,
-  VALID_LOCALES
+  VALID_LOCALES,
 } from '../types/blog';
 
 // Mock next-intl Link component before importing BlogList
 vi.mock('@/shared/components/navigation/Link', () => ({
   Link: ({ children }: { children: React.ReactNode }) => children,
-  default: ({ children }: { children: React.ReactNode }) => children
+  default: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 import { filterPostsByCategory } from '../components/BlogList';
 
 // Arbitraries for generating valid BlogPostMeta objects
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const difficultyArb: fc.Arbitrary<Difficulty> = fc.constantFrom(
-  ...VALID_DIFFICULTIES
+  ...VALID_DIFFICULTIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -29,18 +29,18 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 // Generate valid slugs
 const slugArb = fc
   .array(fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789'.split('')), {
     minLength: 1,
-    maxLength: 30
+    maxLength: 30,
   })
   .map(chars => chars.join(''))
   .filter(s => s.length > 0);
@@ -53,7 +53,7 @@ const safeChars =
 const safeStringArb = fc
   .array(fc.constantFrom(...safeChars.split('')), {
     minLength: 1,
-    maxLength: 50
+    maxLength: 50,
   })
   .map(chars => chars.join('').trim())
   .filter(s => s.length > 0);
@@ -65,11 +65,11 @@ const tagsArb = fc.array(
       fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789'.split('')),
       {
         minLength: 1,
-        maxLength: 15
-      }
+        maxLength: 15,
+      },
     )
     .map(chars => chars.join('')),
-  { minLength: 1, maxLength: 5 }
+  { minLength: 1, maxLength: 5 },
 );
 
 // Full BlogPostMeta arbitrary
@@ -86,9 +86,9 @@ const blogPostMetaArb: fc.Arbitrary<BlogPostMeta> = fc.record({
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(difficultyArb, { nil: undefined }),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
-  locale: localeArb
+  locale: localeArb,
 });
 
 // Generate array of posts with unique slugs
@@ -119,7 +119,7 @@ describe('Property 6: Category Filter Returns Only Matching Posts', () => {
         expect(filtered).toEqual(posts);
         expect(filtered.length).toBe(posts.length);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -135,9 +135,9 @@ describe('Property 6: Category Filter Returns Only Matching Posts', () => {
           for (const post of filtered) {
             expect(post.category).toBe(category);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -149,14 +149,14 @@ describe('Property 6: Category Filter Returns Only Matching Posts', () => {
         (posts: BlogPostMeta[], category: Category) => {
           const filtered = filterPostsByCategory(posts, category);
           const expectedCount = posts.filter(
-            p => p.category === category
+            p => p.category === category,
           ).length;
 
           // Should contain all posts with the selected category
           expect(filtered.length).toBe(expectedCount);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -171,11 +171,11 @@ describe('Property 6: Category Filter Returns Only Matching Posts', () => {
 
           // Order should be preserved
           expect(filtered.map(p => p.slug)).toEqual(
-            expectedPosts.map(p => p.slug)
+            expectedPosts.map(p => p.slug),
           );
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -193,13 +193,13 @@ describe('Property 6: Category Filter Returns Only Matching Posts', () => {
           category: cat,
           tags: ['tag'],
           readingTime: 5,
-          locale: 'en' as Locale
+          locale: 'en' as Locale,
         }));
 
         const filtered = filterPostsByCategory(posts, category);
         expect(filtered).toEqual([]);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -216,9 +216,9 @@ describe('Property 6: Category Filter Returns Only Matching Posts', () => {
           for (const post of filtered) {
             expect(originalSlugs.has(post.slug)).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

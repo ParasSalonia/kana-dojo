@@ -27,8 +27,8 @@ export function useCrazyMode(): CrazyModeState & CrazyModeActions {
       activeThemeId,
       activeFontName,
       toggleCrazyMode,
-      randomize
+      randomize,
     }),
-    [isCrazyMode, activeThemeId, activeFontName, toggleCrazyMode, randomize]
+    [isCrazyMode, activeThemeId, activeFontName, toggleCrazyMode, randomize],
   );
 }

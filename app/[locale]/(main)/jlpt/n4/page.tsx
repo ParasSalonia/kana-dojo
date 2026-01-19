@@ -13,7 +13,7 @@ export async function generateMetadata() {
     description:
       'Complete JLPT N4 Kanji list with all ~170 characters, meanings, and readings. Free interactive practice for JLPT N4 exam preparation. Master N4 Kanji efficiently!',
     keywords:
-      'jlpt n4 kanji, jlpt n4 kanji list, jlpt n4 study guide, n4 kanji practice, jlpt n4 preparation, n4 exam, intermediate japanese kanji'
+      'jlpt n4 kanji, jlpt n4 kanji list, jlpt n4 study guide, n4 kanji practice, jlpt n4 preparation, n4 exam, intermediate japanese kanji',
   };
 }
 
@@ -120,8 +120,8 @@ export default async function JLPTN4Page() {
                 1️⃣ Build on N5 Foundation
               </h3>
               <p>
-                Ensure you&apos;ve mastered all N5 kanji first. N4 kanji build on N5
-                knowledge.
+                Ensure you&apos;ve mastered all N5 kanji first. N4 kanji build
+                on N5 knowledge.
               </p>
             </div>
 
@@ -140,8 +140,8 @@ export default async function JLPTN4Page() {
                 3️⃣ Practice Multiple Readings
               </h3>
               <p>
-                N4 kanji often have multiple readings. Learn both on&apos;yomi and
-                kun&apos;yomi systematically.
+                N4 kanji often have multiple readings. Learn both on&apos;yomi
+                and kun&apos;yomi systematically.
               </p>
             </div>
 
@@ -196,10 +196,16 @@ export default async function JLPTN4Page() {
           </Link>
 
           <div className='mt-6 space-x-4'>
-            <Link href='/jlpt/n5' className='text-sm underline hover:opacity-80'>
+            <Link
+              href='/jlpt/n5'
+              className='text-sm underline hover:opacity-80'
+            >
               ← Back to N5
             </Link>
-            <Link href='/jlpt/n3' className='text-sm underline hover:opacity-80'>
+            <Link
+              href='/jlpt/n3'
+              className='text-sm underline hover:opacity-80'
+            >
               Continue to N3 →
             </Link>
           </div>

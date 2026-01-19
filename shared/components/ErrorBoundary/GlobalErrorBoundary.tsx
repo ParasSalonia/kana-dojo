@@ -37,7 +37,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log to console in development
     console.error('Global Error Boundary caught an error:', error, errorInfo);
-    
+
     // TODO: Send to error tracking service (Sentry, LogRocket, etc.)
     // logErrorToService(error, errorInfo);
   }
@@ -57,7 +57,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
         <ErrorFallback
           error={this.state.error}
           resetErrorBoundary={this.resetErrorBoundary}
-          type="global"
+          type='global'
         />
       );
     }

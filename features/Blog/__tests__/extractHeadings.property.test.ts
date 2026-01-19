@@ -14,12 +14,12 @@ const headingLevelArb = fc.constantFrom(2, 3, 4) as fc.Arbitrary<2 | 3 | 4>;
 const headingLineArb = fc
   .record({
     level: headingLevelArb,
-    text: headingTextArb
+    text: headingTextArb,
   })
   .map(({ level, text }) => ({
     markdown: `${'#'.repeat(level)} ${text}`,
     level,
-    text: text.trim()
+    text: text.trim(),
   }));
 
 // Arbitrary for generating MDX content with headings
@@ -29,8 +29,8 @@ const mdxContentWithHeadingsArb = fc
     content: headings.map(h => h.markdown).join('\n\n'),
     expectedHeadings: headings.map(h => ({
       level: h.level,
-      text: h.text
-    }))
+      text: h.text,
+    })),
   }));
 
 /**
@@ -48,9 +48,9 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
           const extracted = extractHeadings(content);
 
           expect(extracted.length).toBe(expectedHeadings.length);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -65,9 +65,9 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
             expect(extracted[i].text).toBe(expectedHeadings[i].text);
             expect(extracted[i].level).toBe(expectedHeadings[i].level);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -82,11 +82,11 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
 
           // ID should be URL-friendly (lowercase, no special chars except hyphens and numbers)
           expect(heading.id).toMatch(
-            /^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]+$/
+            /^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]+$/,
           );
         }
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -105,9 +105,9 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
           const ids = extracted.map(h => h.id);
           const uniqueIds = new Set(ids);
           expect(uniqueIds.size).toBe(ids.length);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -122,7 +122,7 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
         expect(extracted.length).toBe(1);
         expect(extracted[0].level).toBe(2);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -137,7 +137,7 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
         expect(extracted.length).toBe(1);
         expect(extracted[0].level).toBe(2);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -148,9 +148,9 @@ describe('Property 7: Table of Contents Extraction from Headings', () => {
         content => {
           const extracted = extractHeadings(content);
           expect(extracted).toEqual([]);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });
@@ -162,7 +162,7 @@ describe('generateHeadingId', () => {
         const id = generateHeadingId(text);
         expect(id).toBe(id.toLowerCase());
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -173,8 +173,8 @@ describe('generateHeadingId', () => {
           fc.string({ minLength: 1 }).filter(s => /^[a-zA-Z]+$/.test(s)),
           {
             minLength: 2,
-            maxLength: 5
-          }
+            maxLength: 5,
+          },
         ),
         words => {
           const text = words.join(' ');
@@ -182,9 +182,9 @@ describe('generateHeadingId', () => {
 
           // Should not contain spaces
           expect(id).not.toContain(' ');
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -197,7 +197,7 @@ describe('generateHeadingId', () => {
         // Note: empty results fallback to 'heading'
         expect(id).toMatch(/^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]+$/);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

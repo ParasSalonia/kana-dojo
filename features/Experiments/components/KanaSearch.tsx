@@ -16,7 +16,7 @@ export default function KanaSearch() {
   const [timeLeft, setTimeLeft] = useState(ROUND_TIME);
   const [score, setScore] = useState(0);
   const [gameState, setGameState] = useState<'playing' | 'gameover' | 'idle'>(
-    'idle'
+    'idle',
   );
 
   const { playClick } = useClick();
@@ -153,7 +153,7 @@ export default function KanaSearch() {
               <span
                 className={clsx(
                   'font-mono text-2xl font-black',
-                  timeLeft < 4 && 'text-red-500'
+                  timeLeft < 4 && 'text-red-500',
                 )}
               >
                 {timeLeft}s

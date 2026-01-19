@@ -141,7 +141,7 @@ export function getStartOfYear(referenceDate: Date = new Date()): Date {
  */
 export function getDaysInPeriod(
   period: TimePeriod,
-  referenceDate: Date = new Date()
+  referenceDate: Date = new Date(),
 ): string[] {
   const days: string[] = [];
   let startDate: Date;
@@ -222,7 +222,7 @@ export function getMonthName(monthKey: string): string {
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ];
   const monthIndex = parseInt(monthKey.split('-')[1], 10) - 1;
   return months[monthIndex];

@@ -48,7 +48,7 @@ const BASE_URL = 'https://kanadojo.com';
  */
 export function generateBreadcrumbSchema(
   post: BlogPost,
-  options: BreadcrumbSchemaOptions = {}
+  options: BreadcrumbSchemaOptions = {},
 ): BreadcrumbSchema {
   const baseUrl = options.baseUrl ?? BASE_URL;
   const homeLabel = options.homeLabel ?? 'Home';
@@ -62,21 +62,21 @@ export function generateBreadcrumbSchema(
         '@type': 'ListItem',
         position: 1,
         name: homeLabel,
-        item: `${baseUrl}/${post.locale}`
+        item: `${baseUrl}/${post.locale}`,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: academyLabel,
-        item: `${baseUrl}/${post.locale}/academy`
+        item: `${baseUrl}/${post.locale}/academy`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: post.title,
-        item: `${baseUrl}/${post.locale}/academy/${post.slug}`
-      }
-    ]
+        item: `${baseUrl}/${post.locale}/academy/${post.slug}`,
+      },
+    ],
   };
 
   return schema;

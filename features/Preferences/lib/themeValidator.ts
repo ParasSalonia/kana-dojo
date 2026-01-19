@@ -8,7 +8,7 @@ import {
   getHueDifference,
   getLuminanceRatio,
   isRedHue,
-  isGreenHue
+  isGreenHue,
 } from './colorUtils';
 
 interface Theme {
@@ -48,7 +48,7 @@ const CONTRAST_REQUIREMENTS = {
   // Accent color luminance ratio
   ACCENT_LUMINANCE: 2,
   // Red-green safety luminance ratio
-  RED_GREEN_SAFETY: 3
+  RED_GREEN_SAFETY: 3,
 };
 
 /**
@@ -66,7 +66,7 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'backgroundColor',
       actualRatio: Math.round(mainOnBg * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.TEXT_AA,
-      wcagLevel: 'AA'
+      wcagLevel: 'AA',
     });
   }
 
@@ -78,14 +78,14 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'cardColor',
       actualRatio: Math.round(mainOnCard * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.TEXT_AA,
-      wcagLevel: 'AA'
+      wcagLevel: 'AA',
     });
   }
 
   // 3. secondaryColor on backgroundColor (4.5:1)
   const secondaryOnBg = getContrastRatio(
     theme.secondaryColor,
-    theme.backgroundColor
+    theme.backgroundColor,
   );
   if (secondaryOnBg < CONTRAST_REQUIREMENTS.TEXT_AA) {
     issues.push({
@@ -93,14 +93,14 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'backgroundColor',
       actualRatio: Math.round(secondaryOnBg * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.TEXT_AA,
-      wcagLevel: 'AA'
+      wcagLevel: 'AA',
     });
   }
 
   // 4. secondaryColor on cardColor (4.5:1)
   const secondaryOnCard = getContrastRatio(
     theme.secondaryColor,
-    theme.cardColor
+    theme.cardColor,
   );
   if (secondaryOnCard < CONTRAST_REQUIREMENTS.TEXT_AA) {
     issues.push({
@@ -108,7 +108,7 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'cardColor',
       actualRatio: Math.round(secondaryOnCard * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.TEXT_AA,
-      wcagLevel: 'AA'
+      wcagLevel: 'AA',
     });
   }
 
@@ -120,7 +120,7 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'backgroundColor',
       actualRatio: Math.round(borderOnBg * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.UI_AA,
-      wcagLevel: 'AA (UI)'
+      wcagLevel: 'AA (UI)',
     });
   }
 
@@ -132,7 +132,7 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'cardColor',
       actualRatio: Math.round(borderOnCard * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.BORDER_ON_CARD,
-      wcagLevel: 'UI distinction'
+      wcagLevel: 'UI distinction',
     });
   }
 
@@ -144,7 +144,7 @@ export function validateTheme(theme: Theme): ValidationResult {
       background: 'backgroundColor',
       actualRatio: Math.round(cardOnBg * 100) / 100,
       requiredRatio: CONTRAST_REQUIREMENTS.CARD_DISTINCTION,
-      wcagLevel: 'Visual distinction'
+      wcagLevel: 'Visual distinction',
     });
   }
 
@@ -152,14 +152,14 @@ export function validateTheme(theme: Theme): ValidationResult {
   const hueDiff = getHueDifference(theme.mainColor, theme.secondaryColor);
   const luminanceRatio = getLuminanceRatio(
     theme.mainColor,
-    theme.secondaryColor
+    theme.secondaryColor,
   );
 
   if (hueDiff < 30 && luminanceRatio < CONTRAST_REQUIREMENTS.ACCENT_LUMINANCE) {
     warnings.push(
       `mainColor and secondaryColor may be hard to distinguish (hue diff: ${Math.round(
-        hueDiff
-      )}°, luminance ratio: ${Math.round(luminanceRatio * 100) / 100})`
+        hueDiff,
+      )}°, luminance ratio: ${Math.round(luminanceRatio * 100) / 100})`,
     );
   }
 
@@ -174,7 +174,7 @@ export function validateTheme(theme: Theme): ValidationResult {
       warnings.push(
         `Red-green color combination may be problematic for color blind users (luminance ratio: ${
           Math.round(luminanceRatio * 100) / 100
-        }, recommended: ${CONTRAST_REQUIREMENTS.RED_GREEN_SAFETY})`
+        }, recommended: ${CONTRAST_REQUIREMENTS.RED_GREEN_SAFETY})`,
       );
     }
   }
@@ -183,7 +183,7 @@ export function validateTheme(theme: Theme): ValidationResult {
     themeId: theme.id,
     isValid: issues.length === 0,
     issues,
-    warnings
+    warnings,
   };
 }
 
@@ -218,7 +218,7 @@ export function getValidationSummary(results: ValidationResult[]): {
     valid: results.filter(r => r.isValid).length,
     invalid: results.filter(r => !r.isValid).length,
     withWarnings: results.filter(r => r.warnings.length > 0).length,
-    issuesByType
+    issuesByType,
   };
 }
 
@@ -234,7 +234,7 @@ export function formatValidationResult(result: ValidationResult): string {
     lines.push('Issues:');
     result.issues.forEach(issue => {
       lines.push(
-        `  - ${issue.property} on ${issue.background}: ${issue.actualRatio}:1 (required: ${issue.requiredRatio}:1 ${issue.wcagLevel})`
+        `  - ${issue.property} on ${issue.background}: ${issue.actualRatio}:1 (required: ${issue.requiredRatio}:1 ${issue.wcagLevel})`,
       );
     });
   }

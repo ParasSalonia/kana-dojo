@@ -18,7 +18,7 @@ const Fonts = () => {
   const setFont = usePreferencesStore(state => state.setFont);
 
   const [randomFont, setRandomFont] = useState(
-    fonts.length > 0 ? fonts[random.integer(0, fonts.length - 1)] : null
+    fonts.length > 0 ? fonts[random.integer(0, fonts.length - 1)] : null,
   );
 
   // Separate fonts into recommended and other categories
@@ -36,7 +36,7 @@ const Fonts = () => {
         buttonBorderStyles,
         'border-1 border-[var(--card-color)] px-4 py-4',
         'flex-1 overflow-hidden',
-        fontObj.name === currentFont && 'border-[var(--main-color)]'
+        fontObj.name === currentFont && 'border-[var(--main-color)]',
       )}
       onClick={() => playClick()}
     >
@@ -66,7 +66,7 @@ const Fonts = () => {
           'flex w-1/4 items-center justify-center gap-2 p-6',
           buttonBorderStyles,
           'w-full text-xl',
-          'flex-1 overflow-hidden'
+          'flex-1 overflow-hidden',
         )}
         onClick={() => {
           playClick();
@@ -103,7 +103,7 @@ const Fonts = () => {
  */}
         <fieldset
           className={clsx(
-            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'
+            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4',
           )}
         >
           {recommendedFonts.map(renderFontCard)}
@@ -129,7 +129,7 @@ const Fonts = () => {
  */}
         <fieldset
           className={clsx(
-            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'
+            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4',
           )}
         >
           {otherFonts.map(renderFontCard)}
@@ -140,14 +140,14 @@ const Fonts = () => {
         <p className='text-3xl text-[var(--secondary-color)]' lang='ja'>
           {'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'.slice(
             0,
-            20
+            20,
           )}
         </p>
         <h4 className='text-xl'>Katakana:</h4>
         <p className='text-3xl text-[var(--secondary-color)]' lang='ja'>
           {'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメもヤユヨラリルレロワヲン'.slice(
             0,
-            20
+            20,
           )}
         </p>
         <h4 className='text-xl'>Kanji:</h4>

@@ -17,14 +17,14 @@ const StarItem = memo(({ index, totalStars }: StarItemProps) => (
       totalStars >= 15
         ? 'motion-safe:animate-spin'
         : totalStars >= 10
-        ? 'motion-safe:animate-bounce'
-        : totalStars >= 5
-        ? 'motion-safe:animate-pulse'
-        : '',
-      'text-[var(--secondary-color)]'
+          ? 'motion-safe:animate-bounce'
+          : totalStars >= 5
+            ? 'motion-safe:animate-pulse'
+            : '',
+      'text-[var(--secondary-color)]',
     )}
     style={{
-      animationDelay: `${index * 100}ms`
+      animationDelay: `${index * 100}ms`,
     }}
   />
 ));
@@ -36,15 +36,16 @@ const Stars = () => {
 
   // Memoize the star array to prevent recreation on every render
   const starElements = useMemo(
-    () => Array.from({ length: stars }, (_, index) => (
-      <StarItem key={index} index={index} totalStars={stars} />
-    )),
-    [stars]
+    () =>
+      Array.from({ length: stars }, (_, index) => (
+        <StarItem key={index} index={index} totalStars={stars} />
+      )),
+    [stars],
   );
 
   return (
-    <div className='flex gap-2 mt-4'>
-      <div className='grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 xl:grid-cols-20 gap-2'>
+    <div className='mt-4 flex gap-2'>
+      <div className='grid grid-cols-5 gap-2 md:grid-cols-10 lg:grid-cols-15 xl:grid-cols-20'>
         {starElements}
       </div>
     </div>

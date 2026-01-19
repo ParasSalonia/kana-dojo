@@ -23,7 +23,7 @@ export interface CategoryTabsProps {
 export const CategoryTabs = ({
   selectedCategory,
   onCategorySelect,
-  getCategoryStats
+  getCategoryStats,
 }: CategoryTabsProps) => {
   return (
     <div className='mb-8 flex flex-wrap justify-center gap-4'>
@@ -54,7 +54,7 @@ export const CategoryTabs = ({
                   'rounded-full px-2 py-1 text-xs',
                   isSelected
                     ? 'bg-[var(--background-color)]/20 text-[var(--background-color)]'
-                    : 'bg-[var(--background-color)] text-[var(--secondary-color)]'
+                    : 'bg-[var(--background-color)] text-[var(--secondary-color)]',
                 )}
               >
                 {categoryStats.unlocked}/{categoryStats.total}

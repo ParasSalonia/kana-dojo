@@ -31,12 +31,12 @@ export interface BlitzConfig<T> {
     question: T,
     items: T[],
     count: number,
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => string[];
   renderOption?: (
     option: string,
     items: T[],
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => React.ReactNode;
   getCorrectOption?: (question: T, isReverse?: boolean) => string;
 

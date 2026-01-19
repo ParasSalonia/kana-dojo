@@ -23,7 +23,7 @@ const SoundGarden = () => {
     const gardenKana = hiraganaOnly.slice(0, 20).map(k => ({
       kana: k.kana,
       romanji: k.romanji,
-      isActive: false
+      isActive: false,
     }));
     setTiles(gardenKana);
   }, []);
@@ -36,8 +36,8 @@ const SoundGarden = () => {
       setTiles(prev =>
         prev.map((tile, i) => ({
           ...tile,
-          isActive: i === index
-        }))
+          isActive: i === index,
+        })),
       );
 
       // Reset active state after animation
@@ -45,25 +45,25 @@ const SoundGarden = () => {
         setTiles(prev =>
           prev.map(tile => ({
             ...tile,
-            isActive: false
-          }))
+            isActive: false,
+          })),
         );
       }, 300);
     },
-    [tiles, playCorrect]
+    [tiles, playCorrect],
   );
 
   if (!isMounted) return null;
 
   return (
-    <div className='flex flex-col items-center justify-center gap-8 flex-1 min-h-[80vh]'>
+    <div className='flex min-h-[80vh] flex-1 flex-col items-center justify-center gap-8'>
       {/* Header */}
       <div className='text-center'>
-        <h1 className='text-2xl md:text-3xl text-[var(--main-color)] flex items-center gap-2 justify-center'>
+        <h1 className='flex items-center justify-center gap-2 text-2xl text-[var(--main-color)] md:text-3xl'>
           <Volume2 size={28} />
           Sound Garden
         </h1>
-        <p className='text-[var(--secondary-color)] mt-2'>
+        <p className='mt-2 text-[var(--secondary-color)]'>
           Tap the kana to hear their sounds
         </p>
       </div>
@@ -82,23 +82,23 @@ const SoundGarden = () => {
             key={tile.kana}
             onClick={() => handleTileClick(index)}
             className={clsx(
-              'w-14 h-14 md:w-16 md:h-16 rounded-xl',
-              'bg-[var(--card-color)] border-2 border-[var(--border-color)]',
+              'h-14 w-14 rounded-xl md:h-16 md:w-16',
+              'border-2 border-[var(--border-color)] bg-[var(--card-color)]',
               'flex flex-col items-center justify-center',
-              'hover:cursor-pointer transition-all duration-150',
-              'hover:border-[var(--main-color)] hover:scale-105',
+              'transition-all duration-150 hover:cursor-pointer',
+              'hover:scale-105 hover:border-[var(--main-color)]',
               'active:scale-95',
               tile.isActive &&
-                'bg-[var(--main-color)] scale-110 border-[var(--main-color)]'
+                'scale-110 border-[var(--main-color)] bg-[var(--main-color)]',
             )}
           >
             <span
               lang='ja'
               className={clsx(
-                'text-2xl md:text-3xl transition-colors',
+                'text-2xl transition-colors md:text-3xl',
                 tile.isActive
                   ? 'text-[var(--background-color)]'
-                  : 'text-[var(--main-color)]'
+                  : 'text-[var(--main-color)]',
               )}
             >
               {tile.kana}
@@ -108,7 +108,7 @@ const SoundGarden = () => {
                 'text-xs transition-colors',
                 tile.isActive
                   ? 'text-[var(--background-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  : 'text-[var(--secondary-color)]',
               )}
             >
               {tile.romanji}
@@ -118,7 +118,7 @@ const SoundGarden = () => {
       </div>
 
       {/* Instructions */}
-      <p className='text-sm text-[var(--secondary-color)] text-center'>
+      <p className='text-center text-sm text-[var(--secondary-color)]'>
         Create melodies by tapping different kana in sequence
       </p>
     </div>

@@ -22,7 +22,7 @@ const COLORS = [
   'from-pink-400/40 to-rose-400/40',
   'from-cyan-400/40 to-teal-400/40',
   'from-indigo-400/40 to-blue-400/40',
-  'from-emerald-400/40 to-teal-400/40'
+  'from-emerald-400/40 to-teal-400/40',
 ];
 
 export default function KanaPop() {
@@ -46,7 +46,7 @@ export default function KanaPop() {
       x: Math.random() * 80 + 10,
       size: Math.random() * 30 + 70, // 70-100px
       speed: Math.random() * 3 + 4, // 4-7s
-      color: COLORS[Math.floor(Math.random() * COLORS.length)]
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
     };
     setBubbles(prev => [...prev, newBubble]);
   }, []);
@@ -92,29 +92,29 @@ export default function KanaPop() {
                 y: '100vh',
                 x: `${bubble.x}vw`,
                 opacity: 0,
-                scale: 0.5
+                scale: 0.5,
               }}
               animate={{
                 y: '-20vh',
                 opacity: 1,
                 scale: 1,
-                transition: { duration: bubble.speed, ease: 'linear' }
+                transition: { duration: bubble.speed, ease: 'linear' },
               }}
               exit={{
                 scale: 2,
                 opacity: 0,
-                transition: { duration: 0.2, ease: 'easeOut' }
+                transition: { duration: 0.2, ease: 'easeOut' },
               }}
               onPointerDown={() => popBubble(bubble.id)}
               className={clsx(
                 'absolute flex cursor-pointer flex-col items-center justify-center rounded-full border border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.1)] backdrop-blur-md transition-transform hover:scale-110 active:scale-95',
                 'bg-gradient-to-br',
-                bubble.color
+                bubble.color,
               )}
               style={{
                 width: bubble.size,
                 height: bubble.size,
-                left: 0 // Positioned by initial x
+                left: 0, // Positioned by initial x
               }}
             >
               {/* Shine effect */}

@@ -482,6 +482,6 @@ export const generateAssets = (): GameAssets => {
     oni,
     kasaObake,
     pagoda,
-    chochinObake
+    chochinObake,
   };
 };

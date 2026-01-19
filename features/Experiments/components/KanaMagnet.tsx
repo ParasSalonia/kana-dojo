@@ -28,7 +28,7 @@ const KanaMagnet = () => {
       x: Math.random() * 80 + 10,
       y: Math.random() * 80 + 10,
       vx: 0,
-      vy: 0
+      vy: 0,
     }));
     setParticles(initial);
   }, []);
@@ -37,7 +37,7 @@ const KanaMagnet = () => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePos({
       x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100
+      y: ((e.clientY - rect.top) / rect.height) * 100,
     });
   };
 
@@ -66,7 +66,7 @@ const KanaMagnet = () => {
           newY = Math.max(5, Math.min(95, newY));
 
           return { ...p, x: newX, y: newY, vx: newVx, vy: newVy };
-        })
+        }),
       );
       frameRef.current = requestAnimationFrame(animate);
     };
@@ -97,7 +97,7 @@ const KanaMagnet = () => {
             : 'radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)',
           boxShadow: repel
             ? '0 0 30px rgba(239,68,68,0.5)'
-            : '0 0 30px rgba(59,130,246,0.5)'
+            : '0 0 30px rgba(59,130,246,0.5)',
         }}
       />
 
@@ -110,7 +110,7 @@ const KanaMagnet = () => {
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
           }}
         >
           {p.kana}

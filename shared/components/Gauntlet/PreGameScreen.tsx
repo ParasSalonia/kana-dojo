@@ -11,7 +11,7 @@ import {
   Keyboard,
   Shield,
   Skull,
-  Zap
+  Zap,
 } from 'lucide-react';
 import { useClick } from '@/shared/hooks/useAudio';
 import {
@@ -19,7 +19,7 @@ import {
   REPETITION_OPTIONS,
   type GauntletDifficulty,
   type GauntletGameMode,
-  type RepetitionCount
+  type RepetitionCount,
 } from './types';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
 import { cn } from '@/shared/lib/utils';
@@ -43,7 +43,7 @@ interface PreGameScreenProps {
 const difficultyIcons: Record<GauntletDifficulty, React.ReactNode> = {
   normal: <Shield size={24} />,
   hard: <Zap size={24} />,
-  'instant-death': <Skull size={24} />
+  'instant-death': <Skull size={24} />,
 };
 
 export default function PreGameScreen({
@@ -58,7 +58,7 @@ export default function PreGameScreen({
   repetitions,
   setRepetitions,
   pickModeSupported,
-  onCancel
+  onCancel,
 }: PreGameScreenProps) {
   const { playClick } = useClick();
   const router = useRouter();
@@ -83,14 +83,14 @@ export default function PreGameScreen({
       id: 'Pick' as GauntletGameMode,
       title: 'Pick',
       description: 'Pick the correct answer from multiple options',
-      icon: MousePointerClick
+      icon: MousePointerClick,
     },
     {
       id: 'Type' as GauntletGameMode,
       title: 'Type',
       description: 'Type the correct answer',
-      icon: Keyboard
-    }
+      icon: Keyboard,
+    },
   ];
 
   const handleDifficultyClick = useCallback(
@@ -98,7 +98,7 @@ export default function PreGameScreen({
       playClick();
       setDifficulty(diff);
     },
-    [playClick, setDifficulty]
+    [playClick, setDifficulty],
   );
 
   // Shared design toggle for Difficulty and Mode selector sections:
@@ -148,7 +148,7 @@ export default function PreGameScreen({
                 <div
                   className={cn(
                     'space-y-3',
-                    true && 'rounded-2xl bg-[var(--card-color)] p-4'
+                    true && 'rounded-2xl bg-[var(--card-color)] p-4',
                   )}
                 >
                   <h3 className='text-sm text-[var(--main-color)]'>
@@ -158,7 +158,7 @@ export default function PreGameScreen({
                     {(
                       Object.entries(DIFFICULTY_CONFIG) as [
                         GauntletDifficulty,
-                        (typeof DIFFICULTY_CONFIG)[GauntletDifficulty]
+                        (typeof DIFFICULTY_CONFIG)[GauntletDifficulty],
                       ][]
                     ).map(([key, config]) => {
                       const isSelected = key === difficulty;
@@ -172,7 +172,7 @@ export default function PreGameScreen({
                           borderRadius='3xl'
                           className={clsx(
                             'flex-1 gap-1.5 px-4 py-2.5 text-sm',
-                            !isSelected && 'opacity-60'
+                            !isSelected && 'opacity-60',
                           )}
                         >
                           {difficultyIcons[key]}
@@ -196,7 +196,7 @@ export default function PreGameScreen({
                   {(
                     Object.entries(DIFFICULTY_CONFIG) as [
                       GauntletDifficulty,
-                      (typeof DIFFICULTY_CONFIG)[GauntletDifficulty]
+                      (typeof DIFFICULTY_CONFIG)[GauntletDifficulty],
                     ][]
                   ).map(([key, config]) => {
                     const isSelected = key === difficulty;
@@ -211,7 +211,7 @@ export default function PreGameScreen({
                         className={clsx(
                           'flex-1 gap-1.5 px-4 py-2.5 text-sm',
                           !isSelected &&
-                            'bg-transparent text-[var(--secondary-color)] hover:bg-[var(--border-color)]/50 hover:text-[var(--main-color)]'
+                            'bg-transparent text-[var(--secondary-color)] hover:bg-[var(--border-color)]/50 hover:text-[var(--main-color)]',
                         )}
                       >
                         {difficultyIcons[key]}
@@ -236,7 +236,7 @@ export default function PreGameScreen({
                 <div
                   className={cn(
                     'space-y-3',
-                    true && 'rounded-2xl bg-[var(--card-color)] p-4'
+                    true && 'rounded-2xl bg-[var(--card-color)] p-4',
                   )}
                 >
                   <h3 className='text-sm text-[var(--main-color)]'>Mode</h3>
@@ -264,7 +264,7 @@ export default function PreGameScreen({
                           className={clsx(
                             'flex-1 gap-2 px-4 py-3 text-sm',
                             !isSelected && 'opacity-60',
-                            isDisabled && 'cursor-not-allowed opacity-30'
+                            isDisabled && 'cursor-not-allowed opacity-30',
                           )}
                         >
                           <Icon size={20} />
@@ -306,7 +306,7 @@ export default function PreGameScreen({
                         !isDisabled && 'hover:cursor-pointer',
                         isSelected
                           ? 'border-[var(--main-color)]'
-                          : 'border-[var(--border-color)]'
+                          : 'border-[var(--border-color)]',
                       )}
                     >
                       <div
@@ -314,7 +314,7 @@ export default function PreGameScreen({
                           'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
                           isSelected
                             ? 'bg-[var(--main-color)] text-[var(--background-color)]'
-                            : 'bg-[var(--border-color)] text-[var(--muted-color)]'
+                            : 'bg-[var(--border-color)] text-[var(--muted-color)]',
                         )}
                       >
                         <Icon size={20} />
@@ -332,7 +332,7 @@ export default function PreGameScreen({
                           'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2',
                           isSelected
                             ? 'border-[var(--main-color)] bg-[var(--main-color)]'
-                            : 'border-[var(--border-color)]'
+                            : 'border-[var(--border-color)]',
                         )}
                       >
                         {isSelected && (
@@ -377,7 +377,7 @@ export default function PreGameScreen({
                   borderRadius='3xl'
                   className={clsx(
                     'w-auto px-4 py-2',
-                    repetitions !== rep && 'opacity-60'
+                    repetitions !== rep && 'opacity-60',
                   )}
                 >
                   {rep}×
@@ -395,7 +395,7 @@ export default function PreGameScreen({
                 'bg-[var(--secondary-color)] text-[var(--background-color)]',
                 'rounded-3xl transition-colors duration-200',
                 'border-b-10 border-[var(--secondary-color-accent)]',
-                'hover:cursor-pointer'
+                'hover:cursor-pointer',
               )}
             >
               <ArrowLeft size={20} />
@@ -411,7 +411,7 @@ export default function PreGameScreen({
                   'rounded-3xl transition-colors duration-200',
                   'border-b-10',
                   'hover:cursor-pointer',
-                  'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]'
+                  'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]',
                 )}
               >
                 <Play className='fill-current' size={20} />

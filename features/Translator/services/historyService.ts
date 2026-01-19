@@ -6,7 +6,7 @@ const STORAGE_KEY = 'kanadojo-translation-history';
 // Configure localforage instance for translation history
 const historyStore = localforage.createInstance({
   name: 'kanadojo',
-  storeName: 'translation_history'
+  storeName: 'translation_history',
 });
 
 /**
@@ -33,7 +33,7 @@ export async function loadHistory(): Promise<TranslationEntry[]> {
  * @returns Promise resolving to the updated history array
  */
 export async function saveEntry(
-  entry: TranslationEntry
+  entry: TranslationEntry,
 ): Promise<TranslationEntry[]> {
   try {
     const history = await loadHistory();

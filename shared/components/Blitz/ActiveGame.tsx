@@ -37,7 +37,7 @@ interface ActiveGameProps<T> {
   renderOption?: (
     option: string,
     items: T[],
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => React.ReactNode;
   items: T[];
 
@@ -91,7 +91,7 @@ export default function ActiveGame<T>({
   showGoalTimers,
   elapsedTime,
   goalTimers,
-  onCancel
+  onCancel,
 }: ActiveGameProps<T>) {
   const inputRef = useRef<HTMLInputElement>(null);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -118,7 +118,7 @@ export default function ActiveGame<T>({
         Digit3: 2,
         Numpad1: 0,
         Numpad2: 1,
-        Numpad3: 2
+        Numpad3: 2,
       };
       const index = keyMap[event.code];
       if (index !== undefined && index < shuffledOptions.length) {
@@ -149,7 +149,7 @@ export default function ActiveGame<T>({
             style={{
               width: `${
                 ((challengeDuration - timeLeft) / challengeDuration) * 100
-              }%`
+              }%`,
             }}
           />
         </div>
@@ -215,7 +215,7 @@ function GameHeader({
   seconds,
   timeLeft,
   stats,
-  onCancel
+  onCancel,
 }: {
   minutes: number;
   seconds: number;
@@ -232,7 +232,7 @@ function GameHeader({
             'text-lg font-bold',
             timeLeft <= 10
               ? 'animate-pulse text-red-500'
-              : 'text-[var(--secondary-color)]'
+              : 'text-[var(--secondary-color)]',
           )}
         >
           {minutes}:{seconds.toString().padStart(2, '0')}
@@ -271,7 +271,7 @@ function QuestionDisplay<T>({
   isReverseActive,
   lastAnswerCorrect,
   gameMode,
-  getCorrectAnswer
+  getCorrectAnswer,
 }: {
   currentQuestion: T | null;
   renderQuestion: (question: T, isReverse?: boolean) => React.ReactNode;
@@ -291,7 +291,7 @@ function QuestionDisplay<T>({
               : 'text-6xl font-semibold md:text-7xl',
             lastAnswerCorrect === true && 'text-green-500',
             lastAnswerCorrect === false && 'text-red-500',
-            lastAnswerCorrect === null && 'text-[var(--main-color)]'
+            lastAnswerCorrect === null && 'text-[var(--main-color)]',
           )}
         >
           {currentQuestion && renderQuestion(currentQuestion, isReverseActive)}
@@ -304,7 +304,7 @@ function QuestionDisplay<T>({
           <div
             className={clsx(
               'text-sm font-medium',
-              lastAnswerCorrect ? 'text-green-500' : 'text-red-500'
+              lastAnswerCorrect ? 'text-green-500' : 'text-red-500',
             )}
           >
             {lastAnswerCorrect
@@ -313,7 +313,7 @@ function QuestionDisplay<T>({
                 ? '✗ Try again!'
                 : `✗ Incorrect! It was "${getCorrectAnswer(
                     currentQuestion,
-                    isReverseActive
+                    isReverseActive,
                   )}"`}
           </div>
         )}
@@ -327,7 +327,7 @@ function TypeModeInput({
   userAnswer,
   setUserAnswer,
   onSubmit,
-  inputPlaceholder
+  inputPlaceholder,
 }: {
   inputRef: React.RefObject<HTMLInputElement | null>;
   userAnswer: string;
@@ -357,7 +357,7 @@ function TypeModeInput({
           'border-b-6 font-medium shadow-sm',
           userAnswer.trim()
             ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)] hover:cursor-pointer'
-            : 'cursor-not-allowed border-[var(--border-color)] bg-[var(--card-color)] text-[var(--border-color)]'
+            : 'cursor-not-allowed border-[var(--border-color)] bg-[var(--card-color)] text-[var(--border-color)]',
         )}
       >
         Submit
@@ -373,7 +373,7 @@ function PickModeOptions<T>({
   onOptionClick,
   renderOption,
   items,
-  isReverseActive
+  isReverseActive,
 }: {
   buttonRefs: React.MutableRefObject<(HTMLButtonElement | null)[]>;
   shuffledOptions: string[];
@@ -382,7 +382,7 @@ function PickModeOptions<T>({
   renderOption?: (
     option: string,
     items: T[],
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => React.ReactNode;
   items: T[];
   isReverseActive: boolean;
@@ -411,7 +411,7 @@ function PickModeOptions<T>({
               isWrong &&
                 'border-[var(--border-color)] hover:bg-[var(--card-color)]',
               !isWrong &&
-                'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]'
+                'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]',
             )}
             onClick={() => onOptionClick(option)}
             lang={isReverseActive ? 'ja' : undefined}
@@ -427,7 +427,7 @@ function PickModeOptions<T>({
                 isReverseActive ? '' : 'mr-4',
                 isWrong
                   ? 'text-[var(--border-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  : 'text-[var(--secondary-color)]',
               )}
             >
               {i + 1}
@@ -442,7 +442,7 @@ function PickModeOptions<T>({
 function RealTimeStats({
   correct,
   wrong,
-  accuracy
+  accuracy,
 }: {
   correct: number;
   wrong: number;
@@ -469,7 +469,7 @@ function RealTimeStats({
 function GoalTimersSidebar({
   goals,
   elapsedTime,
-  goalTimers
+  goalTimers,
 }: {
   goals: GoalTimer[];
   elapsedTime: number;
@@ -495,7 +495,7 @@ function GoalTimersSidebar({
         <div
           className={clsx(
             'rounded-xl border-2 p-4',
-            'border-[var(--main-color)] bg-[var(--main-color)]/5'
+            'border-[var(--main-color)] bg-[var(--main-color)]/5',
           )}
         >
           <div className='mb-2 flex items-center gap-2'>

@@ -43,7 +43,7 @@ if (typeof window !== 'undefined' && !sessionStorage.getItem(RELOAD_FLAG)) {
 
     if (isChunkError) {
       console.warn(
-        '[KanaDojo] Detected stale chunks (promise rejection), reloading page...'
+        '[KanaDojo] Detected stale chunks (promise rejection), reloading page...',
       );
       sessionStorage.setItem(RELOAD_FLAG, 'true');
       window.location.reload();
@@ -64,11 +64,11 @@ if (process.env.NODE_ENV === 'development') {
     if (posthogKey) {
       posthog.init(posthogKey, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        defaults: '2025-05-24'
+        defaults: '2025-05-24',
       });
     } else {
       console.warn(
-        'NEXT_PUBLIC_POSTHOG_KEY is not set; PostHog will not be initialized.'
+        'NEXT_PUBLIC_POSTHOG_KEY is not set; PostHog will not be initialized.',
       );
     }
   });

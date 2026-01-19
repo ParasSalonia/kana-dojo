@@ -23,7 +23,7 @@ function StatItem({
   icon: Icon,
   label,
   value,
-  index
+  index,
 }: {
   icon: typeof Trophy;
   label: string;
@@ -42,7 +42,7 @@ function StatItem({
           'flex h-14 w-14 items-center justify-center rounded-2xl',
           'bg-gradient-to-br from-[var(--main-color)]/10 to-[var(--secondary-color)]/5',
           'border border-[var(--border-color)]/30',
-          'text-[var(--main-color)]'
+          'text-[var(--main-color)]',
         )}
       >
         <Icon className='h-6 w-6' />
@@ -66,7 +66,7 @@ function StatItem({
  */
 export default function AchievementSummaryBar({
   summary,
-  className
+  className,
 }: AchievementSummaryBarProps) {
   const { totalPoints, level, unlockedCount, totalAchievements } = summary;
   const progressPercent =
@@ -81,7 +81,7 @@ export default function AchievementSummaryBar({
         'group relative overflow-hidden rounded-3xl',
         'border border-[var(--border-color)]/50 bg-[var(--card-color)]',
         'p-6',
-        className
+        className,
       )}
     >
       {/* Decorative trophy glow */}
@@ -115,7 +115,7 @@ export default function AchievementSummaryBar({
               'border border-[var(--border-color)]/30',
               'text-sm font-semibold text-[var(--secondary-color)]',
               'transition-colors duration-300',
-              'hover:border-[var(--main-color)]/30 hover:text-[var(--main-color)]'
+              'hover:border-[var(--main-color)]/30 hover:text-[var(--main-color)]',
             )}
           >
             View All
@@ -184,6 +184,6 @@ export function getAchievementDisplayValues(summary: AchievementSummary): {
     level: summary.level,
     unlockedCount: summary.unlockedCount,
     totalAchievements: summary.totalAchievements,
-    progressPercent: `${progressPercent.toFixed(0)}%`
+    progressPercent: `${progressPercent.toFixed(0)}%`,
   };
 }

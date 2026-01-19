@@ -24,7 +24,7 @@ class StatsEventBus {
 
   subscribe(
     eventType: StatEventType,
-    listener: (event: StatEvent) => void
+    listener: (event: StatEvent) => void,
   ): () => void {
     if (!this.listeners.has(eventType)) {
       this.listeners.set(eventType, new Set());
@@ -52,14 +52,14 @@ export const statsApi = {
   recordCorrect(
     contentType: StatEvent['contentType'],
     character: string,
-    metadata?: StatEvent['metadata']
+    metadata?: StatEvent['metadata'],
   ) {
     statsEvents.emit({
       type: 'correct',
       contentType,
       character,
       timestamp: Date.now(),
-      metadata
+      metadata,
     });
   },
 
@@ -68,7 +68,7 @@ export const statsApi = {
     character: string,
     userAnswer: string,
     correctAnswer: string,
-    metadata?: StatEvent['metadata']
+    metadata?: StatEvent['metadata'],
   ) {
     statsEvents.emit({
       type: 'incorrect',
@@ -77,20 +77,20 @@ export const statsApi = {
       userAnswer,
       correctAnswer,
       timestamp: Date.now(),
-      metadata
+      metadata,
     });
   },
 
   recordSessionComplete(
     contentType: StatEvent['contentType'],
-    metadata?: StatEvent['metadata']
+    metadata?: StatEvent['metadata'],
   ) {
     statsEvents.emit({
       type: 'session_complete',
       contentType,
       character: '',
       timestamp: Date.now(),
-      metadata
+      metadata,
     });
-  }
+  },
 };

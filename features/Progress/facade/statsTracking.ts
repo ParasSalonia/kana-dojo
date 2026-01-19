@@ -20,5 +20,5 @@ export const statsTracking = {
   recordChallengeModeUsed: (challengeMode: string) =>
     useStatsStore.getState().recordChallengeModeUsed(challengeMode),
   recordDojoUsed: (dojo: string) =>
-    useStatsStore.getState().recordDojoUsed(dojo)
+    useStatsStore.getState().recordDojoUsed(dojo),
 };

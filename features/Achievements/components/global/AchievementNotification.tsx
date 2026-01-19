@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { Trophy, X } from 'lucide-react';
 import useAchievementStore, {
-  type AchievementNotification as NotificationType
+  type AchievementNotification as NotificationType,
 } from '../../store/useAchievementStore';
 import { useClick } from '@/shared/hooks/useAudio';
 import { cardBorderStyles } from '@/shared/lib/styles';
@@ -19,7 +19,7 @@ interface AchievementNotificationProps {
 const AchievementNotification = ({
   notification,
   onDismiss,
-  onViewDetails
+  onViewDetails,
 }: AchievementNotificationProps) => {
   const { playClick } = useClick();
   const [isVisible, setIsVisible] = useState(true);
@@ -64,7 +64,7 @@ const AchievementNotification = ({
             'relative w-80 cursor-pointer p-4',
             'bg-[var(--card-color)] shadow-lg',
             cardBorderStyles,
-            'transition-shadow duration-200 hover:shadow-xl'
+            'transition-shadow duration-200 hover:shadow-xl',
           )}
           onClick={handleViewDetails}
         >
@@ -74,7 +74,7 @@ const AchievementNotification = ({
             className={clsx(
               'absolute top-2 right-2 cursor-pointer rounded p-1',
               'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-              'transition-colors duration-200 hover:bg-[var(--background-color)]'
+              'transition-colors duration-200 hover:bg-[var(--background-color)]',
             )}
           >
             <X size={14} />
@@ -86,7 +86,7 @@ const AchievementNotification = ({
               <div
                 className={clsx(
                   'flex h-10 w-10 items-center justify-center rounded-full',
-                  'bg-yellow-100 text-lg font-bold text-yellow-600'
+                  'bg-yellow-100 text-lg font-bold text-yellow-600',
                 )}
               >
                 {notification.achievement.icon}
@@ -131,7 +131,7 @@ export const AchievementNotificationContainer = () => {
   const [isClient, setIsClient] = useState(false);
   const notifications = useAchievementStore(state => state.unseenNotifications);
   const markNotificationSeen = useAchievementStore(
-    state => state.markNotificationSeen
+    state => state.markNotificationSeen,
   );
   const [selectedAchievement, setSelectedAchievement] = useState<
     NotificationType['achievement'] | null
@@ -197,7 +197,7 @@ export const AchievementNotificationContainer = () => {
             className={clsx(
               'w-full max-w-md p-6 text-center',
               'bg-[var(--card-color)]',
-              cardBorderStyles
+              cardBorderStyles,
             )}
             onClick={e => e.stopPropagation()}
           >
@@ -216,7 +216,7 @@ export const AchievementNotificationContainer = () => {
               className={clsx(
                 'cursor-pointer rounded-lg px-6 py-2',
                 'bg-[var(--background-color)] text-[var(--main-color)]',
-                'transition-colors duration-200 hover:bg-[var(--border-color)]'
+                'transition-colors duration-200 hover:bg-[var(--border-color)]',
               )}
             >
               Continue Learning

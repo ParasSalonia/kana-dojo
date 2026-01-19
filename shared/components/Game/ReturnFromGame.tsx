@@ -14,7 +14,7 @@ import {
   MousePointerClick,
   Keyboard,
   Flame,
-  type LucideIcon
+  type LucideIcon,
 } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
@@ -27,7 +27,7 @@ const GAME_MODE_ICONS: Record<
   pick: { icon: MousePointerClick },
   'anti-pick': { icon: MousePointerClick, className: 'scale-x-[-1]' },
   type: { icon: Keyboard },
-  'anti-type': { icon: Keyboard, className: 'scale-y-[-1]' }
+  'anti-type': { icon: Keyboard, className: 'scale-y-[-1]' },
 };
 
 interface StatItemProps {
@@ -36,7 +36,7 @@ interface StatItemProps {
 }
 
 const StatItem = ({ icon: Icon, value }: StatItemProps) => (
-  <p className='flex flex-row items-center gap-0.75 sm:gap-1 text-xl'>
+  <p className='flex flex-row items-center gap-0.75 text-xl sm:gap-1'>
     <Icon />
     <span>{value}</span>
   </p>
@@ -97,7 +97,7 @@ const Return = ({ isHidden, href, gameMode }: ReturnProps) => {
     <div
       className={clsx(
         'mt-2 flex w-full flex-col md:mt-4 md:w-2/3 lg:w-1/2',
-        isHidden && 'hidden'
+        isHidden && 'hidden',
       )}
     >
       {/* Header with exit and progress */}
@@ -105,7 +105,7 @@ const Return = ({ isHidden, href, gameMode }: ReturnProps) => {
         <Link href={href} ref={buttonRef} onClick={handleExit}>
           <X
             size={32}
-            className='text-[var(--border-color)] hover:scale-125 duration-250 hover:cursor-pointer hover:text-[var(--secondary-color)]'
+            className='text-[var(--border-color)] duration-250 hover:scale-125 hover:cursor-pointer hover:text-[var(--secondary-color)]'
           />
         </Link>
         <ProgressBar />

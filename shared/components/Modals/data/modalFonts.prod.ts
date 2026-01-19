@@ -6,7 +6,7 @@ import {
   Kiwi_Maru,
   Potta_One,
   Zen_Kurenaido,
-  Noto_Sans_JP
+  Noto_Sans_JP,
 } from 'next/font/google';
 
 const zenMaruGothic = Zen_Maru_Gothic({
@@ -14,7 +14,7 @@ const zenMaruGothic = Zen_Maru_Gothic({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const rampartOne = Rampart_One({
@@ -22,7 +22,7 @@ const rampartOne = Rampart_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kleeOne = Klee_One({
@@ -30,7 +30,7 @@ const kleeOne = Klee_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const dotGothic16 = DotGothic16({
@@ -38,7 +38,7 @@ const dotGothic16 = DotGothic16({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kiwiMaru = Kiwi_Maru({
@@ -46,7 +46,7 @@ const kiwiMaru = Kiwi_Maru({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const pottaOne = Potta_One({
@@ -54,7 +54,7 @@ const pottaOne = Potta_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const zenKurenaido = Zen_Kurenaido({
@@ -62,7 +62,7 @@ const zenKurenaido = Zen_Kurenaido({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const notoSansJP = Noto_Sans_JP({
@@ -70,7 +70,7 @@ const notoSansJP = Noto_Sans_JP({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 export const modalFonts = [
@@ -81,5 +81,5 @@ export const modalFonts = [
   { name: 'Kiwi Maru', font: kiwiMaru },
   { name: 'Potta One', font: pottaOne },
   { name: 'Zen Kurenaido', font: zenKurenaido },
-  { name: 'Noto Sans JP', font: notoSansJP }
+  { name: 'Noto Sans JP', font: notoSansJP },
 ];

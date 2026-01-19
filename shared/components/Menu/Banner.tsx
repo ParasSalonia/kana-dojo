@@ -11,15 +11,20 @@ const Banner = () => {
     pathWithoutLocale === '/kana'
       ? 'Kana あ'
       : pathWithoutLocale === '/kanji'
-      ? 'Kanji 字'
-      : pathWithoutLocale === '/vocabulary'
-      ? 'Vocabulary 語'
-      : pathWithoutLocale === '/preferences'
-      ? 'Preferences 設'
-      : '';
+        ? 'Kanji 字'
+        : pathWithoutLocale === '/vocabulary'
+          ? 'Vocabulary 語'
+          : pathWithoutLocale === '/preferences'
+            ? 'Preferences 設'
+            : '';
   return (
-    <h2 className={clsx('text-3xl pt-3 lg:pt-6', 'flex items-center gap-2 overflow-hidden')}>
-      <span className="text-[var(--secondary-color)]">
+    <h2
+      className={clsx(
+        'pt-3 text-3xl lg:pt-6',
+        'flex items-center gap-2 overflow-hidden',
+      )}
+    >
+      <span className='text-[var(--secondary-color)]'>
         {subheading.split(' ')[1]}
       </span>
       <span>{subheading.split(' ')[0]}</span>

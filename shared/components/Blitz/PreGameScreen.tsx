@@ -7,7 +7,7 @@ import {
   ArrowLeft,
   CheckCircle2,
   MousePointerClick,
-  Keyboard
+  Keyboard,
 } from 'lucide-react';
 import { Link } from '@/core/i18n/routing';
 import clsx from 'clsx';
@@ -47,14 +47,14 @@ const GAME_MODES: {
     id: 'Pick',
     title: 'Pick',
     description: 'Pick the correct answer from multiple options',
-    icon: MousePointerClick
+    icon: MousePointerClick,
   },
   {
     id: 'Type',
     title: 'Type',
     description: 'Type the correct answer',
-    icon: Keyboard
-  }
+    icon: Keyboard,
+  },
 ];
 
 const DURATION_OPTIONS = [30, 60, 90, 120, 180];
@@ -72,7 +72,7 @@ export default function PreGameScreen({
   showGoalTimers,
   setShowGoalTimers,
   goalTimers,
-  onStart
+  onStart,
 }: PreGameScreenProps) {
   const { playClick } = useClick();
 
@@ -118,7 +118,7 @@ export default function PreGameScreen({
                 'bg-[var(--secondary-color)] text-[var(--background-color)]',
                 'rounded-2xl transition-colors duration-200',
                 'border-b-6 border-[var(--secondary-color-accent)] shadow-sm',
-                'hover:cursor-pointer'
+                'hover:cursor-pointer',
               )}
               onClick={() => playClick()}
             >
@@ -133,7 +133,7 @@ export default function PreGameScreen({
               'bg-[var(--main-color)] text-[var(--background-color)]',
               'rounded-2xl transition-colors duration-200',
               'border-b-6 border-[var(--main-color-accent)] font-medium shadow-sm',
-              'hover:cursor-pointer'
+              'hover:cursor-pointer',
             )}
           >
             <span className='whitespace-nowrap'>Start</span>
@@ -179,7 +179,7 @@ function SelectedLevelsCard({
   dojoType,
   dojoLabel,
   itemsCount,
-  selectedSets
+  selectedSets,
 }: {
   dojoType: 'kana' | 'kanji' | 'vocabulary';
   dojoLabel: string;
@@ -200,7 +200,7 @@ function SelectedLevelsCard({
         set
           .replace('Set ', '')
           .replace('Level ', '')
-          .replace(/-group.*$/, '')
+          .replace(/-group.*$/, ''),
       )
       .join(', ');
   };
@@ -250,7 +250,7 @@ function SelectedLevelsCard({
 function GameModeSelector({
   gameMode,
   setGameMode,
-  pickModeSupported
+  pickModeSupported,
 }: {
   gameMode: BlitzGameMode;
   setGameMode: (mode: BlitzGameMode) => void;
@@ -281,7 +281,7 @@ function GameModeSelector({
               isDisabled && 'cursor-not-allowed opacity-50',
               isSelected
                 ? 'border-[var(--main-color)]'
-                : 'border-[var(--border-color)]'
+                : 'border-[var(--border-color)]',
             )}
           >
             <div
@@ -289,7 +289,7 @@ function GameModeSelector({
                 'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
                 isSelected
                   ? 'bg-[var(--main-color)] text-[var(--background-color)]'
-                  : 'bg-[var(--border-color)] text-[var(--muted-color)]'
+                  : 'bg-[var(--border-color)] text-[var(--muted-color)]',
               )}
             >
               <Icon size={20} />
@@ -307,7 +307,7 @@ function GameModeSelector({
                 'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2',
                 isSelected
                   ? 'border-[var(--secondary-color)] bg-[var(--secondary-color)]'
-                  : 'border-[var(--border-color)]'
+                  : 'border-[var(--border-color)]',
               )}
             >
               {isSelected && (
@@ -335,7 +335,7 @@ function GameModeSelector({
 
 function DurationSelector({
   challengeDuration,
-  setChallengeDuration
+  setChallengeDuration,
 }: {
   challengeDuration: number;
   setChallengeDuration: (duration: number) => void;
@@ -363,7 +363,7 @@ function DurationSelector({
             borderRadius='2xl'
             className={clsx(
               'w-auto px-4 py-2',
-              challengeDuration !== duration && 'opacity-60'
+              challengeDuration !== duration && 'opacity-60',
             )}
           >
             {duration < 60 ? `${duration}s` : `${duration / 60}m`}

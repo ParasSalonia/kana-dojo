@@ -68,14 +68,14 @@ const defaultGauntletStats: GauntletStats = {
   perfectRuns: 0,
   noDeathRuns: 0,
   livesRegenerated: 0,
-  bestStreak: 0
+  bestStreak: 0,
 };
 
 const defaultBlitzStats: BlitzStats = {
   totalSessions: 0,
   bestSessionScore: 0,
   bestStreak: 0,
-  totalCorrect: 0
+  totalCorrect: 0,
 };
 
 // Max array sizes to prevent memory exhaustion over extended use
@@ -117,7 +117,7 @@ interface IStatsState {
   characterScores: Record<string, CharacterScore>;
   incrementCharacterScore: (
     character: string,
-    field: 'correct' | 'wrong'
+    field: 'correct' | 'wrong',
   ) => void;
 
   // Progress indicators
@@ -202,14 +202,14 @@ interface IStatsState {
 const createTimedCorrectIncrement = (
   correctKey: keyof IStatsState,
   streakKey: keyof IStatsState,
-  bestStreakKey: keyof IStatsState
+  bestStreakKey: keyof IStatsState,
 ) => {
   return (s: IStatsState) => {
     const newStreak = (s[streakKey] as number) + 1;
     return {
       [correctKey]: (s[correctKey] as number) + 1,
       [streakKey]: newStreak,
-      [bestStreakKey]: Math.max(s[bestStreakKey] as number, newStreak)
+      [bestStreakKey]: Math.max(s[bestStreakKey] as number, newStreak),
     };
   };
 };
@@ -217,11 +217,11 @@ const createTimedCorrectIncrement = (
 // Helper for timed stats increment wrong
 const createTimedWrongIncrement = (
   wrongKey: keyof IStatsState,
-  streakKey: keyof IStatsState
+  streakKey: keyof IStatsState,
 ) => {
   return (s: IStatsState) => ({
     [wrongKey]: (s[wrongKey] as number) + 1,
-    [streakKey]: 0
+    [streakKey]: 0,
   });
 };
 
@@ -238,13 +238,13 @@ const useStatsStore = create<IStatsState>()(
       incrementCorrectAnswers: () =>
         set(s => ({
           numCorrectAnswers: s.numCorrectAnswers + 1,
-          currentStreak: s.currentStreak + 1
+          currentStreak: s.currentStreak + 1,
         })),
 
       incrementWrongAnswers: () =>
         set(s => ({
           numWrongAnswers: s.numWrongAnswers + 1,
-          currentStreak: 0
+          currentStreak: 0,
         })),
 
       // UI state
@@ -257,8 +257,8 @@ const useStatsStore = create<IStatsState>()(
         set(s => ({
           correctAnswerTimes: capArray(
             [...s.correctAnswerTimes, time],
-            MAX_ANSWER_TIMES
-          )
+            MAX_ANSWER_TIMES,
+          ),
         })),
       totalMilliseconds: 0,
       setNewTotalMilliseconds: totalMilliseconds => set({ totalMilliseconds }),
@@ -269,8 +269,8 @@ const useStatsStore = create<IStatsState>()(
         set(s => ({
           characterHistory: capArray(
             [...s.characterHistory, character],
-            MAX_CHARACTER_HISTORY
-          )
+            MAX_CHARACTER_HISTORY,
+          ),
         })),
 
       characterScores: {},
@@ -279,19 +279,19 @@ const useStatsStore = create<IStatsState>()(
           const currentScore = s.characterScores[character] || {
             correct: 0,
             wrong: 0,
-            accuracy: 0
+            accuracy: 0,
           };
           const updatedScore = {
             ...currentScore,
-            [field]: currentScore[field] + 1
+            [field]: currentScore[field] + 1,
           };
           const { correct, wrong } = updatedScore;
           updatedScore.accuracy = correct / (correct + wrong);
           return {
             characterScores: {
               ...s.characterScores,
-              [character]: updatedScore
-            }
+              [character]: updatedScore,
+            },
           };
         }),
 
@@ -313,8 +313,8 @@ const useStatsStore = create<IStatsState>()(
           createTimedCorrectIncrement(
             'timedCorrectAnswers',
             'timedStreak',
-            'timedBestStreak'
-          )
+            'timedBestStreak',
+          ),
         ),
 
       incrementTimedWrongAnswers: () =>
@@ -334,23 +334,23 @@ const useStatsStore = create<IStatsState>()(
           createTimedCorrectIncrement(
             'timedVocabCorrectAnswers',
             'timedVocabStreak',
-            'timedVocabBestStreak'
-          )
+            'timedVocabBestStreak',
+          ),
         ),
 
       incrementTimedVocabWrongAnswers: () =>
         set(
           createTimedWrongIncrement(
             'timedVocabWrongAnswers',
-            'timedVocabStreak'
-          )
+            'timedVocabStreak',
+          ),
         ),
 
       resetTimedVocabStats: () =>
         set({
           timedVocabCorrectAnswers: 0,
           timedVocabWrongAnswers: 0,
-          timedVocabStreak: 0
+          timedVocabStreak: 0,
         }),
 
       // Timed Kanji stats
@@ -364,23 +364,23 @@ const useStatsStore = create<IStatsState>()(
           createTimedCorrectIncrement(
             'timedKanjiCorrectAnswers',
             'timedKanjiStreak',
-            'timedKanjiBestStreak'
-          )
+            'timedKanjiBestStreak',
+          ),
         ),
 
       incrementTimedKanjiWrongAnswers: () =>
         set(
           createTimedWrongIncrement(
             'timedKanjiWrongAnswers',
-            'timedKanjiStreak'
-          )
+            'timedKanjiStreak',
+          ),
         ),
 
       resetTimedKanjiStats: () =>
         set({
           timedKanjiCorrectAnswers: 0,
           timedKanjiWrongAnswers: 0,
-          timedKanjiStreak: 0
+          timedKanjiStreak: 0,
         }),
 
       // Historical tracking
@@ -410,7 +410,7 @@ const useStatsStore = create<IStatsState>()(
         trainingDays: [],
         // Wrong streak tracking
         currentWrongStreak: 0,
-        maxWrongStreak: 0
+        maxWrongStreak: 0,
       },
 
       saveSession: () => {
@@ -429,7 +429,10 @@ const useStatsStore = create<IStatsState>()(
           const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
           const trainingDays = s.allTimeStats.trainingDays.includes(today)
             ? s.allTimeStats.trainingDays
-            : capArray([...s.allTimeStats.trainingDays, today], MAX_TRAINING_DAYS);
+            : capArray(
+                [...s.allTimeStats.trainingDays, today],
+                MAX_TRAINING_DAYS,
+              );
 
           return {
             allTimeStats: {
@@ -439,8 +442,8 @@ const useStatsStore = create<IStatsState>()(
               totalIncorrect: s.allTimeStats.totalIncorrect + s.numWrongAnswers,
               bestStreak: Math.max(s.allTimeStats.bestStreak, s.currentStreak),
               characterMastery: mastery,
-              trainingDays
-            }
+              trainingDays,
+            },
           };
         });
 
@@ -484,8 +487,8 @@ const useStatsStore = create<IStatsState>()(
             trainingDays: [],
             // Wrong streak tracking
             currentWrongStreak: 0,
-            maxWrongStreak: 0
-          }
+            maxWrongStreak: 0,
+          },
         }),
 
       resetStats: () =>
@@ -499,7 +502,7 @@ const useStatsStore = create<IStatsState>()(
           correctAnswerTimes: [],
           score: 0,
           stars: 0,
-          iconIndices: []
+          iconIndices: [],
         }),
 
       // Content-specific tracking actions (Requirements 1.1-1.8, 2.1-2.10, 3.1-3.6)
@@ -507,16 +510,16 @@ const useStatsStore = create<IStatsState>()(
         set(s => ({
           allTimeStats: {
             ...s.allTimeStats,
-            hiraganaCorrect: s.allTimeStats.hiraganaCorrect + 1
-          }
+            hiraganaCorrect: s.allTimeStats.hiraganaCorrect + 1,
+          },
         })),
 
       incrementKatakanaCorrect: () =>
         set(s => ({
           allTimeStats: {
             ...s.allTimeStats,
-            katakanaCorrect: s.allTimeStats.katakanaCorrect + 1
-          }
+            katakanaCorrect: s.allTimeStats.katakanaCorrect + 1,
+          },
         })),
 
       incrementKanjiCorrect: (jlptLevel: string) =>
@@ -526,17 +529,17 @@ const useStatsStore = create<IStatsState>()(
             kanjiCorrectByLevel: {
               ...s.allTimeStats.kanjiCorrectByLevel,
               [jlptLevel]:
-                (s.allTimeStats.kanjiCorrectByLevel[jlptLevel] || 0) + 1
-            }
-          }
+                (s.allTimeStats.kanjiCorrectByLevel[jlptLevel] || 0) + 1,
+            },
+          },
         })),
 
       incrementVocabularyCorrect: () =>
         set(s => ({
           allTimeStats: {
             ...s.allTimeStats,
-            vocabularyCorrect: s.allTimeStats.vocabularyCorrect + 1
-          }
+            vocabularyCorrect: s.allTimeStats.vocabularyCorrect + 1,
+          },
         })),
 
       // Gauntlet-specific tracking actions (Requirements 4.1-4.10)
@@ -546,7 +549,7 @@ const useStatsStore = create<IStatsState>()(
         isPerfect,
         livesLost,
         livesRegenerated,
-        bestStreak
+        bestStreak,
       }) =>
         set(s => {
           const gauntletStats = { ...s.allTimeStats.gauntletStats };
@@ -581,14 +584,14 @@ const useStatsStore = create<IStatsState>()(
           // Track best streak
           gauntletStats.bestStreak = Math.max(
             gauntletStats.bestStreak,
-            bestStreak
+            bestStreak,
           );
 
           return {
             allTimeStats: {
               ...s.allTimeStats,
-              gauntletStats
-            }
+              gauntletStats,
+            },
           };
         }),
 
@@ -599,7 +602,7 @@ const useStatsStore = create<IStatsState>()(
           blitzStats.totalSessions += 1;
           blitzStats.bestSessionScore = Math.max(
             blitzStats.bestSessionScore,
-            score
+            score,
           );
           blitzStats.bestStreak = Math.max(blitzStats.bestStreak, streak);
           blitzStats.totalCorrect += correctAnswers;
@@ -607,8 +610,8 @@ const useStatsStore = create<IStatsState>()(
           return {
             allTimeStats: {
               ...s.allTimeStats,
-              blitzStats
-            }
+              blitzStats,
+            },
           };
         }),
 
@@ -620,9 +623,9 @@ const useStatsStore = create<IStatsState>()(
             fastestAnswerMs: Math.min(s.allTimeStats.fastestAnswerMs, timeMs),
             answerTimesMs: capArray(
               [...s.allTimeStats.answerTimesMs, timeMs],
-              MAX_ANSWER_TIMES
-            )
-          }
+              MAX_ANSWER_TIMES,
+            ),
+          },
         })),
 
       // Variety and exploration tracking actions (Requirements 8.1-8.3)
@@ -634,8 +637,8 @@ const useStatsStore = create<IStatsState>()(
           return {
             allTimeStats: {
               ...s.allTimeStats,
-              dojosUsed: [...s.allTimeStats.dojosUsed, dojo]
-            }
+              dojosUsed: [...s.allTimeStats.dojosUsed, dojo],
+            },
           };
         }),
 
@@ -647,8 +650,8 @@ const useStatsStore = create<IStatsState>()(
           return {
             allTimeStats: {
               ...s.allTimeStats,
-              modesUsed: [...s.allTimeStats.modesUsed, mode]
-            }
+              modesUsed: [...s.allTimeStats.modesUsed, mode],
+            },
           };
         }),
 
@@ -662,9 +665,9 @@ const useStatsStore = create<IStatsState>()(
               ...s.allTimeStats,
               challengeModesUsed: [
                 ...s.allTimeStats.challengeModesUsed,
-                challengeMode
-              ]
-            }
+                challengeMode,
+              ],
+            },
           };
         }),
 
@@ -680,9 +683,9 @@ const useStatsStore = create<IStatsState>()(
               ...s.allTimeStats,
               trainingDays: capArray(
                 [...s.allTimeStats.trainingDays, today],
-                MAX_TRAINING_DAYS
-              )
-            }
+                MAX_TRAINING_DAYS,
+              ),
+            },
           };
         }),
 
@@ -696,9 +699,9 @@ const useStatsStore = create<IStatsState>()(
               currentWrongStreak: newWrongStreak,
               maxWrongStreak: Math.max(
                 s.allTimeStats.maxWrongStreak,
-                newWrongStreak
-              )
-            }
+                newWrongStreak,
+              ),
+            },
           };
         }),
 
@@ -706,9 +709,9 @@ const useStatsStore = create<IStatsState>()(
         set(s => ({
           allTimeStats: {
             ...s.allTimeStats,
-            currentWrongStreak: 0
-          }
-        }))
+            currentWrongStreak: 0,
+          },
+        })),
     }),
     {
       name: 'kanadojo-stats',
@@ -725,11 +728,11 @@ const useStatsStore = create<IStatsState>()(
             // Ensure nested objects/arrays are properly merged with defaults
             gauntletStats: {
               ...defaultGauntletStats,
-              ...(persisted?.allTimeStats?.gauntletStats || {})
+              ...(persisted?.allTimeStats?.gauntletStats || {}),
             },
             blitzStats: {
               ...defaultBlitzStats,
-              ...(persisted?.allTimeStats?.blitzStats || {})
+              ...(persisted?.allTimeStats?.blitzStats || {}),
             },
             // Ensure arrays have defaults if missing from persisted state
             dojosUsed: persisted?.allTimeStats?.dojosUsed ?? [],
@@ -740,12 +743,12 @@ const useStatsStore = create<IStatsState>()(
             answerTimesMs: persisted?.allTimeStats?.answerTimesMs ?? [],
             kanjiCorrectByLevel:
               persisted?.allTimeStats?.kanjiCorrectByLevel ?? {},
-            characterMastery: persisted?.allTimeStats?.characterMastery ?? {}
-          }
+            characterMastery: persisted?.allTimeStats?.characterMastery ?? {},
+          },
         };
-      }
-    }
-  )
+      },
+    },
+  ),
 );
 
 export default useStatsStore;

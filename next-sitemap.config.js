@@ -11,24 +11,24 @@ export default {
     '/_next/*',
     '/*/train/*', // Exclude dynamic training pages
     '/es/*', // Exclude es/ja locales - we only generate /en/* URLs
-    '/ja/*' // and add alternateRefs for other locales
+    '/ja/*', // and add alternateRefs for other locales
   ],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
-        allow: '/'
+        allow: '/',
       },
       {
         userAgent: 'Googlebot',
-        allow: '/'
+        allow: '/',
       },
       {
         userAgent: 'Bingbot',
-        allow: '/'
-      }
+        allow: '/',
+      },
     ],
-    additionalSitemaps: []
+    additionalSitemaps: [],
   },
   transform: async (config, path) => {
     // Custom priority for important pages
@@ -41,7 +41,7 @@ export default {
       '/academy': 0.8,
       '/preferences': 0.6,
       '/achievements': 0.7,
-      '/progress': 0.7
+      '/progress': 0.7,
     };
 
     const changefreqs = {
@@ -53,13 +53,13 @@ export default {
       '/academy': 'weekly',
       '/preferences': 'monthly',
       '/achievements': 'weekly',
-      '/progress': 'weekly'
+      '/progress': 'weekly',
     };
 
     // Extract base path without locale (e.g., /en/kana -> /kana)
     const localePattern = /^\/(en|es|ja)(\/.*)?$/;
     const match = path.match(localePattern);
-    const basePath = match ? (match[2] || '/') : path;
+    const basePath = match ? match[2] || '/' : path;
 
     // Check if this is an academy post URL (matches /academy/[slug] pattern)
     const isAcademyPost = /^\/academy\/[^/]+$/.test(basePath);
@@ -87,24 +87,24 @@ export default {
         {
           href: `${siteUrl}/en${basePath}`,
           hreflang: 'en',
-          hrefIsAbsolute: true
+          hrefIsAbsolute: true,
         },
         {
           href: `${siteUrl}/es${basePath}`,
           hreflang: 'es',
-          hrefIsAbsolute: true
+          hrefIsAbsolute: true,
         },
         {
           href: `${siteUrl}/ja${basePath}`,
           hreflang: 'ja',
-          hrefIsAbsolute: true
+          hrefIsAbsolute: true,
         },
         {
           href: `${siteUrl}/en${basePath}`,
           hreflang: 'x-default',
-          hrefIsAbsolute: true
-        }
-      ]
+          hrefIsAbsolute: true,
+        },
+      ],
     };
-  }
+  },
 };

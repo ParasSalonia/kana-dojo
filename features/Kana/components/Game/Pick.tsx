@@ -62,7 +62,7 @@ const OptionButton = memo(
           isWrong &&
             'text-[var(--border-color)] hover:border-[var(--border-color)] hover:bg-[var(--card-color)]',
           !isWrong &&
-            'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]'
+            'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]',
         )}
         onClick={() => onClick(variantChar)}
       >
@@ -72,14 +72,14 @@ const OptionButton = memo(
             'absolute top-1/2 right-4 hidden h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--border-color)] px-1 text-xs leading-none lg:inline-flex',
             isWrong
               ? 'text-[var(--border-color)]'
-              : 'text-[var(--secondary-color)]'
+              : 'text-[var(--secondary-color)]',
           )}
         >
           {index + 1}
         </span>
       </button>
     );
-  }
+  },
 );
 
 OptionButton.displayName = 'OptionButton';
@@ -94,12 +94,12 @@ const PickGame = ({ isHidden }: PickGameProps) => {
   const {
     optionCount,
     recordCorrect: recordDifficultyCorrect,
-    recordWrong: recordDifficultyWrong
+    recordWrong: recordDifficultyWrong,
   } = useProgressiveDifficulty({
     minOptions: 3,
     maxOptions: 6,
     streakPerLevel: 5,
-    wrongsToDecrease: 2
+    wrongsToDecrease: 2,
   });
 
   // Set to true to force word building mode for testing
@@ -112,11 +112,11 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     wordLength,
     decideNextMode: decideNextWordBuildingMode,
     recordWrongAnswer: recordWordBuildingWrong,
-    exitWordBuildingMode
+    exitWordBuildingMode,
   } = useWordBuildingMode({
     minConsecutiveForTrigger: FORCE_WORD_BUILDING_MODE ? 0 : 3,
     baseProbability: FORCE_WORD_BUILDING_MODE ? 1.0 : 0.15,
-    maxProbability: FORCE_WORD_BUILDING_MODE ? 1.0 : 0.4
+    maxProbability: FORCE_WORD_BUILDING_MODE ? 1.0 : 0.4,
   });
 
   // Override with forced mode for testing
@@ -135,7 +135,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     incrementWrongAnswers,
     addCharacterToHistory,
     incrementCharacterScore,
-    addCorrectAnswerTime
+    addCorrectAnswerTime,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -149,8 +149,8 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       incrementWrongAnswers: state.incrementWrongAnswers,
       addCharacterToHistory: state.addCharacterToHistory,
       incrementCharacterScore: state.incrementCharacterScore,
-      addCorrectAnswerTime: state.addCorrectAnswerTime
-    }))
+      addCorrectAnswerTime: state.addCorrectAnswerTime,
+    })),
   );
 
   const speedStopwatch = useStopwatch({ autoStart: false });
@@ -163,50 +163,50 @@ const PickGame = ({ isHidden }: PickGameProps) => {
 
   const selectedKana = useMemo(
     () => kanaGroupIndices.map(i => kana[i].kana).flat(),
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
   const selectedRomaji = useMemo(
     () => kanaGroupIndices.map(i => kana[i].romanji).flat(),
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
 
   // For normal pick mode
   const selectedPairs = useMemo(
     () =>
       Object.fromEntries(
-        selectedKana.map((key, i) => [key, selectedRomaji[i]])
+        selectedKana.map((key, i) => [key, selectedRomaji[i]]),
       ),
-    [selectedKana, selectedRomaji]
+    [selectedKana, selectedRomaji],
   );
 
   // For reverse pick mode
   const selectedPairs1 = useMemo(
     () =>
       Object.fromEntries(
-        selectedRomaji.map((key, i) => [key, selectedKana[i]])
+        selectedRomaji.map((key, i) => [key, selectedKana[i]]),
       ),
-    [selectedRomaji, selectedKana]
+    [selectedRomaji, selectedKana],
   );
   const selectedPairs2 = useMemo(
     () =>
       Object.fromEntries(
-        selectedRomaji.map((key, i) => [key, selectedKana[i]]).reverse()
+        selectedRomaji.map((key, i) => [key, selectedKana[i]]).reverse(),
       ),
-    [selectedRomaji, selectedKana]
+    [selectedRomaji, selectedKana],
   );
   const reversedPairs1 = useMemo(
     () =>
       Object.fromEntries(
-        Object.entries(selectedPairs1).map(([key, value]) => [value, key])
+        Object.entries(selectedPairs1).map(([key, value]) => [value, key]),
       ),
-    [selectedPairs1]
+    [selectedPairs1],
   );
   const reversedPairs2 = useMemo(
     () =>
       Object.fromEntries(
-        Object.entries(selectedPairs2).map(([key, value]) => [value, key])
+        Object.entries(selectedPairs2).map(([key, value]) => [value, key]),
       ),
-    [selectedPairs2]
+    [selectedPairs2],
   );
 
   // State for normal pick mode - uses weighted selection for adaptive learning
@@ -225,7 +225,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       const selected = adaptiveSelector.selectWeightedCharacter(selectedRomaji);
       adaptiveSelector.markCharacterSeen(selected);
       return selected;
-    }
+    },
   );
   const correctKanaCharReverse = random.bool()
     ? selectedPairs1[correctRomajiCharReverse]
@@ -256,24 +256,24 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       correctRomajiCharReverse,
       selectedPairs,
       selectedPairs1,
-      selectedPairs2
-    ]
+      selectedPairs2,
+    ],
   );
 
   const [shuffledVariants, setShuffledVariants] = useState(() => {
     const incorrectOptions = getIncorrectOptions(optionCount);
     return isReverse
       ? [correctKanaCharReverse, ...incorrectOptions].sort(
-          () => random.real(0, 1) - 0.5
+          () => random.real(0, 1) - 0.5,
         )
       : [correctRomajiChar, ...incorrectOptions].sort(
-          () => random.real(0, 1) - 0.5
+          () => random.real(0, 1) - 0.5,
         );
   });
 
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
   const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
-    []
+    [],
   );
 
   // Update shuffled variants when correct character or option count changes
@@ -282,11 +282,11 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     setShuffledVariants(
       isReverse
         ? [correctKanaCharReverse, ...incorrectOptions].sort(
-            () => random.real(0, 1) - 0.5
+            () => random.real(0, 1) - 0.5,
           )
         : [correctRomajiChar, ...incorrectOptions].sort(
-            () => random.real(0, 1) - 0.5
-          )
+            () => random.real(0, 1) - 0.5,
+          ),
     );
     if (isReverse) {
       speedStopwatch.start();
@@ -299,7 +299,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     correctRomajiChar,
     correctKanaCharReverse,
     optionCount,
-    getIncorrectOptions
+    getIncorrectOptions,
     // speedStopwatch intentionally excluded - only calling methods, not reading values
   ]);
 
@@ -329,7 +329,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
   const { topRow, bottomRow } = useMemo(() => {
     return {
       topRow: shuffledVariants.slice(0, 3),
-      bottomRow: shuffledVariants.slice(3)
+      bottomRow: shuffledVariants.slice(3),
     };
   }, [shuffledVariants]);
 
@@ -378,9 +378,9 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       incrementHiraganaCorrect,
       incrementKatakanaCorrect,
       recordAnswerTime,
-      resetWrongStreak
+      resetWrongStreak,
       // speedStopwatch, adaptiveSelector intentionally excluded
-    ]
+    ],
   );
 
   const handleWrongAnswer = useCallback(
@@ -420,8 +420,8 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       triggerCrazyMode,
       recordWrongAnswer,
       recordDifficultyWrong,
-      incrementWrongStreak
-    ]
+      incrementWrongStreak,
+    ],
   );
 
   const handleOptionClick = useCallback(
@@ -433,7 +433,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
           // Use weighted selection - prioritizes characters user struggles with
           const newKana = adaptiveSelector.selectWeightedCharacter(
             selectedKana,
-            correctKanaChar
+            correctKanaChar,
           );
           adaptiveSelector.markCharacterSeen(newKana);
           setCorrectKanaChar(newKana);
@@ -441,7 +441,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
             <>
               <span>{`${correctKanaChar} = ${correctRomajiChar} `}</span>
               <CircleCheck className='inline text-[var(--main-color)]' />
-            </>
+            </>,
           );
         } else {
           handleWrongAnswer(selectedChar);
@@ -449,7 +449,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
             <>
               <span>{`${correctKanaChar} ≠ ${selectedChar} `}</span>
               <CircleX className='inline text-[var(--main-color)]' />
-            </>
+            </>,
           );
         }
       } else {
@@ -462,7 +462,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
           // Use weighted selection - prioritizes characters user struggles with
           const newRomaji = adaptiveSelector.selectWeightedCharacter(
             selectedRomaji,
-            correctRomajiCharReverse
+            correctRomajiCharReverse,
           );
           adaptiveSelector.markCharacterSeen(newRomaji);
           setCorrectRomajiCharReverse(newRomaji);
@@ -470,7 +470,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
             <>
               <span>{`${correctRomajiCharReverse} = ${correctKanaCharReverse} `}</span>
               <CircleCheck className='inline text-[var(--main-color)]' />
-            </>
+            </>,
           );
         } else {
           handleWrongAnswer(selectedChar);
@@ -478,7 +478,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
             <>
               <span>{`${correctRomajiCharReverse} ≠ ${selectedChar} `}</span>
               <CircleX className='inline text-[var(--main-color)]' />
-            </>
+            </>,
           );
         }
       }
@@ -494,8 +494,8 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       reversedPairs2,
       correctRomajiCharReverse,
       selectedRomaji,
-      correctKanaCharReverse
-    ]
+      correctKanaCharReverse,
+    ],
   );
 
   const displayChar = isReverse ? correctRomajiCharReverse : correctKanaChar;
@@ -548,7 +548,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-4 sm:w-4/5 sm:gap-10',
-        isHidden ? 'hidden' : ''
+        isHidden ? 'hidden' : '',
       )}
     >
       {/* <GameIntel gameMode={gameMode} /> */}

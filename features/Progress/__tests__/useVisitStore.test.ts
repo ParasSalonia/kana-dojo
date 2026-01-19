@@ -10,15 +10,15 @@ vi.mock('localforage', () => ({
     setItem: vi.fn((key: string, value: unknown) => {
       mockStorage[key] = value;
       return Promise.resolve(value);
-    })
-  }
+    }),
+  },
 }));
 
 // Helper to generate valid date strings (filter out invalid dates)
 const dateStringArb = fc
   .date({
     min: new Date('2020-01-01'),
-    max: new Date('2030-12-31')
+    max: new Date('2030-12-31'),
   })
   .filter(d => !isNaN(d.getTime()))
   .map(d => formatDate(d))
@@ -59,9 +59,9 @@ describe('useVisitStore', () => {
             const occurrences = visits.filter(v => v === date).length;
 
             expect(occurrences).toBe(1);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -89,9 +89,9 @@ describe('useVisitStore', () => {
             for (const date of uniqueDates) {
               expect(visits).toContain(date);
             }
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -138,9 +138,9 @@ describe('useVisitStore', () => {
             for (const date of savedVisits) {
               expect(loadedVisits).toContain(date);
             }
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -167,7 +167,7 @@ describe('useVisitStore', () => {
         'invalid',
         '2024-02-20',
         '24-01-15',
-        '2024-03-25'
+        '2024-03-25',
       ];
 
       useVisitStore.setState({ visits: [], isLoaded: false });

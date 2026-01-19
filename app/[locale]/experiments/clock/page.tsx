@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Clock - Japanese Time Display | KanaDojo',
-  description: 'A beautiful analog clock with Japanese kana for numbers!'
+  description: 'A beautiful analog clock with Japanese kana for numbers!',
 };
 
 export default function ClockPage() {

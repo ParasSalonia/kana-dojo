@@ -33,13 +33,14 @@ Che tu stia muovendo i primi passi con i sillabari di base o ti stia preparando 
 
 #### 🎯 **Tre Dojo di Allenamento**
 
--   **Kana Dojo** - Padroneggia i sillabari Hiragana e Katakana con gruppi base, dakuon, yoon e suoni stranieri
--   **Kanji Dojo** - Studio dei kanji essenziali organizzati per livello JLPT (N5, N4, N3, N2)
--   **Vocabulary Dojo** - Costruzione del vocabolario giapponese tramite collezioni curate per livello di competenza
+- **Kana Dojo** - Padroneggia i sillabari Hiragana e Katakana con gruppi base, dakuon, yoon e suoni stranieri
+- **Kanji Dojo** - Studio dei kanji essenziali organizzati per livello JLPT (N5, N4, N3, N2)
+- **Vocabulary Dojo** - Costruzione del vocabolario giapponese tramite collezioni curate per livello di competenza
 
 #### 🎮 **Quattro Modalità di Gioco Dinamiche**
 
 Ogni dojo supporta quattro modalità di allenamento:
+
 1. **Pick** - Scelta multipla: seleziona la romanizzazione/traduzione corretta del carattere mostrato
 2. **Reverse-Pick** - Scelta multipla inversa: seleziona il carattere corretto dato il testo
 3. **Input** - Inserimento testuale: digita la romanizzazione/traduzione corretta
@@ -67,7 +68,6 @@ Ogni dojo supporta quattro modalità di allenamento:
 - Animazioni fluide e transizioni con Framer Motion
 
 <a id="screenshots"></a>
-
 
 ## 🖼️ Schermate
 
@@ -101,10 +101,10 @@ KanaDojo adotta un'**estetica minimalista** combinata la massima **flessibilità
 
 ### Minimalismo come Priorità
 
--   Interfacce pulite, prive di elementi superflui
--   Centralità assoluta dei contenuti didattici
--   Navigazione intuitiva e gerarchia visiva chiara
--   Uso consapevole dello spazio bianco
+- Interfacce pulite, prive di elementi superflui
+- Centralità assoluta dei contenuti didattici
+- Navigazione intuitiva e gerarchia visiva chiara
+- Uso consapevole dello spazio bianco
 
 ### Personalizzazione Estetica
 
@@ -127,7 +127,6 @@ KanaDojo adotta un'**estetica minimalista** combinata la massima **flessibilità
 - Chiara distinzione tra caratteri simili
 - Anteprime dei font con testo giapponese reale
 
-
 <a id="tech-stack"></a>
 
 ## 🛠️ Stack Tecnologico
@@ -148,11 +147,10 @@ KanaDojo è sviluppato utilizzando tecnologie web moderne, con particolare atten
 - **[Lucide React](https://lucide.dev/)** - Set di icone coerente e moderno
 - **[FontAwesome](https://fontawesome.com/)** - Supporto per icone aggiuntive
 
-
 ### Gestione dello Stato
 
--  **[Zustand](https://zustand-demo.pmnd.rs/)** - State management leggero e con poco boilerplate
--  **Zustand Persist** - Persistenza delle preferenze utente in localStorage
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - State management leggero e con poco boilerplate
+- **Zustand Persist** - Persistenza delle preferenze utente in localStorage
 
 ### Utility & Funzionalità
 
@@ -207,7 +205,7 @@ Per maggiori dettagli: [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
     cd kanadojo
     ```
 
-2. **Installa le dipendenze** 
+2.  **Installa le dipendenze**
 
     ```bash
     npm install
@@ -219,7 +217,7 @@ Per maggiori dettagli: [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
     npm run dev
     ```
 
-4. **Apri il browser**
+4.  **Apri il browser**
     Vai su [http://localhost:3000](http://localhost:3000)
 
 ### Build di Produzione
@@ -538,7 +536,7 @@ core/i18n/locales/
 
 **Prossimi Passi**:
 
-1. Aggiungere le ~464 stringhe UI  ai file di namespace
+1. Aggiungere le ~464 stringhe UI ai file di namespace
 2. Migrare 88 componenti per usare l'hook di traduzione
 3. Espandersi a 8+ lingue aggiuntive
 4. Impostare la validazione CI/CD su GitHub Actions
@@ -548,12 +546,14 @@ core/i18n/locales/
 Vuoi aiutare KanaDojo ad essere più visibile globalmente?
 
 **Infrastruttura**: ✅ Completa
+
 - Sistema di metadati centralizzato con file specifici per locazione
 - Generazione automatica di immagini OG per ogni lingua
-- Sitemap automatizzata con tag *hreflang*
+- Sitemap automatizzata con tag _hreflang_
 - Non sono necessari cambiamenti al codice - basta tradurre i metadati!
 
 **Linguaggi Correnti**:
+
 - ✅ Inglese (en) - Primario
 - ✅ Spagnolo (es) - Completamente tradotto
 - ✅ Giapponese (ja) - Completamente tradotto
@@ -569,11 +569,13 @@ Vuoi aiutare KanaDojo ad essere più visibile globalmente?
 5. Testa localmente e manda la PR
 
 **Impatto SEO per Lingua**:
+
 - 90+ pagine indicizzate
-- 50+  sottoinsiemi di pagine kana con SEO completa
+- 50+ sottoinsiemi di pagine kana con SEO completa
 - Stimate +200-400 visite al mese per lingua
 
 **Priorità Raccomandata per Lingua**:
+
 1. Portoghese (pt) - Brasile (~200M parlanti)
 2. Francese (fr) - Francia, Canada, Africa (~280M parlanti)
 3. Tedesco (de) - Germania, Austria, Svizzera (~100M parlanti)

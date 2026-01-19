@@ -22,7 +22,7 @@ export interface AchievementCardProps {
 export const AchievementCard = ({
   achievement,
   isUnlocked,
-  progress
+  progress,
 }: AchievementCardProps) => {
   const config = rarityConfig[achievement.rarity];
   const RarityIcon = config.icon;
@@ -34,7 +34,7 @@ export const AchievementCard = ({
         'overflow-hidden rounded-2xl border border-[var(--border-color)]',
         isUnlocked
           ? 'bg-[var(--card-color)]'
-          : 'bg-[var(--background-color)] opacity-80'
+          : 'bg-[var(--background-color)] opacity-80',
       )}
     >
       {/* Gradient overlay for unlocked achievements */}
@@ -42,7 +42,7 @@ export const AchievementCard = ({
         <div
           className='absolute inset-0 opacity-5'
           style={{
-            background: `linear-gradient(135deg, ${config.color}20, transparent)`
+            background: `linear-gradient(135deg, ${config.color}20, transparent)`,
           }}
         />
       )}
@@ -52,19 +52,19 @@ export const AchievementCard = ({
         <div
           className={clsx(
             'flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium',
-            'border backdrop-blur-sm'
+            'border backdrop-blur-sm',
           )}
           style={
             isUnlocked
               ? {
                   backgroundColor: `${config.color}15`,
                   borderColor: `${config.color}30`,
-                  color: config.color
+                  color: config.color,
                 }
               : {
                   backgroundColor: '#F3F4F620',
                   borderColor: '#D1D5DB50',
-                  color: '#9CA3AF'
+                  color: '#9CA3AF',
                 }
           }
         >
@@ -79,19 +79,19 @@ export const AchievementCard = ({
           <div
             className={clsx(
               'flex h-16 w-16 items-center justify-center rounded-2xl text-2xl font-bold',
-              'border-2'
+              'border-2',
             )}
             style={
               isUnlocked
                 ? {
                     backgroundColor: config.bgColor,
                     borderColor: config.borderColor,
-                    color: config.color
+                    color: config.color,
                   }
                 : {
                     backgroundColor: '#F3F4F6',
                     borderColor: '#D1D5DB',
-                    color: '#9CA3AF'
+                    color: '#9CA3AF',
                   }
             }
           >
@@ -104,7 +104,7 @@ export const AchievementCard = ({
                 'mb-1 text-lg font-bold',
                 isUnlocked
                   ? 'text-[var(--main-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  : 'text-[var(--secondary-color)]',
               )}
             >
               {achievement.title}
@@ -115,7 +115,7 @@ export const AchievementCard = ({
                 'text-sm leading-relaxed',
                 isUnlocked
                   ? 'text-[var(--secondary-color)]'
-                  : 'text-[var(--secondary-color)]/70'
+                  : 'text-[var(--secondary-color)]/70',
               )}
             >
               {achievement.description}
@@ -142,7 +142,7 @@ export const AchievementCard = ({
                 className='h-3 rounded-full'
                 style={{
                   background:
-                    'linear-gradient(to right, var(--secondary-color), var(--main-color))'
+                    'linear-gradient(to right, var(--secondary-color), var(--main-color))',
                 }}
               />
             </div>
@@ -163,7 +163,7 @@ export const AchievementCard = ({
                 'text-sm font-bold',
                 isUnlocked
                   ? 'text-[var(--main-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  : 'text-[var(--secondary-color)]',
               )}
             >
               {achievement.points} points

@@ -34,7 +34,7 @@ export default function KanaNebula() {
         y: Math.random() * 100,
         z: Math.random() * 1000 + 500, // Travel distance
         scale: Math.random() * 0.5 + 0.1,
-        opacity: Math.random() * 0.5 + 0.2
+        opacity: Math.random() * 0.5 + 0.2,
       };
       setStars(prev => [...prev, newStar].slice(-50)); // Keep legacy clean
     };
@@ -62,7 +62,7 @@ export default function KanaNebula() {
               height: Math.random() * 2,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              opacity: Math.random()
+              opacity: Math.random(),
             }}
           />
         ))}
@@ -89,13 +89,13 @@ export default function KanaNebula() {
                 y: `${star.y}vh`,
                 z: -star.z,
                 scale: 0,
-                opacity: 0
+                opacity: 0,
               }}
               animate={{
                 z: 1000,
                 scale: star.scale * 4,
                 opacity: [0, star.opacity, 0],
-                transition: { duration: 6, ease: 'easeIn' }
+                transition: { duration: 6, ease: 'easeIn' },
               }}
               exit={{ opacity: 0 }}
               onPointerDown={() => playClick()}
@@ -103,7 +103,7 @@ export default function KanaNebula() {
               style={{
                 top: 0,
                 left: 0,
-                transformStyle: 'preserve-3d'
+                transformStyle: 'preserve-3d',
               }}
             >
               <div className='flex flex-col items-center'>
@@ -124,7 +124,7 @@ export default function KanaNebula() {
         className='pointer-events-none fixed z-50 flex items-center justify-center'
         animate={{
           x: 'var(--mouse-x)',
-          y: 'var(--mouse-y)'
+          y: 'var(--mouse-y)',
         }}
       >
         <div className='relative flex h-12 w-12 items-center justify-center'>
@@ -141,7 +141,7 @@ export default function KanaNebula() {
           document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
           document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
         });
-      `
+      `,
         }}
       />
 

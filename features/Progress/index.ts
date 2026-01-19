@@ -9,7 +9,7 @@ export {
   useSessionStats,
   useTimedStats,
   statsTracking,
-  progressBackup
+  progressBackup,
 } from './facade';
 export type {
   GameStats,
@@ -19,7 +19,7 @@ export type {
   TimedStats,
   RecordGauntletRunParams,
   RecordBlitzSessionParams,
-  StatsStoreState
+  StatsStoreState,
 } from './facade';
 
 // Components (page-level)
@@ -40,7 +40,7 @@ export {
   getTimedModeDisplayValues,
   getGauntletDisplayValues,
   getMasteryDistributionDisplayValues,
-  getAchievementDisplayValues
+  getAchievementDisplayValues,
 } from './components/stats';
 export type {
   StatsPageProps,
@@ -49,7 +49,7 @@ export type {
   TimedModeStatsPanelProps,
   GauntletStatsPanelProps,
   MasteryDistributionChartProps,
-  AchievementSummaryBarProps
+  AchievementSummaryBarProps,
 } from './components/stats';
 
 // Hooks
@@ -58,7 +58,7 @@ export {
   calculateMasteryDistribution,
   filterCharacterMasteryByType,
   getTopDifficultCharacters,
-  getTopMasteredCharacters
+  getTopMasteredCharacters,
 } from './hooks/useStatsAggregator';
 export type { StatsAggregatorState } from './hooks/useStatsAggregator';
 
@@ -73,7 +73,7 @@ export type {
   MasteryDistribution,
   AchievementSummary,
   AggregatedStats,
-  RawCharacterMastery
+  RawCharacterMastery,
 } from './types/stats';
 
 // Utility functions

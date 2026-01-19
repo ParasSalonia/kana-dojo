@@ -47,7 +47,7 @@ export function TableOfContents({ headings, className }: TableOfContentsProps) {
               'text-sm',
               heading.level === 2 && 'ml-0',
               heading.level === 3 && 'ml-4',
-              heading.level === 4 && 'ml-8'
+              heading.level === 4 && 'ml-8',
             )}
             data-testid={`toc-item-${heading.id}`}
           >

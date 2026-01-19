@@ -22,7 +22,7 @@ const FuriganaText = ({
   className = '',
   furiganaClassName = '',
   lang = 'ja',
-  children
+  children,
 }: FuriganaTextProps) => {
   const { furiganaEnabled } = useThemePreferences();
 

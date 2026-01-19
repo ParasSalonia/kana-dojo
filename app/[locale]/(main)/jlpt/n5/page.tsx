@@ -13,7 +13,7 @@ export async function generateMetadata() {
     description:
       'Complete JLPT N5 study guide with all essential Kanji, vocabulary, and study tips. Free interactive practice for JLPT N5 exam success. Start preparing today!',
     keywords:
-      'jlpt n5, jlpt n5 study guide, jlpt n5 kanji, jlpt n5 vocabulary, jlpt n5 preparation, japanese proficiency test n5, jlpt beginner level, n5 exam prep'
+      'jlpt n5, jlpt n5 study guide, jlpt n5 kanji, jlpt n5 vocabulary, jlpt n5 preparation, japanese proficiency test n5, jlpt beginner level, n5 exam prep',
   };
 }
 
@@ -80,7 +80,8 @@ export default async function JLPTN5Page() {
               <li className='flex items-start gap-2'>
                 <span className='text-xl'>🔢</span>
                 <div>
-                  <strong>Numbers & Time (23 kanji):</strong> 一二三四五六七八九十、日月火水木金土、年時分
+                  <strong>Numbers & Time (23 kanji):</strong>{' '}
+                  一二三四五六七八九十、日月火水木金土、年時分
                 </div>
               </li>
               <li className='flex items-start gap-2'>
@@ -92,7 +93,8 @@ export default async function JLPTN5Page() {
               <li className='flex items-start gap-2'>
                 <span className='text-xl'>📍</span>
                 <div>
-                  <strong>Directions (12 kanji):</strong> 上下中外左右前後東西南北
+                  <strong>Directions (12 kanji):</strong>{' '}
+                  上下中外左右前後東西南北
                 </div>
               </li>
               <li className='flex items-start gap-2'>
@@ -104,7 +106,8 @@ export default async function JLPTN5Page() {
               <li className='flex items-start gap-2'>
                 <span className='text-xl'>🏫</span>
                 <div>
-                  <strong>School & Daily Life (27+ kanji):</strong> 学校本語文字、大小高安新古長白赤青円車駅店買物天気山
+                  <strong>School & Daily Life (27+ kanji):</strong>{' '}
+                  学校本語文字、大小高安新古長白赤青円車駅店買物天気山
                 </div>
               </li>
             </ul>
@@ -142,7 +145,7 @@ export default async function JLPTN5Page() {
             <div className='mb-4 grid gap-3 md:grid-cols-2'>
               <div>
                 <strong>Essential Topics:</strong>
-                <ul className='ml-4 mt-1 list-disc'>
+                <ul className='mt-1 ml-4 list-disc'>
                   <li>Greetings & introductions</li>
                   <li>Numbers & counting</li>
                   <li>Time & dates</li>
@@ -152,7 +155,7 @@ export default async function JLPTN5Page() {
               </div>
               <div>
                 <strong>Common Areas:</strong>
-                <ul className='ml-4 mt-1 list-disc'>
+                <ul className='mt-1 ml-4 list-disc'>
                   <li>School & work</li>
                   <li>Directions & places</li>
                   <li>Weather & seasons</li>
@@ -279,10 +282,7 @@ export default async function JLPTN5Page() {
           </div>
 
           <div className='mt-6'>
-            <Link
-              href='/faq'
-              className='text-sm underline hover:opacity-80'
-            >
+            <Link href='/faq' className='text-sm underline hover:opacity-80'>
               Have questions? Check our FAQ →
             </Link>
           </div>

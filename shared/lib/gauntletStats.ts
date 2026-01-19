@@ -2,7 +2,7 @@ import localforage from 'localforage';
 import type {
   GauntletSessionStats,
   GauntletDifficulty,
-  GauntletGameMode
+  GauntletGameMode,
 } from '@/shared/components/Gauntlet/types';
 
 const STORAGE_KEY = 'kanadojo-gauntlet-stats';
@@ -23,8 +23,8 @@ const getDefaultData = (): StoredGauntletData => ({
   bestTimes: {
     kana: {},
     kanji: {},
-    vocabulary: {}
-  }
+    vocabulary: {},
+  },
 });
 
 /**
@@ -34,7 +34,7 @@ const getBestTimeKey = (
   difficulty: GauntletDifficulty,
   repetitions: number,
   gameMode: GauntletGameMode,
-  totalCharacters: number
+  totalCharacters: number,
 ): string => {
   return `${difficulty}-${repetitions}-${gameMode}-${totalCharacters}`;
 };
@@ -78,13 +78,13 @@ const generateSessionId = (): string => {
  * Returns true if this was a new best time
  */
 export const saveSession = async (
-  stats: Omit<GauntletSessionStats, 'id'>
+  stats: Omit<GauntletSessionStats, 'id'>,
 ): Promise<{ saved: boolean; isNewBest: boolean }> => {
   const data = await loadData();
 
   const session: GauntletSessionStats = {
     ...stats,
-    id: generateSessionId()
+    id: generateSessionId(),
   };
 
   // Add to sessions (keep last 100)
@@ -100,7 +100,7 @@ export const saveSession = async (
       stats.difficulty,
       stats.repetitionsPerChar,
       stats.gameMode,
-      stats.totalCharacters
+      stats.totalCharacters,
     );
     const currentBest = data.bestTimes[stats.dojoType][key];
 
@@ -120,7 +120,7 @@ export const saveSession = async (
  */
 export const getSessionHistory = async (
   dojoType: 'kana' | 'kanji' | 'vocabulary',
-  limit: number = 20
+  limit: number = 20,
 ): Promise<GauntletSessionStats[]> => {
   const data = await loadData();
   return data.sessions.filter(s => s.dojoType === dojoType).slice(0, limit);
@@ -134,14 +134,14 @@ export const getBestTime = async (
   difficulty: GauntletDifficulty,
   repetitions: number,
   gameMode: GauntletGameMode,
-  totalCharacters: number
+  totalCharacters: number,
 ): Promise<number | null> => {
   const data = await loadData();
   const key = getBestTimeKey(
     difficulty,
     repetitions,
     gameMode,
-    totalCharacters
+    totalCharacters,
   );
   return data.bestTimes[dojoType][key] ?? null;
 };
@@ -152,12 +152,12 @@ export const getBestTime = async (
 export const getLeaderboard = async (
   dojoType: 'kana' | 'kanji' | 'vocabulary',
   difficulty?: GauntletDifficulty,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<GauntletSessionStats[]> => {
   const data = await loadData();
 
   let sessions = data.sessions.filter(
-    s => s.dojoType === dojoType && s.completed
+    s => s.dojoType === dojoType && s.completed,
   );
 
   if (difficulty) {
@@ -174,7 +174,7 @@ export const getLeaderboard = async (
  * Get overall statistics for a dojo
  */
 export const getOverallStats = async (
-  dojoType: 'kana' | 'kanji' | 'vocabulary'
+  dojoType: 'kana' | 'kanji' | 'vocabulary',
 ): Promise<{
   totalSessions: number;
   completedSessions: number;
@@ -193,7 +193,7 @@ export const getOverallStats = async (
       totalCorrect: 0,
       totalWrong: 0,
       bestStreak: 0,
-      fastestTime: null
+      fastestTime: null,
     };
   }
 
@@ -209,7 +209,7 @@ export const getOverallStats = async (
     totalCorrect: sessions.reduce((sum, s) => sum + s.correctAnswers, 0),
     totalWrong: sessions.reduce((sum, s) => sum + s.wrongAnswers, 0),
     bestStreak: Math.max(...sessions.map(s => s.bestStreak)),
-    fastestTime
+    fastestTime,
   };
 };
 

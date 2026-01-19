@@ -11,14 +11,14 @@ import {
   CalendarDays,
   CalendarRange,
   Calendars,
-  LucideIcon
+  LucideIcon,
 } from 'lucide-react';
 
 const periodOptions: { value: TimePeriod; label: string; icon: LucideIcon }[] =
   [
     { value: 'week', label: 'Week', icon: CalendarDays },
     { value: 'month', label: 'Month', icon: Calendars },
-    { value: 'year', label: 'Year', icon: CalendarRange }
+    { value: 'year', label: 'Year', icon: CalendarRange },
   ];
 
 export default function StreakProgress() {

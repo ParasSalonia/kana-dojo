@@ -8,7 +8,7 @@ import {
   Languages,
   ChevronDown,
   ChevronRight,
-  type LucideIcon
+  type LucideIcon,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
@@ -55,20 +55,20 @@ const mainNavItems: NavItem[] = [
     href: '/preferences',
     label: 'Preferences',
     icon: Sparkles,
-    animateWhenInactive: true
-  }
+    animateWhenInactive: true,
+  },
 ];
 
 // Static sections that don't need lazy loading
 const staticSecondaryNavSections: NavSection[] = [
   {
     title: 'Academy',
-    items: [{ href: '/academy', label: 'Guides', icon: BookOpen }]
+    items: [{ href: '/academy', label: 'Guides', icon: BookOpen }],
   },
   {
     title: 'Tools',
-    items: [{ href: '/translate', label: 'Translate', icon: Languages }]
-  }
+    items: [{ href: '/translate', label: 'Translate', icon: Languages }],
+  },
 ];
 
 // Base experiments section (without dynamic experiments)
@@ -76,7 +76,7 @@ const baseExperimentsSection: NavSection = {
   title: 'Experiments',
   // items: [{ href: '/experiments', label: 'All Experiments', icon: Sparkles }],
   items: [],
-  collapsible: true
+  collapsible: true,
 };
 
 // ============================================================================
@@ -105,7 +105,7 @@ const NavLink = memo(
     isActive,
     onClick,
     variant,
-    useSlidingIndicator = false
+    useSlidingIndicator = false,
   }: NavLinkProps) => {
     const Icon = item.icon;
     const isMain = variant === 'main';
@@ -113,7 +113,7 @@ const NavLink = memo(
     const baseClasses = clsx(
       'flex items-center gap-2 rounded-2xl transition-all duration-250',
       'text-2xl max-lg:justify-center max-lg:px-3 max-lg:py-2 lg:w-full lg:px-4 lg:py-2',
-      !isMain && 'max-lg:hidden'
+      !isMain && 'max-lg:hidden',
     );
 
     // Style classes for original (simple) design
@@ -135,7 +135,7 @@ const NavLink = memo(
               item.animateWhenInactive &&
                 !isActive &&
                 'motion-safe:animate-bounce',
-              item.iconClassName
+              item.iconClassName,
             )}
           />
         );
@@ -171,7 +171,7 @@ const NavLink = memo(
               transition={{
                 type: 'spring',
                 stiffness: 300,
-                damping: 30
+                damping: 30,
               }}
             />
           )}
@@ -185,7 +185,7 @@ const NavLink = memo(
               !isMain && 'max-lg:hidden',
               isActive
                 ? activeTextClass
-                : 'text-[var(--secondary-color)] hover:bg-[var(--card-color)]'
+                : 'text-[var(--secondary-color)] hover:bg-[var(--card-color)]',
             )}
           >
             {renderIcon()}
@@ -211,7 +211,7 @@ const NavLink = memo(
             className={clsx(
               'flex items-center gap-2',
               'text-2xl max-lg:justify-center max-lg:px-3 max-lg:py-2 lg:w-full lg:px-4 lg:py-2',
-              !isMain && 'max-lg:hidden'
+              !isMain && 'max-lg:hidden',
             )}
           >
             {renderIcon()}
@@ -229,7 +229,7 @@ const NavLink = memo(
         href={item.href}
         className={clsx(
           baseClasses,
-          isActive ? activeClassesSimple : inactiveClasses
+          isActive ? activeClassesSimple : inactiveClasses,
         )}
         onClick={onClick}
       >
@@ -239,7 +239,7 @@ const NavLink = memo(
         </span>
       </Link>
     );
-  }
+  },
 );
 
 NavLink.displayName = 'NavLink';
@@ -255,7 +255,7 @@ const SectionHeader = ({
   title,
   collapsible = false,
   isExpanded = false,
-  onToggle
+  onToggle,
 }: SectionHeaderProps) => {
   if (collapsible) {
     return (
@@ -324,11 +324,11 @@ const Sidebar = () => {
           ? loadedExperiments.map(exp => ({
               href: exp.href,
               label: exp.name,
-              icon: exp.icon || null
+              icon: exp.icon || null,
             }))
-          : [])
-      ]
-    }
+          : []),
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -374,14 +374,14 @@ const Sidebar = () => {
         'z-50',
         'border-[var(--border-color)] max-lg:items-center max-lg:justify-evenly max-lg:border-t-2 max-lg:py-2',
         'lg:h-auto lg:border-r-1 lg:px-3',
-        'lg:pb-12'
+        'lg:pb-12',
       )}
     >
       {/* Logo */}
       <h1
         className={clsx(
           'flex items-center gap-1.5 pl-4 text-3xl',
-          'max-3xl:flex-col max-3xl:items-start max-lg:hidden'
+          'max-3xl:flex-col max-3xl:items-start max-lg:hidden',
         )}
       >
         <span className='font-bold'>KanaDojo</span>

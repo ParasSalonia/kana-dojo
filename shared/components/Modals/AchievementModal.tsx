@@ -27,7 +27,7 @@ const rarityConfig: Record<
     borderColor: '#D1D5DB',
     icon: Star,
     label: 'Common',
-    confettiColors: ['#9CA3AF', '#D1D5DB']
+    confettiColors: ['#9CA3AF', '#D1D5DB'],
   },
   uncommon: {
     color: '#059669',
@@ -35,7 +35,7 @@ const rarityConfig: Record<
     borderColor: '#A7F3D0',
     icon: Zap,
     label: 'Uncommon',
-    confettiColors: ['#10B981', '#34D399']
+    confettiColors: ['#10B981', '#34D399'],
   },
   rare: {
     color: '#2563EB',
@@ -43,7 +43,7 @@ const rarityConfig: Record<
     borderColor: '#93C5FD',
     icon: Trophy,
     label: 'Rare',
-    confettiColors: ['#3B82F6', '#60A5FA']
+    confettiColors: ['#3B82F6', '#60A5FA'],
   },
   epic: {
     color: '#7C3AED',
@@ -51,7 +51,7 @@ const rarityConfig: Record<
     borderColor: '#C4B5FD',
     icon: Crown,
     label: 'Epic',
-    confettiColors: ['#8B5CF6', '#A78BFA']
+    confettiColors: ['#8B5CF6', '#A78BFA'],
   },
   legendary: {
     color: '#DC2626',
@@ -59,8 +59,8 @@ const rarityConfig: Record<
     borderColor: '#FECACA',
     icon: Gem,
     label: 'Legendary',
-    confettiColors: ['#EF4444', '#F87171', '#FCD34D', '#FBBF24']
-  }
+    confettiColors: ['#EF4444', '#F87171', '#FCD34D', '#FBBF24'],
+  },
 };
 
 interface AchievementModalProps {
@@ -72,7 +72,7 @@ interface AchievementModalProps {
 const AchievementModal = ({
   achievement,
   isVisible,
-  onClose
+  onClose,
 }: AchievementModalProps) => {
   const { playClick } = useClick();
   const [showConfetti, setShowConfetti] = useState(false);
@@ -105,7 +105,7 @@ const AchievementModal = ({
             shapes: ['circle', 'square'],
             scalar: achievement.rarity === 'legendary' ? 1.2 : 1,
             gravity: 0.8,
-            ticks: 300
+            ticks: 300,
           });
         }, i * 200);
       }
@@ -117,14 +117,14 @@ const AchievementModal = ({
             particleCount: 50,
             angle: 60,
             spread: 55,
-            origin: { x: 0 }
+            origin: { x: 0 },
             // colors: colors
           });
           confetti({
             particleCount: 50,
             angle: 120,
             spread: 55,
-            origin: { x: 1 }
+            origin: { x: 1 },
             // colors: colors
           });
         }, 1000);
@@ -174,7 +174,7 @@ const AchievementModal = ({
               'relative w-full max-w-md',
               'rounded-2xl bg-[var(--card-color)]',
               'shadow-2xl shadow-black/25',
-              cardBorderStyles
+              cardBorderStyles,
             )}
             onClick={e => e.stopPropagation()}
           >
@@ -183,7 +183,7 @@ const AchievementModal = ({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{
                 opacity: showConfetti ? 0.3 : 0,
-                scale: showConfetti ? 1.2 : 0.8
+                scale: showConfetti ? 1.2 : 0.8,
               }}
               className='absolute inset-0 rounded-2xl blur-xl'
               style={{ backgroundColor: config.color }}
@@ -196,7 +196,7 @@ const AchievementModal = ({
                 className={clsx(
                   'rounded-lg p-2 transition-colors duration-200',
                   'hover:bg-[var(--background-color)]',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                 )}
               >
                 <X size={20} />
@@ -239,7 +239,7 @@ const AchievementModal = ({
                   delay: 0.4,
                   type: 'spring',
                   damping: 15,
-                  stiffness: 300
+                  stiffness: 300,
                 }}
                 className='relative'
               >
@@ -247,12 +247,12 @@ const AchievementModal = ({
                   className={clsx(
                     'mx-auto flex h-24 w-24 items-center justify-center rounded-full',
                     'text-4xl font-bold shadow-lg',
-                    'border-4'
+                    'border-4',
                   )}
                   style={{
                     backgroundColor: config.bgColor,
                     borderColor: config.borderColor,
-                    color: config.color
+                    color: config.color,
                   }}
                 >
                   {achievement.icon}
@@ -265,7 +265,7 @@ const AchievementModal = ({
                     transition={{
                       duration: 3,
                       repeat: Infinity,
-                      ease: 'linear'
+                      ease: 'linear',
                     }}
                     className='absolute inset-0 rounded-full border-2 border-dashed'
                     style={{ borderColor: config.color }}
@@ -295,12 +295,12 @@ const AchievementModal = ({
                 transition={{ delay: 0.8, type: 'spring', damping: 20 }}
                 className={clsx(
                   'inline-flex items-center gap-2 rounded-full px-4 py-2',
-                  'text-sm font-semibold'
+                  'text-sm font-semibold',
                 )}
                 style={{
                   backgroundColor: config.bgColor,
                   color: config.color,
-                  border: `2px solid ${config.borderColor}`
+                  border: `2px solid ${config.borderColor}`,
                 }}
               >
                 <Trophy size={16} />+{achievement.points} Points
@@ -351,7 +351,7 @@ const AchievementModal = ({
                     'text-[var(--main-color)]',
                     buttonBorderStyles,
                     'transition-all duration-200 hover:bg-[var(--background-color)]',
-                    'active:scale-95'
+                    'active:scale-95',
                   )}
                 >
                   Continue Learning

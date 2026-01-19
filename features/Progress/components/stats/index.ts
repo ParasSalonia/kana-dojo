@@ -9,36 +9,36 @@ export type { OverviewStatsCardProps } from './OverviewStatsCard';
 
 export {
   default as CharacterMasteryPanel,
-  getTopCharacters
+  getTopCharacters,
 } from './CharacterMasteryPanel';
 export type { CharacterMasteryPanelProps } from './CharacterMasteryPanel';
 
 export {
   default as TimedModeStatsPanel,
-  getTimedModeDisplayValues
+  getTimedModeDisplayValues,
 } from './TimedModeStatsPanel';
 export type { TimedModeStatsPanelProps } from './TimedModeStatsPanel';
 
 export {
   default as GauntletStatsPanel,
-  getGauntletDisplayValues
+  getGauntletDisplayValues,
 } from './GauntletStatsPanel';
 export type { GauntletStatsPanelProps } from './GauntletStatsPanel';
 
 export {
   default as MasteryDistributionChart,
-  getMasteryDistributionDisplayValues
+  getMasteryDistributionDisplayValues,
 } from './MasteryDistributionChart';
 export type { MasteryDistributionChartProps } from './MasteryDistributionChart';
 
 export {
   default as AchievementSummaryBar,
-  getAchievementDisplayValues
+  getAchievementDisplayValues,
 } from './AchievementSummaryBar';
 export type { AchievementSummaryBarProps } from './AchievementSummaryBar';
 
 export {
   default as StatsPage,
-  getStatsOverviewDisplayValues
+  getStatsOverviewDisplayValues,
 } from './StatsPage';
 export type { StatsPageProps } from './StatsPage';

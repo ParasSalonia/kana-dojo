@@ -22,7 +22,7 @@ const KanaSnake = () => {
     x: 10,
     y: 7,
     kana: 'あ',
-    romanji: 'a'
+    romanji: 'a',
   });
   const [collected, setCollected] = useState<string[]>([]);
   const [gameOver, setGameOver] = useState(false);
@@ -35,7 +35,7 @@ const KanaSnake = () => {
     do {
       pos = {
         x: Math.floor(Math.random() * GRID_SIZE),
-        y: Math.floor(Math.random() * GRID_SIZE)
+        y: Math.floor(Math.random() * GRID_SIZE),
       };
     } while (snake.some(s => s.x === pos.x && s.y === pos.y));
     return { ...pos, kana: kana.kana, romanji: kana.romanji };
@@ -130,7 +130,7 @@ const KanaSnake = () => {
       <div
         className='grid gap-px rounded-lg bg-[var(--border-color)] p-1'
         style={{
-          gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`
+          gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
         }}
       >
         {Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, i) => {
@@ -151,7 +151,7 @@ const KanaSnake = () => {
                     ? 'bg-green-400/70'
                     : isFood
                       ? 'bg-[var(--accent-color)]/30'
-                      : 'bg-[var(--card-color)]'
+                      : 'bg-[var(--card-color)]',
               )}
             >
               {isFood && <span lang='ja'>{food.kana}</span>}

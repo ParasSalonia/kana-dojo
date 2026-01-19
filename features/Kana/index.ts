@@ -7,7 +7,7 @@ export { useKanaSelection, useKanaContent } from './facade';
 export type {
   KanaSelection,
   KanaSelectionActions,
-  KanaContent
+  KanaContent,
 } from './facade';
 
 // Components (page-level)

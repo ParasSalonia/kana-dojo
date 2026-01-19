@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Flash Rush - Speed Identification | KanaDojo',
   description:
-    'Test your Japanese character recognition speed in this fast-paced game.'
+    'Test your Japanese character recognition speed in this fast-paced game.',
 };
 
 export default function RushPage() {

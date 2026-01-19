@@ -27,7 +27,7 @@ export const formatLevelsAsRanges = (sets: string[]): string => {
     } else {
       // gap, save current range and start new one
       ranges.push(
-        rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`
+        rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`,
       );
       rangeStart = numbers[i];
       rangeEnd = numbers[i];
@@ -35,7 +35,7 @@ export const formatLevelsAsRanges = (sets: string[]): string => {
   }
 
   ranges.push(
-    rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`
+    rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`,
   );
 
   return ranges.join(', ');
@@ -54,7 +54,7 @@ export const getKanaGroupNames = (kanaGroupIndices: number[]) => {
   }> = [
     { label: 'All Hiragana', start: 0, end: 26 },
     { label: 'All Katakana', start: 26, end: 60 },
-    { label: 'All Challenge', start: 60, end: 69 }
+    { label: 'All Challenge', start: 60, end: 69 },
   ];
 
   const subgroupDefs: Array<{
@@ -73,20 +73,20 @@ export const getKanaGroupNames = (kanaGroupIndices: number[]) => {
       label: 'Katakana Foreign Sounds',
       start: 52,
       end: 60,
-      isChallenge: false
+      isChallenge: false,
     },
     {
       label: 'Challenge Similar Hiragana',
       start: 60,
       end: 65,
-      isChallenge: true
+      isChallenge: true,
     },
     {
       label: 'Challenge Confusing Katakana',
       start: 65,
       end: 69,
-      isChallenge: true
-    }
+      isChallenge: true,
+    },
   ];
 
   const nonChallengeIndices = kana
@@ -161,14 +161,14 @@ export const getKanaGroupNames = (kanaGroupIndices: number[]) => {
     const firstKana = group.kana[0];
     const isChallenge = group.groupName.startsWith('challenge.');
     full.push(
-      isChallenge ? `${firstKana}-group (challenge)` : `${firstKana}-group`
+      isChallenge ? `${firstKana}-group (challenge)` : `${firstKana}-group`,
     );
     compact.push(firstKana);
   });
 
   return {
     full: full.length > 0 ? full.join(', ') : 'None',
-    compact: compact.length > 0 ? compact.join(', ') : 'None'
+    compact: compact.length > 0 ? compact.join(', ') : 'None',
   };
 };
 
@@ -179,7 +179,7 @@ export const getKanjiVocabLabels = (sets: string[]) => {
   if (sets.length === 0) {
     return {
       full: 'None',
-      compact: 'None'
+      compact: 'None',
     };
   }
 
@@ -197,7 +197,7 @@ export const getKanjiVocabLabels = (sets: string[]) => {
 
   return {
     full,
-    compact: ranges
+    compact: ranges,
   };
 };
 
@@ -206,7 +206,7 @@ export const getKanjiVocabLabels = (sets: string[]) => {
  */
 export const getSelectionLabels = (
   type: 'kana' | 'kanji' | 'vocabulary',
-  selection: any
+  selection: any,
 ) => {
   if (type === 'kana') {
     return getKanaGroupNames(selection as number[]);

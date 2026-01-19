@@ -17,14 +17,14 @@ const kanjiChars = '日本語学習漢字読書文字言葉';
 const hiraganaArb = fc
   .array(fc.constantFrom(...hiraganaChars.split('')), {
     minLength: 1,
-    maxLength: 10
+    maxLength: 10,
   })
   .map(chars => chars.join(''));
 
 const kanjiArb = fc
   .array(fc.constantFrom(...kanjiChars.split('')), {
     minLength: 1,
-    maxLength: 5
+    maxLength: 5,
   })
   .map(chars => chars.join(''));
 
@@ -44,14 +44,14 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
     fc.assert(
       fc.property(kanjiArb, hiraganaArb, (kanji, reading) => {
         const { container, unmount } = render(
-          <FuriganaText kanji={kanji} reading={reading} />
+          <FuriganaText kanji={kanji} reading={reading} />,
         );
         const rubyElement = container.querySelector('ruby');
         expect(rubyElement).not.toBeNull();
         expect(rubyElement?.textContent).toContain(kanji);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -59,14 +59,14 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
     fc.assert(
       fc.property(kanjiArb, hiraganaArb, (kanji, reading) => {
         const { container, unmount } = render(
-          <FuriganaText kanji={kanji} reading={reading} />
+          <FuriganaText kanji={kanji} reading={reading} />,
         );
         const rtElement = container.querySelector('rt');
         expect(rtElement).not.toBeNull();
         expect(rtElement?.textContent).toBe(reading);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -74,13 +74,13 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
     fc.assert(
       fc.property(kanjiArb, hiraganaArb, (kanji, reading) => {
         const { container, unmount } = render(
-          <FuriganaText kanji={kanji} reading={reading} />
+          <FuriganaText kanji={kanji} reading={reading} />,
         );
         const rubyElement = container.querySelector('ruby');
         expect(rubyElement?.getAttribute('lang')).toBe('ja');
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -88,7 +88,7 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
     fc.assert(
       fc.property(nonEmptyStringArb, nonEmptyStringArb, (kanji, reading) => {
         const { getByTestId, unmount } = render(
-          <FuriganaText kanji={kanji} reading={reading} />
+          <FuriganaText kanji={kanji} reading={reading} />,
         );
 
         const furiganaText = getByTestId('furigana-text');
@@ -103,7 +103,7 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -111,7 +111,7 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
     fc.assert(
       fc.property(kanjiArb, hiraganaArb, (kanji, reading) => {
         const { container, unmount } = render(
-          <FuriganaText kanji={kanji} reading={reading} />
+          <FuriganaText kanji={kanji} reading={reading} />,
         );
 
         const rubyElement = container.querySelector('ruby');
@@ -119,7 +119,7 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
 
         // Ruby should have the kanji as direct text content (in span)
         const kanjiSpan = rubyElement?.querySelector(
-          '[data-testid="furigana-kanji"]'
+          '[data-testid="furigana-kanji"]',
         );
         expect(kanjiSpan?.textContent).toBe(kanji);
 
@@ -129,7 +129,7 @@ describe('Property 15: FuriganaText Renders Ruby Structure', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

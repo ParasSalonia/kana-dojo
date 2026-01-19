@@ -10,7 +10,8 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Pulse - Fast Reflex Game | KanaDojo',
-  description: 'Test your reflexes - tap the pulsing kana before time runs out!'
+  description:
+    'Test your reflexes - tap the pulsing kana before time runs out!',
 };
 
 export default function PulsePage() {

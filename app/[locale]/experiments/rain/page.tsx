@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Rain - Matrix Style Japanese Characters | KanaDojo',
-  description: 'Watch Japanese characters fall in a digital rain effect.'
+  description: 'Watch Japanese characters fall in a digital rain effect.',
 };
 
 export default function RainPage() {

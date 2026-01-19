@@ -4,7 +4,7 @@ import { getTopCharacters } from '../components/stats/CharacterMasteryPanel';
 import type {
   CharacterMasteryItem,
   ContentType,
-  MasteryLevel
+  MasteryLevel,
 } from '../types/stats';
 
 /**
@@ -15,7 +15,7 @@ function createCharacterItem(
   correct: number,
   incorrect: number,
   masteryLevel: MasteryLevel,
-  contentType: ContentType = 'kana'
+  contentType: ContentType = 'kana',
 ): CharacterMasteryItem {
   const total = correct + incorrect;
   const accuracy = total > 0 ? (correct / total) * 100 : 0;
@@ -26,7 +26,7 @@ function createCharacterItem(
     total,
     accuracy,
     masteryLevel,
-    contentType
+    contentType,
   };
 }
 
@@ -37,7 +37,7 @@ const characterMasteryItemArb = fc
   .record({
     character: fc.string({ minLength: 1, maxLength: 3 }),
     correct: fc.integer({ min: 0, max: 100 }),
-    incorrect: fc.integer({ min: 0, max: 100 })
+    incorrect: fc.integer({ min: 0, max: 100 }),
   })
   .map(({ character, correct, incorrect }) => {
     const total = correct + incorrect;
@@ -62,7 +62,7 @@ const characterMasteryItemArb = fc
       total,
       accuracy,
       masteryLevel,
-      contentType
+      contentType,
     } as CharacterMasteryItem;
   });
 
@@ -95,7 +95,7 @@ describe('Top Characters Identification', () => {
             // Top difficult should be sorted by lowest accuracy
             for (let i = 1; i < topDifficult.length; i++) {
               expect(topDifficult[i - 1].accuracy).toBeLessThanOrEqual(
-                topDifficult[i].accuracy
+                topDifficult[i].accuracy,
               );
             }
 
@@ -109,11 +109,11 @@ describe('Top Characters Identification', () => {
 
             // Should return at most the number of eligible characters
             expect(topDifficult.length).toBeLessThanOrEqual(
-              eligibleForDifficult.length
+              eligibleForDifficult.length,
             );
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -126,7 +126,7 @@ describe('Top Characters Identification', () => {
 
             // Filter characters that are mastered
             const eligibleForMastered = characters.filter(
-              c => c.masteryLevel === 'mastered'
+              c => c.masteryLevel === 'mastered',
             );
 
             if (eligibleForMastered.length === 0) {
@@ -138,7 +138,7 @@ describe('Top Characters Identification', () => {
             // Top mastered should be sorted by highest accuracy (descending)
             for (let i = 1; i < topMastered.length; i++) {
               expect(topMastered[i - 1].accuracy).toBeGreaterThanOrEqual(
-                topMastered[i].accuracy
+                topMastered[i].accuracy,
               );
             }
 
@@ -152,11 +152,11 @@ describe('Top Characters Identification', () => {
 
             // Should return at most the number of eligible characters
             expect(topMastered.length).toBeLessThanOrEqual(
-              eligibleForMastered.length
+              eligibleForMastered.length,
             );
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -169,8 +169,8 @@ describe('Top Characters Identification', () => {
             `char${i}`,
             i + 1, // varying correct counts
             10, // 10 incorrect for all
-            'learning'
-          )
+            'learning',
+          ),
         );
       }
 
@@ -184,7 +184,7 @@ describe('Top Characters Identification', () => {
         createCharacterItem('a', 2, 8, 'needs-practice'), // 10 attempts, 20% accuracy
         createCharacterItem('b', 3, 7, 'needs-practice'), // 10 attempts, 30% accuracy
         createCharacterItem('c', 4, 6, 'needs-practice'), // 10 attempts, 40% accuracy
-        createCharacterItem('d', 1, 1, 'learning') // Only 2 attempts - not eligible
+        createCharacterItem('d', 1, 1, 'learning'), // Only 2 attempts - not eligible
       ];
 
       const topDifficult = getTopCharacters(characters, 5, 'difficult');
@@ -204,7 +204,7 @@ describe('Top Characters Identification', () => {
     it('returns empty array when no characters meet difficult criteria', () => {
       const characters: CharacterMasteryItem[] = [
         createCharacterItem('a', 2, 2, 'learning'), // Only 4 attempts
-        createCharacterItem('b', 1, 1, 'learning') // Only 2 attempts
+        createCharacterItem('b', 1, 1, 'learning'), // Only 2 attempts
       ];
 
       expect(getTopCharacters(characters, 5, 'difficult')).toHaveLength(0);
@@ -213,7 +213,7 @@ describe('Top Characters Identification', () => {
     it('returns empty array when no characters are mastered', () => {
       const characters: CharacterMasteryItem[] = [
         createCharacterItem('a', 5, 5, 'learning'),
-        createCharacterItem('b', 3, 7, 'needs-practice')
+        createCharacterItem('b', 3, 7, 'needs-practice'),
       ];
 
       expect(getTopCharacters(characters, 5, 'mastered')).toHaveLength(0);
@@ -223,7 +223,7 @@ describe('Top Characters Identification', () => {
       const characters: CharacterMasteryItem[] = [
         createCharacterItem('a', 5, 5, 'learning'), // 50% accuracy
         createCharacterItem('b', 5, 5, 'learning'), // 50% accuracy
-        createCharacterItem('c', 5, 5, 'learning') // 50% accuracy
+        createCharacterItem('c', 5, 5, 'learning'), // 50% accuracy
       ];
 
       const topDifficult = getTopCharacters(characters, 5, 'difficult');

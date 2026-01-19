@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Kana Nebula - Deep Space Exploration | KanaDojo',
   description:
-    'An immersive space flight experience through Japanese character star clusters.'
+    'An immersive space flight experience through Japanese character star clusters.',
 };
 
 export default function NebulaPage() {

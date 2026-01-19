@@ -73,7 +73,7 @@ import {
   useCorrect,
   useError,
   useLong,
-  preloadGameSounds
+  preloadGameSounds,
 } from '@/shared/hooks/useAudio';
 
 function GameComponent() {
@@ -178,7 +178,7 @@ The audio service worker (`/public/sw.js`) provides:
 ```typescript
 import {
   cacheAudioFile,
-  clearAudioCache
+  clearAudioCache,
 } from '@/shared/components/ServiceWorkerRegistration';
 
 // Cache a specific audio file

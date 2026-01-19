@@ -14,7 +14,7 @@ export async function generateMetadata() {
     description:
       'Complete Hiragana and Katakana chart with all characters, romanization, and pronunciation guide. Free interactive Japanese kana reference table for learners.',
     keywords:
-      'hiragana chart, katakana chart, kana chart, japanese alphabet chart, hiragana table, katakana table, japanese characters, kana reference, hiragana katakana chart, learn kana'
+      'hiragana chart, katakana chart, kana chart, japanese alphabet chart, hiragana table, katakana table, japanese characters, kana reference, hiragana katakana chart, learn kana',
   };
 }
 

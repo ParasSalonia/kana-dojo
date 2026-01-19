@@ -4,7 +4,7 @@ import { Flame, Trophy, Calendar, type LucideIcon } from 'lucide-react';
 import {
   calculateCurrentStreak,
   calculateLongestStreak,
-  calculateTotalVisits
+  calculateTotalVisits,
 } from '../lib/streakCalculations';
 
 interface StatCardProps {
@@ -16,12 +16,12 @@ interface StatCardProps {
 
 function StatCard({ title, icon: Icon, value, description }: StatCardProps) {
   return (
-    <div className='rounded-2xl bg-[var(--card-color)] border border-[var(--border-color)] p-4'>
+    <div className='rounded-2xl border border-[var(--border-color)] bg-[var(--card-color)] p-4'>
       <div className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <h3 className='text-sm  text-[var(--secondary-color)]'>{title}</h3>
+        <h3 className='text-sm text-[var(--secondary-color)]'>{title}</h3>
         <Icon className='h-4 w-4 text-[var(--main-color)]' />
       </div>
-      <div className='pt-2 flex flex-col gap-1'>
+      <div className='flex flex-col gap-1 pt-2'>
         <div className='text-2xl text-[var(--main-color)]'>
           {value} {value === 1 ? 'day' : 'days'}
         </div>
@@ -46,7 +46,7 @@ export default function StreakStats({ visits }: StreakStatsProps) {
       icon: Flame,
       value: currentStreak,
       description:
-        currentStreak > 0 ? 'Keep it going!' : 'Start your streak today!'
+        currentStreak > 0 ? 'Keep it going!' : 'Start your streak today!',
     },
     {
       title: 'Longest Streak',
@@ -55,18 +55,18 @@ export default function StreakStats({ visits }: StreakStatsProps) {
       description:
         currentStreak >= longestStreak && currentStreak > 0
           ? "You're at your best!"
-          : 'Your personal record'
+          : 'Your personal record',
     },
     {
       title: 'Total Visits',
       icon: Calendar,
       value: totalVisits,
-      description: "Days you've practiced"
-    }
+      description: "Days you've practiced",
+    },
   ];
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+    <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
       {stats.map(stat => (
         <StatCard key={stat.title} {...stat} />
       ))}

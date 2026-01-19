@@ -7,7 +7,7 @@ import {
   RotateCcw,
   ArrowLeft,
   CheckCircle2,
-  XCircle
+  XCircle,
 } from 'lucide-react';
 import { Link } from '@/core/i18n/routing';
 import clsx from 'clsx';
@@ -33,7 +33,7 @@ export default function ResultsScreen({
   stats,
   showGoalTimers,
   goals,
-  onRestart
+  onRestart,
 }: ResultsScreenProps) {
   const { playClick } = useClick();
 
@@ -50,8 +50,8 @@ export default function ResultsScreen({
 
   return (
     <div className='fixed inset-0 z-50 bg-[var(--background-color)]'>
-      <div className='min-h-[100dvh] flex flex-col items-center justify-center p-4'>
-        <div className='max-w-2xl w-full max-h-[90vh] overflow-y-auto space-y-6'>
+      <div className='flex min-h-[100dvh] flex-col items-center justify-center p-4'>
+        <div className='max-h-[90vh] w-full max-w-2xl space-y-6 overflow-y-auto'>
           {/* Header */}
           <ResultsHeader challengeDuration={challengeDuration} />
 
@@ -65,13 +65,13 @@ export default function ResultsScreen({
 
           {/* Secondary Stats */}
           <div className='grid grid-cols-2 gap-4'>
-            <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2 border border-[var(--border-color)]'>
+            <div className='space-y-2 rounded-lg border border-[var(--border-color)] bg-[var(--card-color)] p-4'>
               <p className='text-sm text-[var(--muted-color)]'>Best Streak</p>
               <p className='text-2xl font-bold text-[var(--secondary-color)]'>
                 🔥 {stats.bestStreak}
               </p>
             </div>
-            <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2 border border-[var(--border-color)]'>
+            <div className='space-y-2 rounded-lg border border-[var(--border-color)] bg-[var(--card-color)] p-4'>
               <p className='text-sm text-[var(--muted-color)]'>Total Answers</p>
               <p className='text-2xl font-bold text-[var(--secondary-color)]'>
                 {totalAnswers}
@@ -88,15 +88,15 @@ export default function ResultsScreen({
           )}
 
           {/* Action Buttons */}
-          <div className='flex flex-row items-center justify-center gap-2 md:gap-4 w-full'>
+          <div className='flex w-full flex-row items-center justify-center gap-2 md:gap-4'>
             <Link href={`/${dojoType}`} className='w-1/2'>
               <button
                 className={clsx(
-                  'w-full h-12 px-2 sm:px-6 flex flex-row justify-center items-center gap-2',
+                  'flex h-12 w-full flex-row items-center justify-center gap-2 px-2 sm:px-6',
                   'bg-[var(--secondary-color)] text-[var(--background-color)]',
                   'rounded-2xl transition-colors duration-200',
                   'border-b-6 border-[var(--secondary-color-accent)] shadow-sm',
-                  'hover:cursor-pointer'
+                  'hover:cursor-pointer',
                 )}
                 onClick={() => playClick()}
               >
@@ -107,11 +107,11 @@ export default function ResultsScreen({
             <button
               onClick={onRestart}
               className={clsx(
-                'w-1/2 h-12 px-2 sm:px-6 flex flex-row justify-center items-center gap-2',
+                'flex h-12 w-1/2 flex-row items-center justify-center gap-2 px-2 sm:px-6',
                 'bg-[var(--main-color)] text-[var(--background-color)]',
                 'rounded-2xl transition-colors duration-200',
-                'font-medium border-b-6 border-[var(--main-color-accent)] shadow-sm',
-                'hover:cursor-pointer'
+                'border-b-6 border-[var(--main-color-accent)] font-medium shadow-sm',
+                'hover:cursor-pointer',
               )}
             >
               <RotateCcw size={20} />
@@ -128,8 +128,8 @@ export default function ResultsScreen({
 
 function ResultsHeader({ challengeDuration }: { challengeDuration: number }) {
   return (
-    <div className='text-center space-y-2'>
-      <div className='inline-flex items-center justify-center w-20 h-20 rounded-full bg-[var(--main-color)]/10 mb-4'>
+    <div className='space-y-2 text-center'>
+      <div className='mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--main-color)]/10'>
         <Timer size={48} className='text-[var(--main-color)]' />
       </div>
       <h1 className='text-3xl font-bold text-[var(--secondary-color)]'>
@@ -151,7 +151,7 @@ function MainStatsGrid({
   correct,
   wrong,
   accuracy,
-  questionsPerMinute
+  questionsPerMinute,
 }: {
   correct: number;
   wrong: number;
@@ -159,25 +159,25 @@ function MainStatsGrid({
   questionsPerMinute: string;
 }) {
   return (
-    <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-      <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+    <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+      <div className='space-y-2 rounded-xl border-2 border-[var(--border-color)] bg-[var(--card-color)] p-4 text-center'>
         <Target className='mx-auto text-green-500' size={28} />
         <p className='text-3xl font-bold text-green-500'>{correct}</p>
         <p className='text-sm text-[var(--muted-color)]'>Correct</p>
       </div>
-      <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+      <div className='space-y-2 rounded-xl border-2 border-[var(--border-color)] bg-[var(--card-color)] p-4 text-center'>
         <XCircle className='mx-auto text-red-500' size={28} />
         <p className='text-3xl font-bold text-red-500'>{wrong}</p>
         <p className='text-sm text-[var(--muted-color)]'>Wrong</p>
       </div>
-      <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+      <div className='space-y-2 rounded-xl border-2 border-[var(--border-color)] bg-[var(--card-color)] p-4 text-center'>
         <TrendingUp className='mx-auto text-[var(--main-color)]' size={28} />
         <p className='text-3xl font-bold text-[var(--main-color)]'>
           {accuracy}%
         </p>
         <p className='text-sm text-[var(--muted-color)]'>Accuracy</p>
       </div>
-      <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+      <div className='space-y-2 rounded-xl border-2 border-[var(--border-color)] bg-[var(--card-color)] p-4 text-center'>
         <Timer className='mx-auto text-blue-500' size={28} />
         <p className='text-3xl font-bold text-blue-500'>{questionsPerMinute}</p>
         <p className='text-sm text-[var(--muted-color)]'>Q/Min</p>
@@ -188,14 +188,14 @@ function MainStatsGrid({
 
 function GoalTimersResults({
   reachedGoals,
-  missedGoals
+  missedGoals,
 }: {
   reachedGoals: GoalTimer[];
   missedGoals: GoalTimer[];
 }) {
   return (
-    <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-3 text-left border border-[var(--border-color)]'>
-      <div className='flex items-center gap-2 justify-center'>
+    <div className='space-y-3 rounded-lg border border-[var(--border-color)] bg-[var(--card-color)] p-4 text-left'>
+      <div className='flex items-center justify-center gap-2'>
         <Target className='text-[var(--main-color)]' size={20} />
         <h3 className='text-lg font-semibold text-[var(--secondary-color)]'>
           Goal Timers Results
@@ -203,7 +203,7 @@ function GoalTimersResults({
       </div>
       {reachedGoals.length > 0 && (
         <div className='space-y-2'>
-          <p className='text-sm font-medium text-green-500 flex items-center gap-2'>
+          <p className='flex items-center gap-2 text-sm font-medium text-green-500'>
             <CheckCircle2 size={16} />
             Reached ({reachedGoals.length})
           </p>
@@ -211,12 +211,12 @@ function GoalTimersResults({
             {reachedGoals.map(goal => (
               <div
                 key={goal.id}
-                className='flex items-center justify-between text-sm p-2 rounded bg-green-500/10 border border-green-500/20'
+                className='flex items-center justify-between rounded border border-green-500/20 bg-green-500/10 p-2 text-sm'
               >
                 <span className='text-[var(--secondary-color)]'>
                   {goal.label}
                 </span>
-                <span className='text-green-500 font-mono'>
+                <span className='font-mono text-green-500'>
                   {Math.floor(goal.targetSeconds / 60)}:
                   {(goal.targetSeconds % 60).toString().padStart(2, '0')}
                 </span>
@@ -227,7 +227,7 @@ function GoalTimersResults({
       )}
       {missedGoals.length > 0 && (
         <div className='space-y-2'>
-          <p className='text-sm font-medium text-[var(--muted-color)] flex items-center gap-2'>
+          <p className='flex items-center gap-2 text-sm font-medium text-[var(--muted-color)]'>
             <XCircle size={16} />
             Not Reached ({missedGoals.length})
           </p>
@@ -235,10 +235,10 @@ function GoalTimersResults({
             {missedGoals.map(goal => (
               <div
                 key={goal.id}
-                className='flex items-center justify-between text-sm p-2 rounded bg-[var(--border-color)] opacity-60'
+                className='flex items-center justify-between rounded bg-[var(--border-color)] p-2 text-sm opacity-60'
               >
                 <span className='text-[var(--muted-color)]'>{goal.label}</span>
-                <span className='text-[var(--muted-color)] font-mono'>
+                <span className='font-mono text-[var(--muted-color)]'>
                   {Math.floor(goal.targetSeconds / 60)}:
                   {(goal.targetSeconds % 60).toString().padStart(2, '0')}
                 </span>

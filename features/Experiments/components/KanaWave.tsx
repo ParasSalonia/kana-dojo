@@ -37,7 +37,7 @@ export default function KanaWave() {
       kana: kanaObj.kana,
       romaji: kanaObj.romanji,
       x: 110, // Start off-screen right
-      lane: Math.floor(Math.random() * 3)
+      lane: Math.floor(Math.random() * 3),
     };
     setWaveKanas(prev => [...prev, newWave]);
   }, []);
@@ -56,7 +56,7 @@ export default function KanaWave() {
 
         // Check for misses (characters that passed the target line at x=15)
         const missed = filtered.find(
-          k => k.x < 15 && k.x > 14 && k.lane === activeLane
+          k => k.x < 15 && k.x > 14 && k.lane === activeLane,
         );
         // Logic for hitting is in handleHit
 
@@ -65,7 +65,7 @@ export default function KanaWave() {
 
       requestRef.current = requestAnimationFrame(update);
     },
-    [spawnKana, activeLane]
+    [spawnKana, activeLane],
   );
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function KanaWave() {
     const targetRange = [10, 25]; // Range where it counts as a hit
     const hit = waveKanas.find(
       k =>
-        k.lane === activeLane && k.x >= targetRange[0] && k.x <= targetRange[1]
+        k.lane === activeLane && k.x >= targetRange[0] && k.x <= targetRange[1],
     );
 
     if (hit) {
@@ -163,7 +163,7 @@ export default function KanaWave() {
                 key={l}
                 className={clsx(
                   'relative flex flex-1 items-center border-b border-[var(--border-color)]/30 transition-colors duration-300',
-                  activeLane === l ? 'bg-[var(--main-color)]/[0.03]' : ''
+                  activeLane === l ? 'bg-[var(--main-color)]/[0.03]' : '',
                 )}
                 onClick={() => handleLaneChange(l)}
               >
@@ -190,7 +190,7 @@ export default function KanaWave() {
                 style={{
                   left: `${k.x}%`,
                   top: `${k.lane * 33.33 + 16.66}%`,
-                  transform: 'translate(-50%, -50%)'
+                  transform: 'translate(-50%, -50%)',
                 }}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}

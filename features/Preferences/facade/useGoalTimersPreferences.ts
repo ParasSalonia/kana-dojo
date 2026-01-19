@@ -5,7 +5,7 @@ import useGoalTimersStore from '../store/useGoalTimersStore';
 import type {
   GoalTimersStore,
   GoalTemplate,
-  GoalTimersSettings
+  GoalTimersSettings,
 } from '../store/useGoalTimersStore';
 
 export interface GoalTimersPreferences {
@@ -30,8 +30,8 @@ export function useGoalTimersPreferences(): GoalTimersPreferences &
       templates,
       settings,
       addTemplate,
-      addToHistory
+      addToHistory,
     }),
-    [templates, settings, addTemplate, addToHistory]
+    [templates, settings, addTemplate, addToHistory],
   );
 }

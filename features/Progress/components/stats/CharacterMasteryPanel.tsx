@@ -7,7 +7,7 @@ import { ActionButton } from '@/shared/components/ui/ActionButton';
 import type {
   CharacterMasteryItem,
   ContentFilter,
-  MasteryLevel
+  MasteryLevel,
 } from '../../types/stats';
 import { classifyCharacter } from '../../lib/classifyCharacter';
 import { detectContentType } from '../../lib/detectContentType';
@@ -30,7 +30,7 @@ const CONTENT_FILTERS: { value: ContentFilter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'kana', label: 'Kana' },
   { value: 'kanji', label: 'Kanji' },
-  { value: 'vocabulary', label: 'Vocabulary' }
+  { value: 'vocabulary', label: 'Vocabulary' },
 ];
 
 /**
@@ -44,27 +44,27 @@ const MASTERY_CONFIG: Record<
     label: 'Mastered',
     colorClass: 'text-[var(--main-color)]',
     bgClass: 'bg-[var(--main-color)]',
-    opacity: 1
+    opacity: 1,
   },
   learning: {
     label: 'Learning',
     colorClass: 'text-[var(--secondary-color)]',
     bgClass: 'bg-[var(--secondary-color)]',
-    opacity: 0.8
+    opacity: 0.8,
   },
   'needs-practice': {
     label: 'Needs Practice',
     colorClass: 'text-[var(--secondary-color)]',
     bgClass: 'bg-[var(--secondary-color)]',
-    opacity: 0.5
-  }
+    opacity: 0.5,
+  },
 };
 
 /**
  * Transforms raw character mastery data into CharacterMasteryItem array
  */
 function transformCharacterData(
-  characterMastery: Record<string, { correct: number; incorrect: number }>
+  characterMastery: Record<string, { correct: number; incorrect: number }>,
 ): CharacterMasteryItem[] {
   return Object.entries(characterMastery).map(([character, stats]) => {
     const total = stats.correct + stats.incorrect;
@@ -79,7 +79,7 @@ function transformCharacterData(
       total,
       accuracy,
       masteryLevel,
-      contentType
+      contentType,
     };
   });
 }
@@ -90,7 +90,7 @@ function transformCharacterData(
 export function getTopCharacters(
   characters: CharacterMasteryItem[],
   count: number,
-  sortBy: 'difficult' | 'mastered'
+  sortBy: 'difficult' | 'mastered',
 ): CharacterMasteryItem[] {
   const filtered = characters.filter(char => {
     if (sortBy === 'difficult') {
@@ -117,7 +117,7 @@ export function getTopCharacters(
  */
 export default function CharacterMasteryPanel({
   characterMastery,
-  className
+  className,
 }: CharacterMasteryPanelProps) {
   const [contentFilter, setContentFilter] = useState<ContentFilter>('all');
 
@@ -136,7 +136,7 @@ export default function CharacterMasteryPanel({
       const grouped: Record<MasteryLevel, CharacterMasteryItem[]> = {
         mastered: [],
         learning: [],
-        'needs-practice': []
+        'needs-practice': [],
       };
 
       filtered.forEach(char => {
@@ -147,7 +147,7 @@ export default function CharacterMasteryPanel({
         filteredCharacters: filtered,
         topDifficult: difficult,
         topMastered: mastered,
-        groupedByMastery: grouped
+        groupedByMastery: grouped,
       };
     }, [characterMastery, contentFilter]);
 
@@ -162,7 +162,7 @@ export default function CharacterMasteryPanel({
         'group relative overflow-hidden rounded-3xl',
         'border border-[var(--border-color)]/50 bg-[var(--card-color)]',
         'p-6',
-        className
+        className,
       )}
     >
       {/* Large decorative circle */}
@@ -194,7 +194,7 @@ export default function CharacterMasteryPanel({
                       transition={{
                         type: 'spring',
                         stiffness: 300,
-                        damping: 30
+                        damping: 30,
                       }}
                     />
                   )}
@@ -204,7 +204,7 @@ export default function CharacterMasteryPanel({
                       'relative z-10 cursor-pointer rounded-2xl px-4 pt-2 pb-4 text-sm font-semibold transition-colors duration-300',
                       isSelected
                         ? 'text-[var(--background-color)]'
-                        : 'text-[var(--secondary-color)]/70 hover:text-[var(--main-color)]'
+                        : 'text-[var(--secondary-color)]/70 hover:text-[var(--main-color)]',
                     )}
                   >
                     {filter.label}
@@ -303,7 +303,7 @@ export default function CharacterMasteryPanel({
                 {(
                   Object.entries(groupedByMastery) as [
                     MasteryLevel,
-                    CharacterMasteryItem[]
+                    CharacterMasteryItem[],
                   ][]
                 ).map(([level, chars]) => {
                   const config = MASTERY_CONFIG[level];
@@ -315,7 +315,7 @@ export default function CharacterMasteryPanel({
                       className={cn(
                         'flex items-center gap-2 rounded-full px-4 py-2',
                         'bg-[var(--background-color)]',
-                        'border border-[var(--border-color)]/30'
+                        'border border-[var(--border-color)]/30',
                       )}
                     >
                       <div
@@ -325,7 +325,7 @@ export default function CharacterMasteryPanel({
                             level === 'mastered'
                               ? 'var(--main-color)'
                               : 'var(--secondary-color)',
-                          opacity: config.opacity
+                          opacity: config.opacity,
                         }}
                       />
                       <span className='text-sm font-bold text-[var(--main-color)]'>
@@ -352,7 +352,7 @@ export default function CharacterMasteryPanel({
 function CharacterRow({
   item,
   index,
-  isMastered = false
+  isMastered = false,
 }: {
   item: CharacterMasteryItem;
   index: number;
@@ -368,7 +368,7 @@ function CharacterRow({
         'bg-[var(--background-color)]',
         'border border-transparent',
         'transition-colors duration-300',
-        'hover:border-[var(--main-color)]/20 hover:bg-[var(--border-color)]/20'
+        'hover:border-[var(--main-color)]/20 hover:bg-[var(--border-color)]/20',
       )}
     >
       <span className='text-3xl font-bold text-[var(--main-color)]'>
@@ -380,7 +380,7 @@ function CharacterRow({
             'text-lg font-bold',
             isMastered
               ? 'text-[var(--main-color)]'
-              : 'text-[var(--secondary-color)]'
+              : 'text-[var(--secondary-color)]',
           )}
         >
           {item.accuracy.toFixed(0)}%

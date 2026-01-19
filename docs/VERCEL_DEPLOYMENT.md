@@ -133,23 +133,23 @@ const nextConfig: NextConfig = {
   experimental: {
     turbo: {
       resolveAlias: {
-        '@/*': './*'
-      }
-    }
+        '@/*': './*',
+      },
+    },
   },
 
   // Image optimization
   images: {
     domains: ['kanadojo.com'],
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/avif', 'image/webp'],
   },
 
   // Enable i18n
   i18n: {
     locales: ['en', 'es', 'ja'],
     defaultLocale: 'en',
-    localeDetection: true
-  }
+    localeDetection: true,
+  },
 };
 
 export default nextConfig;

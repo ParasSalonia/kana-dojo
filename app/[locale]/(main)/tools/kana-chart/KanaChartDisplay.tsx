@@ -13,7 +13,7 @@ const hiraganaData = {
     ['や', '', 'ゆ', '', 'よ'],
     ['ら', 'り', 'る', 'れ', 'ろ'],
     ['わ', '', '', '', 'を'],
-    ['n', '', '', '', '']
+    ['n', '', '', '', ''],
   ],
   romanji: [
     ['a', 'i', 'u', 'e', 'o'],
@@ -26,8 +26,8 @@ const hiraganaData = {
     ['ya', '', 'yu', '', 'yo'],
     ['ra', 'ri', 'ru', 're', 'ro'],
     ['wa', '', '', '', 'wo'],
-    ['ん', '', '', '', '']
-  ]
+    ['ん', '', '', '', ''],
+  ],
 };
 
 const katakanaData = {
@@ -42,7 +42,7 @@ const katakanaData = {
     ['ヤ', '', 'ユ', '', 'ヨ'],
     ['ラ', 'リ', 'ル', 'レ', 'ロ'],
     ['ワ', '', '', '', 'ヲ'],
-    ['n', '', '', '', '']
+    ['n', '', '', '', ''],
   ],
   romanji: [
     ['a', 'i', 'u', 'e', 'o'],
@@ -55,17 +55,16 @@ const katakanaData = {
     ['ya', '', 'yu', '', 'yo'],
     ['ra', 'ri', 'ru', 're', 'ro'],
     ['wa', '', '', '', 'wo'],
-    ['ン', '', '', '', '']
-  ]
+    ['ン', '', '', '', ''],
+  ],
 };
 
 export default function KanaChartDisplay() {
   const [activeTab, setActiveTab] = useState<'hiragana' | 'katakana'>(
-    'hiragana'
+    'hiragana',
   );
 
-  const currentData =
-    activeTab === 'hiragana' ? hiraganaData : katakanaData;
+  const currentData = activeTab === 'hiragana' ? hiraganaData : katakanaData;
 
   return (
     <div>
@@ -144,9 +143,15 @@ export default function KanaChartDisplay() {
       {/* Download/Print Info */}
       <div className='mt-8 text-center'>
         <p className='text-[var(--secondary-color)]'>
-          Tip: Press <kbd className='rounded bg-[var(--card-color)] px-2 py-1 text-xs'>Ctrl+P</kbd> or{' '}
-          <kbd className='rounded bg-[var(--card-color)] px-2 py-1 text-xs'>⌘+P</kbd> to print or save
-          this chart as PDF
+          Tip: Press{' '}
+          <kbd className='rounded bg-[var(--card-color)] px-2 py-1 text-xs'>
+            Ctrl+P
+          </kbd>{' '}
+          or{' '}
+          <kbd className='rounded bg-[var(--card-color)] px-2 py-1 text-xs'>
+            ⌘+P
+          </kbd>{' '}
+          to print or save this chart as PDF
         </p>
       </div>
     </div>

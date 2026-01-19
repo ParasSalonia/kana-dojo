@@ -58,7 +58,7 @@ async function setupFFmpeg() {
     // Use PowerShell to extract on Windows
     execSync(
       `powershell -command "Expand-Archive -Path '${zipPath}' -DestinationPath '${FFMPEG_DIR}' -Force"`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit' },
     );
 
     fs.unlinkSync(zipPath);
@@ -118,7 +118,7 @@ function compressFile(wavPath, ffmpegPath) {
 
     execSync(
       `"${ffmpegPath}" -i "${wavPath}" -codec:a libmp3lame -qscale:a 2 "${mp3Path}" -y`,
-      { stdio: 'ignore' }
+      { stdio: 'ignore' },
     );
 
     const newSize = fs.statSync(mp3Path).size;
@@ -127,12 +127,12 @@ function compressFile(wavPath, ffmpegPath) {
     console.log(
       `✅ ${path.basename(wavPath)}: ${(originalSize / 1024).toFixed(1)}KB → ${(
         newSize / 1024
-      ).toFixed(1)}KB (${savings}% smaller)`
+      ).toFixed(1)}KB (${savings}% smaller)`,
     );
   } catch (error) {
     console.error(
       `❌ Failed to convert ${path.basename(wavPath)}:`,
-      error.message
+      error.message,
     );
   }
 }

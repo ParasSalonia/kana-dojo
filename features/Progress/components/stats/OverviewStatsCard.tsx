@@ -44,7 +44,7 @@ export default function OverviewStatsCard({
   icon,
   trend,
   className,
-  index = 0
+  index = 0,
 }: OverviewStatsCardProps) {
   return (
     <motion.div
@@ -53,7 +53,7 @@ export default function OverviewStatsCard({
       transition={{
         duration: 0.5,
         delay: index * 0.08,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        ease: [0.25, 0.46, 0.45, 0.94],
       }}
       className={cn(
         'group relative overflow-hidden rounded-3xl',
@@ -62,7 +62,7 @@ export default function OverviewStatsCard({
         'cursor-pointer p-6',
         'transition-colors duration-300',
         'hover:border-[var(--main-color)]/30',
-        className
+        className,
       )}
     >
       {/* Decorative geometric shape - top right corner */}
@@ -72,7 +72,7 @@ export default function OverviewStatsCard({
       <motion.div
         className={cn(
           'absolute right-0 left-0 h-1.5 bg-gradient-to-r from-[var(--main-color)] via-[var(--secondary-color)] to-[var(--main-color)]',
-          USE_TOP_BORDER ? 'top-0 rounded-t-3xl' : 'bottom-0 rounded-b-3xl'
+          USE_TOP_BORDER ? 'top-0 rounded-t-3xl' : 'bottom-0 rounded-b-3xl',
         )}
         initial={{ opacity: 0, scaleX: 0 }}
         animate={{ opacity: 1, scaleX: 1 }}
@@ -90,7 +90,7 @@ export default function OverviewStatsCard({
               'text-[var(--main-color)]',
               'transition-colors duration-300',
               'group-hover:from-[var(--main-color)]/20 group-hover:to-[var(--secondary-color)]/10',
-              'group-hover:border-[var(--main-color)]/40'
+              'group-hover:border-[var(--main-color)]/40',
             )}
           >
             {icon}
@@ -106,7 +106,7 @@ export default function OverviewStatsCard({
                 trend === 'up' &&
                   'bg-[var(--main-color)]/10 text-[var(--main-color)]',
                 trend === 'down' &&
-                  'bg-[var(--secondary-color)]/10 text-[var(--secondary-color)]'
+                  'bg-[var(--secondary-color)]/10 text-[var(--secondary-color)]',
               )}
             >
               {trend === 'up' ? '↑' : '↓'}

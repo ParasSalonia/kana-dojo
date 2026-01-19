@@ -28,7 +28,7 @@ const NAMESPACES = [
   'settings',
   'errors',
   'menuInfo',
-  'blog'
+  'blog',
 ];
 
 /**

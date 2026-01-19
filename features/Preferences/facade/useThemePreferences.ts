@@ -31,7 +31,9 @@ export function useThemePreferences(): ThemePreferences {
   const displayKana = usePreferencesStore(state => state.displayKana);
   const setDisplayKana = usePreferencesStore(state => state.setDisplayKana);
   const furiganaEnabled = usePreferencesStore(state => state.furiganaEnabled);
-  const setFuriganaEnabled = usePreferencesStore(state => state.setFuriganaEnabled);
+  const setFuriganaEnabled = usePreferencesStore(
+    state => state.setFuriganaEnabled,
+  );
 
   return useMemo<ThemePreferences>(
     () => ({
@@ -44,7 +46,7 @@ export function useThemePreferences(): ThemePreferences {
       displayKana,
       setDisplayKana,
       furiganaEnabled,
-      setFuriganaEnabled
+      setFuriganaEnabled,
     }),
     [
       theme,
@@ -56,7 +58,7 @@ export function useThemePreferences(): ThemePreferences {
       displayKana,
       setDisplayKana,
       furiganaEnabled,
-      setFuriganaEnabled
-    ]
+      setFuriganaEnabled,
+    ],
   );
 }

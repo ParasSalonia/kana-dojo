@@ -79,11 +79,11 @@ const config = {
           '@': path.resolve(__dirname, '../'),
           '@/features': path.resolve(__dirname, '../features'),
           '@/shared': path.resolve(__dirname, '../shared'),
-          '@/core': path.resolve(__dirname, '../core')
-        }
-      }
+          '@/core': path.resolve(__dirname, '../core'),
+        },
+      },
     };
-  }
+  },
 };
 ```
 
@@ -99,11 +99,11 @@ const preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i
-      }
-    }
+        date: /Date$/i,
+      },
+    },
     // Add more global parameters here
-  }
+  },
 };
 
 export default preview;
@@ -126,15 +126,15 @@ const meta = {
   title: 'UI/Button',
   component: Button,
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost']
-    }
-  }
+      options: ['default', 'destructive', 'outline', 'secondary', 'ghost'],
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -143,15 +143,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Button',
-    variant: 'default'
-  }
+    variant: 'default',
+  },
 };
 
 export const Primary: Story = {
   args: {
     children: 'Primary Button',
-    variant: 'default'
-  }
+    variant: 'default',
+  },
 };
 ```
 
@@ -192,16 +192,16 @@ const meta = {
   component: MyComponent,
   args: {
     variant: 'default',
-    size: 'medium'
+    size: 'medium',
   },
   argTypes: {
     variant: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
-      description: 'The size variant of the component'
+      description: 'The size variant of the component',
     },
-    onClick: { action: 'clicked' }
-  }
+    onClick: { action: 'clicked' },
+  },
 };
 ```
 
@@ -283,25 +283,25 @@ Document important component states:
 export const States: Story = {
   args: {
     // Default state
-  }
+  },
 };
 
 export const Loading: Story = {
   args: {
-    loading: true
-  }
+    loading: true,
+  },
 };
 
 export const Disabled: Story = {
   args: {
-    disabled: true
-  }
+    disabled: true,
+  },
 };
 
 export const Error: Story = {
   args: {
-    error: 'Something went wrong'
-  }
+    error: 'Something went wrong',
+  },
 };
 ```
 
@@ -331,14 +331,14 @@ Add stories for edge cases:
 ```typescript
 export const LongText: Story = {
   args: {
-    children: 'Very long text that might cause wrapping issues...'
-  }
+    children: 'Very long text that might cause wrapping issues...',
+  },
 };
 
 export const SpecialCharacters: Story = {
   args: {
-    children: 'Special chars: àéïõü 中文 にほんご 🎉'
-  }
+    children: 'Special chars: àéïõü 中文 にほんご 🎉',
+  },
 };
 ```
 

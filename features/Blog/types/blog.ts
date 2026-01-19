@@ -92,7 +92,7 @@ export const REQUIRED_FRONTMATTER_FIELDS = [
   'publishedAt',
   'author',
   'category',
-  'tags'
+  'tags',
 ] as const;
 
 /**
@@ -109,7 +109,7 @@ export const VALID_CATEGORIES: Category[] = [
   'tutorial',
   'resources',
   'study-tips',
-  'jlpt'
+  'jlpt',
 ];
 
 /**
@@ -118,7 +118,7 @@ export const VALID_CATEGORIES: Category[] = [
 export const VALID_DIFFICULTIES: Difficulty[] = [
   'beginner',
   'intermediate',
-  'advanced'
+  'advanced',
 ];
 
 /**

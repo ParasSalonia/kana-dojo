@@ -41,13 +41,13 @@ interface ProgressiveDifficultyState {
  * // After 9 correct answers: optionCount becomes 6 (max)
  */
 export const useProgressiveDifficulty = (
-  options: ProgressiveDifficultyOptions = {}
+  options: ProgressiveDifficultyOptions = {},
 ) => {
   const {
     minOptions = 3,
     maxOptions = 6,
     streakPerLevel = 3,
-    wrongsToDecrease = 2
+    wrongsToDecrease = 2,
   } = options;
 
   const [state, setState] = useState<ProgressiveDifficultyState>({
@@ -55,7 +55,7 @@ export const useProgressiveDifficulty = (
     difficultyLevel: 0,
     levelStreak: 0,
     wrongStreak: 0,
-    pendingWrongs: 0
+    pendingWrongs: 0,
   });
 
   const recordCorrect = useCallback(() => {
@@ -75,7 +75,7 @@ export const useProgressiveDifficulty = (
           difficultyLevel: newDifficultyLevel,
           levelStreak: 0,
           wrongStreak: 0,
-          pendingWrongs: 0
+          pendingWrongs: 0,
         };
       }
 
@@ -88,7 +88,7 @@ export const useProgressiveDifficulty = (
           difficultyLevel: prev.difficultyLevel + 1,
           levelStreak: 0,
           wrongStreak: 0,
-          pendingWrongs: 0
+          pendingWrongs: 0,
         };
       }
 
@@ -96,7 +96,7 @@ export const useProgressiveDifficulty = (
         ...prev,
         levelStreak: newLevelStreak,
         wrongStreak: 0,
-        pendingWrongs: 0
+        pendingWrongs: 0,
       };
     });
   }, [minOptions, maxOptions, streakPerLevel, wrongsToDecrease]);
@@ -109,7 +109,7 @@ export const useProgressiveDifficulty = (
         ...prev,
         levelStreak: 0,
         wrongStreak: prev.wrongStreak + 1,
-        pendingWrongs: prev.pendingWrongs + 1
+        pendingWrongs: prev.pendingWrongs + 1,
       };
     });
   }, []);
@@ -120,7 +120,7 @@ export const useProgressiveDifficulty = (
       difficultyLevel: 0,
       levelStreak: 0,
       wrongStreak: 0,
-      pendingWrongs: 0
+      pendingWrongs: 0,
     });
   }, [minOptions]);
 
@@ -136,7 +136,7 @@ export const useProgressiveDifficulty = (
     levelProgress,
     recordCorrect,
     recordWrong,
-    reset
+    reset,
   };
 };
 

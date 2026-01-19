@@ -18,7 +18,7 @@ function useFireworkEmojiConfetti({
   scalar = 2,
   duration,
   intervalMs = 250,
-  particleBaseCount = 50
+  particleBaseCount = 50,
 }: UseIndefiniteConfettiOptions) {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -32,7 +32,7 @@ function useFireworkEmojiConfetti({
     }
 
     const shapes = emojis.map(emoji =>
-      confetti.shapeFromText({ text: emoji, scalar })
+      confetti.shapeFromText({ text: emoji, scalar }),
     );
 
     // --- Firework style params
@@ -43,7 +43,7 @@ function useFireworkEmojiConfetti({
       spread: 360,
       ticks: 60,
       zIndex: 0,
-      shapes
+      shapes,
     };
 
     function randomInRange(min: number, max: number) {
@@ -62,19 +62,19 @@ function useFireworkEmojiConfetti({
       }
 
       const particleCount = Math.round(
-        particleBaseCount * (timeLeft / fireworkDuration)
+        particleBaseCount * (timeLeft / fireworkDuration),
       );
 
       // Two firework bursts per tick, different origins
       confetti({
         ...defaults,
         particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
       });
       confetti({
         ...defaults,
         particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
       });
     };
 
@@ -95,7 +95,7 @@ function useFireworkEmojiConfetti({
     scalar,
     duration,
     intervalMs,
-    particleBaseCount
+    particleBaseCount,
   ]);
 }
 

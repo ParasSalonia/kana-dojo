@@ -59,7 +59,7 @@ export function formatConfidence(confidence: number): string {
  * Get confidence level description
  */
 export function getConfidenceLevel(
-  confidence: number
+  confidence: number,
 ): 'high' | 'medium' | 'low' {
   if (confidence >= 0.8) return 'high';
   if (confidence >= 0.5) return 'medium';

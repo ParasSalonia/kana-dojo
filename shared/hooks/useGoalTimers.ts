@@ -21,13 +21,13 @@ interface UseGoalTimersOptions {
 
 export function useGoalTimers(
   currentSeconds: number,
-  options: UseGoalTimersOptions = {}
+  options: UseGoalTimersOptions = {},
 ) {
   const {
     enabled = true,
     onGoalReached,
     saveToHistory = false,
-    context = 'Unknown'
+    context = 'Unknown',
   } = options;
 
   const [goals, setGoals] = useState<GoalTimer[]>([]);
@@ -45,15 +45,15 @@ export function useGoalTimers(
         reached: false,
         // Use store settings as defaults if not specified
         showAnimation: goal.showAnimation ?? settings.defaultShowAnimation,
-        playSound: goal.playSound ?? settings.defaultPlaySound
+        playSound: goal.playSound ?? settings.defaultPlaySound,
       };
 
       setGoals(prev =>
-        [...prev, newGoal].sort((a, b) => a.targetSeconds - b.targetSeconds)
+        [...prev, newGoal].sort((a, b) => a.targetSeconds - b.targetSeconds),
       );
       return newGoal.id;
     },
-    [settings]
+    [settings],
   );
 
   // Remove goal
@@ -79,7 +79,7 @@ export function useGoalTimers(
     confetti({
       particleCount: 100,
       spread: 70,
-      origin: { y: 0.6 }
+      origin: { y: 0.6 },
     });
   }, []);
 
@@ -103,7 +103,7 @@ export function useGoalTimers(
         if (currentSeconds >= goal.targetSeconds) {
           // Mark as reached
           setGoals(prev =>
-            prev.map(g => (g.id === goal.id ? { ...g, reached: true } : g))
+            prev.map(g => (g.id === goal.id ? { ...g, reached: true } : g)),
           );
           reachedGoalsRef.current.add(goal.id);
 
@@ -114,7 +114,7 @@ export function useGoalTimers(
               goalLabel: goal.label,
               achievedAt: new Date(),
               duration: currentSeconds,
-              context
+              context,
             });
           }
 
@@ -141,7 +141,7 @@ export function useGoalTimers(
     onGoalReached,
     saveToHistory,
     addToHistory,
-    context
+    context,
   ]);
 
   // Get next unreached goal
@@ -161,6 +161,6 @@ export function useGoalTimers(
     nextGoal,
     progressToNextGoal,
     reachedGoals: goals.filter(g => g.reached),
-    pendingGoals: goals.filter(g => !g.reached)
+    pendingGoals: goals.filter(g => !g.reached),
   };
 }

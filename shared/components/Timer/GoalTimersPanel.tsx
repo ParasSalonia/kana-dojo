@@ -21,7 +21,7 @@ export default function GoalTimersPanel({
   onAddGoal,
   onRemoveGoal,
   onClearGoals,
-  disabled = false
+  disabled = false,
 }: GoalTimersPanelProps) {
   // Get templates from store
   const { templates, addTemplate, settings } = useGoalTimersPreferences();
@@ -52,7 +52,7 @@ export default function GoalTimersPanel({
       label: newGoalLabel,
       targetSeconds: totalSeconds,
       showAnimation: settings.defaultShowAnimation,
-      playSound: settings.defaultPlaySound
+      playSound: settings.defaultPlaySound,
     });
 
     // Reset form
@@ -75,7 +75,7 @@ export default function GoalTimersPanel({
       targetSeconds: totalSeconds,
       category: 'custom',
       icon: '⏱️',
-      color: 'var(--main-color)'
+      color: 'var(--main-color)',
     });
 
     // Also add as active goal
@@ -92,13 +92,13 @@ export default function GoalTimersPanel({
       targetSeconds: template.targetSeconds,
       showAnimation: settings.defaultShowAnimation,
       playSound: settings.defaultPlaySound,
-      templateId: template.id
+      templateId: template.id,
     });
   };
 
   // Get default templates for quick add
   const defaultTemplates = templates.filter(t =>
-    settings.defaultTemplates.includes(t.id)
+    settings.defaultTemplates.includes(t.id),
   );
   const customTemplates = templates.filter(t => t.category === 'custom');
 
@@ -106,7 +106,7 @@ export default function GoalTimersPanel({
     <div
       className={clsx(
         'rounded-2xl border-2 p-4',
-        'border-[var(--border-color)] bg-[var(--card-color)]'
+        'border-[var(--border-color)] bg-[var(--card-color)]',
       )}
     >
       <div className='mb-4 flex items-center justify-between'>
@@ -123,7 +123,7 @@ export default function GoalTimersPanel({
             className={clsx(
               'text-xs transition-colors',
               'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-              disabled && 'cursor-not-allowed opacity-50'
+              disabled && 'cursor-not-allowed opacity-50',
             )}
           >
             Clear All
@@ -142,7 +142,7 @@ export default function GoalTimersPanel({
         {goals.map(goal => {
           const progress = Math.min(
             (currentSeconds / goal.targetSeconds) * 100,
-            100
+            100,
           );
           const isReached = goal.reached;
 
@@ -153,7 +153,7 @@ export default function GoalTimersPanel({
                 'rounded-xl border-2 p-3 transition-all',
                 isReached
                   ? 'border-green-500 bg-green-500/10'
-                  : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                  : 'border-[var(--border-color)] bg-[var(--card-color)]',
               )}
             >
               <div className='mb-2 flex items-center justify-between'>
@@ -166,7 +166,7 @@ export default function GoalTimersPanel({
                   <span
                     className={clsx(
                       'font-medium',
-                      isReached ? 'text-green-500' : 'text-[var(--main-color)]'
+                      isReached ? 'text-green-500' : 'text-[var(--main-color)]',
                     )}
                   >
                     {goal.label}
@@ -182,7 +182,7 @@ export default function GoalTimersPanel({
                     className={clsx(
                       'transition-colors',
                       'text-[var(--secondary-color)] hover:text-red-500',
-                      disabled && 'cursor-not-allowed opacity-50'
+                      disabled && 'cursor-not-allowed opacity-50',
                     )}
                   >
                     <X className='h-4 w-4' />
@@ -209,7 +209,7 @@ export default function GoalTimersPanel({
         <div
           className={clsx(
             'space-y-3 rounded-xl border-2 p-3',
-            'border-[var(--border-color)] bg-[var(--card-color)]'
+            'border-[var(--border-color)] bg-[var(--card-color)]',
           )}
         >
           <input
@@ -220,7 +220,7 @@ export default function GoalTimersPanel({
             className={clsx(
               'w-full rounded-lg border-2 px-3 py-2',
               'border-[var(--border-color)] bg-[var(--card-color)]',
-              'text-[var(--main-color)] placeholder:text-[var(--secondary-color)]'
+              'text-[var(--main-color)] placeholder:text-[var(--secondary-color)]',
             )}
             autoFocus
           />
@@ -239,7 +239,7 @@ export default function GoalTimersPanel({
                 className={clsx(
                   'w-full rounded-lg border-2 px-3 py-2',
                   'border-[var(--border-color)] bg-[var(--card-color)]',
-                  'text-[var(--main-color)]'
+                  'text-[var(--main-color)]',
                 )}
               />
             </div>
@@ -256,7 +256,7 @@ export default function GoalTimersPanel({
                 className={clsx(
                   'w-full rounded-lg border-2 px-3 py-2',
                   'border-[var(--border-color)] bg-[var(--card-color)]',
-                  'text-[var(--main-color)]'
+                  'text-[var(--main-color)]',
                 )}
               />
             </div>
@@ -268,7 +268,7 @@ export default function GoalTimersPanel({
               className={clsx(
                 'flex-1 rounded-lg px-4 py-2 transition-opacity',
                 'bg-[var(--main-color)] text-[var(--bg-color)]',
-                'hover:opacity-90'
+                'hover:opacity-90',
               )}
             >
               Add Goal
@@ -279,7 +279,7 @@ export default function GoalTimersPanel({
                 'rounded-lg border-2 px-4 py-2 transition-colors',
                 'border-[var(--border-color)]',
                 'hover:bg-[var(--border-color)]',
-                'flex items-center gap-2'
+                'flex items-center gap-2',
               )}
               title='Save as template and add goal'
             >
@@ -291,7 +291,7 @@ export default function GoalTimersPanel({
               className={clsx(
                 'rounded-lg border-2 px-4 py-2 transition-colors',
                 'border-[var(--border-color)]',
-                'hover:bg-[var(--border-color)]'
+                'hover:bg-[var(--border-color)]',
               )}
             >
               Cancel
@@ -316,7 +316,7 @@ export default function GoalTimersPanel({
                       'rounded-lg border-2 px-3 py-2 text-sm transition-colors',
                       'border-[var(--border-color)]',
                       'hover:bg-[var(--border-color)]',
-                      disabled && 'cursor-not-allowed opacity-50'
+                      disabled && 'cursor-not-allowed opacity-50',
                     )}
                   >
                     <span className='mr-1'>{template.icon}</span>
@@ -346,7 +346,7 @@ export default function GoalTimersPanel({
                       'rounded-lg border-2 px-3 py-2 text-sm transition-colors',
                       'border-[var(--border-color)]',
                       'hover:bg-[var(--border-color)]',
-                      disabled && 'cursor-not-allowed opacity-50'
+                      disabled && 'cursor-not-allowed opacity-50',
                     )}
                   >
                     <span className='mr-1'>{template.icon}</span>
@@ -368,7 +368,7 @@ export default function GoalTimersPanel({
               'border-[var(--border-color)]',
               'hover:bg-[var(--border-color)]',
               'flex items-center justify-center gap-2',
-              disabled && 'cursor-not-allowed opacity-50'
+              disabled && 'cursor-not-allowed opacity-50',
             )}
           >
             <Plus className='h-4 w-4' />

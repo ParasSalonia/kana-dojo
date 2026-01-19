@@ -13,12 +13,11 @@ export async function generateMetadata() {
     description:
       'Learn how to use KanaDojo effectively with this complete tutorial. Discover all features, training modes, progress tracking, and tips for mastering Japanese Hiragana, Katakana, Kanji, and Vocabulary.',
     keywords:
-      'how to use kanadojo, kanadojo tutorial, kanadojo guide, japanese learning tutorial, kana training guide, kanji study guide, kanadojo features'
+      'how to use kanadojo, kanadojo tutorial, kanadojo guide, japanese learning tutorial, kana training guide, kanji study guide, kanadojo features',
   };
 }
 
 export default async function HowToUsePage() {
-
   return (
     <div className='mx-auto max-w-4xl px-4 py-8'>
       <h1 className='mb-4 text-center text-4xl font-bold text-[var(--main-color)]'>
@@ -44,8 +43,8 @@ export default async function HowToUsePage() {
             </h3>
             <ol className='list-decimal space-y-2 pl-6'>
               <li>
-                Choose your content: <strong>Kana</strong>, <strong>Kanji</strong>, or{' '}
-                <strong>Vocabulary</strong>
+                Choose your content: <strong>Kana</strong>,{' '}
+                <strong>Kanji</strong>, or <strong>Vocabulary</strong>
               </li>
               <li>
                 Select what you want to practice (e.g., Hiragana Base, JLPT N5
@@ -125,8 +124,8 @@ export default async function HowToUsePage() {
             Training Modes
           </h2>
           <p className='mb-4'>
-            KanaDojo offers 6 different training modes to keep learning
-            engaging and effective:
+            KanaDojo offers 6 different training modes to keep learning engaging
+            and effective:
           </p>
 
           <div className='space-y-3'>
@@ -262,7 +261,9 @@ export default async function HowToUsePage() {
               <p className='font-semibold text-[var(--main-color)]'>
                 ✅ Practice Daily
               </p>
-              <p>Even 15 minutes per day is better than cramming once a week.</p>
+              <p>
+                Even 15 minutes per day is better than cramming once a week.
+              </p>
             </div>
 
             <div className='rounded-lg border-l-4 border-[var(--main-color)] bg-[var(--card-color)] p-4'>
@@ -398,8 +399,8 @@ export default async function HowToUsePage() {
                 Is KanaDojo really completely free?
               </h4>
               <p>
-                Yes! No hidden costs, no premium features, no advertisements. All
-                content and features are free forever.
+                Yes! No hidden costs, no premium features, no advertisements.
+                All content and features are free forever.
               </p>
             </div>
 
@@ -430,8 +431,8 @@ export default async function HowToUsePage() {
         <section className='rounded-lg bg-[var(--main-color)] p-8 text-center text-[var(--background-color)]'>
           <h2 className='mb-4 text-3xl font-bold'>Ready to Start Learning?</h2>
           <p className='mb-6 text-lg'>
-            Begin your Japanese journey today with KanaDojo&apos;s free interactive
-            lessons!
+            Begin your Japanese journey today with KanaDojo&apos;s free
+            interactive lessons!
           </p>
           <div className='flex flex-col gap-4 sm:flex-row sm:justify-center'>
             <Link

@@ -4,7 +4,7 @@ import {
   motion,
   AnimatePresence,
   type Variants,
-  type MotionStyle
+  type MotionStyle,
 } from 'framer-motion';
 import clsx from 'clsx';
 import { kana } from '@/features/Kana/data/kana';
@@ -31,7 +31,7 @@ const springConfig = {
   type: 'spring' as const,
   stiffness: 400,
   damping: 30,
-  mass: 0.8
+  mass: 0.8,
 };
 
 // Premium entry animation variants for option tiles
@@ -40,9 +40,9 @@ const tileContainerVariants = {
   visible: {
     transition: {
       staggerChildren: 0.08,
-      delayChildren: 0.15
-    }
-  }
+      delayChildren: 0.15,
+    },
+  },
 };
 
 const tileEntryVariants = {
@@ -50,7 +50,7 @@ const tileEntryVariants = {
     opacity: 0,
     scale: 0.7,
     y: 20,
-    rotateX: -15
+    rotateX: -15,
   },
   visible: {
     opacity: 1,
@@ -61,16 +61,16 @@ const tileEntryVariants = {
       type: 'spring' as const,
       stiffness: 350,
       damping: 25,
-      mass: 0.8
-    }
-  }
+      mass: 0.8,
+    },
+  },
 };
 
 // Duolingo-like slide animation for game content transitions
 const gameContentVariants = {
   hidden: {
     opacity: 0,
-    x: 80
+    x: 80,
   },
   visible: {
     opacity: 1,
@@ -80,13 +80,13 @@ const gameContentVariants = {
         type: 'spring' as const,
         stiffness: 350,
         damping: 30,
-        mass: 0.7
+        mass: 0.7,
       },
       opacity: {
         duration: 0.25,
-        ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number]
-      }
-    }
+        ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number],
+      },
+    },
   },
   exit: {
     opacity: 0,
@@ -96,14 +96,14 @@ const gameContentVariants = {
         type: 'spring' as const,
         stiffness: 350,
         damping: 30,
-        mass: 0.7
+        mass: 0.7,
       },
       opacity: {
         duration: 0.25,
-        ease: [0.4, 0.0, 1, 1] as [number, number, number, number]
-      }
-    }
-  }
+        ease: [0.4, 0.0, 1, 1] as [number, number, number, number],
+      },
+    },
+  },
 };
 
 // Celebration bounce animation for correct answers - Duolingo-style sequential jump
@@ -112,9 +112,9 @@ const celebrationContainerVariants = {
   celebrate: {
     transition: {
       staggerChildren: 0.18,
-      delayChildren: 0.08
-    }
-  }
+      delayChildren: 0.08,
+    },
+  },
 };
 
 const celebrationBounceVariants = {
@@ -122,7 +122,7 @@ const celebrationBounceVariants = {
     y: 0,
     scaleX: 1,
     scaleY: 1,
-    opacity: 1
+    opacity: 1,
   },
   celebrate: {
     y: [0, -32, -35, 0, -10, 0],
@@ -133,9 +133,9 @@ const celebrationBounceVariants = {
     transition: {
       duration: 1,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      times: [0, 0.25, 0.35, 0.6, 0.8, 1]
-    }
-  }
+      times: [0, 0.25, 0.35, 0.6, 0.8, 1],
+    },
+  },
 };
 
 // Helper function to determine if a kana character is hiragana or katakana
@@ -179,7 +179,7 @@ const ActiveTile = memo(
           // Match ActionButton's smooth press animation: translate down + add margin to prevent layout shift
           'active:mb-[10px] active:translate-y-[10px] active:border-b-0',
           'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]',
-          isDisabled && 'cursor-not-allowed opacity-50'
+          isDisabled && 'cursor-not-allowed opacity-50',
         )}
         transition={springConfig}
         style={motionStyle}
@@ -192,7 +192,7 @@ const ActiveTile = memo(
     prevProps.id === nextProps.id &&
     prevProps.char === nextProps.char &&
     prevProps.isDisabled === nextProps.isDisabled &&
-    prevProps.onClick === nextProps.onClick
+    prevProps.onClick === nextProps.onClick,
 );
 
 ActiveTile.displayName = 'ActiveTile';
@@ -205,14 +205,14 @@ const BlankTile = memo(
         className={clsx(
           tileBaseStyles,
           'border-transparent bg-[var(--border-color)]/30',
-          'select-none'
+          'select-none',
         )}
       >
         <span className='opacity-0'>{char}</span>
       </div>
     );
   },
-  (prevProps, nextProps) => prevProps.char === nextProps.char
+  (prevProps, nextProps) => prevProps.char === nextProps.char,
 );
 
 BlankTile.displayName = 'BlankTile';
@@ -237,13 +237,13 @@ const WordBuildingGame = ({
   isReverse: externalIsReverse,
   wordLength: externalWordLength = 3,
   onCorrect: externalOnCorrect,
-  onWrong: externalOnWrong
+  onWrong: externalOnWrong,
 }: WordBuildingGameProps) => {
   // Smart reverse mode - used when not controlled externally
   const {
     isReverse: internalIsReverse,
     decideNextMode: decideNextReverseMode,
-    recordWrongAnswer: recordReverseModeWrong
+    recordWrongAnswer: recordReverseModeWrong,
   } = useSmartReverseMode();
 
   // Use external isReverse if provided, otherwise use internal smart mode
@@ -270,7 +270,7 @@ const WordBuildingGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     incrementCharacterScore,
-    addCorrectAnswerTime
+    addCorrectAnswerTime,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -284,8 +284,8 @@ const WordBuildingGame = ({
       incrementWrongAnswers: state.incrementWrongAnswers,
       addCharacterToHistory: state.addCharacterToHistory,
       incrementCharacterScore: state.incrementCharacterScore,
-      addCorrectAnswerTime: state.addCorrectAnswerTime
-    }))
+      addCorrectAnswerTime: state.addCorrectAnswerTime,
+    })),
   );
 
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
@@ -308,7 +308,7 @@ const WordBuildingGame = ({
         selectedKana: kanaChars,
         selectedRomaji: romajiChars,
         kanaToRomaji: k2r,
-        romajiToKana: r2k
+        romajiToKana: r2k,
       };
     }, [kanaGroupIndices]);
 
@@ -322,14 +322,28 @@ const WordBuildingGame = ({
       selectedRomaji,
       wordLength,
       kanaToRomaji,
-      romajiToKana
+      romajiToKana,
     }),
-    [isReverse, selectedKana, selectedRomaji, wordLength, kanaToRomaji, romajiToKana]
+    [
+      isReverse,
+      selectedKana,
+      selectedRomaji,
+      wordLength,
+      kanaToRomaji,
+      romajiToKana,
+    ],
   );
 
   // Generate a word (array of characters) and distractors
   const generateWord = useCallback(() => {
-    const { isReverse, selectedKana, selectedRomaji, wordLength, kanaToRomaji, romajiToKana } = generateWordDeps;
+    const {
+      isReverse,
+      selectedKana,
+      selectedRomaji,
+      wordLength,
+      kanaToRomaji,
+      romajiToKana,
+    } = generateWordDeps;
     const sourceChars = isReverse ? selectedRomaji : selectedKana;
     if (sourceChars.length < wordLength) {
       return { wordChars: [], answerChars: [], allTiles: [] };
@@ -359,7 +373,7 @@ const WordBuildingGame = ({
 
     for (let i = 0; i < distractorCount; i++) {
       const available = distractorSource.filter(
-        c => !usedAnswers.has(c) && !distractors.includes(c)
+        c => !usedAnswers.has(c) && !distractors.includes(c),
       );
       if (available.length === 0) break;
       const selected = available[random.integer(0, available.length - 1)];
@@ -367,7 +381,7 @@ const WordBuildingGame = ({
     }
 
     const allTiles = [...answerChars, ...distractors].sort(
-      () => random.real(0, 1) - 0.5
+      () => random.real(0, 1) - 0.5,
     );
 
     return { wordChars, answerChars, allTiles };
@@ -513,7 +527,7 @@ const WordBuildingGame = ({
     decideNextReverseMode,
     recordReverseModeWrong,
     addCorrectAnswerTime,
-    recordAnswerTime
+    recordAnswerTime,
     // speedStopwatch intentionally excluded - only calling methods
   ]);
 
@@ -560,7 +574,7 @@ const WordBuildingGame = ({
         setPlacedTiles(prev => [...prev, char]);
       }
     },
-    [isChecking, bottomBarState, placedTiles, playClick]
+    [isChecking, bottomBarState, placedTiles, playClick],
   );
   // Note: speedStopwatch deliberately excluded - only calling methods
 
@@ -584,7 +598,7 @@ const WordBuildingGame = ({
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-6 sm:w-4/5 sm:gap-10',
-        isHidden && 'hidden'
+        isHidden && 'hidden',
       )}
     >
       {/* <GameIntel gameMode='word-building' /> */}
@@ -603,7 +617,9 @@ const WordBuildingGame = ({
             <motion.p
               className={clsx(
                 'sm:text-8xl',
-                !isReverse && wordData.wordChars.length === 3 ? 'text-6xl' : 'text-7xl'
+                !isReverse && wordData.wordChars.length === 3
+                  ? 'text-6xl'
+                  : 'text-7xl',
               )}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -686,7 +702,7 @@ const WordBuildingGame = ({
                 {bottomRowTiles.length > 0 && (
                   <motion.div className='flex flex-row justify-center gap-3 sm:gap-4'>
                     {bottomRowTiles.map((char, i) =>
-                      renderTile(char, i + tilesPerRow)
+                      renderTile(char, i + tilesPerRow),
                     )}
                   </motion.div>
                 )}

@@ -30,19 +30,19 @@ async function generateConstants() {
 
     // Import vocab files
     const n5Vocab = await import(toFileURL(join(staticDir, 'vocab/n5.json')), {
-      assert: { type: 'json' }
+      assert: { type: 'json' },
     });
     const n4Vocab = await import(toFileURL(join(staticDir, 'vocab/n4.json')), {
-      assert: { type: 'json' }
+      assert: { type: 'json' },
     });
     const n3Vocab = await import(toFileURL(join(staticDir, 'vocab/n3.json')), {
-      assert: { type: 'json' }
+      assert: { type: 'json' },
     });
     const n2Vocab = await import(toFileURL(join(staticDir, 'vocab/n2.json')), {
-      assert: { type: 'json' }
+      assert: { type: 'json' },
     });
     const n1Vocab = await import(toFileURL(join(staticDir, 'vocab/n1.json')), {
-      assert: { type: 'json' }
+      assert: { type: 'json' },
     });
 
     // Get lengths (handle both default exports and named exports)
@@ -51,7 +51,7 @@ async function generateConstants() {
       n4: (n4Kanji.default || n4Kanji).length,
       n3: (n3Kanji.default || n3Kanji).length,
       n2: (n2Kanji.default || n2Kanji).length,
-      n1: (n1Kanji.default || n1Kanji).length
+      n1: (n1Kanji.default || n1Kanji).length,
     };
 
     const vocabLengths = {
@@ -59,7 +59,7 @@ async function generateConstants() {
       n4: (n4Vocab.default || n4Vocab).length,
       n3: (n3Vocab.default || n3Vocab).length,
       n2: (n2Vocab.default || n2Vocab).length,
-      n1: (n1Vocab.default || n1Vocab).length
+      n1: (n1Vocab.default || n1Vocab).length,
     };
 
     // Generate the TypeScript file content

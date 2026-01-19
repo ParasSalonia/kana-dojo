@@ -11,6 +11,6 @@ export function useTranslation() {
 
   return {
     locale,
-    t
+    t,
   };
 }

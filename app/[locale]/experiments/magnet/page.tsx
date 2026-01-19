@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Magnet - Attraction Physics | KanaDojo',
-  description: 'Watch kana attracted and repelled by your cursor!'
+  description: 'Watch kana attracted and repelled by your cursor!',
 };
 
 export default function MagnetPage() {

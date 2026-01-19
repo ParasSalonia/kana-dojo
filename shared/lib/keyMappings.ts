@@ -10,5 +10,5 @@ export const pickGameKeyMappings: Record<string, number> = {
   Digit5: 4,
   Numpad5: 4,
   Digit6: 5,
-  Numpad6: 5
+  Numpad6: 5,
 };

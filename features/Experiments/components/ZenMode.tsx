@@ -12,7 +12,7 @@ const ZenMode = () => {
   const { playClick } = useClick();
   const router = useRouter();
   const setExpandDecorations = useDecorationsStore(
-    state => state.setExpandDecorations
+    state => state.setExpandDecorations,
   );
 
   useEffect(() => {
@@ -41,11 +41,11 @@ const ZenMode = () => {
       <button
         onClick={handleClose}
         className={clsx(
-          'fixed top-4 right-4 z-50 p-2 rounded-lg',
-          'bg-[var(--card-color)] border border-[var(--border-color)]',
+          'fixed top-4 right-4 z-50 rounded-lg p-2',
+          'border border-[var(--border-color)] bg-[var(--card-color)]',
           'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-          'hover:cursor-pointer transition-all duration-250',
-          'active:scale-95'
+          'transition-all duration-250 hover:cursor-pointer',
+          'active:scale-95',
         )}
         aria-label='Return to home'
       >

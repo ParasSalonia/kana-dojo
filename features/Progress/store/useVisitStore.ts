@@ -25,7 +25,7 @@ const useVisitStore = create<VisitState>()((set, get) => ({
       if (storedVisits && Array.isArray(storedVisits)) {
         // Filter out any invalid date strings
         const validVisits = storedVisits.filter(
-          date => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)
+          date => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date),
         );
         set({ visits: validVisits, isLoaded: true });
       } else {
@@ -56,7 +56,7 @@ const useVisitStore = create<VisitState>()((set, get) => ({
     }
   },
 
-  getVisits: () => get().visits
+  getVisits: () => get().visits,
 }));
 
 export default useVisitStore;

@@ -41,7 +41,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPost | null {
     const validation = validateFrontmatter(frontmatter);
     if (!validation.success) {
       console.error(
-        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`
+        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`,
       );
       return null;
     }
@@ -68,13 +68,13 @@ function parsePostFile(filePath: string, locale: Locale): BlogPost | null {
       readingTime,
       difficulty: frontmatter.difficulty as BlogPostMeta['difficulty'],
       relatedPosts: frontmatter.relatedPosts as string[] | undefined,
-      locale
+      locale,
     };
 
     return {
       ...meta,
       content,
-      headings
+      headings,
     };
   } catch (error) {
     console.error(`Error parsing post file ${filePath}:`, error);
@@ -102,7 +102,7 @@ export function postExists(locale: Locale, slug: string): boolean {
  */
 export function getBlogPost(
   slug: string,
-  locale: Locale = 'en'
+  locale: Locale = 'en',
 ): BlogPost | null {
   // Try to get the post in the requested locale
   const requestedPath = getPostPath(locale, slug);

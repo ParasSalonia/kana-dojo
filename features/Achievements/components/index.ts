@@ -11,7 +11,7 @@
 export {
   AchievementIntegration,
   AchievementNotification,
-  AchievementNotificationContainer
+  AchievementNotificationContainer,
 } from './global';
 
 // Progress page components
@@ -24,7 +24,7 @@ export {
   AchievementGrid,
   useAchievementProgress,
   rarityConfig,
-  categories
+  categories,
 } from './progress';
 
 // Types
@@ -33,7 +33,7 @@ export type {
   HeroSectionProps,
   CategoryTabsProps,
   AchievementGridProps,
-  CategoryId
+  CategoryId,
 } from './progress';
 
 // Default export (main page component)

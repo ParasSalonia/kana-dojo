@@ -20,12 +20,12 @@ export default function KanaPage() {
   return (
     <>
       <CourseSchema
-        name="Japanese Hiragana and Katakana Course"
-        description="Master Japanese Hiragana and Katakana syllabaries with interactive games and exercises. Learn all 92 basic kana characters plus dakuon, yoon, and foreign sound variations through multiple training modes."
-        url="https://kanadojo.com/en/kana"
-        educationalLevel="Beginner"
-        skillLevel="Beginner"
-        learningResourceType="Interactive Exercise and Games"
+        name='Japanese Hiragana and Katakana Course'
+        description='Master Japanese Hiragana and Katakana syllabaries with interactive games and exercises. Learn all 92 basic kana characters plus dakuon, yoon, and foreign sound variations through multiple training modes.'
+        url='https://kanadojo.com/en/kana'
+        educationalLevel='Beginner'
+        skillLevel='Beginner'
+        learningResourceType='Interactive Exercise and Games'
       />
       <DojoMenu />
     </>

@@ -89,7 +89,7 @@ const KANA_CHARS = [
   'し',
   'す',
   'せ',
-  'そ'
+  'そ',
 ];
 
 export const RunnerGame = () => {
@@ -111,7 +111,7 @@ export const RunnerGame = () => {
     grounded: true,
     rotation: 0,
     canDoubleJump: true,
-    isDiving: false
+    isDiving: false,
   });
   const obstaclesRef = useRef<Obstacle[]>([]);
   const spiritsRef = useRef<Spirit[]>([]);
@@ -143,7 +143,7 @@ export const RunnerGame = () => {
         vy: 0.5 + Math.random() * 1.5,
         rotation: Math.random() * Math.PI,
         rotationSpeed: (Math.random() - 0.5) * 0.1,
-        size: Math.random() * 4 + 2
+        size: Math.random() * 4 + 2,
       });
     }
     // Init Clouds
@@ -152,7 +152,7 @@ export const RunnerGame = () => {
         x: Math.random() * CANVAS_WIDTH,
         y: Math.random() * 150, // Upper sky
         speed: 0.2 + Math.random() * 0.3,
-        scale: 0.8 + Math.random() * 0.5
+        scale: 0.8 + Math.random() * 0.5,
       });
     }
   }, []);
@@ -168,7 +168,7 @@ export const RunnerGame = () => {
       grounded: true,
       rotation: 0,
       canDoubleJump: true,
-      isDiving: false
+      isDiving: false,
     };
     obstaclesRef.current = [];
     spiritsRef.current = [];
@@ -232,7 +232,7 @@ export const RunnerGame = () => {
     x: number,
     y: number,
     count: number,
-    color: string
+    color: string,
   ) => {
     for (let i = 0; i < count; i++) {
       particlesRef.current.push({
@@ -241,7 +241,7 @@ export const RunnerGame = () => {
         vx: (Math.random() - 0.5) * 4,
         vy: (Math.random() - 0.5) * 4,
         life: 1.0,
-        color
+        color,
       });
     }
   };
@@ -338,7 +338,7 @@ export const RunnerGame = () => {
             Math.floor(cloud.x),
             Math.floor(cloud.y),
             120 * cloud.scale,
-            60 * cloud.scale
+            60 * cloud.scale,
           );
         });
         ctx.globalAlpha = 1.0;
@@ -372,7 +372,7 @@ export const RunnerGame = () => {
         ctx.drawImage(
           startAssetsRef.current.fuji,
           Math.floor(fujiX - shift),
-          GROUND_HEIGHT - 350
+          GROUND_HEIGHT - 350,
         );
         ctx.globalAlpha = 1.0;
       }
@@ -381,7 +381,7 @@ export const RunnerGame = () => {
       if (startAssetsRef.current) {
         const pagodaSpeed = 0.05; // Very slow
         const pOffset = Math.floor(
-          (distanceRef.current * pagodaSpeed) % (CANVAS_WIDTH + 200)
+          (distanceRef.current * pagodaSpeed) % (CANVAS_WIDTH + 200),
         );
         const pX = CANVAS_WIDTH - pOffset;
 
@@ -391,7 +391,7 @@ export const RunnerGame = () => {
           ctx.drawImage(
             startAssetsRef.current.pagoda,
             Math.floor(pX),
-            GROUND_HEIGHT - 180
+            GROUND_HEIGHT - 180,
           ); // Just peeking over hills
           ctx.globalAlpha = 1.0;
         }
@@ -403,7 +403,7 @@ export const RunnerGame = () => {
         const bgWidth = 1600; // Match asset width
         // Use DISTANCE for smooth scrolling
         const offset = Math.floor(
-          (distanceRef.current * mountainSpeed) % bgWidth
+          (distanceRef.current * mountainSpeed) % bgWidth,
         );
 
         ctx.globalAlpha = isNight ? 0.3 : 1.0;
@@ -415,7 +415,7 @@ export const RunnerGame = () => {
         ctx.drawImage(
           startAssetsRef.current.mountains,
           -offset + bgWidth,
-          yPos
+          yPos,
         );
 
         ctx.globalAlpha = 1.0;
@@ -464,7 +464,7 @@ export const RunnerGame = () => {
       const currentScore = scoreRef.current;
       const spawnRate = Math.max(
         OBSTACLE_SPAWN_MIN,
-        OBSTACLE_SPAWN_MAX - Math.floor(currentScore / 50)
+        OBSTACLE_SPAWN_MAX - Math.floor(currentScore / 50),
       );
 
       // Simple logic: spawn if frame count exceeds threshold and randomly
@@ -518,7 +518,7 @@ export const RunnerGame = () => {
             width,
             height,
             type,
-            passed: false
+            passed: false,
           });
           frameRef.current = 0;
         }
@@ -532,7 +532,7 @@ export const RunnerGame = () => {
             x: CANVAS_WIDTH + Math.random() * 200,
             y: GROUND_HEIGHT - 60 - Math.random() * 100, // Varying heights
             char: KANA_CHARS[Math.floor(Math.random() * KANA_CHARS.length)],
-            collected: false
+            collected: false,
           });
         }
       }
@@ -545,7 +545,7 @@ export const RunnerGame = () => {
         // Collection
         const dist = Math.hypot(
           player.x + 20 - spirit.x,
-          player.y + 20 - spirit.y
+          player.y + 20 - spirit.y,
         );
         if (!spirit.collected && dist < 40) {
           spirit.collected = true;
@@ -629,7 +629,7 @@ export const RunnerGame = () => {
       ctx.save();
       ctx.translate(
         Math.floor(player.x + player.width / 2),
-        Math.floor(player.y + player.height / 2)
+        Math.floor(player.y + player.height / 2),
       );
       ctx.rotate((player.rotation * Math.PI) / 180);
 
@@ -653,7 +653,7 @@ export const RunnerGame = () => {
               obsX,
               obsY - 10,
               100,
-              120
+              120,
             );
           } else if (obs.type === 'TENGU') {
             ctx.drawImage(startAssetsRef.current.tengu, obsX, obsY, 40, 40);
@@ -669,7 +669,7 @@ export const RunnerGame = () => {
               obsX,
               obsY,
               40,
-              60
+              60,
             );
           } else {
             // Fallback
@@ -680,7 +680,7 @@ export const RunnerGame = () => {
               Math.floor(obs.y + obs.height / 2),
               obs.width / 2,
               0,
-              Math.PI * 2
+              Math.PI * 2,
             );
             ctx.fill();
           }
@@ -718,13 +718,13 @@ export const RunnerGame = () => {
       ctx.fillText(
         `SCORE: ${Math.floor(scoreRef.current)}`,
         CANVAS_WIDTH - 20,
-        30
+        30,
       );
       ctx.fillText(`HI: ${highScoreRef.current}`, CANVAS_WIDTH - 20, 60);
 
       requestRef.current = requestAnimationFrame(animate);
     },
-    [gameState]
+    [gameState],
   );
 
   // Input Handling

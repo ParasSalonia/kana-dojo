@@ -2,7 +2,7 @@
 import { createElement, useEffect, useRef } from 'react';
 import themeSets, {
   applyTheme,
-  applyThemeObject
+  applyThemeObject,
   // hexToHsl
 } from '@/features/Preferences/data/themes';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
@@ -28,7 +28,7 @@ const Themes = () => {
     cardColor: '#321441',
     borderColor: '#49215e',
     mainColor: '#ea70ad',
-    secondaryColor: '#ce89e6'
+    secondaryColor: '#ce89e6',
   });
 
   const selectedTheme = usePreferencesStore(state => state.theme);
@@ -90,7 +90,7 @@ const Themes = () => {
   useEffect(() => {
     setIsMounted(true);
     setRandomTheme(
-      themeSets[2].themes[random.integer(0, themeSets[2].themes.length - 1)]
+      themeSets[2].themes[random.integer(0, themeSets[2].themes.length - 1)],
     );
   }, []);
 
@@ -99,8 +99,8 @@ const Themes = () => {
       <div className='flex gap-2'>
         <button
           className={clsx(
-            'p-6 flex justify-center items-center gap-2 w-full md:w-1/2 flex-1 overflow-hidden',
-            buttonBorderStyles
+            'flex w-full flex-1 items-center justify-center gap-2 overflow-hidden p-6 md:w-1/2',
+            buttonBorderStyles,
           )}
           onMouseEnter={() => setIsHovered(randomTheme.id)}
           onMouseLeave={() => setIsHovered('')}
@@ -112,7 +112,7 @@ const Themes = () => {
                 : randomTheme.cardColor,
             borderWidth:
               process.env.NODE_ENV === 'development' ? '2px' : undefined,
-            borderColor: randomTheme.borderColor
+            borderColor: randomTheme.borderColor,
           }}
           onClick={() => {
             playClick();
@@ -129,7 +129,7 @@ const Themes = () => {
           </span>
           <Dice5
             style={{
-              color: randomTheme.secondaryColor
+              color: randomTheme.secondaryColor,
             }}
           />
           Random Theme
@@ -137,13 +137,13 @@ const Themes = () => {
       </div>
       {themeSets.map((themeSet, i) => (
         <div key={i} className='flex flex-col gap-3'>
-          <h4 className='text-xl flex flex-row items-center gap-1.5'>
+          <h4 className='flex flex-row items-center gap-1.5 text-xl'>
             {createElement(themeSet.icon)}
             <span>{themeSet.name}</span>
           </h4>
           <fieldset
             className={clsx(
-              'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
+              'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4',
             )}
           >
             {themeSet.themes.map(currentTheme => (
@@ -159,7 +159,7 @@ const Themes = () => {
                   borderWidth:
                     process.env.NODE_ENV === 'development' ? '2px' : undefined,
  */
-                  borderColor: currentTheme.borderColor
+                  borderColor: currentTheme.borderColor,
                 }}
                 onMouseEnter={() => {
                   if (isAdding) return;
@@ -176,11 +176,11 @@ const Themes = () => {
                 }}
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
-                  'py-4 flex justify-center items-center hover:cursor-pointer duration-275 rounded-xl',
-                  'flex-1 overflow-hidden ',
+                  'flex items-center justify-center rounded-xl py-4 duration-275 hover:cursor-pointer',
+                  'flex-1 overflow-hidden',
                   // 'border-b-4',
                   currentTheme.id === selectedTheme &&
-                    'border-0 border-[var(--main-color)]'
+                    'border-0 border-[var(--main-color)]',
                 )}
                 onClick={() => {
                   playClick();
@@ -203,14 +203,14 @@ const Themes = () => {
                         {
                           event_category: 'Theme Change',
                           event_label: currentTheme.id,
-                          value: 1
-                        }
+                          value: 1,
+                        },
                       );
                     }
                   }}
                   className='hidden'
                 />
-                <span className='text-center text-lg flex items-center gap-1.5'>
+                <span className='flex items-center gap-1.5 text-center text-lg'>
                   <span className='text-[var(--secondary-color)]'>
                     {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                   </span>
@@ -225,7 +225,7 @@ const Themes = () => {
                                 ? i === 0
                                   ? currentTheme.mainColor
                                   : currentTheme.secondaryColor
-                                : undefined
+                                : undefined,
                           }}
                         >
                           {i > 0 && ' '}

@@ -7,7 +7,7 @@ import { calculateAccuracy } from '../lib/calculateAccuracy';
 import type {
   CharacterMasteryItem,
   MasteryLevel,
-  ContentType
+  ContentType,
 } from '../types/stats';
 
 /**
@@ -17,7 +17,7 @@ const characterMasteryItemArb = fc
   .record({
     character: fc.string({ minLength: 1, maxLength: 3 }),
     correct: fc.integer({ min: 0, max: 1000 }),
-    incorrect: fc.integer({ min: 0, max: 1000 })
+    incorrect: fc.integer({ min: 0, max: 1000 }),
   })
   .map(({ character, correct, incorrect }) => {
     const total = correct + incorrect;
@@ -32,7 +32,7 @@ const characterMasteryItemArb = fc
       total,
       accuracy,
       masteryLevel,
-      contentType
+      contentType,
     } as CharacterMasteryItem;
   });
 
@@ -41,7 +41,7 @@ const characterMasteryItemArb = fc
  */
 const characterMasteryArrayArb = fc.array(characterMasteryItemArb, {
   minLength: 0,
-  maxLength: 100
+  maxLength: 100,
 });
 
 describe('Mastery Distribution Calculation', () => {
@@ -66,7 +66,7 @@ describe('Mastery Distribution Calculation', () => {
           expect(sum).toBe(distribution.total);
           expect(distribution.total).toBe(items.length);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -76,20 +76,20 @@ describe('Mastery Distribution Calculation', () => {
           const distribution = calculateMasteryDistribution(items);
 
           const expectedMastered = items.filter(
-            i => i.masteryLevel === 'mastered'
+            i => i.masteryLevel === 'mastered',
           ).length;
           const expectedLearning = items.filter(
-            i => i.masteryLevel === 'learning'
+            i => i.masteryLevel === 'learning',
           ).length;
           const expectedNeedsPractice = items.filter(
-            i => i.masteryLevel === 'needs-practice'
+            i => i.masteryLevel === 'needs-practice',
           ).length;
 
           expect(distribution.mastered).toBe(expectedMastered);
           expect(distribution.learning).toBe(expectedLearning);
           expect(distribution.needsPractice).toBe(expectedNeedsPractice);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -114,9 +114,9 @@ describe('Mastery Distribution Calculation', () => {
               // Allow for floating point precision issues
               expect(totalPercent).toBeCloseTo(100, 10);
             }
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -130,7 +130,7 @@ describe('Mastery Distribution Calculation', () => {
           expect(distribution.needsPractice).toBeGreaterThanOrEqual(0);
           expect(distribution.total).toBeGreaterThanOrEqual(0);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -157,8 +157,8 @@ describe('Mastery Distribution Calculation', () => {
           total: 10,
           accuracy: 100,
           masteryLevel: 'mastered',
-          contentType: 'kana'
-        }
+          contentType: 'kana',
+        },
       ];
 
       const distribution = calculateMasteryDistribution(items);
@@ -178,8 +178,8 @@ describe('Mastery Distribution Calculation', () => {
           total: 10,
           accuracy: 10,
           masteryLevel: 'needs-practice',
-          contentType: 'kanji'
-        }
+          contentType: 'kanji',
+        },
       ];
 
       const distribution = calculateMasteryDistribution(items);
@@ -199,7 +199,7 @@ describe('Mastery Distribution Calculation', () => {
           total: 10,
           accuracy: 100,
           masteryLevel: 'mastered',
-          contentType: 'kana'
+          contentType: 'kana',
         },
         {
           character: 'い',
@@ -208,7 +208,7 @@ describe('Mastery Distribution Calculation', () => {
           total: 5,
           accuracy: 60,
           masteryLevel: 'learning',
-          contentType: 'kana'
+          contentType: 'kana',
         },
         {
           character: 'う',
@@ -217,8 +217,8 @@ describe('Mastery Distribution Calculation', () => {
           total: 10,
           accuracy: 10,
           masteryLevel: 'needs-practice',
-          contentType: 'kana'
-        }
+          contentType: 'kana',
+        },
       ];
 
       const distribution = calculateMasteryDistribution(items);

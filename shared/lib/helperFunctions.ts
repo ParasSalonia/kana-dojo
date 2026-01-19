@@ -53,7 +53,7 @@ export function findHighestCounts(data: Data): HighestCounts {
 
 export function chunkArray(
   array: { name: string; start: number; end: number; id: string }[],
-  chunkSize: number
+  chunkSize: number,
 ) {
   const result = [];
   for (let i = 0; i < array.length; i += chunkSize) {
@@ -68,7 +68,7 @@ export const formatLevelsAsRanges = (sets: string[]): string => {
 
   // Extract numbers and sort
   const numbers = sets
-    .map((set) => parseInt(set.replace('Set ', '')))
+    .map(set => parseInt(set.replace('Set ', '')))
     .sort((a, b) => a - b);
 
   const ranges: string[] = [];
@@ -82,7 +82,7 @@ export const formatLevelsAsRanges = (sets: string[]): string => {
     } else {
       // gap, save current range and start new one
       ranges.push(
-        rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`
+        rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`,
       );
       rangeStart = numbers[i];
       rangeEnd = numbers[i];
@@ -90,7 +90,7 @@ export const formatLevelsAsRanges = (sets: string[]): string => {
   }
 
   ranges.push(
-    rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`
+    rangeStart === rangeEnd ? `${rangeStart}` : `${rangeStart}-${rangeEnd}`,
   );
 
   return ranges.join(', ');

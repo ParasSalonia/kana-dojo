@@ -43,7 +43,7 @@ export function calculateAccuracy(correct: number, incorrect: number): number {
 export function calculateAccuracyRounded(
   correct: number,
   incorrect: number,
-  decimals: number = 1
+  decimals: number = 1,
 ): number {
   const accuracy = calculateAccuracy(correct, incorrect);
   const factor = Math.pow(10, decimals);
@@ -65,7 +65,7 @@ export function calculateAccuracyRounded(
 export function formatAccuracy(
   correct: number,
   incorrect: number,
-  decimals: number = 1
+  decimals: number = 1,
 ): string {
   const accuracy = calculateAccuracyRounded(correct, incorrect, decimals);
   return `${accuracy.toFixed(decimals)}%`;

@@ -11,7 +11,7 @@ interface AnimatedCardProps {
 const AnimatedCard: React.FC<AnimatedCardProps> = ({
   children,
   delay = 0,
-  className
+  className,
 }) => {
   return (
     <motion.div
@@ -20,7 +20,7 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
       transition={{
         duration: 0.4,
         ease: 'easeOut',
-        delay
+        delay,
       }}
       viewport={{ once: true, amount: 0.2 }} // 👈 triggers when visible in scroll
       className={className}

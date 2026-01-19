@@ -22,7 +22,7 @@ const KanaZen = () => {
       y: Math.random() * 80 + 10,
       size: Math.random() * 1.5 + 1,
       delay: Math.random() * 5,
-      duration: Math.random() * 4 + 6
+      duration: Math.random() * 4 + 6,
     };
   });
 
@@ -40,7 +40,7 @@ const KanaZen = () => {
             top: `${f.y}%`,
             fontSize: `${f.size}rem`,
             animation: `zen-float ${f.duration}s ease-in-out infinite`,
-            animationDelay: `-${f.delay}s`
+            animationDelay: `-${f.delay}s`,
           }}
         >
           {f.kana}

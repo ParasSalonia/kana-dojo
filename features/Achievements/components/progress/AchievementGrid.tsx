@@ -20,7 +20,7 @@ export const AchievementGrid = ({
   achievements,
   unlockedAchievements,
   getAchievementProgress,
-  selectedCategory
+  selectedCategory,
 }: AchievementGridProps) => {
   if (achievements.length === 0) {
     return (

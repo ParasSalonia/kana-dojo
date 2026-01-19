@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faDiscord,
   faGithub,
-  faPatreon
+  faPatreon,
 } from '@fortawesome/free-brands-svg-icons';
 import { Coffee, Palette, GitBranch, Type, LucideIcon } from 'lucide-react';
 import clsx from 'clsx';
@@ -12,7 +12,7 @@ import { useClick } from '@/shared/hooks/useAudio';
 import {
   useThemePreferences,
   ThemesModal,
-  FontsModal
+  FontsModal,
 } from '@/features/Preferences';
 import { useCrazyMode } from '@/features/CrazyMode';
 import useDecorationsStore from '@/shared/store/useDecorationsStore';
@@ -32,19 +32,19 @@ const socialLinks: SocialLink[] = [
   {
     icon: faDiscord,
     url: 'https://discord.gg/CyvBNNrSmb',
-    type: 'fontawesome'
+    type: 'fontawesome',
   },
   {
     icon: faGithub,
     url: 'https://github.com/lingdojo/kana-dojo',
-    type: 'fontawesome'
+    type: 'fontawesome',
   },
   {
     icon: Coffee,
     url: 'https://ko-fi.com/kanadojo',
     type: 'lucide',
-    special: 'donate'
-  }
+    special: 'donate',
+  },
   // {
   //   icon: faPatreon,
   //   url: 'https://www.patreon.com/kanadojo',
@@ -57,7 +57,7 @@ const MobileBottomBar = () => {
   const { theme, font } = useThemePreferences();
   const { isCrazyMode, activeThemeId } = useCrazyMode();
   const expandDecorations = useDecorationsStore(
-    state => state.expandDecorations
+    state => state.expandDecorations,
   );
   const effectiveTheme = isCrazyMode && activeThemeId ? activeThemeId : theme;
   const [isPatchNotesOpen, setIsPatchNotesOpen] = useState(false);
@@ -87,21 +87,21 @@ const MobileBottomBar = () => {
   const baseIconClasses = clsx(
     'hover:cursor-pointer ',
     'active:scale-100 active:duration-225',
-    'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+    'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
   );
 
   const infoItems = [
     {
       icon: Palette,
       text: effectiveTheme.replace('-', ' '),
-      onClick: handleThemeClick
+      onClick: handleThemeClick,
     },
     { icon: Type, text: font.toLowerCase(), onClick: handleFontClick },
     {
       icon: GitBranch,
       text: `v${APP_VERSION_DISPLAY}`,
-      onClick: handleVersionClick
-    }
+      onClick: handleVersionClick,
+    },
   ];
 
   return (
@@ -111,7 +111,7 @@ const MobileBottomBar = () => {
         'fixed right-0 bottom-0 left-0 z-50 max-lg:hidden',
         'border-t-1 border-[var(--border-color)] bg-[var(--background-color)]',
         'flex items-center justify-between px-4 py-1',
-        expandDecorations && 'hidden'
+        expandDecorations && 'hidden',
       )}
     >
       <div className='flex items-center gap-3'>
@@ -125,7 +125,7 @@ const MobileBottomBar = () => {
           const pulseClasses = clsx(
             (isKofi || isPatreon) && 'motion-safe:animate-pulse',
             isKofi && '[animation-delay:0ms]',
-            isPatreon && '[animation-delay:750ms]'
+            isPatreon && '[animation-delay:750ms]',
           );
 
           return (
@@ -137,7 +137,7 @@ const MobileBottomBar = () => {
                   className={clsx(
                     baseIconClasses,
                     pulseClasses,
-                    isPatreon && 'text-blue-500'
+                    isPatreon && 'text-blue-500',
                   )}
                   onClick={() => handleClick(link.url)}
                 />
@@ -148,7 +148,7 @@ const MobileBottomBar = () => {
                     baseIconClasses,
                     pulseClasses,
                     isDonate &&
-                      'fill-current text-red-500 motion-safe:animate-pulse'
+                      'fill-current text-red-500 motion-safe:animate-pulse',
                   )}
                   onClick={() => handleClick(link.url)}
                 />

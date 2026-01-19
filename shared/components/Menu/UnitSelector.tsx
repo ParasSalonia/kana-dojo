@@ -15,7 +15,7 @@ import {
   N4VocabLength,
   N3VocabLength,
   N2VocabLength,
-  N1VocabLength
+  N1VocabLength,
 } from '@/shared/lib/unitSets';
 import { useClick } from '@/shared/hooks/useAudio';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
@@ -33,7 +33,7 @@ const KANJI_SETS = {
   n4: calculateSets(N4KanjiLength),
   n3: calculateSets(N3KanjiLength),
   n2: calculateSets(N2KanjiLength),
-  n1: calculateSets(N1KanjiLength)
+  n1: calculateSets(N1KanjiLength),
 };
 
 const VOCAB_SETS = {
@@ -41,7 +41,7 @@ const VOCAB_SETS = {
   n4: calculateSets(N4VocabLength),
   n3: calculateSets(N3VocabLength),
   n2: calculateSets(N2VocabLength),
-  n1: calculateSets(N1VocabLength)
+  n1: calculateSets(N1VocabLength),
 };
 
 const UnitSelector = () => {
@@ -101,7 +101,7 @@ const UnitSelector = () => {
         name: level,
         displayName: `Unit ${index + 1}`,
         subtitle: `Levels ${startSet}-${endSet}`,
-        jlpt: level.toUpperCase()
+        jlpt: level.toUpperCase(),
       };
     });
   }, [sets]);
@@ -125,7 +125,7 @@ const UnitSelector = () => {
                 borderRadius='4xl'
                 className={clsx(
                   'flex-1 flex-col gap-1 px-4 pt-4 pb-6',
-                  !isSelected && 'opacity-60'
+                  !isSelected && 'opacity-60',
                 )}
               >
                 <div className='flex items-center gap-2'>
@@ -135,7 +135,7 @@ const UnitSelector = () => {
                       'rounded px-1.5 py-0.5 text-xs',
                       isSelected
                         ? 'bg-[var(--background-color)]/20 text-[var(--background-color)]'
-                        : 'bg-[var(--background-color)]/20 text-[var(--background-color)]'
+                        : 'bg-[var(--background-color)]/20 text-[var(--background-color)]',
                     )}
                   >
                     {collection.jlpt}
@@ -146,7 +146,7 @@ const UnitSelector = () => {
                     'text-xs',
                     isSelected
                       ? 'text-[var(--background-color)]/80'
-                      : 'text-[var(--background-color)]/80'
+                      : 'text-[var(--background-color)]/80',
                   )}
                 >
                   {collection.subtitle}
@@ -180,7 +180,7 @@ const UnitSelector = () => {
                   transition={{
                     type: 'spring',
                     stiffness: 300,
-                    damping: 30
+                    damping: 30,
                   }}
                 />
               )}
@@ -194,7 +194,7 @@ const UnitSelector = () => {
                   'relative z-10 w-full flex-col gap-1 px-4 pt-4 pb-6',
                   isSelected
                     ? 'bg-transparent text-[var(--background-color)]'
-                    : 'bg-transparent text-[var(--main-color)] hover:bg-[var(--border-color)]/50'
+                    : 'bg-transparent text-[var(--main-color)] hover:bg-[var(--border-color)]/50',
                 )}
               >
                 <div className='flex items-center gap-2'>
@@ -202,7 +202,7 @@ const UnitSelector = () => {
                   <span
                     className={clsx(
                       'rounded px-1.5 py-0.5 text-xs',
-                      'bg-[var(--border-color)] text-[var(--secondary-color)]'
+                      'bg-[var(--border-color)] text-[var(--secondary-color)]',
                     )}
                   >
                     {collection.jlpt}
@@ -213,7 +213,7 @@ const UnitSelector = () => {
                     'text-xs',
                     isSelected
                       ? 'text-[var(--background-color)]/80'
-                      : 'text-[var(--secondary-color)]/80'
+                      : 'text-[var(--secondary-color)]/80',
                   )}
                 >
                   {collection.subtitle}

@@ -107,13 +107,13 @@ Only request necessary permissions:
 ```typescript
 // ❌ Wrong - excessive permissions
 await octokit.request('GET /user', {
-  headers: { authorization: `token ${token}` }
+  headers: { authorization: `token ${token}` },
 });
 
 // ✅ Correct - minimal scope
 await octokit.request('GET /user', {
   headers: { authorization: `token ${token}` },
-  mediaType: { previews: ['machine-man'] }
+  mediaType: { previews: ['machine-man'] },
 });
 ```
 

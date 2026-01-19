@@ -12,14 +12,14 @@ import { ACHIEVEMENTS, type Achievement } from '../store/useAchievementStore';
 
 // Filter mastery-based achievements
 const masteryAchievements = ACHIEVEMENTS.filter(
-  a => a.requirements.type === 'content_mastery'
+  a => a.requirements.type === 'content_mastery',
 );
 
 // Helper to create character mastery data
 function createCharacterMastery(
   numCharacters: number,
   accuracy: number,
-  minAnswers: number = 10
+  minAnswers: number = 10,
 ): Record<string, { correct: number; incorrect: number }> {
   const mastery: Record<string, { correct: number; incorrect: number }> = {};
 
@@ -40,7 +40,7 @@ function createCharacterMastery(
 function createStatsForMasteryAchievement(
   achievement: Achievement,
   meetsThreshold: boolean,
-  numCharacters: number = 10
+  numCharacters: number = 10,
 ): { allTimeStats: Record<string, unknown> } {
   const { value, additional } = achievement.requirements;
   const minAnswers = additional?.minAnswers ?? 10;
@@ -51,7 +51,7 @@ function createStatsForMasteryAchievement(
   const characterMastery = createCharacterMastery(
     numCharacters,
     targetAccuracy,
-    minAnswers
+    minAnswers,
   );
 
   return {
@@ -64,15 +64,15 @@ function createStatsForMasteryAchievement(
       hiraganaCorrect: 0,
       katakanaCorrect: 0,
       kanjiCorrectByLevel: {},
-      vocabularyCorrect: 0
-    }
+      vocabularyCorrect: 0,
+    },
   };
 }
 
 // Simplified mastery requirement checker for testing
 function checkMasteryRequirement(
   achievement: Achievement,
-  stats: { allTimeStats: Record<string, unknown> }
+  stats: { allTimeStats: Record<string, unknown> },
 ): boolean {
   const { value, additional } = achievement.requirements;
   const minAnswers = additional?.minAnswers;
@@ -120,7 +120,7 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
     const kanaMasteryAchievements = masteryAchievements.filter(
       a =>
         a.requirements.additional?.contentType === 'hiragana' ||
-        a.requirements.additional?.contentType === 'katakana'
+        a.requirements.additional?.contentType === 'katakana',
     );
 
     if (kanaMasteryAchievements.length === 0) {
@@ -135,21 +135,21 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
         (
           achievement: Achievement,
           meetsThreshold: boolean,
-          numCharacters: number
+          numCharacters: number,
         ) => {
           const stats = createStatsForMasteryAchievement(
             achievement,
             meetsThreshold,
-            numCharacters
+            numCharacters,
           );
           const isUnlocked = checkMasteryRequirement(achievement, stats);
 
           if (meetsThreshold) {
             expect(isUnlocked).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -157,7 +157,7 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
     const vocabMasteryAchievements = masteryAchievements.filter(
       a =>
         a.requirements.additional?.contentType === 'vocabulary' &&
-        a.requirements.additional?.minAnswers !== undefined
+        a.requirements.additional?.minAnswers !== undefined,
     );
 
     if (vocabMasteryAchievements.length === 0) {
@@ -178,7 +178,7 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
           const stats = createStatsForMasteryAchievement(
             achievement,
             true, // All characters meet accuracy
-            numCharacters
+            numCharacters,
           );
 
           const isUnlocked = checkMasteryRequirement(achievement, stats);
@@ -188,9 +188,9 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
           } else {
             expect(isUnlocked).toBe(false);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -204,16 +204,16 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
           const stats = createStatsForMasteryAchievement(
             achievement,
             false, // Below threshold
-            numCharacters
+            numCharacters,
           );
 
           const isUnlocked = checkMasteryRequirement(achievement, stats);
 
           // Should not unlock when below accuracy threshold
           expect(isUnlocked).toBe(false);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -224,8 +224,8 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
           ...masteryAchievements.filter(
             a =>
               a.requirements.additional?.contentType !== 'vocabulary' ||
-              a.requirements.additional?.minAnswers === undefined
-          )
+              a.requirements.additional?.minAnswers === undefined,
+          ),
         ),
         fc.integer({ min: 5, max: 20 }),
         (achievement: Achievement, numCharacters: number) => {
@@ -249,7 +249,7 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
           }
 
           const stats = {
-            allTimeStats: { characterMastery }
+            allTimeStats: { characterMastery },
           };
 
           const isUnlocked = checkMasteryRequirement(achievement, stats);
@@ -259,9 +259,9 @@ describe('Property 2: Mastery Achievement Unlocking', () => {
           if (value > 33) {
             expect(isUnlocked).toBe(false);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

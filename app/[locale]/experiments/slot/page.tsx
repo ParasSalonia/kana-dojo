@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Slot - Slot Machine Game | KanaDojo',
-  description: 'Spin the slot machine and match kana to win!'
+  description: 'Spin the slot machine and match kana to win!',
 };
 
 export default function SlotPage() {

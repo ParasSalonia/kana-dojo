@@ -18,7 +18,7 @@ const fetchContributors = async (): Promise<Contributor[]> => {
   try {
     const res = await fetch(
       'https://api.github.com/repos/lingdojo/kana-dojo/contributors?per_page=100',
-      { next: { revalidate: 60 * 60 * 24 } }
+      { next: { revalidate: 60 * 60 * 24 } },
     );
 
     if (!res.ok) return [];
@@ -29,7 +29,7 @@ const fetchContributors = async (): Promise<Contributor[]> => {
       .map(c => ({
         login: c.login,
         avatar: c.avatar_url,
-        url: c.html_url
+        url: c.html_url,
       }));
   } catch (e) {
     console.error('Failed to fetch contributors', e);
@@ -42,7 +42,7 @@ export default async function Credits() {
   const contributorsList = contributors.filter(
     c =>
       c.login !== ORGANIZATION.owner.login &&
-      !ORGANIZATION.members.some(m => m.login === c.login)
+      !ORGANIZATION.members.some(m => m.login === c.login),
   );
 
   const credits = `# Credits

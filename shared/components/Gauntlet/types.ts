@@ -23,12 +23,12 @@ export interface GauntletConfig<T> {
     question: T,
     items: T[],
     count: number,
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => string[];
   renderOption?: (
     option: string,
     items: T[],
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => React.ReactNode;
   getCorrectOption?: (question: T, isReverse?: boolean) => string;
 
@@ -129,7 +129,7 @@ export const DIFFICULTY_CONFIG: Record<
     label: 'Normal',
     description:
       'Challenging but forgiving. Earn lives back through consistent correct answers.',
-    icon: '🛡️'
+    icon: '🛡️',
   },
   hard: {
     lives: 3,
@@ -137,15 +137,15 @@ export const DIFFICULTY_CONFIG: Record<
     label: 'Hard',
     description:
       'No second chances on lives. Every mistake brings you closer to defeat.',
-    icon: '⚔️'
+    icon: '⚔️',
   },
   'instant-death': {
     lives: 1,
     regenerates: false,
     label: 'Instant Death',
     description: "One strike and you're out. For true masters only.",
-    icon: '💀'
-  }
+    icon: '💀',
+  },
 };
 
 export const REPETITION_OPTIONS = [3, 5, 10, 15, 20] as const;

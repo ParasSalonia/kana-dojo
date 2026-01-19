@@ -69,19 +69,19 @@ const useStore = create<StoreState>()(
       // Actions
       addItem: item =>
         set(state => ({
-          items: [...state.items, item]
+          items: [...state.items, item],
         })),
 
       removeItem: id =>
         set(state => ({
-          items: state.items.filter(i => i.id !== id)
+          items: state.items.filter(i => i.id !== id),
         })),
 
-      setLoading: loading => set({ loading })
+      setLoading: loading => set({ loading }),
     }),
     // Persistence configuration
-    { name: 'storage-key' }
-  )
+    { name: 'storage-key' },
+  ),
 );
 
 export default useStore;
@@ -370,10 +370,10 @@ const useStore = create<StoreState>()(
       partialize: state => ({
         // Only persist these fields
         theme: state.theme,
-        font: state.font
-      })
-    }
-  )
+        font: state.font,
+      }),
+    },
+  ),
 );
 ```
 
@@ -396,9 +396,9 @@ const useStore = create<StoreState>()(
           return { ...oldState, version: 2 };
         }
         return oldState;
-      }
-    }
-  )
+      },
+    },
+  ),
 );
 ```
 
@@ -415,7 +415,7 @@ Each store should manage one feature area:
 const useStore = create(set => ({
   theme: 'dark',
   currentGame: null,
-  userStats: null
+  userStats: null,
   // ... 50+ properties
 }));
 
@@ -448,8 +448,8 @@ const useStore = create(
     set => ({
       /* ... */
     }),
-    { name: 'my-store' }
-  )
+    { name: 'my-store' },
+  ),
 );
 ```
 
@@ -469,7 +469,7 @@ const useStore = create(set => ({
     } catch (error) {
       set({ error: error.message, loading: false });
     }
-  }
+  },
 }));
 ```
 
@@ -493,10 +493,10 @@ const useNewFeatureStore = create<NewFeatureState>()(
   persist(
     set => ({
       value: 'default',
-      setValue: value => set({ value })
+      setValue: value => set({ value }),
     }),
-    { name: 'new-feature-storage' }
-  )
+    { name: 'new-feature-storage' },
+  ),
 );
 
 export default useNewFeatureStore;

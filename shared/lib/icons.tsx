@@ -11,7 +11,7 @@ import {
   Snail,
   Squirrel,
   Turtle,
-  Worm
+  Worm,
 } from 'lucide-react';
 
 export const animalIcons = [
@@ -27,7 +27,7 @@ export const animalIcons = [
   <Snail key='snail' className='text-[var(--secondary-color)]' />,
   <Squirrel key='squirrel' className='text-[var(--secondary-color)]' />,
   <Turtle key='turtle' className='text-[var(--secondary-color)]' />,
-  <Worm key='worm' className='text-[var(--secondary-color)]' />
+  <Worm key='worm' className='text-[var(--secondary-color)]' />,
 ];
 
 export const animalIconsLength = animalIcons.length;

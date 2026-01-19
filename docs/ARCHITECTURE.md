@@ -432,12 +432,12 @@ export const useFeatureStore = create<FeatureState>()(
 
       // Actions
       setData: data => set({ data }),
-      reset: () => set({ data: [] })
+      reset: () => set({ data: [] }),
     }),
     {
-      name: 'feature-storage' // localStorage key
-    }
-  )
+      name: 'feature-storage', // localStorage key
+    },
+  ),
 );
 
 export default useFeatureStore;
@@ -545,9 +545,9 @@ export const useNewFeatureStore = create<NewFeatureState>()(
       // ...
     }),
     {
-      name: 'new-feature-storage'
-    }
-  )
+      name: 'new-feature-storage',
+    },
+  ),
 );
 
 export default useNewFeatureStore;
@@ -580,7 +580,6 @@ export default function NewFeaturePage() {
 ### Adding a Shared Component
 
 1. **Determine if truly shared:**
-
    - Is it used by 2+ features?
    - Is it generic and not feature-specific?
 
@@ -731,17 +730,14 @@ During migration, obsolete files were removed:
 ### Critical Fixes
 
 1. **Circular dependency in Preferences.ts:**
-
    - Changed import from `@/features/Preferences` to `../store/useCustomThemeStore`
 
 2. **Incorrect exports in barrels:**
-
    - Fixed 7+ `index.ts` files to match actual exports
    - Added missing component exports
    - Added missing type exports
 
 3. **Component paths:**
-
    - Fixed Game paths (from `Game/Game` to `Game`)
    - Removed non-existent exports (hiragana, katakana)
 

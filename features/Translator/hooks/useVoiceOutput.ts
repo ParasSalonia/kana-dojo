@@ -26,7 +26,7 @@ interface UseVoiceOutputReturn {
 export function useVoiceOutput({
   language,
   onEnd,
-  onError
+  onError,
 }: UseVoiceOutputOptions): UseVoiceOutputReturn {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -84,7 +84,7 @@ export function useVoiceOutput({
       const preferredVoice = voices.find(
         voice =>
           voice.lang.startsWith(language === 'ja' ? 'ja' : 'en') &&
-          voice.localService
+          voice.localService,
       );
 
       if (preferredVoice) {
@@ -140,7 +140,7 @@ export function useVoiceOutput({
       utteranceRef.current = utterance;
       window.speechSynthesis.speak(utterance);
     },
-    [isSupported, language, onEnd, onError]
+    [isSupported, language, onEnd, onError],
   );
 
   const stop = useCallback(() => {
@@ -173,6 +173,6 @@ export function useVoiceOutput({
     stop,
     pause,
     resume,
-    isPaused
+    isPaused,
   };
 }

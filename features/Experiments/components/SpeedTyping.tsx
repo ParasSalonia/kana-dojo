@@ -97,19 +97,19 @@ const SpeedTyping = () => {
         setInput('');
       }
     },
-    [queue, playCorrect, playError]
+    [queue, playCorrect, playError],
   );
 
   if (!isMounted) return null;
 
   return (
-    <div className='flex flex-col items-center justify-center gap-8 flex-1 min-h-[80vh]'>
+    <div className='flex min-h-[80vh] flex-1 flex-col items-center justify-center gap-8'>
       {/* Header */}
       <div className='text-center'>
-        <h1 className='text-2xl md:text-3xl text-[var(--main-color)]'>
+        <h1 className='text-2xl text-[var(--main-color)] md:text-3xl'>
           Speed Typing
         </h1>
-        <p className='text-[var(--secondary-color)] mt-2'>
+        <p className='mt-2 text-[var(--secondary-color)]'>
           Type the romanji as fast as you can!
         </p>
       </div>
@@ -118,11 +118,11 @@ const SpeedTyping = () => {
         <button
           onClick={startGame}
           className={clsx(
-            'px-8 py-4 rounded-xl flex items-center gap-3',
-            'bg-[var(--card-color)] border-2 border-[var(--border-color)]',
-            'text-[var(--main-color)] text-xl',
+            'flex items-center gap-3 rounded-xl px-8 py-4',
+            'border-2 border-[var(--border-color)] bg-[var(--card-color)]',
+            'text-xl text-[var(--main-color)]',
             'hover:cursor-pointer hover:border-[var(--main-color)]',
-            'transition-all duration-250 active:scale-95'
+            'transition-all duration-250 active:scale-95',
           )}
         >
           <Play size={24} />
@@ -133,7 +133,7 @@ const SpeedTyping = () => {
       {gameState === 'playing' && (
         <>
           {/* Stats bar */}
-          <div className='flex justify-between w-full max-w-md text-lg'>
+          <div className='flex w-full max-w-md justify-between text-lg'>
             <span className='text-[var(--secondary-color)]'>
               Score: <span className='text-[var(--main-color)]'>{score}</span>
             </span>
@@ -152,20 +152,20 @@ const SpeedTyping = () => {
               <div
                 key={i}
                 className={clsx(
-                  'flex flex-col items-center p-4 rounded-xl transition-all',
+                  'flex flex-col items-center rounded-xl p-4 transition-all',
                   i === 0
-                    ? 'bg-[var(--card-color)] border-2 border-[var(--main-color)] scale-110'
-                    : 'opacity-50'
+                    ? 'scale-110 border-2 border-[var(--main-color)] bg-[var(--card-color)]'
+                    : 'opacity-50',
                 )}
               >
                 <span
                   lang='ja'
-                  className='text-4xl md:text-5xl text-[var(--main-color)]'
+                  className='text-4xl text-[var(--main-color)] md:text-5xl'
                 >
                   {kana.kana}
                 </span>
                 {i === 0 && (
-                  <span className='text-xs text-[var(--secondary-color)] mt-1'>
+                  <span className='mt-1 text-xs text-[var(--secondary-color)]'>
                     {kana.romanji}
                   </span>
                 )}
@@ -180,10 +180,10 @@ const SpeedTyping = () => {
             value={input}
             onChange={handleInput}
             className={clsx(
-              'w-full max-w-xs px-6 py-4 text-2xl text-center rounded-xl',
-              'bg-[var(--card-color)] border-2 border-[var(--border-color)]',
+              'w-full max-w-xs rounded-xl px-6 py-4 text-center text-2xl',
+              'border-2 border-[var(--border-color)] bg-[var(--card-color)]',
               'text-[var(--main-color)] outline-none',
-              'focus:border-[var(--main-color)]'
+              'focus:border-[var(--main-color)]',
             )}
             placeholder='Type here...'
             autoComplete='off'
@@ -196,11 +196,11 @@ const SpeedTyping = () => {
         <div className='flex flex-col items-center gap-6'>
           <div
             className={clsx(
-              'bg-[var(--card-color)] border border-[var(--border-color)]',
-              'rounded-2xl p-8 text-center'
+              'border border-[var(--border-color)] bg-[var(--card-color)]',
+              'rounded-2xl p-8 text-center',
             )}
           >
-            <h2 className='text-2xl text-[var(--main-color)] mb-4'>Results</h2>
+            <h2 className='mb-4 text-2xl text-[var(--main-color)]'>Results</h2>
             <div className='space-y-2'>
               <p className='text-lg text-[var(--secondary-color)]'>
                 Correct:{' '}
@@ -218,7 +218,7 @@ const SpeedTyping = () => {
                   %
                 </span>
               </p>
-              <p className='text-2xl text-[var(--main-color)] mt-4'>
+              <p className='mt-4 text-2xl text-[var(--main-color)]'>
                 {wpm} KPM
               </p>
               <p className='text-sm text-[var(--secondary-color)]'>
@@ -230,11 +230,11 @@ const SpeedTyping = () => {
           <button
             onClick={startGame}
             className={clsx(
-              'px-6 py-3 rounded-xl flex items-center gap-2',
-              'bg-[var(--card-color)] border border-[var(--border-color)]',
+              'flex items-center gap-2 rounded-xl px-6 py-3',
+              'border border-[var(--border-color)] bg-[var(--card-color)]',
               'text-[var(--main-color)]',
               'hover:cursor-pointer hover:border-[var(--main-color)]',
-              'transition-all duration-250 active:scale-95'
+              'transition-all duration-250 active:scale-95',
             )}
           >
             <RotateCcw size={20} />

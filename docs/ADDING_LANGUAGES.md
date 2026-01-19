@@ -39,6 +39,7 @@ Open the new file and translate all strings:
 ```
 
 **Important Sections to Translate:**
+
 - `home` - Homepage metadata
 - `kana`, `kanji`, `vocabulary` - Main learning sections
 - `kanaBlitz`, `kanjiBlitz`, `vocabularyBlitz` - Speed test modes
@@ -53,7 +54,7 @@ Open the new file and translate all strings:
 ```typescript
 export const routing = defineRouting({
   locales: ['en', 'es', 'ja', 'YOUR_LOCALE'], // Add your locale here
-  defaultLocale: 'en'
+  defaultLocale: 'en',
 });
 ```
 
@@ -66,7 +67,7 @@ Add your locale to the OpenGraph alternates:
 ```typescript
 openGraph: {
   // ...existing config
-  alternateLocale: ['es_ES', 'ja_JP', 'YOUR_LOCALE'] // Add here
+  alternateLocale: ['es_ES', 'ja_JP', 'YOUR_LOCALE']; // Add here
 }
 ```
 
@@ -105,6 +106,7 @@ npm run build
 ## 📊 SEO Impact of Each Language
 
 Adding one new language adds approximately:
+
 - **90+ indexed pages** (all routes × 1 locale)
 - **50+ kana subset pages** (with full SEO)
 - **Estimated +200-400 monthly visits** per language
@@ -112,18 +114,21 @@ Adding one new language adds approximately:
 ## 🎯 Recommended Languages by Market
 
 ### High Priority (Large Learning Markets):
+
 1. **Portuguese (pt)** - Brazil market (~200M speakers)
 2. **French (fr)** - France, Canada, Africa (~280M speakers)
 3. **German (de)** - Germany, Austria, Switzerland (~100M speakers)
 4. **Italian (it)** - Italy market (~85M speakers)
 
 ### Medium Priority (Growing Markets):
+
 5. **Korean (ko)** - Korea, strong Japanese learning interest
 6. **Chinese Simplified (zh)** - China, massive market
 7. **Russian (ru)** - Russia, Eastern Europe
 8. **Indonesian (id)** - Indonesia, large population
 
 ### Future Consideration:
+
 - Thai (th)
 - Vietnamese (vi)
 - Arabic (ar)
@@ -135,31 +140,32 @@ Your metadata file should include these sections:
 
 ```json
 {
-  "home": {},           // Homepage
-  "kana": {},           // Kana main page
-  "kanaBlitz": {},      // Kana speed test
-  "kanaGauntlet": {},   // Kana mastery mode
-  "kanaTrain": {},      // Kana training
-  "kanji": {},          // Kanji main page
-  "kanjiBlitz": {},     // Kanji speed test
-  "kanjiGauntlet": {},  // Kanji mastery mode
-  "kanjiTrain": {},     // Kanji training
-  "vocabulary": {},     // Vocabulary main page
-  "vocabularyBlitz": {},    // Vocabulary speed test
+  "home": {}, // Homepage
+  "kana": {}, // Kana main page
+  "kanaBlitz": {}, // Kana speed test
+  "kanaGauntlet": {}, // Kana mastery mode
+  "kanaTrain": {}, // Kana training
+  "kanji": {}, // Kanji main page
+  "kanjiBlitz": {}, // Kanji speed test
+  "kanjiGauntlet": {}, // Kanji mastery mode
+  "kanjiTrain": {}, // Kanji training
+  "vocabulary": {}, // Vocabulary main page
+  "vocabularyBlitz": {}, // Vocabulary speed test
   "vocabularyGauntlet": {}, // Vocabulary mastery
-  "vocabularyTrain": {},    // Vocabulary training
-  "academy": {},        // Academy/blog
-  "preferences": {},    // Settings page
-  "progress": {},       // Statistics page
-  "privacy": {},        // Privacy policy
-  "terms": {},          // Terms of service
-  "security": {},       // Security policy
-  "credits": {},        // Credits page
-  "patchNotes": {},     // Version history
-  "experiments": {},    // Experimental features
-  "translate": {},      // Translator tool
-  "zen": {},            // Zen mode
-  "kanaSubset": {       // ⭐ MOST IMPORTANT FOR SEO
+  "vocabularyTrain": {}, // Vocabulary training
+  "academy": {}, // Academy/blog
+  "preferences": {}, // Settings page
+  "progress": {}, // Statistics page
+  "privacy": {}, // Privacy policy
+  "terms": {}, // Terms of service
+  "security": {}, // Security policy
+  "credits": {}, // Credits page
+  "patchNotes": {}, // Version history
+  "experiments": {}, // Experimental features
+  "translate": {}, // Translator tool
+  "zen": {}, // Zen mode
+  "kanaSubset": {
+    // ⭐ MOST IMPORTANT FOR SEO
     "hiraganaBase": {},
     "hiraganaDakuon": {},
     "hiraganaYoon": {},
@@ -176,11 +182,13 @@ Your metadata file should include these sections:
 ### 1. Use Native Keywords
 
 **❌ Bad (Direct translation):**
+
 ```json
 "keywords": "learn japanese, hiragana practice"
 ```
 
 **✅ Good (Native SEO keywords):**
+
 ```json
 // For Portuguese
 "keywords": "aprender japonês, prática hiragana"
@@ -193,11 +201,13 @@ Your metadata file should include these sections:
 ### 2. Localize Titles Naturally
 
 **❌ Bad:**
+
 ```json
 "title": "KanaDojo - Learn Japanese Hiragana, Katakana..."
 ```
 
 **✅ Good:**
+
 ```json
 // Portuguese
 "title": "KanaDojo - Aprenda Japonês Hiragana, Katakana..."
@@ -208,6 +218,7 @@ Your metadata file should include these sections:
 ### 3. Research Local Search Terms
 
 Use tools like:
+
 - Google Keyword Planner (for target country)
 - Google Trends (compare keyword variants)
 - Answer The Public (find question-based keywords)
@@ -247,17 +258,20 @@ Japanese characters (あ, ア, 漢字) are universal - keep them in all language
 ## ⏱️ Performance Impact
 
 ### Development Server:
+
 - **Per language:** +0.2-0.5 sec startup time
 - **5 languages:** ~3 sec total startup
 - **10 languages:** ~4 sec total startup
 - **Negligible HMR impact**
 
 ### Production Build:
+
 - **Per language:** +30-60 sec build time
 - **5 languages:** ~2-3 min total
 - **10 languages:** ~4-6 min total
 
 ### Runtime:
+
 - **Zero impact** - users only load one locale
 - **No bundle size increase** per language
 
@@ -278,6 +292,7 @@ For each new language, you get:
 ### Issue: Pages show English instead of new language
 
 **Solution:** Check that:
+
 1. Metadata file exists in `core/i18n/locales/[LOCALE]/metadata.json`
 2. Locale is added to `core/i18n/routing.ts`
 3. Dev server was restarted after changes
@@ -285,11 +300,13 @@ For each new language, you get:
 ### Issue: Build fails with new locale
 
 **Solution:** Run type checking:
+
 ```bash
 npm run check
 ```
 
 Common issues:
+
 - Missing required metadata keys
 - Malformed JSON syntax
 - Missing commas in metadata.json
@@ -297,6 +314,7 @@ Common issues:
 ### Issue: Sitemap doesn't include new locale
 
 **Solution:**
+
 1. Verify locale in routing.ts
 2. Run `npm run build` (sitemap generates post-build)
 3. Check `public/sitemap.xml`

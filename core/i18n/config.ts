@@ -12,11 +12,11 @@ export const defaultLocale: Locale = 'en';
 export const localeNames: Record<AllLocale, string> = {
   en: 'English',
   es: 'Español',
-  ja: '日本語'
+  ja: '日本語',
 };
 
 export const localeLabels: Record<AllLocale, string> = {
   en: 'EN',
   es: 'ES',
-  ja: 'JA'
+  ja: 'JA',
 };

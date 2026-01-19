@@ -19,7 +19,7 @@ const toWordObj = (entry: RawVocabEntry): IWord => {
     word: entry.kanji?.trim() || entry.kana,
     reading: `${entry.kana}`.trim(),
     displayMeanings: definitionPieces,
-    meanings: definitionPieces
+    meanings: definitionPieces,
   };
 };
 
@@ -89,7 +89,7 @@ export const vocabDataService = {
     Object.keys(vocabCache).forEach(key => {
       delete vocabCache[key as VocabLevel];
     });
-  }
+  },
 };
 
 export type { VocabLevel };

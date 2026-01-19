@@ -44,7 +44,7 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
               openIndex === index ? 'max-h-96' : 'max-h-0'
             }`}
           >
-            <div className='px-6 pb-4 pt-2 text-[var(--secondary-color)]'>
+            <div className='px-6 pt-2 pb-4 text-[var(--secondary-color)]'>
               {faq.answer}
             </div>
           </div>

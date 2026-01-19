@@ -4,14 +4,14 @@ export type { GameStats, GameStatsActions } from './useGameStats';
 export {
   useStatsDisplay,
   useSessionStats,
-  useTimedStats
+  useTimedStats,
 } from './useStatsDisplay';
 export type { StatsDisplay, SessionStats, TimedStats } from './useStatsDisplay';
 
 export { statsTracking } from './statsTracking';
 export type {
   RecordGauntletRunParams,
-  RecordBlitzSessionParams
+  RecordBlitzSessionParams,
 } from './statsTracking';
 
 export { progressBackup } from './backup';

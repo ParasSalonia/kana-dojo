@@ -63,7 +63,7 @@ const PUBLISHER_LOGO = 'https://kanadojo.com/logo.png';
  */
 export function generateArticleSchema(
   post: BlogPost,
-  options: ArticleSchemaOptions = {}
+  options: ArticleSchemaOptions = {},
 ): ArticleSchema {
   const baseUrl = options.baseUrl ?? BASE_URL;
   const publisherName = options.publisherName ?? PUBLISHER_NAME;
@@ -85,18 +85,18 @@ export function generateArticleSchema(
       '@type': 'Person',
       name: post.author,
       url: `${baseUrl}/academy?author=${encodeURIComponent(post.author)}`,
-      image: `${baseUrl}/api/og?title=${encodeURIComponent(post.author)}&type=academy`
+      image: `${baseUrl}/api/og?title=${encodeURIComponent(post.author)}&type=academy`,
     },
     publisher: {
       '@type': 'Organization',
       name: publisherName,
       logo: {
         '@type': 'ImageObject',
-        url: publisherLogo
-      }
+        url: publisherLogo,
+      },
     },
     mainEntityOfPage,
-    inLanguage: post.locale || 'en'
+    inLanguage: post.locale || 'en',
   };
 
   // Add dateModified if present

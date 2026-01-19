@@ -31,22 +31,22 @@ interface GauntletSettingsState {
   // Actions
   setGameMode: (
     dojoType: 'kana' | 'kanji' | 'vocabulary',
-    gameMode: GauntletGameMode
+    gameMode: GauntletGameMode,
   ) => void;
   setDifficulty: (
     dojoType: 'kana' | 'kanji' | 'vocabulary',
-    difficulty: GauntletDifficulty
+    difficulty: GauntletDifficulty,
   ) => void;
   setRepetitions: (
     dojoType: 'kana' | 'kanji' | 'vocabulary',
-    repetitions: RepetitionCount
+    repetitions: RepetitionCount,
   ) => void;
   getGameMode: (dojoType: 'kana' | 'kanji' | 'vocabulary') => GauntletGameMode;
   getDifficulty: (
-    dojoType: 'kana' | 'kanji' | 'vocabulary'
+    dojoType: 'kana' | 'kanji' | 'vocabulary',
   ) => GauntletDifficulty;
   getRepetitions: (
-    dojoType: 'kana' | 'kanji' | 'vocabulary'
+    dojoType: 'kana' | 'kanji' | 'vocabulary',
   ) => RepetitionCount;
 }
 
@@ -146,12 +146,12 @@ const useGauntletSettingsStore = create<GauntletSettingsState>()(
           default:
             return 10;
         }
-      }
+      },
     }),
     {
-      name: 'gauntlet-settings-storage'
-    }
-  )
+      name: 'gauntlet-settings-storage',
+    },
+  ),
 );
 
 export default useGauntletSettingsStore;

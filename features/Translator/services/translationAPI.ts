@@ -1,7 +1,7 @@
 import type {
   Language,
   TranslationAPIResponse,
-  TranslationAPIError
+  TranslationAPIError,
 } from '../types';
 
 // Client-side cache to reduce API calls
@@ -18,7 +18,7 @@ const pendingRequests = new Map<string, Promise<TranslationAPIResponse>>();
 function getClientCacheKey(
   text: string,
   source: Language,
-  target: Language
+  target: Language,
 ): string {
   return `${source}:${target}:${text.trim()}`;
 }
@@ -43,7 +43,7 @@ export const ERROR_CODES = {
   API_ERROR: 'API_ERROR',
   AUTH_ERROR: 'AUTH_ERROR',
   NETWORK_ERROR: 'NETWORK_ERROR',
-  OFFLINE: 'OFFLINE'
+  OFFLINE: 'OFFLINE',
 } as const;
 
 /**
@@ -58,7 +58,7 @@ export const ERROR_MESSAGES: Record<string, string> = {
   [ERROR_CODES.NETWORK_ERROR]:
     'Unable to connect. Please check your internet connection.',
   [ERROR_CODES.OFFLINE]:
-    'You are offline. Please check your internet connection.'
+    'You are offline. Please check your internet connection.',
 };
 
 /**
@@ -89,14 +89,14 @@ export function isOnline(): boolean {
 export async function translate(
   text: string,
   sourceLanguage: Language,
-  targetLanguage: Language
+  targetLanguage: Language,
 ): Promise<TranslationAPIResponse> {
   // Check if offline
   if (!isOnline()) {
     const error: TranslationAPIError = {
       code: ERROR_CODES.OFFLINE,
       message: getErrorMessage(ERROR_CODES.OFFLINE),
-      status: 0
+      status: 0,
     };
     throw error;
   }
@@ -106,7 +106,7 @@ export async function translate(
     const error: TranslationAPIError = {
       code: ERROR_CODES.INVALID_INPUT,
       message: 'Please enter text to translate.',
-      status: 400
+      status: 400,
     };
     throw error;
   }
@@ -115,7 +115,7 @@ export async function translate(
     const error: TranslationAPIError = {
       code: ERROR_CODES.INVALID_INPUT,
       message: 'Text exceeds maximum length of 5000 characters.',
-      status: 400
+      status: 400,
     };
     throw error;
   }
@@ -138,68 +138,68 @@ export async function translate(
   const requestPromise = (async (): Promise<TranslationAPIResponse> => {
     try {
       const fetchResponse = await fetch('/api/translate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        text,
-        sourceLanguage,
-        targetLanguage
-      })
-    });
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text,
+          sourceLanguage,
+          targetLanguage,
+        }),
+      });
 
-    const data = await fetchResponse.json();
+      const data = await fetchResponse.json();
 
-    // Handle error responses
-    if (!fetchResponse.ok) {
-      const error: TranslationAPIError = {
-        code: data.code || ERROR_CODES.API_ERROR,
-        message: data.message || getErrorMessage(data.code),
-        status: fetchResponse.status
-      };
-      throw error;
-    }
+      // Handle error responses
+      if (!fetchResponse.ok) {
+        const error: TranslationAPIError = {
+          code: data.code || ERROR_CODES.API_ERROR,
+          message: data.message || getErrorMessage(data.code),
+          status: fetchResponse.status,
+        };
+        throw error;
+      }
 
-    const translationResult = data as TranslationAPIResponse;
+      const translationResult = data as TranslationAPIResponse;
 
-    // Cache successful response
-    clientCache.set(cacheKey, {
-      response: translationResult,
-      timestamp: Date.now()
-    });
-    cleanupClientCache();
+      // Cache successful response
+      clientCache.set(cacheKey, {
+        response: translationResult,
+        timestamp: Date.now(),
+      });
+      cleanupClientCache();
 
-    return translationResult;
-  } catch (error) {
-    // Re-throw if it's already a TranslationAPIError
-    if (
-      error &&
-      typeof error === 'object' &&
-      'code' in error &&
-      'message' in error &&
-      'status' in error
-    ) {
-      throw error;
-    }
+      return translationResult;
+    } catch (error) {
+      // Re-throw if it's already a TranslationAPIError
+      if (
+        error &&
+        typeof error === 'object' &&
+        'code' in error &&
+        'message' in error &&
+        'status' in error
+      ) {
+        throw error;
+      }
 
-    // Handle network errors
-    if (error instanceof TypeError) {
+      // Handle network errors
+      if (error instanceof TypeError) {
+        const apiError: TranslationAPIError = {
+          code: ERROR_CODES.NETWORK_ERROR,
+          message: getErrorMessage(ERROR_CODES.NETWORK_ERROR),
+          status: 0,
+        };
+        throw apiError;
+      }
+
+      // Handle other errors
       const apiError: TranslationAPIError = {
-        code: ERROR_CODES.NETWORK_ERROR,
-        message: getErrorMessage(ERROR_CODES.NETWORK_ERROR),
-        status: 0
+        code: ERROR_CODES.API_ERROR,
+        message: getErrorMessage(ERROR_CODES.API_ERROR),
+        status: 500,
       };
       throw apiError;
-    }
-
-    // Handle other errors
-    const apiError: TranslationAPIError = {
-      code: ERROR_CODES.API_ERROR,
-      message: getErrorMessage(ERROR_CODES.API_ERROR),
-      status: 500
-    };
-    throw apiError;
     }
   })();
 

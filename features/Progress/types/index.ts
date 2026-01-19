@@ -12,5 +12,5 @@ export type {
   MasteryDistribution,
   AchievementSummary,
   AggregatedStats,
-  RawCharacterMastery
+  RawCharacterMastery,
 } from './stats';

@@ -27,7 +27,7 @@ const KanaShadow = () => {
     const options = [correct, ...Array.from(wrongIndices).map(i => allKana[i])];
     return {
       shadow: correct,
-      options: options.sort(() => Math.random() - 0.5)
+      options: options.sort(() => Math.random() - 0.5),
     };
   };
 
@@ -61,7 +61,7 @@ const KanaShadow = () => {
         className={clsx(
           'flex h-40 w-40 items-center justify-center rounded-2xl',
           'border-2 border-[var(--border-color)] bg-[var(--card-color)]',
-          'transition-all duration-500'
+          'transition-all duration-500',
         )}
       >
         <span
@@ -69,7 +69,7 @@ const KanaShadow = () => {
           className='text-7xl text-[var(--main-color)] transition-all duration-500'
           style={{
             filter: revealed ? 'blur(0)' : 'blur(8px)',
-            opacity: revealed ? 1 : 0.6
+            opacity: revealed ? 1 : 0.6,
           }}
         >
           {currentRound.shadow.kana}
@@ -90,7 +90,7 @@ const KanaShadow = () => {
                 ? 'border-green-500 bg-green-500/20 text-green-400'
                 : revealed && feedback === 'wrong'
                   ? 'border-[var(--border-color)] opacity-50'
-                  : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] hover:scale-105 hover:border-[var(--accent-color)]'
+                  : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] hover:scale-105 hover:border-[var(--accent-color)]',
             )}
           >
             {opt.kana}
@@ -103,7 +103,7 @@ const KanaShadow = () => {
           <p
             className={clsx(
               'text-xl',
-              feedback === 'correct' ? 'text-green-400' : 'text-red-400'
+              feedback === 'correct' ? 'text-green-400' : 'text-red-400',
             )}
           >
             {feedback === 'correct' ? '✓ Correct!' : '✗ Wrong!'} It's "

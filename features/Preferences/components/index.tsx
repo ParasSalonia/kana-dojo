@@ -10,7 +10,7 @@ import {
   Sparkles,
   CaseSensitive,
   Blocks,
-  Palette
+  Palette,
   // Target
 } from 'lucide-react';
 
@@ -60,7 +60,7 @@ const Settings = () => {
       <div className='mb-12 flex flex-col gap-4'>
         <h3
           className={clsx(
-            'flex flex-row items-end gap-2 border-b-0 border-[var(--border-color)] py-6 text-3xl'
+            'flex flex-row items-end gap-2 border-b-0 border-[var(--border-color)] py-6 text-3xl',
           )}
         >
           <Blocks size={32} />

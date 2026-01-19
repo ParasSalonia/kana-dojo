@@ -9,8 +9,8 @@ const Stars = () => {
   const animalIconsToDisplay = iconIndices.map(index => animalIcons[index]);
 
   return (
-    <div className='flex gap-2 mt-4'>
-      <div className='grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 xl:grid-cols-20 gap-2'>
+    <div className='mt-4 flex gap-2'>
+      <div className='grid grid-cols-5 gap-2 md:grid-cols-10 lg:grid-cols-15 xl:grid-cols-20'>
         {/* {Array.from({ length: stars }, (_, index) => (
           <Star
             key={index}
@@ -39,17 +39,17 @@ const Stars = () => {
               iconIndices.length >= 20
                 ? 'motion-safe:animate-ping'
                 : iconIndices.length >= 15
-                ? 'motion-safe:animate-spin'
-                : iconIndices.length >= 10
-                ? 'motion-safe:animate-bounce'
-                : iconIndices.length >= 5
-                ? 'motion-safe:animate-pulse'
-                : ''
+                  ? 'motion-safe:animate-spin'
+                  : iconIndices.length >= 10
+                    ? 'motion-safe:animate-bounce'
+                    : iconIndices.length >= 5
+                      ? 'motion-safe:animate-pulse'
+                      : '',
             )}
             style={{
               animationDelay: `${
                 index * (iconIndices.length >= 20 ? 500 : 100)
-              }ms`
+              }ms`,
             }}
           >
             {Icon}

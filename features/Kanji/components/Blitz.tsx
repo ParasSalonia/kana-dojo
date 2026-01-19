@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useKanjiStore, {
-  type IKanjiObj
+  type IKanjiObj,
 } from '@/features/Kanji/store/useKanjiStore';
 import { useStatsStore } from '@/features/Progress';
 import Blitz, { type BlitzConfig } from '@/shared/components/Blitz';
@@ -13,7 +13,7 @@ export default function BlitzKanji() {
   const selectedKanjiObjs = useKanjiStore(state => state.selectedKanjiObjs);
   const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
   const selectedGameModeKanji = useKanjiStore(
-    state => state.selectedGameModeKanji
+    state => state.selectedGameModeKanji,
   );
 
   const {
@@ -23,7 +23,7 @@ export default function BlitzKanji() {
     timedKanjiBestStreak,
     incrementTimedKanjiCorrectAnswers,
     incrementTimedKanjiWrongAnswers,
-    resetTimedKanjiStats
+    resetTimedKanjiStats,
   } = useStatsStore();
 
   const formattedSets = React.useMemo(() => {
@@ -53,13 +53,13 @@ export default function BlitzKanji() {
           question.kunyomi.some(k => k.split(' ')[0] === answer) ||
           question.onyomi.some(k => k.split(' ')[0] === answer) ||
           question.meanings.some(
-            meaning => answer.toLowerCase() === meaning.toLowerCase()
+            meaning => answer.toLowerCase() === meaning.toLowerCase(),
           )
         );
       }
       // Normal: answer should match any meaning
       return question.meanings.some(
-        meaning => answer.toLowerCase() === meaning.toLowerCase()
+        meaning => answer.toLowerCase() === meaning.toLowerCase(),
       );
     },
     getCorrectAnswer: (question, isReverse) =>
@@ -70,7 +70,7 @@ export default function BlitzKanji() {
         // Reverse: options are kanji characters
         const correctAnswer = question.kanjiChar;
         const incorrectOptions = shuffle(
-          items.filter(item => item.kanjiChar !== question.kanjiChar)
+          items.filter(item => item.kanjiChar !== question.kanjiChar),
         )
           .slice(0, count - 1)
           .map(item => item.kanjiChar);
@@ -79,7 +79,7 @@ export default function BlitzKanji() {
       // Normal: options are meanings
       const correctAnswer = question.meanings[0];
       const incorrectOptions = shuffle(
-        items.filter(item => item.kanjiChar !== question.kanjiChar)
+        items.filter(item => item.kanjiChar !== question.kanjiChar),
       )
         .slice(0, count - 1)
         .map(item => item.meanings[0]);
@@ -95,8 +95,8 @@ export default function BlitzKanji() {
       bestStreak: timedKanjiBestStreak,
       incrementCorrect: incrementTimedKanjiCorrectAnswers,
       incrementWrong: incrementTimedKanjiWrongAnswers,
-      reset: resetTimedKanjiStats
-    }
+      reset: resetTimedKanjiStats,
+    },
   };
 
   return <Blitz config={config} />;

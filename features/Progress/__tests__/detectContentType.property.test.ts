@@ -11,7 +11,7 @@ import {
   KATAKANA_START,
   KATAKANA_END,
   KANJI_START,
-  KANJI_END
+  KANJI_END,
 } from '../lib/detectContentType';
 
 // Arbitraries for generating characters in specific Unicode ranges
@@ -44,21 +44,21 @@ describe('Content Type Detection', () => {
         fc.property(
           fc.array(fc.oneof(kanaCharArb, kanjiCharArb), {
             minLength: 1,
-            maxLength: 20
+            maxLength: 20,
           }),
           characters => {
             const filtered = filterByContentType(characters, 'kana');
             const expectedCount = characters.filter(
-              c => detectContentType(c) === 'kana'
+              c => detectContentType(c) === 'kana',
             ).length;
 
             expect(filtered.length).toBe(expectedCount);
             filtered.forEach(char => {
               expect(detectContentType(char)).toBe('kana');
             });
-          }
+          },
         ),
-        { numRuns: 25 }
+        { numRuns: 25 },
       );
     });
 
@@ -67,21 +67,21 @@ describe('Content Type Detection', () => {
         fc.property(
           fc.array(fc.oneof(kanaCharArb, kanjiCharArb), {
             minLength: 1,
-            maxLength: 20
+            maxLength: 20,
           }),
           characters => {
             const filtered = filterByContentType(characters, 'kanji');
             const expectedCount = characters.filter(
-              c => detectContentType(c) === 'kanji'
+              c => detectContentType(c) === 'kanji',
             ).length;
 
             expect(filtered.length).toBe(expectedCount);
             filtered.forEach(char => {
               expect(detectContentType(char)).toBe('kanji');
             });
-          }
+          },
         ),
-        { numRuns: 25 }
+        { numRuns: 25 },
       );
     });
 
@@ -94,23 +94,23 @@ describe('Content Type Detection', () => {
               kanjiCharArb,
               fc
                 .array(kanjiCharArb, { minLength: 2, maxLength: 4 })
-                .map(arr => arr.join(''))
+                .map(arr => arr.join('')),
             ),
-            { minLength: 1, maxLength: 10 }
+            { minLength: 1, maxLength: 10 },
           ),
           characters => {
             const filtered = filterByContentType(characters, 'vocabulary');
             const expectedCount = characters.filter(
-              c => detectContentType(c) === 'vocabulary'
+              c => detectContentType(c) === 'vocabulary',
             ).length;
 
             expect(filtered.length).toBe(expectedCount);
             filtered.forEach(char => {
               expect(detectContentType(char)).toBe('vocabulary');
             });
-          }
+          },
         ),
-        { numRuns: 25 }
+        { numRuns: 25 },
       );
     });
 
@@ -123,22 +123,22 @@ describe('Content Type Detection', () => {
               kanjiCharArb,
               fc
                 .array(kanjiCharArb, { minLength: 2, maxLength: 3 })
-                .map(arr => arr.join(''))
+                .map(arr => arr.join('')),
             ),
-            { minLength: 0, maxLength: 15 }
+            { minLength: 0, maxLength: 15 },
           ),
           characters => {
             const kanaCount = filterByContentType(characters, 'kana').length;
             const kanjiCount = filterByContentType(characters, 'kanji').length;
             const vocabCount = filterByContentType(
               characters,
-              'vocabulary'
+              'vocabulary',
             ).length;
 
             expect(kanaCount + kanjiCount + vocabCount).toBe(characters.length);
-          }
+          },
         ),
-        { numRuns: 25 }
+        { numRuns: 25 },
       );
     });
   });
@@ -150,7 +150,7 @@ describe('Content Type Detection', () => {
           expect(detectContentType(char)).toBe('kana');
           expect(isHiragana(char.charCodeAt(0))).toBe(true);
         }),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -160,7 +160,7 @@ describe('Content Type Detection', () => {
           expect(detectContentType(char)).toBe('kana');
           expect(isKatakana(char.charCodeAt(0))).toBe(true);
         }),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -170,7 +170,7 @@ describe('Content Type Detection', () => {
           expect(detectContentType(char)).toBe('kanji');
           expect(isKanji(char.charCodeAt(0))).toBe(true);
         }),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
   });

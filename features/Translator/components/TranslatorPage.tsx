@@ -15,16 +15,16 @@ import TranslationHistory from './TranslationHistory';
 // Lazy load SEOContent for better initial page load performance
 const SEOContent = dynamic(() => import('./SEOContent'), {
   loading: () => (
-    <div className='mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-[var(--card-color)] border border-[var(--border-color)] animate-pulse'>
-      <div className='h-8 w-64 bg-[var(--border-color)] rounded mb-4' />
+    <div className='mt-6 animate-pulse rounded-2xl border border-[var(--border-color)] bg-[var(--card-color)] p-4 sm:mt-8 sm:p-6'>
+      <div className='mb-4 h-8 w-64 rounded bg-[var(--border-color)]' />
       <div className='space-y-3'>
-        <div className='h-4 w-full bg-[var(--border-color)] rounded' />
-        <div className='h-4 w-3/4 bg-[var(--border-color)] rounded' />
-        <div className='h-4 w-5/6 bg-[var(--border-color)] rounded' />
+        <div className='h-4 w-full rounded bg-[var(--border-color)]' />
+        <div className='h-4 w-3/4 rounded bg-[var(--border-color)]' />
+        <div className='h-4 w-5/6 rounded bg-[var(--border-color)]' />
       </div>
     </div>
   ),
-  ssr: true // Keep SSR for SEO purposes
+  ssr: true, // Keep SSR for SEO purposes
 });
 
 interface TranslatorPageProps {
@@ -53,7 +53,7 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
     deleteFromHistory,
     clearHistory,
     restoreFromHistory,
-    initFromUrlParams
+    initFromUrlParams,
   } = useTranslatorStore();
 
   // Load history on mount
@@ -74,7 +74,7 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
         text: text || undefined,
         from: from || undefined,
         to: to || undefined,
-        q: searchParams.get('q') || undefined
+        q: searchParams.get('q') || undefined,
       });
 
       if (hasParams) {
@@ -101,12 +101,12 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
       <header
         className={cn(
           'flex flex-col items-start gap-4 rounded-2xl p-4 sm:flex-row sm:items-center sm:p-6',
-          'border border-[var(--border-color)] bg-gradient-to-r from-[var(--card-color)] to-[var(--background-color)]'
+          'border border-[var(--border-color)] bg-gradient-to-r from-[var(--card-color)] to-[var(--background-color)]',
         )}
       >
         <div
           className={cn(
-            'rounded-xl border border-[var(--main-color)]/20 bg-[var(--main-color)]/10 p-2.5 sm:p-3'
+            'rounded-xl border border-[var(--main-color)]/20 bg-[var(--main-color)]/10 p-2.5 sm:p-3',
           )}
           aria-hidden='true'
         >
@@ -117,8 +117,8 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
             Free English to Japanese Translator
           </h1>
           <p className='mt-1 text-sm text-[var(--secondary-color)] sm:text-base'>
-            <strong>Translate English to Japanese</strong> or Japanese to English
-            instantly. Get accurate translations with{' '}
+            <strong>Translate English to Japanese</strong> or Japanese to
+            English instantly. Get accurate translations with{' '}
             <strong>romaji pronunciation</strong> — no registration required.
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
       {isOffline && (
         <div
           className={cn(
-            'flex items-center gap-3 rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-4 text-yellow-600 dark:text-yellow-400'
+            'flex items-center gap-3 rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-4 text-yellow-600 dark:text-yellow-400',
           )}
           role='alert'
         >
@@ -142,7 +142,7 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
       {/* Main translation area */}
       <div
         className={cn(
-          'grid grid-cols-1 items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr]'
+          'grid grid-cols-1 items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr]',
         )}
       >
         <TranslatorInput
@@ -163,7 +163,7 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
               'h-12 w-12 cursor-pointer rounded-full border-2 border-[var(--border-color)] bg-[var(--card-color)] lg:h-14 lg:w-14',
               'transition-all duration-200 hover:border-[var(--main-color)] hover:bg-[var(--border-color)] active:scale-95',
               'flex rotate-90 items-center justify-center disabled:cursor-not-allowed disabled:opacity-50 lg:rotate-0',
-              'focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2'
+              'focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2',
             )}
             aria-label='Swap languages'
           >
@@ -189,7 +189,7 @@ export default function TranslatorPage({ locale = 'en' }: TranslatorPageProps) {
           borderRadius='2xl'
           borderBottomThickness={6}
           className={cn(
-            'h-12 w-full text-base font-semibold disabled:cursor-not-allowed disabled:opacity-50 sm:h-14 sm:w-auto sm:min-w-[240px] sm:text-lg'
+            'h-12 w-full text-base font-semibold disabled:cursor-not-allowed disabled:opacity-50 sm:h-14 sm:w-auto sm:min-w-[240px] sm:text-lg',
           )}
         >
           <Sparkles className='h-5 w-5' />

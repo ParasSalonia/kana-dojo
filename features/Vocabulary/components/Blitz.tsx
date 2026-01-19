@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useVocabStore, {
-  type IVocabObj
+  type IVocabObj,
 } from '@/features/Vocabulary/store/useVocabStore';
 import { useStatsStore } from '@/features/Progress';
 import Blitz, { type BlitzConfig } from '@/shared/components/Blitz';
@@ -14,7 +14,7 @@ export default function BlitzVocab() {
   const selectedVocabObjs = useVocabStore(state => state.selectedVocabObjs);
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
   const selectedGameModeVocab = useVocabStore(
-    state => state.selectedGameModeVocab
+    state => state.selectedGameModeVocab,
   );
 
   const {
@@ -24,7 +24,7 @@ export default function BlitzVocab() {
     timedVocabBestStreak,
     incrementTimedVocabCorrectAnswers,
     incrementTimedVocabWrongAnswers,
-    resetTimedVocabStats
+    resetTimedVocabStats,
   } = useStatsStore();
 
   const formattedSets = React.useMemo(() => {
@@ -57,7 +57,7 @@ export default function BlitzVocab() {
       }
       // Normal: answer should match any meaning
       return question.meanings.some(
-        meaning => answer.toLowerCase() === meaning.toLowerCase()
+        meaning => answer.toLowerCase() === meaning.toLowerCase(),
       );
     },
     getCorrectAnswer: (question, isReverse) =>
@@ -68,7 +68,7 @@ export default function BlitzVocab() {
         // Reverse: options are Japanese words
         const correctAnswer = question.word;
         const incorrectOptions = shuffle(
-          items.filter(item => item.word !== question.word)
+          items.filter(item => item.word !== question.word),
         )
           .slice(0, count - 1)
           .map(item => item.word);
@@ -77,7 +77,7 @@ export default function BlitzVocab() {
       // Normal: options are meanings
       const correctAnswer = question.meanings[0];
       const incorrectOptions = shuffle(
-        items.filter(item => item.word !== question.word)
+        items.filter(item => item.word !== question.word),
       )
         .slice(0, count - 1)
         .map(item => item.meanings[0]);
@@ -93,8 +93,8 @@ export default function BlitzVocab() {
       bestStreak: timedVocabBestStreak,
       incrementCorrect: incrementTimedVocabCorrectAnswers,
       incrementWrong: incrementTimedVocabWrongAnswers,
-      reset: resetTimedVocabStats
-    }
+      reset: resetTimedVocabStats,
+    },
   };
 
   return <Blitz config={config} />;

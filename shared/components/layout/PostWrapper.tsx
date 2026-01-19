@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 const PostWrapper = ({
   textContent,
   tag,
-  date
+  date,
 }: {
   textContent: string;
   tag?: string;
@@ -15,13 +15,15 @@ const PostWrapper = ({
   return (
     <div>
       {tag && date && (
-        <div className="my-2 flex justify-between items-center w-full">
-          <h1 className="text-3xl font-bold mt-4 pb-3 text-[var(--main-color)]">{tag}</h1>
-          <span className="my-1 leading-relaxed text-[var(--secondary-color)]">
+        <div className='my-2 flex w-full items-center justify-between'>
+          <h1 className='mt-4 pb-3 text-3xl font-bold text-[var(--main-color)]'>
+            {tag}
+          </h1>
+          <span className='my-1 leading-relaxed text-[var(--secondary-color)]'>
             {new Date(date).toLocaleDateString('en-GB', {
               day: '2-digit',
               month: 'short',
-              year: 'numeric'
+              year: 'numeric',
             })}
           </span>
         </div>
@@ -30,62 +32,62 @@ const PostWrapper = ({
         remarkPlugins={[remarkGfm]}
         components={{
           h1: props => (
-            <h1 className="text-3xl font-bold mt-4 pb-3" {...props} />
+            <h1 className='mt-4 pb-3 text-3xl font-bold' {...props} />
           ),
           h2: props => (
-            <h2 className="text-2xl font-semibold mt-4 pb-2" {...props} />
+            <h2 className='mt-4 pb-2 text-2xl font-semibold' {...props} />
           ),
           h3: props => (
-            <h3 className="text-xl font-medium mt-4 pb-2" {...props} />
+            <h3 className='mt-4 pb-2 text-xl font-medium' {...props} />
           ),
           p: props => (
             <p
-              className="my-1  leading-relaxed text-[var(--secondary-color)]"
+              className='my-1 leading-relaxed text-[var(--secondary-color)]'
               {...props}
             />
           ),
           ul: props => (
             <ul
-              className="list-disc list-inside pb-2 text-[var(--secondary-color)]"
+              className='list-inside list-disc pb-2 text-[var(--secondary-color)]'
               {...props}
             />
           ),
           ol: props => (
             <ol
-              className="list-decimal list-inside pb-4 text-[var(--secondary-color)]"
+              className='list-inside list-decimal pb-4 text-[var(--secondary-color)]'
               {...props}
             />
           ),
-          li: props => <li className="mb-1" {...props} />,
+          li: props => <li className='mb-1' {...props} />,
           a: props => (
             <a
-              target="_blank"
-              className="underline text-[var(--main-color)]"
+              target='_blank'
+              className='text-[var(--main-color)] underline'
               {...props}
             />
           ),
 
           table: props => (
             <table
-              className="border-collapse border border-[var(--border-color)] w-full"
+              className='w-full border-collapse border border-[var(--border-color)]'
               {...props}
             />
           ),
           th: props => (
             <th
-              className="border border-[var(--border-color)] px-2 py-1"
+              className='border border-[var(--border-color)] px-2 py-1'
               {...props}
             />
           ),
           td: props => (
             <td
-              className="border border-[var(--border-color)] px-2 py-1"
+              className='border border-[var(--border-color)] px-2 py-1'
               {...props}
             />
           ),
           hr: props => (
-            <hr className="border-[var(--border-color)]" {...props} />
-          )
+            <hr className='border-[var(--border-color)]' {...props} />
+          ),
         }}
       >
         {textContent}

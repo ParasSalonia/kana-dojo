@@ -32,12 +32,16 @@ export interface VocabSelectionActions {
 export function useVocabSelection(): VocabSelection & VocabSelectionActions {
   const selectedVocab = useVocabStore(state => state.selectedVocabObjs);
   const selectedSets = useVocabStore(state => state.selectedVocabSets);
-  const selectedCollection = useVocabStore(state => state.selectedVocabCollection);
+  const selectedCollection = useVocabStore(
+    state => state.selectedVocabCollection,
+  );
   const gameMode = useVocabStore(state => state.selectedGameModeVocab);
   const addVocab = useVocabStore(state => state.addVocabObj);
   const addVocabList = useVocabStore(state => state.addVocabObjs);
   const clearVocab = useVocabStore(state => state.clearVocabObjs);
-  const setCollection = useVocabStore(state => state.setSelectedVocabCollection);
+  const setCollection = useVocabStore(
+    state => state.setSelectedVocabCollection,
+  );
   const setSets = useVocabStore(state => state.setSelectedVocabSets);
   const clearSets = useVocabStore(state => state.clearVocabSets);
   const setGameMode = useVocabStore(state => state.setSelectedGameModeVocab);
@@ -59,7 +63,7 @@ export function useVocabSelection(): VocabSelection & VocabSelectionActions {
       setCollection,
       setSets,
       clearSets,
-      setGameMode
+      setGameMode,
     }),
     [
       selectedVocab,
@@ -72,7 +76,7 @@ export function useVocabSelection(): VocabSelection & VocabSelectionActions {
       setCollection,
       setSets,
       clearSets,
-      setGameMode
-    ]
+      setGameMode,
+    ],
   );
 }

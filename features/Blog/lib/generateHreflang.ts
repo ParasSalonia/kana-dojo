@@ -29,7 +29,7 @@ const BASE_URL = 'https://kanadojo.com';
 const LOCALE_TO_HREFLANG: Record<Locale, string> = {
   en: 'en',
   es: 'es',
-  ja: 'ja'
+  ja: 'ja',
 };
 
 /**
@@ -46,21 +46,21 @@ const LOCALE_TO_HREFLANG: Record<Locale, string> = {
 export function generateHreflang(
   slug: string,
   availableLocales: Locale[],
-  options: HreflangOptions = {}
+  options: HreflangOptions = {},
 ): HreflangTag[] {
   const baseUrl = options.baseUrl ?? BASE_URL;
 
   // Generate hreflang tags for each available locale
   const tags: HreflangTag[] = availableLocales.map(locale => ({
     hreflang: LOCALE_TO_HREFLANG[locale],
-    href: `${baseUrl}/${locale}/academy/${slug}`
+    href: `${baseUrl}/${locale}/academy/${slug}`,
   }));
 
   // Add x-default pointing to English version if English is available
   if (availableLocales.includes('en')) {
     tags.push({
       hreflang: 'x-default',
-      href: `${baseUrl}/en/academy/${slug}`
+      href: `${baseUrl}/en/academy/${slug}`,
     });
   }
 
@@ -79,12 +79,12 @@ export function generateHreflang(
 export function generateHreflangLinks(
   slug: string,
   availableLocales: Locale[],
-  options: HreflangOptions = {}
+  options: HreflangOptions = {},
 ): string[] {
   const tags = generateHreflang(slug, availableLocales, options);
 
   return tags.map(
     tag =>
-      `<link rel="alternate" hreflang="${tag.hreflang}" href="${tag.href}" />`
+      `<link rel="alternate" hreflang="${tag.hreflang}" href="${tag.href}" />`,
   );
 }

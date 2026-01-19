@@ -12,7 +12,7 @@ const DEFAULT_SHOWN_SUBSETS = [
   'hiragana ひらがな',
   'hbase',
   'katakana カタカナ',
-  'kbase'
+  'kbase',
 ];
 
 const kanaGroups = [
@@ -21,8 +21,8 @@ const kanaGroups = [
     subsets: [
       { name: 'HBase', sliceRange: [0, 10] },
       { name: 'HDakuon', sliceRange: [10, 15] },
-      { name: 'HYoon', sliceRange: [15, 26] }
-    ]
+      { name: 'HYoon', sliceRange: [15, 26] },
+    ],
   },
   {
     name: 'Katakana カタカナ',
@@ -30,9 +30,9 @@ const kanaGroups = [
       { name: 'KBase', sliceRange: [26, 36] },
       { name: 'KDakuon', sliceRange: [36, 41] },
       { name: 'KYoon', sliceRange: [41, 52] },
-      { name: 'KForeign Sounds', sliceRange: [52, 60] }
-    ]
-  }
+      { name: 'KForeign Sounds', sliceRange: [52, 60] },
+    ],
+  },
   // TEMPORARILY COMMENTED OUT - Challenge section
   // {
   //   name: 'Challenge チャレンジ',
@@ -46,7 +46,7 @@ const kanaGroups = [
 const getDefaultHiddenSubsets = () => {
   const allToggleKeys = kanaGroups.flatMap(group => [
     group.name.toLowerCase(),
-    ...group.subsets.map(subset => subset.name.toLowerCase())
+    ...group.subsets.map(subset => subset.name.toLowerCase()),
   ]);
 
   const shown = new Set(DEFAULT_SHOWN_SUBSETS.map(name => name.toLowerCase()));
@@ -99,7 +99,7 @@ const KanaCards = () => {
       'duration-300 text-[var(--border-color)]',
       'max-md:group-active:text-[var(--secondary-color)]',
       'md:group-hover:text-[var(--secondary-color)]',
-      hidden && 'rotate-180'
+      hidden && 'rotate-180',
     );
 
   return (
@@ -113,7 +113,7 @@ const KanaCards = () => {
             <form
               className={clsx(
                 'flex w-full flex-col gap-2 p-4 sm:w-1/2',
-                cardBorderStyles
+                cardBorderStyles,
               )}
             >
               {/* Group Header */}

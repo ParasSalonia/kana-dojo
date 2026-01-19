@@ -18,7 +18,7 @@ const useStats = () => {
   const incrementCorrectAnswers = useCallback(() => {
     // Legacy method - new code should use statsApi.recordCorrect()
     console.warn(
-      'useStats().incrementCorrectAnswers() is deprecated. Use statsApi.recordCorrect() instead.'
+      'useStats().incrementCorrectAnswers() is deprecated. Use statsApi.recordCorrect() instead.',
     );
     // Trigger achievement check
     achievementApi.triggerCheck();
@@ -27,7 +27,7 @@ const useStats = () => {
   const incrementWrongAnswers = useCallback(() => {
     // Legacy method - new code should use statsApi.recordIncorrect()
     console.warn(
-      'useStats().incrementWrongAnswers() is deprecated. Use statsApi.recordIncorrect() instead.'
+      'useStats().incrementWrongAnswers() is deprecated. Use statsApi.recordIncorrect() instead.',
     );
     // Trigger achievement check
     achievementApi.triggerCheck();
@@ -35,23 +35,23 @@ const useStats = () => {
 
   const addCharacterToHistory = useCallback((character: string) => {
     console.warn(
-      'useStats().addCharacterToHistory() is deprecated. Character history is now managed automatically via statsApi events.'
+      'useStats().addCharacterToHistory() is deprecated. Character history is now managed automatically via statsApi events.',
     );
   }, []);
 
   const addCorrectAnswerTime = useCallback((time: number) => {
     console.warn(
-      'useStats().addCorrectAnswerTime() is deprecated. Use statsApi metadata instead.'
+      'useStats().addCorrectAnswerTime() is deprecated. Use statsApi metadata instead.',
     );
   }, []);
 
   const incrementCharacterScore = useCallback(
     (character: string, field: 'correct' | 'wrong') => {
       console.warn(
-        'useStats().incrementCharacterScore() is deprecated. Character scoring is now managed automatically via statsApi events.'
+        'useStats().incrementCharacterScore() is deprecated. Character scoring is now managed automatically via statsApi events.',
       );
     },
-    []
+    [],
   );
 
   return {
@@ -61,7 +61,7 @@ const useStats = () => {
     characterHistory,
     addCorrectAnswerTime,
     correctAnswerTimes: [], // No longer tracked
-    incrementCharacterScore
+    incrementCharacterScore,
   };
 };
 

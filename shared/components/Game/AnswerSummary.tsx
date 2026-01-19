@@ -15,14 +15,14 @@ const springConfig = {
   type: 'spring' as const,
   stiffness: 400,
   damping: 30,
-  mass: 0.8
+  mass: 0.8,
 };
 
 // Duolingo-like slide animation - slides in from right, fades in
 const slideInVariants = {
   hidden: {
     opacity: 0,
-    x: 100
+    x: 100,
   },
   visible: {
     opacity: 1,
@@ -33,8 +33,8 @@ const slideInVariants = {
       damping: 35,
       mass: 0.5,
       staggerChildren: 0.08,
-      delayChildren: 0.02
-    }
+      delayChildren: 0.02,
+    },
   },
   exit: {
     opacity: 0,
@@ -43,9 +43,9 @@ const slideInVariants = {
       type: 'spring' as const,
       stiffness: 600,
       damping: 40,
-      mass: 0.4
-    }
-  }
+      mass: 0.4,
+    },
+  },
 };
 
 // Container variants for staggered children animations
@@ -55,9 +55,9 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.12,
-      delayChildren: 0.1
-    }
-  }
+      delayChildren: 0.1,
+    },
+  },
 };
 
 // Smooth fade + slide up animation for content items
@@ -65,14 +65,14 @@ const itemVariants = {
   hidden: {
     opacity: 0,
     y: 20,
-    scale: 0.95
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: springConfig
-  }
+    transition: springConfig,
+  },
 };
 
 // Special animation for the main character display (kanji/word)
@@ -81,7 +81,7 @@ const mainCharVariants = {
     opacity: 0,
     scale: 0.8,
     y: 30,
-    rotateX: -15
+    rotateX: -15,
   },
   visible: {
     opacity: 1,
@@ -92,9 +92,9 @@ const mainCharVariants = {
       type: 'spring' as const,
       stiffness: 350,
       damping: 25,
-      mass: 0.9
-    }
-  }
+      mass: 0.9,
+    },
+  },
 };
 
 // Subtle pulse animation for readings
@@ -102,7 +102,7 @@ const readingVariants = {
   hidden: {
     opacity: 0,
     x: -15,
-    scale: 0.9
+    scale: 0.9,
   },
   visible: {
     opacity: 1,
@@ -111,9 +111,9 @@ const readingVariants = {
     transition: {
       type: 'spring' as const,
       stiffness: 300,
-      damping: 25
-    }
-  }
+      damping: 25,
+    },
+  },
 };
 
 // Elegant slide-in for meanings text
@@ -121,7 +121,7 @@ const meaningVariants = {
   hidden: {
     opacity: 0,
     y: 15,
-    filter: 'blur(4px)'
+    filter: 'blur(4px)',
   },
   visible: {
     opacity: 1,
@@ -131,9 +131,9 @@ const meaningVariants = {
       type: 'spring' as const,
       stiffness: 250,
       damping: 25,
-      delay: 0.3
-    }
-  }
+      delay: 0.3,
+    },
+  },
 };
 
 // Type guard
@@ -154,7 +154,7 @@ const FeedbackHeader = ({ feedback }: { feedback: React.ReactElement }) => (
 const ContinueButton = ({
   buttonRef,
   onClick,
-  disabled
+  disabled,
 }: {
   buttonRef: React.RefObject<HTMLButtonElement | null>;
   onClick: () => void;
@@ -168,13 +168,13 @@ const ContinueButton = ({
         type: 'spring',
         stiffness: 300,
         damping: 25,
-        delay: 0.4
+        delay: 0.4,
       }}
       className={clsx(
         'w-[100vw]',
         'border-t-2 border-[var(--border-color)] bg-[var(--card-color)]',
         'absolute bottom-0 z-10 px-4 py-4 md:bottom-6',
-        'flex items-center justify-center'
+        'flex items-center justify-center',
       )}
     >
       <ActionButton
@@ -230,7 +230,7 @@ const KanjiDisplay = ({ payload }: { payload: IKanjiObj }) => (
 const ReadingsList = ({
   readings,
   isHidden,
-  delay = 0
+  delay = 0,
 }: {
   readings: string[];
   isHidden: boolean;
@@ -253,13 +253,13 @@ const ReadingsList = ({
             type: 'spring',
             stiffness: 300,
             damping: 20,
-            delay: delay + i * 0.08
+            delay: delay + i * 0.08,
           }}
           className={clsx(
             'flex flex-row items-center justify-center px-2 py-1 text-sm md:text-base',
             'w-full text-[var(--secondary-color)]',
             i < readings.slice(0, 2).length - 1 &&
-              'border-r-1 border-[var(--border-color)]'
+              'border-r-1 border-[var(--border-color)]',
           )}
         >
           {reading}
@@ -274,7 +274,7 @@ const KanjiSummary = ({
   feedback,
   onContinue,
   buttonRef,
-  isEmbedded = false
+  isEmbedded = false,
 }: {
   payload: IKanjiObj;
   feedback: React.ReactElement;
@@ -332,7 +332,7 @@ const VocabSummary = ({
   feedback,
   onContinue,
   buttonRef,
-  isEmbedded = false
+  isEmbedded = false,
 }: {
   payload: IVocabObj;
   feedback: React.ReactElement;
@@ -383,7 +383,7 @@ const VocabSummary = ({
           className={clsx(
             'flex flex-row items-center rounded-xl px-2 py-1',
             'bg-[var(--card-color)] text-lg',
-            'text-[var(--secondary-color)]'
+            'text-[var(--secondary-color)]',
           )}
         >
           {displayReading}
@@ -412,7 +412,7 @@ const AnswerSummary = ({
   payload,
   setDisplayAnswerSummary,
   feedback,
-  isEmbedded = false
+  isEmbedded = false,
 }: {
   payload: IKanjiObj | IVocabObj;
   setDisplayAnswerSummary: Dispatch<SetStateAction<boolean>>;

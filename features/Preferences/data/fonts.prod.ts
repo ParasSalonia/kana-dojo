@@ -34,7 +34,7 @@
   Murecho,
   Kaisei_Opti,
   BIZ_UDMincho,
-  Shippori_Antique
+  Shippori_Antique,
 } from 'next/font/google';
 
 const notoSansJP = Noto_Sans_JP({
@@ -42,7 +42,7 @@ const notoSansJP = Noto_Sans_JP({
   weight: ['400'],
   display: 'swap',
   preload: true,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const zenMaruGothic = Zen_Maru_Gothic({
@@ -50,7 +50,7 @@ const zenMaruGothic = Zen_Maru_Gothic({
   weight: ['400'],
   display: 'swap',
   preload: true,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const rampartOne = Rampart_One({
@@ -58,7 +58,7 @@ const rampartOne = Rampart_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const zenKurenaido = Zen_Kurenaido({
@@ -66,7 +66,7 @@ const zenKurenaido = Zen_Kurenaido({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kleeOne = Klee_One({
@@ -74,7 +74,7 @@ const kleeOne = Klee_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const dotGothic16 = DotGothic16({
@@ -82,7 +82,7 @@ const dotGothic16 = DotGothic16({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kiwiMaru = Kiwi_Maru({
@@ -90,7 +90,7 @@ const kiwiMaru = Kiwi_Maru({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const pottaOne = Potta_One({
@@ -98,7 +98,7 @@ const pottaOne = Potta_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const hachiMaruPop = Hachi_Maru_Pop({
@@ -106,7 +106,7 @@ const hachiMaruPop = Hachi_Maru_Pop({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const yujiMai = Yuji_Mai({
@@ -114,7 +114,7 @@ const yujiMai = Yuji_Mai({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const rocknRollOne = RocknRoll_One({
@@ -122,7 +122,7 @@ const rocknRollOne = RocknRoll_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const reggaeOne = Reggae_One({
@@ -130,7 +130,7 @@ const reggaeOne = Reggae_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const stick = Stick({
@@ -138,7 +138,7 @@ const stick = Stick({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const mPlusRounded1c = M_PLUS_Rounded_1c({
@@ -146,7 +146,7 @@ const mPlusRounded1c = M_PLUS_Rounded_1c({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const mPlus1 = M_PLUS_1({
@@ -154,7 +154,7 @@ const mPlus1 = M_PLUS_1({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const yuseiMagic = Yusei_Magic({
@@ -162,28 +162,28 @@ const yuseiMagic = Yusei_Magic({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 const delaGothicOne = Dela_Gothic_One({
   subsets: ['latin'],
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 const newTegomin = New_Tegomin({
   subsets: ['latin'],
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 const kosugiMaru = Kosugi_Maru({
   subsets: ['latin'],
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const hinaMincho = Hina_Mincho({
@@ -191,7 +191,7 @@ const hinaMincho = Hina_Mincho({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const shipporiMincho = Shippori_Mincho({
@@ -199,7 +199,7 @@ const shipporiMincho = Shippori_Mincho({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kaiseiDecol = Kaisei_Decol({
@@ -207,7 +207,7 @@ const kaiseiDecol = Kaisei_Decol({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const mochiyPopOne = Mochiy_Pop_One({
@@ -215,7 +215,7 @@ const mochiyPopOne = Mochiy_Pop_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const yujiBoku = Yuji_Boku({
@@ -223,7 +223,7 @@ const yujiBoku = Yuji_Boku({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kaiseiHarunoUmi = Kaisei_HarunoUmi({
@@ -231,7 +231,7 @@ const kaiseiHarunoUmi = Kaisei_HarunoUmi({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const sawarabiGothic = Sawarabi_Gothic({
@@ -239,7 +239,7 @@ const sawarabiGothic = Sawarabi_Gothic({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const zenOldMincho = Zen_Old_Mincho({
@@ -247,7 +247,7 @@ const zenOldMincho = Zen_Old_Mincho({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const sawarabiMincho = Sawarabi_Mincho({
@@ -255,7 +255,7 @@ const sawarabiMincho = Sawarabi_Mincho({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const zenAntique = Zen_Antique({
@@ -263,7 +263,7 @@ const zenAntique = Zen_Antique({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kaiseiTokumin = Kaisei_Tokumin({
@@ -271,7 +271,7 @@ const kaiseiTokumin = Kaisei_Tokumin({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const yujiSyuku = Yuji_Syuku({
@@ -279,7 +279,7 @@ const yujiSyuku = Yuji_Syuku({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 // WDXL Lubrifont JP N removed - causes font override error in Next.js 15
@@ -289,7 +289,7 @@ const murecho = Murecho({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kaiseiOpti = Kaisei_Opti({
@@ -297,7 +297,7 @@ const kaiseiOpti = Kaisei_Opti({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const bIZUDMincho = BIZ_UDMincho({
@@ -305,7 +305,7 @@ const bIZUDMincho = BIZ_UDMincho({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const shipporiAntique = Shippori_Antique({
@@ -313,152 +313,152 @@ const shipporiAntique = Shippori_Antique({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const fonts = [
   {
     name: 'Zen Maru Gothic',
-    font: zenMaruGothic
+    font: zenMaruGothic,
   },
   {
     name: 'Noto Sans JP',
-    font: notoSansJP
+    font: notoSansJP,
   },
 
   {
     name: 'Rampart One',
-    font: rampartOne
+    font: rampartOne,
   },
   {
     name: 'Zen Kurenaido',
-    font: zenKurenaido
+    font: zenKurenaido,
   },
   {
     name: 'Klee One',
-    font: kleeOne
+    font: kleeOne,
   },
   {
     name: 'Dot Gothic 16',
-    font: dotGothic16
+    font: dotGothic16,
   },
   {
     name: 'Kiwi Maru',
-    font: kiwiMaru
+    font: kiwiMaru,
   },
   {
     name: 'Potta One',
-    font: pottaOne
+    font: pottaOne,
   },
   {
     name: 'Hachi Maru Pop',
-    font: hachiMaruPop
+    font: hachiMaruPop,
   },
   {
     name: 'Yuji Mai',
-    font: yujiMai
+    font: yujiMai,
   },
   {
     name: 'RocknRoll One',
-    font: rocknRollOne
+    font: rocknRollOne,
   },
   {
     name: 'Reggae One',
-    font: reggaeOne
+    font: reggaeOne,
   },
   {
     name: 'Stick',
-    font: stick
+    font: stick,
   },
   {
     name: 'M PLUS Rounded 1c',
-    font: mPlusRounded1c
+    font: mPlusRounded1c,
   },
   {
     name: 'M PLUS 1',
-    font: mPlus1
+    font: mPlus1,
   },
   {
     name: 'Yusei Magic',
-    font: yuseiMagic
+    font: yuseiMagic,
   },
   {
     name: 'Dela Gothic One',
-    font: delaGothicOne
+    font: delaGothicOne,
   },
   {
     name: 'New Tegomin',
-    font: newTegomin
+    font: newTegomin,
   },
   {
     name: 'Kosugi Maru',
-    font: kosugiMaru
+    font: kosugiMaru,
   },
   {
     name: 'Hina Mincho',
-    font: hinaMincho
+    font: hinaMincho,
   },
   {
     name: 'Shippori Mincho',
-    font: shipporiMincho
+    font: shipporiMincho,
   },
   {
     name: 'Kaisei Decol',
-    font: kaiseiDecol
+    font: kaiseiDecol,
   },
   {
     name: 'Mochiy Pop One',
-    font: mochiyPopOne
+    font: mochiyPopOne,
   },
   {
     name: 'Yuji Boku',
-    font: yujiBoku
+    font: yujiBoku,
   },
   {
     name: 'Kaisei HarunoUmi',
-    font: kaiseiHarunoUmi
+    font: kaiseiHarunoUmi,
   },
   {
     name: 'Sawarabi Gothic',
-    font: sawarabiGothic
+    font: sawarabiGothic,
   },
   {
     name: 'Zen Old Mincho',
-    font: zenOldMincho
+    font: zenOldMincho,
   },
   {
     name: 'Sawarabi Mincho',
-    font: sawarabiMincho
+    font: sawarabiMincho,
   },
   {
     name: 'Zen Antique',
-    font: zenAntique
+    font: zenAntique,
   },
   {
     name: 'Kaisei Tokumin',
-    font: kaiseiTokumin
+    font: kaiseiTokumin,
   },
   {
     name: 'Yuji Syuku',
-    font: yujiSyuku
+    font: yujiSyuku,
   },
   // WDXL Lubrifont JP N removed - causes font override error
   {
     name: 'Murecho',
-    font: murecho
+    font: murecho,
   },
   {
     name: 'Kaisei Opti',
-    font: kaiseiOpti
+    font: kaiseiOpti,
   },
   {
     name: 'BIZ UDMincho',
-    font: bIZUDMincho
+    font: bIZUDMincho,
   },
   {
     name: 'Shippori Antique',
-    font: shipporiAntique
-  }
+    font: shipporiAntique,
+  },
 ];
 
 export default fonts;

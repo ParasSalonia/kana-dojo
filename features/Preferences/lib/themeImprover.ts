@@ -9,7 +9,7 @@ import {
   rgbToHsl,
   hslToRgb,
   getContrastRatio,
-  getRelativeLuminance
+  getRelativeLuminance,
 } from './colorUtils';
 import { validateTheme, CONTRAST_REQUIREMENTS } from './themeValidator';
 
@@ -29,7 +29,7 @@ function adjustColorForContrast(
   color: string,
   background: string,
   targetRatio: number,
-  preferLighter: boolean
+  preferLighter: boolean,
 ): string {
   const rgb = parseColor(color);
   const hsl = rgbToHsl(rgb);
@@ -70,7 +70,7 @@ function adjustColorForContrast(
   }
 
   return `hsla(${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(
-    bestL * 100
+    bestL * 100,
   )}%, 1)`;
 }
 
@@ -105,7 +105,7 @@ export function improveTheme(theme: Theme): Theme {
       theme.mainColor,
       theme.backgroundColor,
       CONTRAST_REQUIREMENTS.TEXT_AA,
-      isDarkTheme
+      isDarkTheme,
     );
   }
 
@@ -121,7 +121,7 @@ export function improveTheme(theme: Theme): Theme {
       theme.secondaryColor,
       theme.backgroundColor,
       CONTRAST_REQUIREMENTS.TEXT_AA,
-      isDarkTheme
+      isDarkTheme,
     );
   }
 
@@ -133,7 +133,7 @@ export function improveTheme(theme: Theme): Theme {
       theme.borderColor,
       theme.backgroundColor,
       CONTRAST_REQUIREMENTS.UI_AA,
-      isDarkTheme
+      isDarkTheme,
     );
   }
 
@@ -147,7 +147,7 @@ export function improveTheme(theme: Theme): Theme {
       ? Math.min(cardHsl.l + 0.05, 0.95)
       : Math.max(cardHsl.l - 0.05, 0.05);
     improved.cardColor = `hsla(${Math.round(cardHsl.h)}, ${Math.round(
-      cardHsl.s * 100
+      cardHsl.s * 100,
     )}%, ${Math.round(newL * 100)}%, 1)`;
   }
 

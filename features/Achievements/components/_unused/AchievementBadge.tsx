@@ -17,7 +17,7 @@ const AchievementBadge = ({
   onClick,
   showNotificationDot = true,
   size = 'md',
-  variant = 'icon'
+  variant = 'icon',
 }: AchievementBadgeProps) => {
   const { playClick } = useClick();
   const { totalPoints, level, unlockedCount, hasUnseenNotifications } =
@@ -31,13 +31,13 @@ const AchievementBadge = ({
   const sizeClasses = {
     sm: 'p-2 text-sm',
     md: 'p-3 text-base',
-    lg: 'p-4 text-lg'
+    lg: 'p-4 text-lg',
   };
 
   const iconSizes = {
     sm: 16,
     md: 20,
-    lg: 24
+    lg: 24,
   };
 
   if (variant === 'full') {
@@ -51,7 +51,7 @@ const AchievementBadge = ({
           'bg-[var(--card-color)] hover:bg-[var(--background-color)]',
           'border border-[var(--border-color)]',
           'transition-all duration-200',
-          sizeClasses[size]
+          sizeClasses[size],
         )}
       >
         <div className='relative'>
@@ -92,7 +92,7 @@ const AchievementBadge = ({
         'bg-[var(--card-color)] hover:bg-[var(--background-color)]',
         'border border-[var(--border-color)]',
         'transition-all duration-200',
-        sizeClasses[size]
+        sizeClasses[size],
       )}
     >
       <Trophy size={iconSizes[size]} className='text-yellow-500' />

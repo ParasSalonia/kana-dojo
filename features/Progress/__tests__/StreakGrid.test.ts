@@ -7,14 +7,14 @@ import {
   groupDatesByMonth,
   getStartOfWeek,
   getStartOfMonth,
-  getStartOfYear
+  getStartOfYear,
 } from '../lib/streakCalculations';
 
 // Helper to generate valid dates (filter out invalid dates)
 const validDateArb = fc
   .date({
     min: new Date('2020-01-01'),
-    max: new Date('2030-12-31')
+    max: new Date('2030-12-31'),
   })
   .filter(d => !isNaN(d.getTime()));
 
@@ -42,7 +42,7 @@ describe('StreakGrid Properties', () => {
           const startOfWeek = getStartOfWeek(referenceDate);
           expect(days[0]).toBe(formatDate(startOfWeek));
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -53,7 +53,7 @@ describe('StreakGrid Properties', () => {
           const refDateStr = formatDate(referenceDate);
           expect(days[days.length - 1]).toBe(refDateStr);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -64,7 +64,7 @@ describe('StreakGrid Properties', () => {
           expect(days.length).toBeGreaterThanOrEqual(1);
           expect(days.length).toBeLessThanOrEqual(7);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -82,7 +82,7 @@ describe('StreakGrid Properties', () => {
           const startOfMonth = getStartOfMonth(referenceDate);
           expect(days[0]).toBe(formatDate(startOfMonth));
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -93,7 +93,7 @@ describe('StreakGrid Properties', () => {
           const refDateStr = formatDate(referenceDate);
           expect(days[days.length - 1]).toBe(refDateStr);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -104,7 +104,7 @@ describe('StreakGrid Properties', () => {
           expect(days.length).toBeGreaterThanOrEqual(1);
           expect(days.length).toBeLessThanOrEqual(31);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -122,7 +122,7 @@ describe('StreakGrid Properties', () => {
           const startOfYear = getStartOfYear(referenceDate);
           expect(days[0]).toBe(formatDate(startOfYear));
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -133,7 +133,7 @@ describe('StreakGrid Properties', () => {
           const refDateStr = formatDate(referenceDate);
           expect(days[days.length - 1]).toBe(refDateStr);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -144,7 +144,7 @@ describe('StreakGrid Properties', () => {
           expect(days.length).toBeGreaterThanOrEqual(1);
           expect(days.length).toBeLessThanOrEqual(366);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -164,11 +164,11 @@ describe('StreakGrid Properties', () => {
           // Total days across all months should equal days length
           const totalDays = Object.values(monthGroups).reduce(
             (sum, monthDays) => sum + monthDays.length,
-            0
+            0,
           );
           expect(totalDays).toBe(days.length);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -187,7 +187,7 @@ describe('StreakGrid Properties', () => {
           const expected = visits.includes(testDate);
           expect(result).toBe(expected);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -204,9 +204,9 @@ describe('StreakGrid Properties', () => {
               const shouldBeVisited = visits.includes(day);
               expect(isVisited).toBe(shouldBeVisited);
             }
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -220,7 +220,7 @@ describe('StreakGrid Properties', () => {
             expect(hasVisit(emptyVisits, day)).toBe(false);
           }
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });

@@ -128,7 +128,7 @@ interface AchievementState {
   clearAllNotifications: () => void;
   checkAchievements: (
     stats: unknown,
-    sessionStats?: SessionStats
+    sessionStats?: SessionStats,
   ) => Achievement[];
 
   // Internal method to update computed properties
@@ -136,7 +136,7 @@ interface AchievementState {
 
   // Getters
   getAchievementsByCategory: (
-    category: Achievement['category']
+    category: Achievement['category'],
   ) => Achievement[];
 }
 
@@ -151,7 +151,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 10,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 1 }
+    requirements: { type: 'total_correct', value: 1 },
   },
   {
     id: 'streak_starter',
@@ -161,7 +161,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 25,
     category: 'streak',
-    requirements: { type: 'streak', value: 5 }
+    requirements: { type: 'streak', value: 5 },
   },
   {
     id: 'hot_streak',
@@ -171,7 +171,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 50,
     category: 'streak',
-    requirements: { type: 'streak', value: 10 }
+    requirements: { type: 'streak', value: 10 },
   },
   {
     id: 'streak_legend',
@@ -181,7 +181,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 150,
     category: 'streak',
-    requirements: { type: 'streak', value: 25 }
+    requirements: { type: 'streak', value: 25 },
   },
   {
     id: 'unstoppable',
@@ -191,7 +191,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 300,
     category: 'streak',
-    requirements: { type: 'streak', value: 50 }
+    requirements: { type: 'streak', value: 50 },
   },
 
   // Milestone Achievements
@@ -203,7 +203,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 100 }
+    requirements: { type: 'total_correct', value: 100 },
   },
   {
     id: 'knowledge_seeker',
@@ -213,7 +213,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 250,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 500 }
+    requirements: { type: 'total_correct', value: 500 },
   },
   {
     id: 'master_scholar',
@@ -223,7 +223,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 1000 }
+    requirements: { type: 'total_correct', value: 1000 },
   },
   {
     id: 'legendary_master',
@@ -233,7 +233,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1000,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 5000 }
+    requirements: { type: 'total_correct', value: 5000 },
   },
 
   // Consistency Achievements
@@ -245,7 +245,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 75,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 10 }
+    requirements: { type: 'sessions', value: 10 },
   },
   {
     id: 'persistent_student',
@@ -255,7 +255,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 200,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 50 }
+    requirements: { type: 'sessions', value: 50 },
   },
   {
     id: 'training_master',
@@ -265,7 +265,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 400,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 100 }
+    requirements: { type: 'sessions', value: 100 },
   },
 
   // Accuracy Achievements
@@ -280,8 +280,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'accuracy',
       value: 80,
-      additional: { minAnswers: 50 }
-    }
+      additional: { minAnswers: 50 },
+    },
   },
   {
     id: 'accuracy_expert',
@@ -294,8 +294,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'accuracy',
       value: 90,
-      additional: { minAnswers: 100 }
-    }
+      additional: { minAnswers: 100 },
+    },
   },
   {
     id: 'perfectionist',
@@ -308,8 +308,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'accuracy',
       value: 95,
-      additional: { minAnswers: 200 }
-    }
+      additional: { minAnswers: 200 },
+    },
   },
 
   // ============================================
@@ -326,8 +326,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 50,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'hiragana_adept',
@@ -340,8 +340,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 200,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'hiragana_master',
@@ -354,8 +354,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 500,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'katakana_apprentice',
@@ -368,8 +368,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 50,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
   {
     id: 'katakana_adept',
@@ -382,8 +382,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 200,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
   {
     id: 'katakana_master',
@@ -396,8 +396,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 500,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
   {
     id: 'hiragana_perfectionist',
@@ -410,8 +410,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 100,
-      additional: { contentType: 'hiragana' }
-    }
+      additional: { contentType: 'hiragana' },
+    },
   },
   {
     id: 'katakana_perfectionist',
@@ -424,8 +424,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 100,
-      additional: { contentType: 'katakana' }
-    }
+      additional: { contentType: 'katakana' },
+    },
   },
 
   // ============================================
@@ -442,8 +442,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N5' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N5' },
+    },
   },
   {
     id: 'n4_explorer',
@@ -456,8 +456,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N4' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N4' },
+    },
   },
   {
     id: 'n3_explorer',
@@ -470,8 +470,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N3' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N3' },
+    },
   },
   {
     id: 'n2_explorer',
@@ -484,8 +484,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N2' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N2' },
+    },
   },
   {
     id: 'n1_explorer',
@@ -498,8 +498,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'kanji', jlptLevel: 'N1' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N1' },
+    },
   },
   {
     id: 'n5_graduate',
@@ -512,8 +512,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N5' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N5' },
+    },
   },
   {
     id: 'n4_graduate',
@@ -526,8 +526,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N4' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N4' },
+    },
   },
   {
     id: 'n3_graduate',
@@ -540,8 +540,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N3' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N3' },
+    },
   },
   {
     id: 'n2_graduate',
@@ -554,8 +554,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N2' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N2' },
+    },
   },
   {
     id: 'n1_graduate',
@@ -568,8 +568,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 80,
-      additional: { contentType: 'kanji', jlptLevel: 'N1' }
-    }
+      additional: { contentType: 'kanji', jlptLevel: 'N1' },
+    },
   },
 
   // ============================================
@@ -586,8 +586,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 100,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'lexicon_builder',
@@ -600,8 +600,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 500,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'dictionary_devotee',
@@ -614,8 +614,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 1000,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'vocabulary_virtuoso',
@@ -628,8 +628,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_correct',
       value: 2500,
-      additional: { contentType: 'vocabulary' }
-    }
+      additional: { contentType: 'vocabulary' },
+    },
   },
   {
     id: 'word_wizard',
@@ -642,8 +642,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 90,
-      additional: { contentType: 'vocabulary', minAnswers: 50 }
-    }
+      additional: { contentType: 'vocabulary', minAnswers: 50 },
+    },
   },
   {
     id: 'linguistic_legend',
@@ -656,8 +656,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'content_mastery',
       value: 90,
-      additional: { contentType: 'vocabulary', minAnswers: 200 }
-    }
+      additional: { contentType: 'vocabulary', minAnswers: 200 },
+    },
   },
 
   // ============================================
@@ -671,7 +671,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 50,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_completion', value: 1 }
+    requirements: { type: 'gauntlet_completion', value: 1 },
   },
   {
     id: 'gauntlet_survivor',
@@ -684,8 +684,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_difficulty',
       value: 1,
-      additional: { difficulty: 'normal' }
-    }
+      additional: { difficulty: 'normal' },
+    },
   },
   {
     id: 'gauntlet_warrior',
@@ -698,8 +698,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_difficulty',
       value: 1,
-      additional: { difficulty: 'hard' }
-    }
+      additional: { difficulty: 'hard' },
+    },
   },
   {
     id: 'gauntlet_legend',
@@ -712,8 +712,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_difficulty',
       value: 1,
-      additional: { difficulty: 'instant-death' }
-    }
+      additional: { difficulty: 'instant-death' },
+    },
   },
   {
     id: 'gauntlet_veteran',
@@ -723,7 +723,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 150,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_completion', value: 10 }
+    requirements: { type: 'gauntlet_completion', value: 10 },
   },
   {
     id: 'gauntlet_champion',
@@ -733,7 +733,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 400,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_completion', value: 50 }
+    requirements: { type: 'gauntlet_completion', value: 50 },
   },
   {
     id: 'flawless_victory',
@@ -743,7 +743,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'gauntlet',
-    requirements: { type: 'gauntlet_perfect', value: 1 }
+    requirements: { type: 'gauntlet_perfect', value: 1 },
   },
   {
     id: 'untouchable',
@@ -756,8 +756,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_lives',
       value: 0,
-      additional: { type: 'no_lives_lost' }
-    }
+      additional: { type: 'no_lives_lost' },
+    },
   },
   {
     id: 'phoenix_rising',
@@ -770,8 +770,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'gauntlet_lives',
       value: 5,
-      additional: { type: 'lives_regenerated' }
-    }
+      additional: { type: 'lives_regenerated' },
+    },
   },
   {
     id: 'gauntlet_streak_master',
@@ -784,8 +784,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'streak',
       value: 50,
-      additional: { gameMode: 'gauntlet' }
-    }
+      additional: { gameMode: 'gauntlet' },
+    },
   },
 
   // ============================================
@@ -799,7 +799,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 50,
     category: 'blitz',
-    requirements: { type: 'blitz_session', value: 1 }
+    requirements: { type: 'blitz_session', value: 1 },
   },
   {
     id: 'blitz_warrior',
@@ -809,7 +809,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 150,
     category: 'blitz',
-    requirements: { type: 'blitz_score', value: 50 }
+    requirements: { type: 'blitz_score', value: 50 },
   },
   {
     id: 'blitz_champion',
@@ -819,7 +819,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 300,
     category: 'blitz',
-    requirements: { type: 'blitz_score', value: 100 }
+    requirements: { type: 'blitz_score', value: 100 },
   },
   {
     id: 'lightning_reflexes',
@@ -832,8 +832,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'streak',
       value: 25,
-      additional: { gameMode: 'blitz' }
-    }
+      additional: { gameMode: 'blitz' },
+    },
   },
   {
     id: 'blitz_legend',
@@ -846,8 +846,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'streak',
       value: 50,
-      additional: { gameMode: 'blitz' }
-    }
+      additional: { gameMode: 'blitz' },
+    },
   },
   {
     id: 'precision_under_pressure',
@@ -860,8 +860,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'accuracy',
       value: 90,
-      additional: { gameMode: 'blitz', minAnswers: 100 }
-    }
+      additional: { gameMode: 'blitz', minAnswers: 100 },
+    },
   },
   {
     id: 'speed_addict',
@@ -871,7 +871,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'blitz',
-    requirements: { type: 'blitz_session', value: 10 }
+    requirements: { type: 'blitz_session', value: 10 },
   },
   {
     id: 'blitz_master',
@@ -881,7 +881,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 400,
     category: 'blitz',
-    requirements: { type: 'blitz_session', value: 50 }
+    requirements: { type: 'blitz_session', value: 50 },
   },
 
   // ============================================
@@ -898,8 +898,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 30000,
-      additional: { minAnswers: 10 }
-    }
+      additional: { minAnswers: 10 },
+    },
   },
   {
     id: 'speed_reader',
@@ -912,8 +912,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 60000,
-      additional: { minAnswers: 25 }
-    }
+      additional: { minAnswers: 25 },
+    },
   },
   {
     id: 'instant_recognition',
@@ -926,8 +926,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 1000,
-      additional: { type: 'single_answer' }
-    }
+      additional: { type: 'single_answer' },
+    },
   },
   {
     id: 'rapid_fire',
@@ -941,8 +941,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 2000,
-      additional: { type: 'average', minAnswers: 50 }
-    }
+      additional: { type: 'average', minAnswers: 50 },
+    },
   },
   {
     id: 'efficient_learner',
@@ -956,8 +956,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'speed',
       value: 300000,
-      additional: { type: 'session', minAccuracy: 90 }
-    }
+      additional: { type: 'session', minAccuracy: 90 },
+    },
   },
 
   // ============================================
@@ -971,7 +971,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 400,
     category: 'streak',
-    requirements: { type: 'streak', value: 75 }
+    requirements: { type: 'streak', value: 75 },
   },
   {
     id: 'century_streak',
@@ -981,7 +981,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 600,
     category: 'streak',
-    requirements: { type: 'streak', value: 100 }
+    requirements: { type: 'streak', value: 100 },
   },
   {
     id: 'streak_titan',
@@ -991,7 +991,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 800,
     category: 'streak',
-    requirements: { type: 'streak', value: 150 }
+    requirements: { type: 'streak', value: 150 },
   },
   {
     id: 'streak_immortal',
@@ -1001,7 +1001,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1000,
     category: 'streak',
-    requirements: { type: 'streak', value: 200 }
+    requirements: { type: 'streak', value: 200 },
   },
   {
     id: 'streak_god',
@@ -1011,7 +1011,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 2000,
     category: 'streak',
-    requirements: { type: 'streak', value: 500 }
+    requirements: { type: 'streak', value: 500 },
   },
 
   // ============================================
@@ -1028,8 +1028,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'variety',
       value: 3,
-      additional: { dojos: ['kana', 'kanji', 'vocabulary'] }
-    }
+      additional: { dojos: ['kana', 'kanji', 'vocabulary'] },
+    },
   },
   {
     id: 'mode_explorer',
@@ -1043,8 +1043,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'variety',
       value: 4,
-      additional: { modes: ['pick', 'reverse-pick', 'input', 'reverse-input'] }
-    }
+      additional: { modes: ['pick', 'reverse-pick', 'input', 'reverse-input'] },
+    },
   },
   {
     id: 'triple_threat',
@@ -1057,8 +1057,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'variety',
       value: 3,
-      additional: { challengeModes: ['classic', 'gauntlet', 'blitz'] }
-    }
+      additional: { challengeModes: ['classic', 'gauntlet', 'blitz'] },
+    },
   },
   {
     id: 'consistent_learner',
@@ -1068,7 +1068,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'common',
     points: 75,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 5 }
+    requirements: { type: 'days_trained', value: 5 },
   },
   {
     id: 'monthly_dedication',
@@ -1078,7 +1078,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 300,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 30 }
+    requirements: { type: 'days_trained', value: 30 },
   },
   {
     id: 'century_of_learning',
@@ -1088,7 +1088,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 600,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 100 }
+    requirements: { type: 'days_trained', value: 100 },
   },
   {
     id: 'year_of_mastery',
@@ -1098,7 +1098,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1500,
     category: 'exploration',
-    requirements: { type: 'days_trained', value: 365 }
+    requirements: { type: 'days_trained', value: 365 },
   },
 
   // ============================================
@@ -1112,7 +1112,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 350,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 2500 }
+    requirements: { type: 'total_correct', value: 2500 },
   },
   {
     id: 'grand_master',
@@ -1122,7 +1122,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1500,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 10000 }
+    requirements: { type: 'total_correct', value: 10000 },
   },
   {
     id: 'legendary_scholar',
@@ -1132,7 +1132,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 3000,
     category: 'milestone',
-    requirements: { type: 'total_correct', value: 25000 }
+    requirements: { type: 'total_correct', value: 25000 },
   },
   {
     id: 'session_veteran',
@@ -1142,7 +1142,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 400,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 250 }
+    requirements: { type: 'sessions', value: 250 },
   },
   {
     id: 'session_legend',
@@ -1152,7 +1152,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 700,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 500 }
+    requirements: { type: 'sessions', value: 500 },
   },
   {
     id: 'eternal_student',
@@ -1162,7 +1162,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'legendary',
     points: 1200,
     category: 'consistency',
-    requirements: { type: 'sessions', value: 1000 }
+    requirements: { type: 'sessions', value: 1000 },
   },
 
   // ============================================
@@ -1176,7 +1176,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'milestone',
-    requirements: { type: 'total_points', value: 1000 }
+    requirements: { type: 'total_points', value: 1000 },
   },
   {
     id: 'point_hoarder',
@@ -1186,7 +1186,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 250,
     category: 'milestone',
-    requirements: { type: 'total_points', value: 5000 }
+    requirements: { type: 'total_points', value: 5000 },
   },
   {
     id: 'point_master',
@@ -1196,7 +1196,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'milestone',
-    requirements: { type: 'total_points', value: 10000 }
+    requirements: { type: 'total_points', value: 10000 },
   },
 
   // ============================================
@@ -1211,7 +1211,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     points: 10,
     category: 'fun',
     requirements: { type: 'total_incorrect', value: 1 },
-    hidden: false
+    hidden: false,
   },
   {
     id: 'perseverance',
@@ -1221,7 +1221,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 50,
     category: 'fun',
-    requirements: { type: 'wrong_streak', value: 5 }
+    requirements: { type: 'wrong_streak', value: 5 },
   },
   {
     id: 'night_owl',
@@ -1234,9 +1234,9 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'time_of_day',
       value: 1,
-      additional: { hourStart: 0, hourEnd: 1 }
+      additional: { hourStart: 0, hourEnd: 1 },
     },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'early_bird',
@@ -1249,9 +1249,9 @@ export const ACHIEVEMENTS: Achievement[] = [
     requirements: {
       type: 'time_of_day',
       value: 1,
-      additional: { hourStart: 5, hourEnd: 6 }
+      additional: { hourStart: 5, hourEnd: 6 },
     },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'answer_to_everything',
@@ -1262,7 +1262,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     points: 142,
     category: 'fun',
     requirements: { type: 'exact_count', value: 42 },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'perfect_century',
@@ -1273,7 +1273,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     points: 200,
     category: 'fun',
     requirements: { type: 'exact_count', value: 100 },
-    hidden: true
+    hidden: true,
   },
   {
     id: 'achievement_hunter',
@@ -1283,7 +1283,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'uncommon',
     points: 100,
     category: 'fun',
-    requirements: { type: 'achievement_count', value: 10 }
+    requirements: { type: 'achievement_count', value: 10 },
   },
   {
     id: 'achievement_collector',
@@ -1293,7 +1293,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'rare',
     points: 250,
     category: 'fun',
-    requirements: { type: 'achievement_count', value: 25 }
+    requirements: { type: 'achievement_count', value: 25 },
   },
   {
     id: 'achievement_enthusiast',
@@ -1303,7 +1303,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     rarity: 'epic',
     points: 500,
     category: 'fun',
-    requirements: { type: 'achievement_count', value: 50 }
+    requirements: { type: 'achievement_count', value: 50 },
   },
   {
     id: 'completionist',
@@ -1314,8 +1314,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     points: 2000,
     category: 'fun',
     requirements: { type: 'achievement_count', value: -1 }, // -1 means all
-    hidden: true
-  }
+    hidden: true,
+  },
 ];
 
 // ============================================
@@ -1392,7 +1392,7 @@ export interface SessionStats {
  */
 function checkContentCorrect(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { value, additional } = achievement.requirements;
   const contentType = additional?.contentType;
@@ -1424,7 +1424,7 @@ function checkContentCorrect(
  */
 function checkContentMastery(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { value, additional } = achievement.requirements;
   const contentType = additional?.contentType;
@@ -1476,7 +1476,7 @@ function checkContentMastery(
  */
 function checkGauntletRequirement(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { type, value, additional } = achievement.requirements;
   const gauntletStats = allTimeStats.gauntletStats;
@@ -1527,7 +1527,7 @@ function checkGauntletRequirement(
  */
 function checkBlitzRequirement(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { type, value } = achievement.requirements;
   const blitzStats = allTimeStats.blitzStats;
@@ -1554,7 +1554,7 @@ function checkBlitzRequirement(
 function checkSpeedRequirement(
   achievement: Achievement,
   allTimeStats: AllTimeStatsForAchievements,
-  sessionStats?: SessionStats
+  sessionStats?: SessionStats,
 ): boolean {
   const { value, additional } = achievement.requirements;
   const speedType = additional?.type;
@@ -1603,7 +1603,7 @@ function checkSpeedRequirement(
  */
 function checkVarietyRequirement(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { value, additional } = achievement.requirements;
 
@@ -1625,7 +1625,7 @@ function checkVarietyRequirement(
     const challengeModesUsed = allTimeStats.challengeModesUsed ?? [];
     const requiredChallengeModes = additional.challengeModes;
     const matchedChallengeModes = requiredChallengeModes.filter(cm =>
-      challengeModesUsed.includes(cm)
+      challengeModesUsed.includes(cm),
     );
     return matchedChallengeModes.length >= value;
   }
@@ -1640,7 +1640,7 @@ function checkVarietyRequirement(
  */
 function checkDaysTrainedRequirement(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { value } = achievement.requirements;
   const trainingDays = allTimeStats.trainingDays ?? [];
@@ -1654,7 +1654,7 @@ function checkDaysTrainedRequirement(
  */
 function checkTimeOfDayRequirement(
   achievement: Achievement,
-  sessionStats?: SessionStats
+  sessionStats?: SessionStats,
 ): boolean {
   const { additional } = achievement.requirements;
   const hourStart = additional?.hourStart;
@@ -1675,7 +1675,7 @@ function checkTimeOfDayRequirement(
  */
 function checkWrongStreakRequirement(
   achievement: Achievement,
-  allTimeStats: AllTimeStatsForAchievements
+  allTimeStats: AllTimeStatsForAchievements,
 ): boolean {
   const { value } = achievement.requirements;
   const maxWrongStreak = allTimeStats.maxWrongStreak ?? 0;
@@ -1689,7 +1689,7 @@ function checkWrongStreakRequirement(
  */
 function checkExactCountRequirement(
   achievement: Achievement,
-  sessionStats?: SessionStats
+  sessionStats?: SessionStats,
 ): boolean {
   const { value } = achievement.requirements;
 
@@ -1706,7 +1706,7 @@ function checkExactCountRequirement(
  */
 function checkAchievementCountRequirement(
   achievement: Achievement,
-  state: AchievementState
+  state: AchievementState,
 ): boolean {
   const { value } = achievement.requirements;
   const unlockedCount = Object.keys(state.unlockedAchievements).length;
@@ -1716,7 +1716,7 @@ function checkAchievementCountRequirement(
     // Count total non-meta achievements
     const nonMetaAchievements = ACHIEVEMENTS.filter(
       a =>
-        a.requirements.type !== 'achievement_count' && a.id !== achievement.id
+        a.requirements.type !== 'achievement_count' && a.id !== achievement.id,
     );
     return unlockedCount >= nonMetaAchievements.length;
   }
@@ -1731,7 +1731,7 @@ function checkAchievementCountRequirement(
  */
 function checkTotalPointsRequirement(
   achievement: Achievement,
-  state: AchievementState
+  state: AchievementState,
 ): boolean {
   const { value } = achievement.requirements;
   return state.totalPoints >= value;
@@ -1744,7 +1744,7 @@ function checkRequirement(
   achievement: Achievement,
   allTimeStats: AllTimeStatsForAchievements,
   state: AchievementState,
-  sessionStats?: SessionStats
+  sessionStats?: SessionStats,
 ): boolean {
   const { type, value, additional } = achievement.requirements;
 
@@ -1863,7 +1863,7 @@ const useAchievementStore = create<AchievementState>()(
         const unseenNotifications = state.notifications.filter(n => !n.seen);
         set({
           unseenNotifications,
-          hasUnseenNotifications: unseenNotifications.length > 0
+          hasUnseenNotifications: unseenNotifications.length > 0,
         });
       },
 
@@ -1873,14 +1873,14 @@ const useAchievementStore = create<AchievementState>()(
 
         const unlockedAchievement = {
           ...achievement,
-          unlockedAt: new Date()
+          unlockedAt: new Date(),
         };
 
         const notification: AchievementNotification = {
           id: `${achievement.id}-${Date.now()}`,
           achievement: unlockedAchievement,
           timestamp: new Date(),
-          seen: false
+          seen: false,
         };
 
         const newTotalPoints = state.totalPoints + achievement.points;
@@ -1889,11 +1889,11 @@ const useAchievementStore = create<AchievementState>()(
         set({
           unlockedAchievements: {
             ...state.unlockedAchievements,
-            [achievement.id]: unlockedAchievement
+            [achievement.id]: unlockedAchievement,
           },
           notifications: [...state.notifications, notification],
           totalPoints: newTotalPoints,
-          level: newLevel
+          level: newLevel,
         });
 
         // Update computed properties
@@ -1905,8 +1905,8 @@ const useAchievementStore = create<AchievementState>()(
           notifications: state.notifications.map(notification =>
             notification.id === notificationId
               ? { ...notification, seen: true }
-              : notification
-          )
+              : notification,
+          ),
         }));
 
         // Update computed properties
@@ -1917,8 +1917,8 @@ const useAchievementStore = create<AchievementState>()(
         set(state => ({
           notifications: state.notifications.map(notification => ({
             ...notification,
-            seen: true
-          }))
+            seen: true,
+          })),
         }));
 
         // Update computed properties
@@ -1942,7 +1942,7 @@ const useAchievementStore = create<AchievementState>()(
             achievement,
             allTimeStats,
             state,
-            sessionStats
+            sessionStats,
           );
 
           if (isUnlocked) {
@@ -1957,12 +1957,12 @@ const useAchievementStore = create<AchievementState>()(
       getAchievementsByCategory: (category: Achievement['category']) => {
         const state = get();
         return ACHIEVEMENTS.filter(
-          achievement => achievement.category === category
+          achievement => achievement.category === category,
         ).map(achievement => ({
           ...achievement,
-          unlockedAt: state.unlockedAchievements[achievement.id]?.unlockedAt
+          unlockedAt: state.unlockedAchievements[achievement.id]?.unlockedAt,
         }));
-      }
+      },
     }),
     {
       name: 'kanadojo-achievements',
@@ -1970,7 +1970,7 @@ const useAchievementStore = create<AchievementState>()(
         unlockedAchievements: state.unlockedAchievements,
         notifications: state.notifications,
         totalPoints: state.totalPoints,
-        level: state.level
+        level: state.level,
       }),
       merge: (persistedState, currentState) => {
         const persisted = persistedState as
@@ -1982,11 +1982,11 @@ const useAchievementStore = create<AchievementState>()(
           unlockedAchievements: persisted?.unlockedAchievements ?? {},
           notifications: persisted?.notifications ?? [],
           totalPoints: persisted?.totalPoints ?? 0,
-          level: persisted?.level ?? 1
+          level: persisted?.level ?? 1,
         };
-      }
-    }
-  )
+      },
+    },
+  ),
 );
 
 export default useAchievementStore;

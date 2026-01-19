@@ -11,14 +11,14 @@ const GAME_DURATION = 30;
 
 export default function FlashRush() {
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'result'>(
-    'idle'
+    'idle',
   );
   const [currentKana, setCurrentKana] = useState<any>(null);
   const [options, setOptions] = useState<any[]>([]);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(GAME_DURATION);
   const [lastResult, setLastResult] = useState<'correct' | 'wrong' | null>(
-    null
+    null,
   );
 
   const { playClick } = useClick();
@@ -138,14 +138,14 @@ export default function FlashRush() {
           <Timer
             className={clsx(
               'text-[var(--main-color)]',
-              timeLeft < 5 && 'animate-bounce text-red-500'
+              timeLeft < 5 && 'animate-bounce text-red-500',
             )}
             size={20}
           />
           <span
             className={clsx(
               'font-mono text-xl font-bold',
-              timeLeft < 5 ? 'text-red-500' : 'text-[var(--main-color)]'
+              timeLeft < 5 ? 'text-red-500' : 'text-[var(--main-color)]',
             )}
           >
             {timeLeft}s
@@ -195,7 +195,7 @@ export default function FlashRush() {
             onClick={() => handleAnswer(option)}
             className={clsx(
               'flex flex-col items-center justify-center rounded-2xl border-2 py-6 transition-all',
-              'border-[var(--border-color)] bg-[var(--card-color)] hover:border-[var(--main-color)]'
+              'border-[var(--border-color)] bg-[var(--card-color)] hover:border-[var(--main-color)]',
             )}
           >
             <span className='text-3xl font-bold text-[var(--main-color)]'>

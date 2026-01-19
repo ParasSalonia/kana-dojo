@@ -22,7 +22,7 @@ export default function Train() {
         items={[
           { name: 'Home', url: 'https://kanadojo.com' },
           { name: 'Kana', url: 'https://kanadojo.com/kana' },
-          { name: 'Training', url: 'https://kanadojo.com/kana/train' }
+          { name: 'Training', url: 'https://kanadojo.com/kana/train' },
         ]}
       />
       <CourseSchema

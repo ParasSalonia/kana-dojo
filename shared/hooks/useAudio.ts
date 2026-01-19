@@ -161,7 +161,7 @@ const clickSoundUrls = [
   '/sounds/click/click4/click4_11',
   '/sounds/click/click4/click4_22',
   '/sounds/click/click4/click4_33',
-  '/sounds/click/click4/click4_44'
+  '/sounds/click/click4/click4_44',
 ];
 
 const CORRECT_SOUND_BASE = '/sounds/correct';
@@ -223,7 +223,7 @@ const getClickPool = (baseUrl: string) => {
 export const preloadGameSounds = async (): Promise<void> => {
   await Promise.all([
     getCorrectPool().ensureLoaded(),
-    getErrorPool().ensureLoaded()
+    getErrorPool().ensureLoaded(),
   ]);
 };
 
@@ -277,7 +277,7 @@ export const useError = () => {
 
   return {
     playError,
-    playErrorTwice
+    playErrorTwice,
   };
 };
 
@@ -311,7 +311,7 @@ export const useChristmas = () => {
       // Handle load errors
       christmasAudio.onerror = () => {
         console.warn(
-          'Failed to load Christmas audio - Opus may not be supported in this browser'
+          'Failed to load Christmas audio - Opus may not be supported in this browser',
         );
       };
     }
@@ -353,7 +353,7 @@ export const useChristmas = () => {
  */
 export const playSoundByUrl = async (
   url: string,
-  volume: number = 1
+  volume: number = 1,
 ): Promise<void> => {
   const buffer = await loadAudioBuffer(url);
   if (buffer) {

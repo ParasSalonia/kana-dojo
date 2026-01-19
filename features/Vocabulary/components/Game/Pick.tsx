@@ -52,7 +52,7 @@ const OptionButton = memo(
     quizType,
     wordObjMap,
     onClick,
-    buttonRef
+    buttonRef,
   }: OptionButtonProps) => {
     const optionLang =
       quizType === 'reading' ? 'ja' : isReverse ? 'ja' : undefined;
@@ -72,7 +72,7 @@ const OptionButton = memo(
           isWrong &&
             'border-[var(--border-color)] hover:bg-[var(--card-color)]',
           !isWrong &&
-            'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]'
+            'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]',
         )}
         onClick={() => onClick(option)}
         lang={optionLang}
@@ -92,14 +92,14 @@ const OptionButton = memo(
             'mr-4 hidden rounded-full bg-[var(--border-color)] px-1 text-xs lg:inline',
             isWrong
               ? 'text-[var(--border-color)]'
-              : 'text-[var(--secondary-color)]'
+              : 'text-[var(--secondary-color)]',
           )}
         >
           {index + 1}
         </span>
       </button>
     );
-  }
+  },
 );
 
 OptionButton.displayName = 'OptionButton';
@@ -119,7 +119,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
     incrementVocabularyCorrect,
     recordAnswerTime,
     incrementWrongStreak,
-    resetWrongStreak
+    resetWrongStreak,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -127,8 +127,8 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
       incrementVocabularyCorrect: state.incrementVocabularyCorrect,
       recordAnswerTime: state.recordAnswerTime,
       incrementWrongStreak: state.incrementWrongStreak,
-      resetWrongStreak: state.resetWrongStreak
-    }))
+      resetWrongStreak: state.resetWrongStreak,
+    })),
   );
 
   const speedStopwatch = useStopwatch({ autoStart: false });
@@ -138,7 +138,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -161,14 +161,14 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
   // Create Map for O(1) lookups instead of O(n) find() calls
   const wordObjMap = useMemo(
     () => new Map(selectedWordObjs.map(obj => [obj.word, obj])),
-    [selectedWordObjs]
+    [selectedWordObjs],
   );
 
   // Find the correct object - O(1) lookup
   const correctWordObj = wordObjMap.get(correctChar);
 
   const [currentWordObj, setCurrentWordObj] = useState<IVocabObj>(
-    correctWordObj as IVocabObj
+    correctWordObj as IVocabObj,
   );
 
   // What to display as the question
@@ -186,7 +186,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
   const getIncorrectOptions = (): string[] => {
     // Filter out the current word
     const incorrectWordObjs = selectedWordObjs.filter(
-      obj => obj.word !== correctChar
+      obj => obj.word !== correctChar,
     );
 
     if (quizType === 'meaning') {
@@ -207,14 +207,14 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
 
   const [shuffledOptions, setShuffledOptions] = useState(
     [targetChar ?? '', ...randomIncorrectOptions].sort(
-      () => random.real(0, 1) - 0.5
-    ) as string[]
+      () => random.real(0, 1) - 0.5,
+    ) as string[],
   );
 
   const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
   const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
-    []
+    [],
   );
 
   // Update shuffled options when correctChar or isReverse changes
@@ -222,8 +222,8 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
     if (!hasWords) return;
     setShuffledOptions(
       [targetChar ?? '', ...getIncorrectOptions()].sort(
-        () => random.real(0, 1) - 0.5
-      ) as string[]
+        () => random.real(0, 1) - 0.5,
+      ) as string[],
     );
     setWrongSelectedAnswers([]);
   }, [correctChar, hasWords, isReverse, quizType]);
@@ -259,7 +259,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
         <>
           <span className='text-[var(--secondary-color)]'>{`${displayChar} = ${selectedOption} `}</span>
           <CircleCheck className='inline text-[var(--main-color)]' />
-        </>
+        </>,
       );
       setCurrentWordObj(correctWordObj as IVocabObj);
     } else {
@@ -268,7 +268,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
         <>
           <span className='text-[var(--secondary-color)]'>{`${displayChar} ≠ ${selectedOption} `}</span>
           <CircleX className='inline text-[var(--main-color)]' />
-        </>
+        </>,
       );
     }
   };
@@ -324,7 +324,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
     const newChar = adaptiveSelector.selectWeightedCharacter(
       sourceArray,
       // Exclude current word to avoid repetition
-      correctWordObj?.word
+      correctWordObj?.word,
     );
     adaptiveSelector.markCharacterSeen(newChar);
     setCorrectChar(newChar);
@@ -358,7 +358,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-6 sm:w-4/5 sm:gap-10',
-        isHidden ? 'hidden' : ''
+        isHidden ? 'hidden' : '',
       )}
     >
       {/* <GameIntel gameMode={gameMode} /> */}
@@ -405,7 +405,7 @@ const VocabPickGame = ({ selectedWordObjs, isHidden }: VocabPickGameProps) => {
 
           <div
             className={clsx(
-              'flex w-full flex-col items-center gap-6'
+              'flex w-full flex-col items-center gap-6',
               // 'lg:flex-row'
             )}
           >

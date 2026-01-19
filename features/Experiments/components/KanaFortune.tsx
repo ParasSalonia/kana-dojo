@@ -13,7 +13,7 @@ const fortunes = [
   { text: 'Small blessing', emoji: '🍀', color: 'text-green-400' },
   { text: 'Be patient', emoji: '🐢', color: 'text-teal-400' },
   { text: 'Take a rest', emoji: '😴', color: 'text-indigo-400' },
-  { text: 'Make new friends', emoji: '🤝', color: 'text-orange-400' }
+  { text: 'Make new friends', emoji: '🤝', color: 'text-orange-400' },
 ];
 
 const KanaFortune = () => {
@@ -26,7 +26,7 @@ const KanaFortune = () => {
 
   const wheelKana = useMemo(
     () => allKana.slice(0, 8).map((k, i) => ({ ...k, angle: i * 45 })),
-    []
+    [],
   );
 
   const spin = () => {
@@ -72,7 +72,7 @@ const KanaFortune = () => {
             transform: `rotate(${rotation}deg)`,
             transition: spinning
               ? 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)'
-              : 'none'
+              : 'none',
           }}
         >
           {wheelKana.map((k, i) => (
@@ -82,7 +82,7 @@ const KanaFortune = () => {
               className='absolute top-1/2 left-1/2 text-2xl text-[var(--main-color)]'
               style={{
                 transform: `rotate(${k.angle}deg) translateY(-90px) rotate(-${k.angle}deg)`,
-                transformOrigin: '0 0'
+                transformOrigin: '0 0',
               }}
             >
               {k.kana}

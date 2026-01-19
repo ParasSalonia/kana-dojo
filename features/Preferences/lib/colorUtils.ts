@@ -59,7 +59,7 @@ function parseHex(hex: string): RGB {
   return {
     r: parseInt(h.substring(0, 2), 16),
     g: parseInt(h.substring(2, 4), 16),
-    b: parseInt(h.substring(4, 6), 16)
+    b: parseInt(h.substring(4, 6), 16),
   };
 }
 
@@ -75,7 +75,7 @@ function parseRgb(rgb: string): RGB {
   return {
     r: parseInt(match[1], 10),
     g: parseInt(match[2], 10),
-    b: parseInt(match[3], 10)
+    b: parseInt(match[3], 10),
   };
 }
 
@@ -85,7 +85,7 @@ function parseRgb(rgb: string): RGB {
 function parseHsl(hsl: string): RGB {
   // Match various HSL formats: hsl(h, s%, l%), hsla(h, s%, l%, a), hsl(hdeg, s%, l%)
   const match = hsl.match(
-    /hsla?\s*\(\s*([\d.]+)(?:deg)?\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%/
+    /hsla?\s*\(\s*([\d.]+)(?:deg)?\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%/,
   );
   if (!match) {
     throw new Error(`Invalid HSL color: ${hsl}`);
@@ -128,7 +128,7 @@ export function hslToRgb(hsl: HSL): RGB {
   return {
     r: Math.round(hueToRgb(p, q, hNorm + 1 / 3) * 255),
     g: Math.round(hueToRgb(p, q, hNorm) * 255),
-    b: Math.round(hueToRgb(p, q, hNorm - 1 / 3) * 255)
+    b: Math.round(hueToRgb(p, q, hNorm - 1 / 3) * 255),
   };
 }
 
@@ -291,7 +291,7 @@ export function isGreenHue(color: string): boolean {
 export function rgbToHslString(rgb: RGB): string {
   const hsl = rgbToHsl(rgb);
   return `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(
-    hsl.l * 100
+    hsl.l * 100,
   )}%)`;
 }
 
@@ -302,7 +302,7 @@ export function rgbToHslString(rgb: RGB): string {
 export function adjustLightness(
   color: string,
   background: string,
-  targetContrast: number
+  targetContrast: number,
 ): string {
   const rgb = parseColor(color);
   const hsl = rgbToHsl(rgb);
@@ -345,6 +345,6 @@ export function adjustLightness(
   // If we couldn't achieve target, use the best we found
   const finalRgb = hslToRgb({ h: hsl.h, s: hsl.s, l: bestL });
   return `hsla(${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(
-    bestL * 100
+    bestL * 100,
   )}%, 1)`;
 }

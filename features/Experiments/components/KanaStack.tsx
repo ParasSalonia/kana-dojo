@@ -23,7 +23,7 @@ const KanaStack = () => {
     const unstacked = cards.filter(c => !c.stacked);
     if (unstacked.length === 0) return null;
     return unstacked.reduce((min, c) =>
-      c.romanji.localeCompare(min.romanji) < 0 ? c : min
+      c.romanji.localeCompare(min.romanji) < 0 ? c : min,
     );
   }, [cards]);
 
@@ -34,7 +34,7 @@ const KanaStack = () => {
     const expected = getNextExpected();
     if (expected && card.id === expected.id) {
       setCards(prev =>
-        prev.map(c => (c.id === id ? { ...c, stacked: true } : c))
+        prev.map(c => (c.id === id ? { ...c, stacked: true } : c)),
       );
       setStack(prev => [...prev, card]);
       setSelectedId(null);
@@ -79,7 +79,7 @@ const KanaStack = () => {
                 'border-2 transition-all duration-200',
                 selectedId === card.id
                   ? 'animate-shake scale-95 border-red-500 bg-red-500/20'
-                  : 'border-[var(--border-color)] bg-[var(--card-color)] hover:scale-105 hover:border-[var(--accent-color)]'
+                  : 'border-[var(--border-color)] bg-[var(--card-color)] hover:scale-105 hover:border-[var(--accent-color)]',
               )}
             >
               <span lang='ja' className='text-3xl text-[var(--main-color)]'>
@@ -99,7 +99,7 @@ const KanaStack = () => {
             key={card.id}
             className='flex h-16 w-12 items-center justify-center rounded-lg border border-green-500 bg-green-500/20 text-green-400'
             style={{
-              animation: 'stack-in 0.3s ease-out'
+              animation: 'stack-in 0.3s ease-out',
             }}
           >
             <span lang='ja' className='text-xl'>

@@ -16,17 +16,17 @@ interface SidebarLayoutProps {
 const SidebarLayout = ({
   children,
   showBanner = true,
-  className
+  className,
 }: SidebarLayoutProps) => {
   return (
-    <div className='min-h-[100dvh] max-w-[100dvw] lg:pr-20 flex gap-4'>
+    <div className='flex min-h-[100dvh] max-w-[100dvw] gap-4 lg:pr-20'>
       <Sidebar />
       <div
         className={clsx(
           'flex flex-col gap-4',
-          'w-full lg:w-4/5 lg:px-0 px-4 md:px-8',
+          'w-full px-4 md:px-8 lg:w-4/5 lg:px-0',
           'pb-20',
-          className
+          className,
         )}
       >
         {showBanner && <Banner />}

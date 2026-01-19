@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Gravity - Physics Playground | KanaDojo',
-  description: 'Click to flip gravity and watch kana float and fall!'
+  description: 'Click to flip gravity and watch kana float and fall!',
 };
 
 export default function GravityPage() {

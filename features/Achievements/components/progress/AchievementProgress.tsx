@@ -26,7 +26,7 @@ const AchievementProgress = () => {
     completionPercentage,
     handleCategorySelect,
     getAchievementProgress,
-    getCategoryStats
+    getCategoryStats,
   } = useAchievementProgress();
 
   return (

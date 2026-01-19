@@ -32,7 +32,7 @@ const useCrazyModeStore = create<CrazyModeState>()(
           set({
             isCrazyMode: false,
             activeThemeId: null,
-            activeFontName: null
+            activeFontName: null,
           });
         }
       },
@@ -47,14 +47,14 @@ const useCrazyModeStore = create<CrazyModeState>()(
 
         set({
           activeThemeId: randomTheme.id,
-          activeFontName: randomFont?.name ?? null
+          activeFontName: randomFont?.name ?? null,
         });
-      }
+      },
     }),
     {
-      name: 'kanadojo-crazy-mode'
-    }
-  )
+      name: 'kanadojo-crazy-mode',
+    },
+  ),
 );
 
 export default useCrazyModeStore;

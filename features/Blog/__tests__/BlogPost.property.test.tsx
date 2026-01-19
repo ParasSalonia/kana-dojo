@@ -8,12 +8,12 @@ import type {
   Category,
   Difficulty,
   Locale,
-  Heading
+  Heading,
 } from '../types/blog';
 import {
   VALID_CATEGORIES,
   VALID_DIFFICULTIES,
-  VALID_LOCALES
+  VALID_LOCALES,
 } from '../types/blog';
 import { BlogPost } from '../components/BlogPost';
 
@@ -42,7 +42,7 @@ vi.mock('@/shared/components/navigation/Link', () => ({
     <a href={href} {...props}>
       {children}
     </a>
-  )
+  ),
 }));
 
 // Cleanup after each test
@@ -52,10 +52,10 @@ afterEach(() => {
 
 // Arbitraries for generating valid BlogPost objects
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const difficultyArb: fc.Arbitrary<Difficulty> = fc.constantFrom(
-  ...VALID_DIFFICULTIES
+  ...VALID_DIFFICULTIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -64,18 +64,18 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 // Generate valid slugs
 const slugArb = fc
   .array(fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789'.split('')), {
     minLength: 1,
-    maxLength: 30
+    maxLength: 30,
   })
   .map(chars => chars.join(''))
   .filter(s => s.length > 0);
@@ -88,7 +88,7 @@ const safeChars =
 const safeStringArb = fc
   .array(fc.constantFrom(...safeChars.split('')), {
     minLength: 1,
-    maxLength: 50
+    maxLength: 50,
   })
   .map(chars => chars.join('').trim())
   .filter(s => s.length > 0);
@@ -100,11 +100,11 @@ const tagsArb = fc.array(
       fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789'.split('')),
       {
         minLength: 1,
-        maxLength: 15
-      }
+        maxLength: 15,
+      },
     )
     .map(chars => chars.join('')),
-  { minLength: 1, maxLength: 5 }
+  { minLength: 1, maxLength: 5 },
 );
 
 // Generate valid heading IDs
@@ -113,8 +113,8 @@ const headingIdArb = fc
     fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789-'.split('')),
     {
       minLength: 1,
-      maxLength: 30
-    }
+      maxLength: 30,
+    },
   )
   .map(chars => chars.join(''))
   .filter(s => s.length > 0 && !s.startsWith('-') && !s.endsWith('-'));
@@ -126,7 +126,7 @@ const headingLevelArb: fc.Arbitrary<2 | 3 | 4> = fc.constantFrom(2, 3, 4);
 const headingArb: fc.Arbitrary<Heading> = fc.record({
   id: headingIdArb,
   text: safeStringArb,
-  level: headingLevelArb
+  level: headingLevelArb,
 });
 
 // Generate array of headings with valid hierarchy (no skipped levels)
@@ -167,11 +167,11 @@ const blogPostArb: fc.Arbitrary<BlogPostType> = fc.record({
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(difficultyArb, { nil: undefined }),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
   locale: localeArb,
   content: safeStringArb,
-  headings: validHeadingsArb
+  headings: validHeadingsArb,
 });
 
 // BlogPostMeta arbitrary for related posts
@@ -188,9 +188,9 @@ const blogPostMetaArb: fc.Arbitrary<BlogPostMeta> = fc.record({
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(difficultyArb, { nil: undefined }),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
-  locale: localeArb
+  locale: localeArb,
 });
 
 /**
@@ -213,7 +213,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -228,7 +228,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -243,7 +243,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -257,7 +257,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -271,7 +271,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -285,7 +285,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -299,14 +299,14 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('renders table of contents when headings are present', () => {
     // Generate posts with at least one heading
     const postWithHeadingsArb = blogPostArb.filter(
-      post => post.headings.length > 0
+      post => post.headings.length > 0,
     );
 
     fc.assert(
@@ -315,13 +315,13 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         // Should have table of contents (either mobile or desktop version)
         const tocElements = container.querySelectorAll(
-          '[data-testid="table-of-contents"]'
+          '[data-testid="table-of-contents"]',
         );
         expect(tocElements.length).toBeGreaterThan(0);
 
         unmount();
       }),
-      { numRuns: 50 }
+      { numRuns: 50 },
     );
   });
 
@@ -332,16 +332,16 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
         fc.array(blogPostMetaArb, { minLength: 1, maxLength: 3 }),
         (post: BlogPostType, relatedPosts: BlogPostMeta[]) => {
           const { getByTestId, unmount } = render(
-            <BlogPost post={post} relatedPosts={relatedPosts} />
+            <BlogPost post={post} relatedPosts={relatedPosts} />,
           );
 
           const relatedSection = getByTestId('blog-post-related-section');
           expect(relatedSection).not.toBeNull();
 
           unmount();
-        }
+        },
       ),
-      { numRuns: 50 }
+      { numRuns: 50 },
     );
   });
 
@@ -349,7 +349,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
     fc.assert(
       fc.property(blogPostArb, (post: BlogPostType) => {
         const { queryByTestId, unmount } = render(
-          <BlogPost post={post} relatedPosts={[]} />
+          <BlogPost post={post} relatedPosts={[]} />,
         );
 
         const relatedSection = queryByTestId('blog-post-related-section');
@@ -357,7 +357,7 @@ describe('Property 19: Heading Hierarchy Maintained', () => {
 
         unmount();
       }),
-      { numRuns: 50 }
+      { numRuns: 50 },
     );
   });
 });

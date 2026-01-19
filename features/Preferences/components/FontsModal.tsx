@@ -27,13 +27,15 @@ const FontCard = memo(function FontCard({
   fontClassName,
   isSelected,
   isDefault,
-  onClick
+  onClick,
 }: FontCardProps) {
   return (
     <label
       className={clsx(
         'flex cursor-pointer items-center justify-center overflow-hidden rounded-xl border-0 bg-[var(--card-color)] px-4 py-4',
-        isSelected ? 'border-[var(--main-color)]' : 'border-[var(--card-color)]'
+        isSelected
+          ? 'border-[var(--main-color)]'
+          : 'border-[var(--card-color)]',
       )}
       onClick={() => onClick(fontName)}
     >
@@ -68,7 +70,7 @@ export default function FontsModal({ open, onOpenChange }: FontsModalProps) {
       playClick();
       setSelectedFont(fontName);
     },
-    [playClick, setSelectedFont]
+    [playClick, setSelectedFont],
   );
 
   const handleClose = useCallback(() => {

@@ -38,7 +38,7 @@ export function TrainingGame<T>({
   mode,
   adapter,
   onComplete,
-  children
+  children,
 }: TrainingGameProps<T>) {
   const gameState = useGameEngine({ content, mode, adapter, contentType });
 

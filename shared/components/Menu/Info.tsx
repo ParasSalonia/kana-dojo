@@ -32,23 +32,23 @@ const Info = () => {
 
   const [showInfo, setShowInfo] = useState(
     ['/kana', '/kanji', '/vocabulary', '/', '/sentences'].includes(
-      pathWithoutLocale
+      pathWithoutLocale,
     )
       ? true
-      : false
+      : false,
   );
 
   return (
     <div
       className={clsx(
-        'p-4 rounded-2xl w-full flex flex-col gap-1 overflow-hidden',
-        cardBorderStyles
+        'flex w-full flex-col gap-1 overflow-hidden rounded-2xl p-4',
+        cardBorderStyles,
       )}
     >
       <motion.h3
         className={clsx(
           'group text-xl hover:cursor-pointer',
-          'flex flex-row items-center gap-1'
+          'flex flex-row items-center gap-1',
         )}
         onClick={() => {
           playClick();
@@ -64,7 +64,7 @@ const Info = () => {
             'text-[var(--border-color)]',
             'max-md:group-active:text-[var(--secondary-color)]',
             'md:group-hover:text-[var(--secondary-color)]',
-            !showInfo && 'rotate-180'
+            !showInfo && 'rotate-180',
           )}
           size={24}
         />
@@ -73,7 +73,7 @@ const Info = () => {
       <motion.div
         className={clsx(
           'overflow-hidden duration-300',
-          showInfo ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+          showInfo ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0',
           // 'text-[var(--secondary-color)]'
         )}
         initial={{ opacity: 0 }}
