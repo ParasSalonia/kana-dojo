@@ -27,13 +27,15 @@ const FontCard = memo(function FontCard({
   fontClassName,
   isSelected,
   isDefault,
-  onClick
+  onClick,
 }: FontCardProps) {
   return (
     <label
       className={clsx(
         'flex cursor-pointer items-center justify-center overflow-hidden rounded-xl border-0 bg-[var(--card-color)] px-4 py-4',
-        isSelected ? 'border-[var(--main-color)]' : 'border-[var(--card-color)]'
+        isSelected
+          ? 'border-[var(--main-color)]'
+          : 'border-[var(--card-color)]',
       )}
       onClick={() => onClick(fontName)}
     >
@@ -68,7 +70,7 @@ export default function FontsModal({ open, onOpenChange }: FontsModalProps) {
       playClick();
       setSelectedFont(fontName);
     },
-    [playClick, setSelectedFont]
+    [playClick, setSelectedFont],
   );
 
   const handleClose = useCallback(() => {
@@ -104,17 +106,20 @@ export default function FontsModal({ open, onOpenChange }: FontsModalProps) {
             {/* Recommended Fonts Section */}
             <div className='mb-6'>
               <div className='mb-3 flex items-center gap-2'>
-                <BookOpen size={18} className='text-[var(--secondary-color)]' />
                 <h3 className='text-lg font-semibold text-[var(--main-color)]'>
-                  Recommended for Learning
+                  Recommended
                 </h3>
+                {/* 
                 <span className='text-sm text-[var(--secondary-color)]'>
                   ({recommendedFonts.length})
                 </span>
+ */}
               </div>
+              {/* 
               <p className='mb-4 text-sm text-[var(--secondary-color)]'>
                 Used in real Japanese textbooks, books & media
               </p>
+ */}
               <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
                 {recommendedFonts.map(fontObj => (
                   <FontCard
@@ -132,17 +137,20 @@ export default function FontsModal({ open, onOpenChange }: FontsModalProps) {
             {/* Other Fonts Section */}
             <div>
               <div className='mb-3 flex items-center gap-2'>
-                <Sparkles size={18} className='text-[var(--secondary-color)]' />
                 <h3 className='text-lg font-semibold text-[var(--main-color)]'>
-                  Other Fonts
+                  Other
                 </h3>
+                {/* 
                 <span className='text-sm text-[var(--secondary-color)]'>
                   ({otherFonts.length})
                 </span>
+ */}
               </div>
+              {/* 
               <p className='mb-4 text-sm text-[var(--secondary-color)]'>
                 Fun & decorative fonts for entertainment
               </p>
+ */}
               <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
                 {otherFonts.map(fontObj => (
                   <FontCard

@@ -11,7 +11,7 @@ const statsOverviewArb = fc.record({
   totalIncorrect: fc.integer({ min: 0, max: 100000 }),
   overallAccuracy: fc.float({ min: 0, max: 100, noNaN: true }),
   bestStreak: fc.integer({ min: 0, max: 10000 }),
-  uniqueCharactersLearned: fc.integer({ min: 0, max: 500 })
+  uniqueCharactersLearned: fc.integer({ min: 0, max: 500 }),
 });
 
 describe('Stats Overview Display', () => {
@@ -34,7 +34,7 @@ describe('Stats Overview Display', () => {
 
           // Verify overall accuracy is displayed (Requirement 1.2)
           expect(displayValues.overallAccuracy).toBe(
-            `${stats.overallAccuracy.toFixed(1)}%`
+            `${stats.overallAccuracy.toFixed(1)}%`,
           );
 
           // Verify best streak is displayed (Requirement 1.3)
@@ -42,7 +42,7 @@ describe('Stats Overview Display', () => {
 
           // Verify unique characters learned is displayed (Requirement 1.4)
           expect(displayValues.uniqueCharactersLearned).toBe(
-            stats.uniqueCharactersLearned
+            stats.uniqueCharactersLearned,
           );
 
           // Verify total correct and incorrect are displayed (Requirement 1.5)
@@ -52,7 +52,7 @@ describe('Stats Overview Display', () => {
           // Verify all metrics are present
           expect(displayValues.hasAllMetrics).toBe(true);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -64,7 +64,7 @@ describe('Stats Overview Display', () => {
           // Accuracy should end with %
           expect(displayValues.overallAccuracy).toMatch(/^\d+\.\d%$/);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -76,12 +76,12 @@ describe('Stats Overview Display', () => {
           expect(displayValues.totalSessions).toBeGreaterThanOrEqual(0);
           expect(displayValues.bestStreak).toBeGreaterThanOrEqual(0);
           expect(displayValues.uniqueCharactersLearned).toBeGreaterThanOrEqual(
-            0
+            0,
           );
           expect(displayValues.totalCorrect).toBeGreaterThanOrEqual(0);
           expect(displayValues.totalIncorrect).toBeGreaterThanOrEqual(0);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -90,13 +90,13 @@ describe('Stats Overview Display', () => {
         fc.property(statsOverviewArb, stats => {
           const displayValues = getStatsOverviewDisplayValues(stats);
           const percentValue = parseFloat(
-            displayValues.overallAccuracy.replace('%', '')
+            displayValues.overallAccuracy.replace('%', ''),
           );
 
           expect(percentValue).toBeGreaterThanOrEqual(0);
           expect(percentValue).toBeLessThanOrEqual(100);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -112,7 +112,7 @@ describe('Stats Overview Display', () => {
         totalIncorrect: 0,
         overallAccuracy: 0,
         bestStreak: 0,
-        uniqueCharactersLearned: 0
+        uniqueCharactersLearned: 0,
       };
 
       const displayValues = getStatsOverviewDisplayValues(stats);
@@ -133,7 +133,7 @@ describe('Stats Overview Display', () => {
         totalIncorrect: 0,
         overallAccuracy: 100,
         bestStreak: 100,
-        uniqueCharactersLearned: 50
+        uniqueCharactersLearned: 50,
       };
 
       const displayValues = getStatsOverviewDisplayValues(stats);
@@ -148,7 +148,7 @@ describe('Stats Overview Display', () => {
         totalIncorrect: 50,
         overallAccuracy: 0,
         bestStreak: 0,
-        uniqueCharactersLearned: 10
+        uniqueCharactersLearned: 10,
       };
 
       const displayValues = getStatsOverviewDisplayValues(stats);
@@ -163,7 +163,7 @@ describe('Stats Overview Display', () => {
         totalIncorrect: 1,
         overallAccuracy: 99.9,
         bestStreak: 5000,
-        uniqueCharactersLearned: 500
+        uniqueCharactersLearned: 500,
       };
 
       const displayValues = getStatsOverviewDisplayValues(stats);
@@ -181,7 +181,7 @@ describe('Stats Overview Display', () => {
         totalIncorrect: 67,
         overallAccuracy: 33.333,
         bestStreak: 5,
-        uniqueCharactersLearned: 20
+        uniqueCharactersLearned: 20,
       };
 
       const displayValues = getStatsOverviewDisplayValues(stats);

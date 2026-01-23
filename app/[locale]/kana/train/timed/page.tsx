@@ -9,14 +9,22 @@ export function generateStaticParams() {
 
 export const revalidate = 3600;
 
-export async function generateMetadata(): Promise<Metadata> {
-  return await generatePageMetadata('kanaBlitz');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return await generatePageMetadata('kanaBlitz', {
+    locale,
+    pathname: '/kana/train/timed',
+  });
 }
 
 export default function TimedKanaPage() {
   return (
-    <main className='p-4 max-w-xl mx-auto'>
-      <h1 className='text-2xl font-bold mb-4 text-center'>Blitz: Kana</h1>
+    <main className='mx-auto max-w-xl p-4'>
+      <h1 className='mb-4 text-center text-2xl font-bold'>Blitz: Kana</h1>
       <BlitzKana />
     </main>
   );

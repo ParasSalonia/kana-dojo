@@ -34,5 +34,5 @@ export default function middleware(request: NextRequest) {
 export const config = {
   // More restrictive matcher - only match actual page routes
   // Excludes: api, _next, _vercel, static files, and common bot endpoints
-  matcher: ['/((?!api|_next|_vercel|monitoring|healthcheck|.*\\..*).*)']
+  matcher: ['/((?!api|_next|_vercel|monitoring|healthcheck|.*\\..*).*)'],
 };

@@ -257,6 +257,4 @@
     - _Requirements: 4.4_
 
 - [x] 15. Final Checkpoint - Ensure all tests pass
- 
   - Ensure all tests pass, ask the user if questions arise.
-

@@ -4,23 +4,23 @@ import { validateFrontmatter } from '../lib/validateFrontmatter';
 import {
   REQUIRED_FRONTMATTER_FIELDS,
   VALID_CATEGORIES,
-  type Category
+  type Category,
 } from '../types/blog';
 
 // Arbitraries for generating valid frontmatter values
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 
 const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 const nonEmptyStringArb = fc
@@ -36,7 +36,7 @@ const validFrontmatterArb = fc.record({
   publishedAt: dateArb,
   author: nonEmptyStringArb,
   category: categoryArb,
-  tags: tagsArb
+  tags: tagsArb,
 });
 
 /**
@@ -52,14 +52,14 @@ describe('Property 3: Frontmatter Validation Identifies Missing Fields', () => {
         const result = validateFrontmatter(frontmatter);
         expect(result.success).toBe(true);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('missing required fields are identified', () => {
     // Generate a subset of required fields to remove
     const fieldsToRemoveArb = fc.subarray([...REQUIRED_FRONTMATTER_FIELDS], {
-      minLength: 1
+      minLength: 1,
     });
 
     fc.assert(
@@ -87,9 +87,9 @@ describe('Property 3: Frontmatter Validation Identifies Missing Fields', () => {
             // Missing fields should only contain the removed fields
             expect(result.missingFields.length).toBe(fieldsToRemove.length);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -108,9 +108,9 @@ describe('Property 3: Frontmatter Validation Identifies Missing Fields', () => {
           if (!result.success) {
             expect(result.missingFields).toContain(fieldToEmpty);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -126,7 +126,7 @@ describe('Property 3: Frontmatter Validation Identifies Missing Fields', () => {
           expect(result.missingFields).toContain('tags');
         }
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -140,7 +140,7 @@ describe('Property 3: Frontmatter Validation Identifies Missing Fields', () => {
         (frontmatter, invalidCategory) => {
           const withInvalidCategory = {
             ...frontmatter,
-            category: invalidCategory
+            category: invalidCategory,
           };
 
           const result = validateFrontmatter(withInvalidCategory);
@@ -149,9 +149,9 @@ describe('Property 3: Frontmatter Validation Identifies Missing Fields', () => {
           if (!result.success) {
             expect(result.missingFields).toContain('category');
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

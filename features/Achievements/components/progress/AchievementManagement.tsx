@@ -27,7 +27,7 @@ export const AchievementManagement = () => {
       <div
         className={clsx(
           'border border-[var(--border-color)] p-6',
-          cardBorderStyles
+          cardBorderStyles,
         )}
       >
         <div className='mb-4 flex items-center gap-3'>
@@ -56,7 +56,7 @@ export const AchievementManagement = () => {
             className={clsx(
               'flex items-center gap-2 rounded-lg px-4 py-2',
               buttonBorderStyles,
-              'text-[var(--main-color)] hover:bg-[var(--border-color)]'
+              'text-[var(--main-color)] hover:bg-[var(--border-color)]',
             )}
           >
             <RotateCcw size={16} />

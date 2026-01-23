@@ -7,7 +7,7 @@ import themeSets from '../data/themes';
 import {
   validateTheme,
   getValidationSummary,
-  formatValidationResult
+  formatValidationResult,
 } from './themeValidator';
 
 interface Theme {
@@ -88,8 +88,8 @@ export function getThemesNeedingImprovement(): {
       themeId: r.themeId,
       issues: r.issues.map(
         i =>
-          `${i.property} on ${i.background}: ${i.actualRatio}:1 < ${i.requiredRatio}:1`
-      )
+          `${i.property} on ${i.background}: ${i.actualRatio}:1 < ${i.requiredRatio}:1`,
+      ),
     }));
 }
 

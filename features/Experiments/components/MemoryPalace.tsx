@@ -43,7 +43,7 @@ const MemoryPalace = () => {
         romanji: k.romanji,
         position: 0,
         isRevealed: true,
-        isMatched: false
+        isMatched: false,
       });
       pairs.push({
         id: i * 2 + 1,
@@ -51,7 +51,7 @@ const MemoryPalace = () => {
         romanji: k.romanji,
         position: 0,
         isRevealed: true,
-        isMatched: false
+        isMatched: false,
       });
     });
     const shuffledPairs = pairs.sort(() => Math.random() - 0.5);
@@ -97,11 +97,11 @@ const MemoryPalace = () => {
       if (!selectedCard) {
         setSelectedCard(card);
         setCards(c =>
-          c.map(c => (c.id === card.id ? { ...c, isRevealed: true } : c))
+          c.map(c => (c.id === card.id ? { ...c, isRevealed: true } : c)),
         );
       } else {
         setCards(c =>
-          c.map(c => (c.id === card.id ? { ...c, isRevealed: true } : c))
+          c.map(c => (c.id === card.id ? { ...c, isRevealed: true } : c)),
         );
         if (selectedCard.kana === card.kana && selectedCard.id !== card.id) {
           playCorrect();
@@ -110,8 +110,8 @@ const MemoryPalace = () => {
             c.map(c =>
               c.kana === card.kana
                 ? { ...c, isMatched: true, isRevealed: true }
-                : c
-            )
+                : c,
+            ),
           );
           setSelectedCard(null);
           setTimeout(() => {
@@ -125,14 +125,14 @@ const MemoryPalace = () => {
           setMistakes(m => m + 1);
           setTimeout(() => {
             setCards(c =>
-              c.map(c => (!c.isMatched ? { ...c, isRevealed: false } : c))
+              c.map(c => (!c.isMatched ? { ...c, isRevealed: false } : c)),
             );
             setSelectedCard(null);
           }, 800);
         }
       }
     },
-    [phase, selectedCard, playClick, playCorrect, playError]
+    [phase, selectedCard, playClick, playCorrect, playError],
   );
 
   const nextRound = useCallback(() => {
@@ -143,17 +143,17 @@ const MemoryPalace = () => {
   if (!isMounted) return null;
 
   return (
-    <div className='flex flex-col items-center justify-center gap-6 flex-1 min-h-[80vh]'>
-      <div className='text-center mb-2'>
-        <h1 className='text-2xl md:text-3xl text-[var(--main-color)]'>
+    <div className='flex min-h-[80vh] flex-1 flex-col items-center justify-center gap-6'>
+      <div className='mb-2 text-center'>
+        <h1 className='text-2xl text-[var(--main-color)] md:text-3xl'>
           Memory Palace
         </h1>
-        <p className='text-[var(--secondary-color)] mt-2'>
+        <p className='mt-2 text-[var(--secondary-color)]'>
           {phase === 'memorize' && `Memorize the positions! ${timeLeft}s`}
           {phase === 'recall' && 'Find the matching pairs!'}
           {phase === 'result' && 'Round Complete!'}
         </p>
-        <div className='flex gap-4 justify-center mt-2 text-sm'>
+        <div className='mt-2 flex justify-center gap-4 text-sm'>
           <span className='text-[var(--secondary-color)]'>
             Round: <span className='text-[var(--main-color)]'>{round}</span>
           </span>
@@ -165,7 +165,7 @@ const MemoryPalace = () => {
           </span>
         </div>
       </div>
-      <div className='grid grid-cols-4 gap-3 md:gap-4 max-w-md'>
+      <div className='grid max-w-md grid-cols-4 gap-3 md:gap-4'>
         {cards
           .sort((a, b) => a.position - b.position)
           .map(card => (
@@ -174,18 +174,18 @@ const MemoryPalace = () => {
               onClick={() => handleCardClick(card)}
               disabled={phase === 'memorize' || card.isMatched}
               className={clsx(
-                'w-16 h-20 md:w-20 md:h-24 rounded-xl flex flex-col items-center justify-center transition-all duration-300 transform hover:cursor-pointer',
-                card.isMatched && 'opacity-50 scale-95',
+                'flex h-20 w-16 transform flex-col items-center justify-center rounded-xl transition-all duration-300 hover:cursor-pointer md:h-24 md:w-20',
+                card.isMatched && 'scale-95 opacity-50',
                 card.isRevealed || card.isMatched
-                  ? 'bg-[var(--card-color)] border-2 border-[var(--main-color)]'
-                  : 'bg-[var(--border-color)] border-2 border-[var(--border-color)] hover:border-[var(--main-color)]'
+                  ? 'border-2 border-[var(--main-color)] bg-[var(--card-color)]'
+                  : 'border-2 border-[var(--border-color)] bg-[var(--border-color)] hover:border-[var(--main-color)]',
               )}
             >
               {card.isRevealed || card.isMatched ? (
                 <>
                   <span
                     lang='ja'
-                    className='text-2xl md:text-3xl text-[var(--main-color)]'
+                    className='text-2xl text-[var(--main-color)] md:text-3xl'
                   >
                     {card.kana}
                   </span>
@@ -201,7 +201,7 @@ const MemoryPalace = () => {
       </div>
       {phase === 'result' && (
         <div className='mt-2 text-center'>
-          <p className='text-xl text-[var(--main-color)] mb-4'>
+          <p className='mb-4 text-xl text-[var(--main-color)]'>
             {mistakes === 0
               ? '🎉 Perfect!'
               : mistakes <= 2
@@ -211,7 +211,7 @@ const MemoryPalace = () => {
           <button
             onClick={nextRound}
             className={clsx(
-              'px-6 py-3 rounded-xl flex items-center gap-2 mx-auto bg-[var(--card-color)] border border-[var(--border-color)] text-[var(--main-color)] hover:cursor-pointer hover:border-[var(--main-color)] transition-all duration-250 active:scale-95'
+              'mx-auto flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-color)] px-6 py-3 text-[var(--main-color)] transition-all duration-250 hover:cursor-pointer hover:border-[var(--main-color)] active:scale-95',
             )}
           >
             <Play size={20} />

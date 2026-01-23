@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useVocabStore, {
-  type IVocabObj
+  type IVocabObj,
 } from '@/features/Vocabulary/store/useVocabStore';
 import Gauntlet, { type GauntletConfig } from '@/shared/components/Gauntlet';
 import { getSelectionLabels } from '@/shared/lib/selectionFormatting';
@@ -17,7 +17,7 @@ const GauntletVocab: React.FC<GauntletVocabProps> = ({ onCancel }) => {
   const selectedVocabObjs = useVocabStore(state => state.selectedVocabObjs);
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
   const selectedGameModeVocab = useVocabStore(
-    state => state.selectedGameModeVocab
+    state => state.selectedGameModeVocab,
   );
 
   // Format selected sets for display
@@ -47,7 +47,7 @@ const GauntletVocab: React.FC<GauntletVocabProps> = ({ onCancel }) => {
       }
       // Normal: answer should match any meaning
       return question.meanings.some(
-        meaning => answer.toLowerCase() === meaning.toLowerCase()
+        meaning => answer.toLowerCase() === meaning.toLowerCase(),
       );
     },
     getCorrectAnswer: (question, isReverse) =>
@@ -58,7 +58,7 @@ const GauntletVocab: React.FC<GauntletVocabProps> = ({ onCancel }) => {
         // Reverse: options are Japanese words
         const correctAnswer = question.word;
         const incorrectOptions = shuffle(
-          items.filter(item => item.word !== question.word)
+          items.filter(item => item.word !== question.word),
         )
           .slice(0, count - 1)
           .map(item => item.word);
@@ -67,7 +67,7 @@ const GauntletVocab: React.FC<GauntletVocabProps> = ({ onCancel }) => {
       // Normal: options are meanings
       const correctAnswer = question.meanings[0];
       const incorrectOptions = shuffle(
-        items.filter(item => item.word !== question.word)
+        items.filter(item => item.word !== question.word),
       )
         .slice(0, count - 1)
         .map(item => item.meanings[0]);
@@ -75,7 +75,7 @@ const GauntletVocab: React.FC<GauntletVocabProps> = ({ onCancel }) => {
     },
     getCorrectOption: (question, isReverse) =>
       isReverse ? question.word : question.meanings[0],
-    supportsReverseMode: true
+    supportsReverseMode: true,
   };
 
   return <Gauntlet config={config} onCancel={onCancel} />;

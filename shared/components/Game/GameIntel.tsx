@@ -40,12 +40,12 @@ const GameIntel = memo(({ gameMode: _gameMode }: { gameMode: string }) => {
       className={clsx(
         'flex flex-col',
         cardBorderStyles,
-        'text-[var(--secondary-color)]'
+        'text-[var(--secondary-color)]',
       )}
     >
       <div
         className={clsx(
-          'flex w-full flex-col gap-2 border-[var(--border-color)] p-4'
+          'flex w-full flex-col gap-2 border-[var(--border-color)] p-4',
         )}
       >
         <span className='flex items-center gap-2'>

@@ -5,7 +5,7 @@ import { render, cleanup } from '@testing-library/react';
 import {
   KanaChart,
   BASE_CHARACTER_COUNT,
-  EXTENDED_CHARACTER_COUNT
+  EXTENDED_CHARACTER_COUNT,
 } from '../components/mdx/KanaChart';
 
 // Cleanup after each test
@@ -32,13 +32,13 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
     fc.assert(
       fc.property(kanaTypeArb, booleanArb, (type, showRomaji) => {
         const { getAllByTestId, unmount } = render(
-          <KanaChart type={type} showRomaji={showRomaji} extended={false} />
+          <KanaChart type={type} showRomaji={showRomaji} extended={false} />,
         );
         const cells = getAllByTestId('kana-chart-cell');
         expect(cells.length).toBe(BASE_CHARACTER_COUNT);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -46,13 +46,13 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
     fc.assert(
       fc.property(kanaTypeArb, booleanArb, (type, showRomaji) => {
         const { getAllByTestId, unmount } = render(
-          <KanaChart type={type} showRomaji={showRomaji} extended={true} />
+          <KanaChart type={type} showRomaji={showRomaji} extended={true} />,
         );
         const cells = getAllByTestId('kana-chart-cell');
         expect(cells.length).toBe(EXTENDED_CHARACTER_COUNT);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -60,7 +60,7 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
     fc.assert(
       fc.property(kanaTypeArb, booleanArb, (type, extended) => {
         const { getAllByTestId, unmount } = render(
-          <KanaChart type={type} extended={extended} />
+          <KanaChart type={type} extended={extended} />,
         );
         const characters = getAllByTestId('kana-character');
         const expectedCount = extended
@@ -75,7 +75,7 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
 
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -83,7 +83,7 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
     fc.assert(
       fc.property(kanaTypeArb, booleanArb, (type, extended) => {
         const { getAllByTestId, unmount } = render(
-          <KanaChart type={type} showRomaji={true} extended={extended} />
+          <KanaChart type={type} showRomaji={true} extended={extended} />,
         );
         const romajiElements = getAllByTestId('kana-romaji');
         const expectedCount = extended
@@ -92,7 +92,7 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
         expect(romajiElements.length).toBe(expectedCount);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -100,13 +100,13 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
     fc.assert(
       fc.property(kanaTypeArb, booleanArb, (type, extended) => {
         const { queryAllByTestId, unmount } = render(
-          <KanaChart type={type} showRomaji={false} extended={extended} />
+          <KanaChart type={type} showRomaji={false} extended={extended} />,
         );
         const romajiElements = queryAllByTestId('kana-romaji');
         expect(romajiElements.length).toBe(0);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -118,7 +118,7 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
         expect(chart.getAttribute('data-type')).toBe(type);
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -126,13 +126,13 @@ describe('Property 16: KanaChart Renders Correct Character Count', () => {
     fc.assert(
       fc.property(kanaTypeArb, booleanArb, (type, extended) => {
         const { getByTestId, unmount } = render(
-          <KanaChart type={type} extended={extended} />
+          <KanaChart type={type} extended={extended} />,
         );
         const chart = getByTestId('kana-chart');
         expect(chart.getAttribute('data-extended')).toBe(String(extended));
         unmount();
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

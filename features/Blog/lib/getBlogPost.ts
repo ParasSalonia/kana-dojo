@@ -20,10 +20,45 @@ export { extractHeadings, generateHeadingId } from './extractHeadings';
 const CONTENT_BASE_PATH = 'features/Blog/content/posts';
 
 /**
- * Gets the absolute path to a post file
+ * Gets the absolute path to the locale posts directory
  */
-function getPostPath(locale: Locale, slug: string): string {
-  return path.join(process.cwd(), CONTENT_BASE_PATH, locale, `${slug}.mdx`);
+function getLocaleDirectory(locale: Locale): string {
+  return path.join(process.cwd(), CONTENT_BASE_PATH, locale);
+}
+
+/**
+ * Finds the path to a post file by searching in category subdirectories
+ * @param locale - The locale to search in
+ * @param slug - The post slug (filename without extension)
+ * @returns The full path to the post file, or null if not found
+ */
+function findPostPath(locale: Locale, slug: string): string | null {
+  const localeDir = getLocaleDirectory(locale);
+  const filename = `${slug}.mdx`;
+
+  // First, check if the file exists directly in the locale directory (backward compatibility)
+  const directPath = path.join(localeDir, filename);
+  if (fs.existsSync(directPath)) {
+    return directPath;
+  }
+
+  // Search in category subdirectories
+  if (!fs.existsSync(localeDir)) {
+    return null;
+  }
+
+  const entries = fs.readdirSync(localeDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const categoryPath = path.join(localeDir, entry.name, filename);
+      if (fs.existsSync(categoryPath)) {
+        return categoryPath;
+      }
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -41,7 +76,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPost | null {
     const validation = validateFrontmatter(frontmatter);
     if (!validation.success) {
       console.error(
-        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`
+        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`,
       );
       return null;
     }
@@ -68,13 +103,13 @@ function parsePostFile(filePath: string, locale: Locale): BlogPost | null {
       readingTime,
       difficulty: frontmatter.difficulty as BlogPostMeta['difficulty'],
       relatedPosts: frontmatter.relatedPosts as string[] | undefined,
-      locale
+      locale,
     };
 
     return {
       ...meta,
       content,
-      headings
+      headings,
     };
   } catch (error) {
     console.error(`Error parsing post file ${filePath}:`, error);
@@ -89,8 +124,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPost | null {
  * @returns True if the file exists
  */
 export function postExists(locale: Locale, slug: string): boolean {
-  const filePath = getPostPath(locale, slug);
-  return fs.existsSync(filePath);
+  return findPostPath(locale, slug) !== null;
 }
 
 /**
@@ -102,20 +136,20 @@ export function postExists(locale: Locale, slug: string): boolean {
  */
 export function getBlogPost(
   slug: string,
-  locale: Locale = 'en'
+  locale: Locale = 'en',
 ): BlogPost | null {
   // Try to get the post in the requested locale
-  const requestedPath = getPostPath(locale, slug);
+  const requestedPath = findPostPath(locale, slug);
 
-  if (fs.existsSync(requestedPath)) {
+  if (requestedPath) {
     return parsePostFile(requestedPath, locale);
   }
 
   // Fall back to English if not found in requested locale
   if (locale !== 'en') {
-    const englishPath = getPostPath('en', slug);
+    const englishPath = findPostPath('en', slug);
 
-    if (fs.existsSync(englishPath)) {
+    if (englishPath) {
       // Return the English version but keep the original requested locale
       // This allows the UI to know it's showing a fallback
       const post = parsePostFile(englishPath, 'en');

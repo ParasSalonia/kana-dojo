@@ -4,7 +4,7 @@ import Image from 'next/image';
 import type { Contributor } from './types';
 
 export default function ContributorsGrid({
-  contributors
+  contributors,
 }: {
   contributors: Contributor[];
 }) {

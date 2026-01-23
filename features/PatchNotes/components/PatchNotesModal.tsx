@@ -14,7 +14,7 @@ interface PatchNotesModalProps {
 
 export default function PatchNotesModal({
   open,
-  onOpenChange
+  onOpenChange,
 }: PatchNotesModalProps) {
   const { playClick } = useClick();
 

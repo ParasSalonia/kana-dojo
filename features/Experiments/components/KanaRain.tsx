@@ -39,7 +39,7 @@ const KanaRain = () => {
         romanji: kana.romanji,
         speed: Math.random() * 2 + 3, // 4-6 seconds
         opacity: Math.random() * 0.4 + 0.4, // 0.4-0.8
-        startDelay: Math.random() * 5 // 0-5 seconds into animation
+        startDelay: Math.random() * 5, // 0-5 seconds into animation
       };
     };
 
@@ -66,15 +66,15 @@ const KanaRain = () => {
   if (!isMounted) return null;
 
   return (
-    <div className='relative flex-1 min-h-[80vh] overflow-hidden'>
+    <div className='relative min-h-[80vh] flex-1 overflow-hidden'>
       {drops.map(drop => (
         <div
           key={drop.id}
-          className='absolute text-2xl md:text-3xl cursor-default select-none will-change-transform'
+          className='absolute cursor-default text-2xl will-change-transform select-none md:text-3xl'
           style={{
             left: `${(drop.column / COLUMNS) * 100 + 2.5}%`,
             animation: `rain-fall ${drop.speed}s linear infinite`,
-            animationDelay: `-${drop.startDelay}s`
+            animationDelay: `-${drop.startDelay}s`,
           }}
           onMouseEnter={() => setHoveredId(drop.id)}
           onMouseLeave={() => setHoveredId(null)}
@@ -83,16 +83,16 @@ const KanaRain = () => {
             lang='ja'
             className={clsx(
               'text-[var(--main-color)] transition-all duration-200',
-              hoveredId === drop.id && 'text-green-400 scale-150'
+              hoveredId === drop.id && 'scale-150 text-green-400',
             )}
             style={{
-              opacity: hoveredId === drop.id ? 1 : drop.opacity
+              opacity: hoveredId === drop.id ? 1 : drop.opacity,
             }}
           >
             {drop.kana}
           </span>
           {hoveredId === drop.id && (
-            <span className='absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-green-400 whitespace-nowrap font-mono'>
+            <span className='absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs whitespace-nowrap text-green-400'>
               {drop.romanji}
             </span>
           )}

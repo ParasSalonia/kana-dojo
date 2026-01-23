@@ -64,7 +64,7 @@ function compressFile(wavPath) {
     // High quality MP3 conversion
     execSync(
       `ffmpeg -i "${wavPath}" -codec:a libmp3lame -qscale:a 2 "${mp3Path}"`,
-      { stdio: 'ignore' }
+      { stdio: 'ignore' },
     );
 
     const newSize = fs.statSync(mp3Path).size;
@@ -73,12 +73,12 @@ function compressFile(wavPath) {
     console.log(
       `✅ ${path.basename(wavPath)}: ${(originalSize / 1024).toFixed(1)}KB → ${(
         newSize / 1024
-      ).toFixed(1)}KB (${savings}% smaller)`
+      ).toFixed(1)}KB (${savings}% smaller)`,
     );
   } catch (error) {
     console.error(
       `❌ Failed to convert ${path.basename(wavPath)}:`,
-      error.message
+      error.message,
     );
   }
 }

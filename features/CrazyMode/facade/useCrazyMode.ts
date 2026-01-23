@@ -1,7 +1,10 @@
 'use client';
 
 import { useMemo } from 'react';
-import useCrazyModeStore from '../store/useCrazyModeStore';
+import useCrazyModeStore, { KYOKI_THEME_ID } from '../store/useCrazyModeStore';
+import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
+
+export { KYOKI_THEME_ID };
 
 export interface CrazyModeState {
   isCrazyMode: boolean;
@@ -10,15 +13,16 @@ export interface CrazyModeState {
 }
 
 export interface CrazyModeActions {
-  toggleCrazyMode: () => void;
   randomize: () => void;
 }
 
 export function useCrazyMode(): CrazyModeState & CrazyModeActions {
-  const isCrazyMode = useCrazyModeStore(state => state.isCrazyMode);
+  // Crazy mode is now derived from whether the kyoki theme is selected
+  const selectedTheme = usePreferencesStore(state => state.theme);
+  const isCrazyMode = selectedTheme === KYOKI_THEME_ID;
+
   const activeThemeId = useCrazyModeStore(state => state.activeThemeId);
   const activeFontName = useCrazyModeStore(state => state.activeFontName);
-  const toggleCrazyMode = useCrazyModeStore(state => state.toggleCrazyMode);
   const randomize = useCrazyModeStore(state => state.randomize);
 
   return useMemo(
@@ -26,9 +30,8 @@ export function useCrazyMode(): CrazyModeState & CrazyModeActions {
       isCrazyMode,
       activeThemeId,
       activeFontName,
-      toggleCrazyMode,
       randomize
     }),
-    [isCrazyMode, activeThemeId, activeFontName, toggleCrazyMode, randomize]
+    [isCrazyMode, activeThemeId, activeFontName, randomize]
   );
 }

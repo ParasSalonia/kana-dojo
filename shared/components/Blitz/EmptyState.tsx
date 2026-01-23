@@ -11,8 +11,8 @@ interface EmptyStateProps {
 
 export default function EmptyState({ dojoType, dojoLabel }: EmptyStateProps) {
   return (
-    <div className='min-h-[100dvh] flex flex-col items-center justify-center p-4'>
-      <div className='max-w-md text-center space-y-4'>
+    <div className='flex min-h-[100dvh] flex-col items-center justify-center p-4'>
+      <div className='max-w-md space-y-4 text-center'>
         <Timer size={64} className='mx-auto text-[var(--main-color)]' />
         <h1 className='text-2xl font-bold text-[var(--secondary-color)]'>
           Blitz
@@ -24,11 +24,11 @@ export default function EmptyState({ dojoType, dojoLabel }: EmptyStateProps) {
         <Link href={`/${dojoType}`}>
           <button
             className={clsx(
-              'w-full h-12 px-6 flex flex-row justify-center items-center gap-2',
+              'flex h-12 w-full flex-row items-center justify-center gap-2 px-6',
               'bg-[var(--secondary-color)] text-[var(--background-color)]',
               'rounded-2xl transition-colors duration-200',
               'border-b-6 border-[var(--secondary-color-accent)] shadow-sm',
-              'hover:cursor-pointer'
+              'hover:cursor-pointer',
             )}
           >
             <ArrowLeft size={20} />

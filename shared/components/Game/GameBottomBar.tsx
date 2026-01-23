@@ -4,7 +4,7 @@ import {
   CircleCheck,
   CircleX,
   CircleArrowRight,
-  RotateCcw
+  RotateCcw,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
@@ -35,7 +35,7 @@ export const GameBottomBar = ({
   secondaryAction,
   buttonRef,
   className,
-  hideRetry = false
+  hideRetry = false,
 }: GameBottomBarProps) => {
   const isCorrect = state === 'correct';
   const isWrong = state === 'wrong';
@@ -55,14 +55,14 @@ export const GameBottomBar = ({
         'border-t-2 border-[var(--border-color)] bg-[var(--card-color)]',
         'absolute bottom-0 z-10 px-2 py-4 sm:py-3 md:bottom-6 md:px-12 md:pt-2 md:pb-4',
         'flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-0',
-        className
+        className,
       )}
     >
       {/* Feedback Container: Hidden on mobile when no feedback, always visible on desktop */}
       <div
         className={clsx(
           'w-full items-center justify-start sm:flex sm:w-1/2 sm:justify-center',
-          showFeedback ? 'flex' : 'hidden'
+          showFeedback ? 'flex' : 'hidden',
         )}
       >
         <div
@@ -70,7 +70,7 @@ export const GameBottomBar = ({
             'flex items-center gap-2 transition-all duration-500 sm:gap-3 md:gap-4',
             showFeedback
               ? 'translate-x-0 opacity-100'
-              : 'pointer-events-none -translate-x-4 opacity-0 sm:-translate-x-8'
+              : 'pointer-events-none -translate-x-4 opacity-0 sm:-translate-x-8',
           )}
         >
           {isCorrect ? (
@@ -95,7 +95,7 @@ export const GameBottomBar = ({
         <div
           className={clsx(
             'flex h-[68px] items-end sm:h-[72px]',
-            secondaryAction ? 'w-[80%] sm:w-auto' : 'w-full sm:w-auto'
+            secondaryAction ? 'w-[80%] sm:w-auto' : 'w-full sm:w-auto',
           )}
         >
           <ActionButton
@@ -107,7 +107,7 @@ export const GameBottomBar = ({
               !canCheck &&
                 !showContinue &&
                 !showRetryButton &&
-                'cursor-default opacity-60'
+                'cursor-default opacity-60',
             )}
             onClick={onAction}
           >

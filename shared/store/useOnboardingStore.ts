@@ -8,15 +8,15 @@ interface OnboardingState {
 
 const useOnboardingStore = create<OnboardingState>()(
   persist(
-    (set) => ({
+    set => ({
       hasSeenWelcome: false,
       setHasSeenWelcome: (hasSeenWelcome: boolean) => set({ hasSeenWelcome }),
     }),
     {
       name: 'welcome-storage',
       version: 0,
-    }
-  )
+    },
+  ),
 );
 
 export default useOnboardingStore;

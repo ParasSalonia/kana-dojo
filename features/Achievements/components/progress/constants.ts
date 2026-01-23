@@ -13,7 +13,7 @@ import {
   BookOpen,
   ScrollText,
   Swords,
-  Gauge
+  Gauge,
 } from 'lucide-react';
 import { LucideProps } from 'lucide-react';
 import { type AchievementRarity } from '@/features/Achievements/store/useAchievementStore';
@@ -37,36 +37,36 @@ export const rarityConfig: Record<
     bgColor: '#F9FAFB',
     borderColor: '#D1D5DB',
     icon: Star,
-    label: 'Common'
+    label: 'Common',
   },
   uncommon: {
     color: '#059669',
     bgColor: '#ECFDF5',
     borderColor: '#A7F3D0',
     icon: Zap,
-    label: 'Uncommon'
+    label: 'Uncommon',
   },
   rare: {
     color: '#2563EB',
     bgColor: '#EFF6FF',
     borderColor: '#93C5FD',
     icon: Trophy,
-    label: 'Rare'
+    label: 'Rare',
   },
   epic: {
     color: '#7C3AED',
     bgColor: '#F5F3FF',
     borderColor: '#C4B5FD',
     icon: Crown,
-    label: 'Epic'
+    label: 'Epic',
   },
   legendary: {
     color: '#DC2626',
     bgColor: '#FEF2F2',
     borderColor: '#FECACA',
     icon: Gem,
-    label: 'Legendary'
-  }
+    label: 'Legendary',
+  },
 };
 
 /**
@@ -93,7 +93,7 @@ export const categories = [
   { id: 'consistency', label: 'Consistency', icon: Target },
   { id: 'mastery', label: 'Mastery', icon: Crown },
   { id: 'exploration', label: 'Exploration', icon: Compass },
-  { id: 'fun', label: 'Fun & Secret', icon: Sparkles }
+  { id: 'fun', label: 'Fun & Secret', icon: Sparkles },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]['id'];

@@ -3,16 +3,7 @@ import clsx from 'clsx';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
 import { useClick } from '@/shared/hooks/useAudio';
-import {
-  AudioLines,
-  VolumeX,
-  Volume2,
-  RefreshCw,
-  Play,
-  Zap,
-  ZapOff
-} from 'lucide-react';
-import useCrazyModeStore from '@/features/CrazyMode/store/useCrazyModeStore';
+import { AudioLines, VolumeX, Volume2, RefreshCw, Play } from 'lucide-react';
 import { useJapaneseTTS } from '@/shared/hooks/useJapaneseTTS';
 // import{Command, KeyboardOff} from 'lucide-react'
 // import HotkeyReference from './HotkeyReference';
@@ -89,7 +80,7 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
+            'w-1/2 p-4 md:w-1/4',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -107,7 +98,7 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
+            'w-1/2 p-4 md:w-1/4',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -130,8 +121,8 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
+            'w-1/2 p-4 md:w-1/4',
+            'flex flex-row items-end justify-center gap-1.5',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -146,14 +137,14 @@ const Behavior = () => {
             </span>
             on
           </span>
-          <span className='text-sm mb-0.5'>ふり</span>
+          <span className='mb-0.5 text-sm'>ふり</span>
         </button>
         <button
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
+            'w-1/2 p-4 md:w-1/4',
+            'flex flex-row items-end justify-center gap-1.5',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -177,8 +168,8 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
+            'w-1/2 p-4 md:w-1/4',
+            'flex flex-row items-end justify-center gap-1.5',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -199,8 +190,8 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
+            'w-1/2 p-4 md:w-1/4',
+            'flex flex-row items-end justify-center gap-1.5',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -225,8 +216,8 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
+            'w-1/2 p-4 md:w-1/4',
+            'flex flex-row items-end justify-center gap-1.5',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -247,8 +238,8 @@ const Behavior = () => {
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
+            'w-1/2 p-4 md:w-1/4',
+            'flex flex-row items-end justify-center gap-1.5',
             'text-[var(--secondary-color)]',
             'flex-1 overflow-hidden'
           )}
@@ -280,7 +271,7 @@ const Behavior = () => {
               onChange={e => setPronunciationSpeed(parseFloat(e.target.value))}
               className='w-full'
             />
-            <div className='text-sm text-[var(--secondary-color)] text-center'>
+            <div className='text-center text-sm text-[var(--secondary-color)]'>
               {pronunciationSpeed}x
             </div>
           </div>
@@ -296,16 +287,16 @@ const Behavior = () => {
               onChange={e => setPronunciationPitch(parseFloat(e.target.value))}
               className='w-full'
             />
-            <div className='text-sm text-[var(--secondary-color)] text-center'>
+            <div className='text-center text-sm text-[var(--secondary-color)]'>
               {pronunciationPitch}x
             </div>
           </div>
 
           <h4 className='text-lg'>Pronunciation voice:</h4>
           <div className='flex flex-col gap-2'>
-            <div className='flex gap-2 items-center'>
+            <div className='flex items-center gap-2'>
               <select
-                className={clsx(buttonBorderStyles, 'p-2 flex-1')}
+                className={clsx(buttonBorderStyles, 'flex-1 p-2')}
                 value={pronunciationVoiceName || currentVoice?.name || ''}
                 onChange={e => {
                   const name = e.target.value || null;
@@ -346,7 +337,7 @@ const Behavior = () => {
                 <Play size={18} />
               </button>
             </div>
-            <div className='text-sm text-[var(--secondary-color)] text-center'>
+            <div className='text-center text-sm text-[var(--secondary-color)]'>
               {currentVoice
                 ? `${currentVoice.name} • ${currentVoice.lang}`
                 : 'No voice selected'}
@@ -363,8 +354,8 @@ const Behavior = () => {
                   !/Edge/i.test(navigator.userAgent);
 
                 return (
-                  <div className='text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-800'>
-                    <strong className='block mb-2'>
+                  <div className='rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400'>
+                    <strong className='mb-2 block'>
                       ⚠️ Notice: No Japanese voices found
                     </strong>
                     <p className='mb-2'>
@@ -398,9 +389,9 @@ const Behavior = () => {
                       <summary className='cursor-pointer font-semibold hover:underline'>
                         How to install Japanese voices:
                       </summary>
-                      <div className='mt-2 pl-4 space-y-2 text-xs'>
+                      <div className='mt-2 space-y-2 pl-4 text-xs'>
                         {isFirefox && (
-                          <div className='mb-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800'>
+                          <div className='mb-3 rounded border border-yellow-200 bg-yellow-50 p-2 dark:border-yellow-800 dark:bg-yellow-900/20'>
                             <strong>⚠️ Firefox-specific:</strong> Firefox relies
                             on your operating system&apos;s voices. You must
                             install Japanese language packs in your OS, then
@@ -409,7 +400,7 @@ const Behavior = () => {
                         )}
                         <div>
                           <strong>Windows:</strong>
-                          <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <ol className='ml-2 list-inside list-decimal space-y-1'>
                             <li>
                               Open Settings → Time &amp; Language → Language
                             </li>
@@ -423,7 +414,7 @@ const Behavior = () => {
                         </div>
                         <div>
                           <strong>macOS:</strong>
-                          <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <ol className='ml-2 list-inside list-decimal space-y-1'>
                             <li>
                               Open System Settings → General → Language &amp;
                               Region
@@ -437,22 +428,22 @@ const Behavior = () => {
                         </div>
                         <div>
                           <strong>Linux (Ubuntu/Debian):</strong>
-                          <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <ol className='ml-2 list-inside list-decimal space-y-1'>
                             <li>
                               Install speech-dispatcher:{' '}
-                              <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>
+                              <code className='rounded bg-gray-100 px-1 dark:bg-gray-800'>
                                 sudo apt install speech-dispatcher
                               </code>
                             </li>
                             <li>
                               Install espeak with Japanese:{' '}
-                              <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>
+                              <code className='rounded bg-gray-100 px-1 dark:bg-gray-800'>
                                 sudo apt install espeak espeak-data
                               </code>
                             </li>
                             <li>
                               Or install festival:{' '}
-                              <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>
+                              <code className='rounded bg-gray-100 px-1 dark:bg-gray-800'>
                                 sudo apt install festival festvox-ja
                               </code>
                             </li>
@@ -461,7 +452,7 @@ const Behavior = () => {
                         </div>
                         <div>
                           <strong>Chrome/Edge:</strong>
-                          <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <ol className='ml-2 list-inside list-decimal space-y-1'>
                             <li>
                               Chrome includes built-in Google TTS voices
                               (including Japanese) - no installation needed
@@ -477,23 +468,23 @@ const Behavior = () => {
                         </div>
                         <div>
                           <strong>Firefox:</strong>
-                          <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <ol className='ml-2 list-inside list-decimal space-y-1'>
                             <li>
                               Type{' '}
-                              <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>
+                              <code className='rounded bg-gray-100 px-1 dark:bg-gray-800'>
                                 about:config
                               </code>{' '}
                               in address bar
                             </li>
                             <li>
                               Search for{' '}
-                              <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>
+                              <code className='rounded bg-gray-100 px-1 dark:bg-gray-800'>
                                 media.webspeech.synth.enabled
                               </code>
                             </li>
                             <li>
                               Ensure it&apos;s set to{' '}
-                              <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>
+                              <code className='rounded bg-gray-100 px-1 dark:bg-gray-800'>
                                 true
                               </code>
                             </li>
@@ -512,7 +503,7 @@ const Behavior = () => {
                 );
               })()}
             {availableVoices.length === 0 && (
-              <div className='text-sm text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-200 dark:border-orange-800'>
+              <div className='rounded-lg border border-orange-200 bg-orange-50 p-3 text-sm text-orange-600 dark:border-orange-800 dark:bg-orange-900/20 dark:text-orange-400'>
                 <strong>⚠️ Notice:</strong> No voices are available. Please
                 refresh voices or check your system and browser speech synthesis
                 settings. This may be due to the operating system (e.g.,
@@ -524,60 +515,6 @@ const Behavior = () => {
           </div>
         </>
       )}
-
-      <h4 className='text-lg'>Crazy Mode (Experimental):</h4>
-      <div className='flex flex-row gap-4'>
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
-            'flex-1 overflow-hidden'
-          )}
-          onClick={() => {
-            playClick();
-            const currentState = useCrazyModeStore.getState().isCrazyMode;
-            if (!currentState) {
-              useCrazyModeStore.getState().toggleCrazyMode();
-            }
-          }}
-        >
-          <span>
-            <span className='text-[var(--main-color)]'>
-              {useCrazyModeStore(state => state.isCrazyMode) && '\u2B24 '}
-            </span>
-            on
-          </span>
-          <Zap size={20} className='mb-0.5' />
-        </button>
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
-            'flex-1 overflow-hidden'
-          )}
-          onClick={() => {
-            playClick();
-            const currentState = useCrazyModeStore.getState().isCrazyMode;
-            if (currentState) {
-              useCrazyModeStore.getState().toggleCrazyMode();
-            }
-          }}
-        >
-          <span>
-            <span className='text-[var(--main-color)]'>
-              {!useCrazyModeStore(state => state.isCrazyMode) && '\u2B24 '}
-            </span>
-            off
-          </span>
-          <ZapOff size={20} className='mb-0.5' />
-        </button>
-      </div>
       {/* 
       <h4 className='text-lg'>Enable theme preview on hover:</h4>
       <div className='flex flex-row gap-4'>

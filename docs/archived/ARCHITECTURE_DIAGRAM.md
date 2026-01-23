@@ -341,7 +341,10 @@ export default function Pick() {
   const { incrementCorrectAnswers, incrementWrongAnswers } = useStatsStore();
 
   const selectedKana = kanaGroupIndices.flatMap(i => kana[i].data);
-  const shuffled = useMemo(() => [...selectedKana].sort(() => Math.random() - 0.5), []);
+  const shuffled = useMemo(
+    () => [...selectedKana].sort(() => Math.random() - 0.5),
+    [],
+  );
 
   const current = shuffled[currentQuestion];
   const options = useMemo(() => {
@@ -351,7 +354,7 @@ export default function Pick() {
     return [current, ...wrongOptions].sort(() => Math.random() - 0.5);
   }, [current]);
 
-  const handleAnswer = (answer) => {
+  const handleAnswer = answer => {
     if (answer === current.romanization) {
       incrementCorrectAnswers();
     } else {
@@ -451,46 +454,53 @@ import { statsApi } from '@/shared/events';
 
 ## Migration Impact Summary
 
-| Aspect | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| **Layer Violations** | 27 | 0 | 100% ✅ |
-| **Code Duplication** | 540 lines | < 100 lines | 81% ✅ |
-| **Progress Imports** | 25+ files | < 10 files | 60% ✅ |
-| **Barrel Exports** | 2/16 features | 16/16 features | 800% ✅ |
-| **Global Hacks** | 1 (window.__) | 0 | 100% ✅ |
-| **ESLint Violations** | Unchecked | 0 (enforced) | 100% ✅ |
-| **Test Isolation** | Difficult | Easy (mock facades) | ✅ |
-| **Refactor Safety** | Risky | Safe (enforced boundaries) | ✅ |
+| Aspect                | Before          | After                      | Improvement |
+| --------------------- | --------------- | -------------------------- | ----------- |
+| **Layer Violations**  | 27              | 0                          | 100% ✅     |
+| **Code Duplication**  | 540 lines       | < 100 lines                | 81% ✅      |
+| **Progress Imports**  | 25+ files       | < 10 files                 | 60% ✅      |
+| **Barrel Exports**    | 2/16 features   | 16/16 features             | 800% ✅     |
+| **Global Hacks**      | 1 (window.\_\_) | 0                          | 100% ✅     |
+| **ESLint Violations** | Unchecked       | 0 (enforced)               | 100% ✅     |
+| **Test Isolation**    | Difficult       | Easy (mock facades)        | ✅          |
+| **Refactor Safety**   | Risky           | Safe (enforced boundaries) | ✅          |
 
 ---
 
 ## Key Architectural Patterns
 
 ### 1. Facade Pattern
+
 ```
 Feature Store (PRIVATE) → Facade (PUBLIC) → Consumer
 ```
+
 - Encapsulates internal complexity
 - Exposes limited, typed API
 - Easy to mock for testing
 
 ### 2. Event Bus Pattern
+
 ```
 Emitter → Event Bus → Subscriber
 ```
+
 - Decouples producers from consumers
 - No direct dependencies
 - Easier to test and extend
 
 ### 3. Adapter Pattern
+
 ```
 ContentAdapter<T> → kanaAdapter | kanjiAdapter | vocabAdapter
 ```
+
 - Polymorphic game logic
 - Type-safe content handling
 - Eliminates duplication
 
 ### 4. Barrel Export Pattern
+
 ```
 feature/
   ├── facade/ (public)
@@ -498,6 +508,7 @@ feature/
   ├── store/ (PRIVATE)
   └── index.ts (PUBLIC API)
 ```
+
 - Clear public/private separation
 - Enforced by ESLint
 - Safe refactoring
@@ -505,6 +516,7 @@ feature/
 ---
 
 **This transformation takes 5-7 days but delivers:**
+
 - ✅ Cleaner architecture
 - ✅ Better testability
 - ✅ Easier refactoring

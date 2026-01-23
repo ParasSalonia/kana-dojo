@@ -54,7 +54,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
     maxProbability = 0.4,
     minConsecutiveForTrigger = 3,
     wordLength: initialWordLength = 3,
-    minWordBuildingStreak = 2
+    minWordBuildingStreak = 2,
   } = options;
 
   const [state, setState] = useState<WordBuildingModeState>({
@@ -62,7 +62,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
     isWordBuildingReverse: false,
     consecutiveCorrect: 0,
     wordBuildingStreak: 0,
-    wordLength: initialWordLength
+    wordLength: initialWordLength,
   });
 
   // Call this on wrong answers to reset the streak without changing mode
@@ -70,7 +70,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
     setState(prev => ({
       ...prev,
       consecutiveCorrect: 0,
-      wordBuildingStreak: 0
+      wordBuildingStreak: 0,
     }));
   }, []);
 
@@ -94,7 +94,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
             isWordBuildingMode: false,
             isWordBuildingReverse: false,
             consecutiveCorrect: newConsecutive,
-            wordBuildingStreak: 0
+            wordBuildingStreak: 0,
           };
         }
         // Stay in word building mode, maybe switch direction
@@ -109,7 +109,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
             ? !prev.isWordBuildingReverse
             : prev.isWordBuildingReverse,
           consecutiveCorrect: newConsecutive,
-          wordBuildingStreak: newWordBuildingStreak
+          wordBuildingStreak: newWordBuildingStreak,
         };
       }
 
@@ -118,7 +118,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
         const wordBuildingProbability = Math.min(
           baseProbability +
             (newConsecutive - minConsecutiveForTrigger) * incrementPerCorrect,
-          maxProbability
+          maxProbability,
         );
 
         if (random.real(0, 1) < wordBuildingProbability) {
@@ -128,7 +128,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
             isWordBuildingMode: true,
             isWordBuildingReverse: random.real(0, 1) < 0.5,
             consecutiveCorrect: newConsecutive,
-            wordBuildingStreak: 0
+            wordBuildingStreak: 0,
           };
         }
       }
@@ -136,7 +136,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
       // Stay in normal pick mode
       return {
         ...prev,
-        consecutiveCorrect: newConsecutive
+        consecutiveCorrect: newConsecutive,
       };
     });
   }, [
@@ -144,7 +144,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
     incrementPerCorrect,
     maxProbability,
     minConsecutiveForTrigger,
-    minWordBuildingStreak
+    minWordBuildingStreak,
   ]);
 
   // Force exit word building mode (e.g., when question pool is too small)
@@ -153,7 +153,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
       ...prev,
       isWordBuildingMode: false,
       isWordBuildingReverse: false,
-      wordBuildingStreak: 0
+      wordBuildingStreak: 0,
     }));
   }, []);
 
@@ -161,7 +161,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
   const setWordLength = useCallback((length: number) => {
     setState(prev => ({
       ...prev,
-      wordLength: Math.max(2, Math.min(6, length)) // Clamp between 2-6
+      wordLength: Math.max(2, Math.min(6, length)), // Clamp between 2-6
     }));
   }, []);
 
@@ -174,7 +174,7 @@ export const useWordBuildingMode = (options: WordBuildingModeOptions = {}) => {
     decideNextMode,
     recordWrongAnswer,
     exitWordBuildingMode,
-    setWordLength
+    setWordLength,
   };
 };
 

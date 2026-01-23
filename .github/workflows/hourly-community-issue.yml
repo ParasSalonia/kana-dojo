@@ -2,28 +2,40 @@ name: Create Community Contribution Issue
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
+    inputs:
+      force_type:
+        description: 'Force issue type: theme | fact | proverb'
+        required: false
+        type: string
+      dry_run:
+        description: 'Do not create an issue; only log selection'
+        required: false
+        type: boolean
 
 permissions:
-  contents: write
+  contents: read
   issues: write
-  pull-requests: write
 
 # Prevent multiple runs from overlapping and causing race conditions
 concurrency:
-  group: community-data-updates
-  cancel-in-progress: false
+  group: community-issue-creation
+  cancel-in-progress: true
 
 jobs:
   create-issue:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.repository == 'lingdojo/kana-dojo'
+    env:
+      AUTOMATION_PR_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,6 +52,9 @@ jobs:
             const templates = require('./.github/templates/messages.cjs');
             const t = templates.issueCreation;
 
+            const forceType = (context.payload.inputs && context.payload.inputs.force_type) ? String(context.payload.inputs.force_type).trim() : '';
+            const dryRun = !!(context.payload.inputs && (context.payload.inputs.dry_run === true || context.payload.inputs.dry_run === 'true'));
+
             const statePath = 'data/community/automation-state.json';
             const themeBacklogPath = 'data/community/theme-backlog.json';
             const factsBacklogPath = 'data/community/facts-backlog.json';
@@ -54,6 +69,10 @@ jobs:
             const facts = JSON.parse(fs.readFileSync(factsBacklogPath, 'utf8'));
             const proverbs = JSON.parse(fs.readFileSync(proverbsBacklogPath, 'utf8'));
 
+            if (typeof state.consecutiveNoIssueRuns !== 'number') {
+              state.consecutiveNoIssueRuns = 0;
+            }
+
             let backlogChanged = false;
 
             let existingFacts = [];
@@ -61,7 +80,7 @@ jobs:
               try {
                 existingFacts = JSON.parse(fs.readFileSync(factsSourcePath, 'utf8'));
               } catch (e) {
-                console.log('Could not parse ' + factsSourcePath + ': ' + e.message);
+                console.log(`Could not parse ${factsSourcePath}: ${e.message}`);
               }
             }
 
@@ -70,7 +89,7 @@ jobs:
               try {
                 existingProverbs = JSON.parse(fs.readFileSync(proverbsSourcePath, 'utf8'));
               } catch (e) {
-                console.log('Could not parse ' + proverbsSourcePath + ': ' + e.message);
+                console.log(`Could not parse ${proverbsSourcePath}: ${e.message}`);
               }
             }
 
@@ -79,12 +98,12 @@ jobs:
               try {
                 themesSourceContent = fs.readFileSync(themesSourcePath, 'utf8');
               } catch (e) {
-                console.log('Could not read ' + themesSourcePath + ': ' + e.message);
+                console.log(`Could not read ${themesSourcePath}: ${e.message}`);
               }
             }
 
             async function hasOpenIssueForQuery(query) {
-              const q = query + ' repo:' + context.repo.owner + '/' + context.repo.repo + ' is:issue is:open';
+              const q = `${query} repo:${context.repo.owner}/${context.repo.repo} is:issue is:open label:${templates.labels.community}`;
               try {
                 const res = await github.rest.search.issuesAndPullRequests({
                   q: q,
@@ -92,19 +111,27 @@ jobs:
                 });
                 return res.data && res.data.total_count > 0;
               } catch (e) {
-                console.log('Search query failed: ' + q + ' :: ' + e.message);
+                console.log(`Search query failed: ${q} :: ${e.message}`);
                 return false;
               }
             }
 
-            // Rotate through types: theme -> fact -> proverb -> theme...
-            const typeOrder = ['theme', 'fact', 'proverb'];
+            const defaultOrder = ['theme', 'fact', 'proverb'];
+            const typeOrder = forceType && defaultOrder.includes(forceType)
+              ? [forceType]
+              : defaultOrder;
             const currentIndex = typeOrder.indexOf(state.lastType);
-            const nextType = typeOrder[(currentIndex + 1) % typeOrder.length];
 
             let item, issueTitle, issueBody;
+            let selectedType = null;
 
-            if (nextType === 'theme') {
+            for (let offset = 1; offset <= typeOrder.length; offset += 1) {
+              const nextType = typeOrder[((currentIndex === -1 ? -1 : currentIndex) + offset) % typeOrder.length];
+              item = null;
+              issueTitle = null;
+              issueBody = null;
+
+              if (nextType === 'theme') {
               // Skip items that are already issued OR completed OR already exist in main
               item = themes.find(function(th) {
                 if (th.issued || th.completed) {
@@ -128,75 +155,37 @@ jobs:
                 if (backlogChanged) {
                   fs.writeFileSync(themeBacklogPath, JSON.stringify(themes, null, 2));
                 }
-                core.setOutput('should_commit', backlogChanged ? 'true' : 'false');
-                return;
+                continue;
               }
               
               // Check for duplicate theme issue
-              const duplicateTheme = await hasOpenIssueForQuery('"Add New Color Theme:" "' + item.name + '"');
+              const duplicateTheme = await hasOpenIssueForQuery(`"Add New Color Theme:" "${item.name}"`);
               
               if (duplicateTheme) {
-                console.log('Issue already exists for theme "' + item.name + '": Marking as issued and skipping.');
+                console.log(`Issue already exists for theme "${item.name}": Marking as issued and skipping.`);
                 const themeIdx = themes.findIndex(function(th) { return th.id === item.id; });
                 themes[themeIdx].issued = true;
                 fs.writeFileSync(themeBacklogPath, JSON.stringify(themes, null, 2));
                 backlogChanged = true;
-                
-                // Update lastType so next run tries the other type
-                state.lastType = nextType;
-                state.lastRun = new Date().toISOString();
-                fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
-                
-                core.setOutput('should_commit', 'true');
-                return;
+
+                continue;
               }
               
               const tmpl = t.theme;
               issueTitle = tmpl.title.replace('{name}', item.name);
               
-              const instructions = tmpl.instructions.map(function(instr, i) {
-                return (i + 1) + '. ' + instr.replace(/{name}/g, item.name);
-              });
+              const instructions = tmpl.instructions.map((instr, i) => `${i + 1}. ${instr.replace(/{name}/g, item.name)}`);
               
-              // Insert code block after instruction 3
-              const codeBlock = '```typescript\n{\n' +
-                "  id: '" + item.id + "',\n" +
-                "  backgroundColor: '" + item.backgroundColor + "',\n" +
-                "  mainColor: '" + item.mainColor + "',\n" +
-                "  secondaryColor: '" + item.secondaryColor + "'\n" +
-                '},\n```';
+              const codeBlock = `\`\`\`typescript\n{\n  id: '${item.id}',\n  backgroundColor: '${item.backgroundColor}',\n  mainColor: '${item.mainColor}',\n  secondaryColor: '${item.secondaryColor}'\n},\n\`\`\``;
               
-              issueBody = tmpl.header.replace('{name}', item.name) + '\n\n' +
-                '**Category:** ' + tmpl.category + '  \n' +
-                '**Difficulty:** ' + tmpl.difficulty + '  \n' +
-                '**Estimated Time:** ' + tmpl.estimatedTime + '\n\n' +
-                '---\n\n' +
-                '### 🎯 Your Task\n\n' +
-                tmpl.taskDescription + '\n\n' +
-                tmpl.detailsHeader + '\n\n' +
-                '| Property | Value |\n|----------|-------|\n' +
-                '| **ID** | `' + item.id + '` |\n' +
-                '| **Background** | `' + item.backgroundColor + '` |\n' +
-                '| **Main Color** | `' + item.mainColor + '` |\n' +
-                '| **Secondary** | `' + item.secondaryColor + '` |\n\n' +
-                '> ' + tmpl.vibeLabel + ' ' + item.description + '\n\n' +
-                tmpl.instructionsHeader + '\n\n' +
-                instructions[0] + '\n' +
-                instructions[1] + '\n' +
-                instructions[2] + '\n\n' +
-                codeBlock + '\n\n' +
-                instructions[3] + '\n' +
-                instructions[4] + '\n' +
-                instructions[5] + '\n\n' +
-                '---\n\n' +
-                tmpl.footer;
+              issueBody = `${tmpl.header.replace('{name}', item.name)}\n\n**Category:** ${tmpl.category}  \n**Difficulty:** ${tmpl.difficulty}  \n**Estimated Time:** ${tmpl.estimatedTime}\n\n---\n\n### 🎯 Your Task\n\n${tmpl.taskDescription}\n\n${tmpl.detailsHeader}\n\n| Property | Value |\n|----------|-------|\n| **ID** | \`${item.id}\` |\n| **Background** | \`${item.backgroundColor}\` |\n| **Main Color** | \`${item.mainColor}\` |\n| **Secondary** | \`${item.secondaryColor}\` |\n\n> ${tmpl.vibeLabel} ${item.description}\n\n${tmpl.instructionsHeader}\n\n${instructions[0]}\n${instructions[1]}\n${instructions[2]}\n\n${codeBlock}\n\n${instructions[3]}\n${instructions[4]}\n${instructions[5]}\n\n---\n\n${tmpl.footer}`;
               
               const themeIndex = themes.findIndex(function(th) { return th.id === item.id; });
               themes[themeIndex].issued = true;
               fs.writeFileSync(themeBacklogPath, JSON.stringify(themes, null, 2));
               backlogChanged = true;
               
-            } else if (nextType === 'fact') {
+              } else if (nextType === 'fact') {
               // Skip items that are already issued OR completed OR already exist in main
               item = facts.find(function(f) {
                 if (f.issued || f.completed) {
@@ -218,55 +207,34 @@ jobs:
                   fs.writeFileSync(factsBacklogPath, JSON.stringify(facts, null, 2));
                   fs.writeFileSync(proverbsBacklogPath, JSON.stringify(proverbs, null, 2));
                 }
-                core.setOutput('should_commit', backlogChanged ? 'true' : 'false');
-                return;
+                continue;
               }
               
               // Check for duplicate fact issue
-              const duplicateFact = await hasOpenIssueForQuery('"Add Japan Fact #' + item.id + '"');
+              const duplicateFact = await hasOpenIssueForQuery(`"Add Japan Fact #${item.id}"`);
               
               if (duplicateFact) {
-                console.log('Issue already exists for fact #' + item.id + ': Marking as issued and skipping.');
+                console.log(`Issue already exists for fact #${item.id}: Marking as issued and skipping.`);
                 const factIdx = facts.findIndex(function(f) { return f.id === item.id; });
                 facts[factIdx].issued = true;
                 fs.writeFileSync(factsBacklogPath, JSON.stringify(facts, null, 2));
                 backlogChanged = true;
-                
-                // Update lastType so next run tries the other type
-                state.lastType = nextType;
-                state.lastRun = new Date().toISOString();
-                fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
-                
-                core.setOutput('should_commit', 'true');
-                return;
+
+                continue;
               }
               
               const tmpl = t.fact;
               issueTitle = tmpl.title.replace('{id}', item.id);
               
-              const instructions = tmpl.instructions.map(function(instr, i) {
-                return (i + 1) + '. ' + instr.replace(/{id}/g, item.id);
-              });
+              const instructions = tmpl.instructions.map((instr, i) => `${i + 1}. ${instr.replace(/{id}/g, item.id)}`);
               
-              issueBody = tmpl.header + '\n\n' +
-                '**Category:** ' + tmpl.category + '  \n' +
-                '**Difficulty:** ' + tmpl.difficulty + '  \n' +
-                '**Estimated Time:** ' + tmpl.estimatedTime + '\n\n' +
-                '---\n\n' +
-                '### 🎯 Your Task\n\n' +
-                tmpl.taskDescription + '\n\n' +
-                tmpl.factHeader + '\n\n' +
-                '> ' + item.fact + '\n\n' +
-                tmpl.instructionsHeader + '\n\n' +
-                instructions.join('\n') + '\n\n' +
-                '---\n\n' +
-                tmpl.footer;
+              issueBody = `${tmpl.header}\n\n**Category:** ${tmpl.category}  \n**Difficulty:** ${tmpl.difficulty}  \n**Estimated Time:** ${tmpl.estimatedTime}\n\n---\n\n### 🎯 Your Task\n\n${tmpl.taskDescription}\n\n${tmpl.factHeader}\n\n> ${item.fact}\n\n${tmpl.instructionsHeader}\n\n${instructions.join('\n')}\n\n---\n\n${tmpl.footer}`;
               
               const factIndex = facts.findIndex(function(f) { return f.id === item.id; });
               facts[factIndex].issued = true;
               fs.writeFileSync(factsBacklogPath, JSON.stringify(facts, null, 2));
               backlogChanged = true;
-            } else {
+              } else {
               // Proverb
               item = proverbs.find(function(p) {
                 if (p.issued || p.completed) {
@@ -296,70 +264,71 @@ jobs:
                   fs.writeFileSync(factsBacklogPath, JSON.stringify(facts, null, 2));
                   fs.writeFileSync(proverbsBacklogPath, JSON.stringify(proverbs, null, 2));
                 }
-                core.setOutput('should_commit', backlogChanged ? 'true' : 'false');
-                return;
+                continue;
               }
               
               // Check for duplicate proverb issue
-              const duplicateProverb = await hasOpenIssueForQuery('"Add Japanese Proverb #' + item.id + '"');
+              const duplicateProverb = await hasOpenIssueForQuery(`"Add Japanese Proverb #${item.id}"`);
               
               if (duplicateProverb) {
-                console.log('Issue already exists for proverb #' + item.id + ': Marking as issued and skipping.');
+                console.log(`Issue already exists for proverb #${item.id}: Marking as issued and skipping.`);
                 const proverbIdx = proverbs.findIndex(function(p) { return p.id === item.id; });
                 proverbs[proverbIdx].issued = true;
                 fs.writeFileSync(proverbsBacklogPath, JSON.stringify(proverbs, null, 2));
                 backlogChanged = true;
-                
-                // Update lastType so next run tries the other type
-                state.lastType = nextType;
-                state.lastRun = new Date().toISOString();
-                fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
-                
-                core.setOutput('should_commit', 'true');
-                return;
+
+                continue;
               }
               
               const tmpl = t.proverb;
               issueTitle = tmpl.title.replace('{id}', item.id);
               
-              const instructions = tmpl.instructions.map(function(instr, i) {
-                return (i + 1) + '. ' + instr.replace(/{id}/g, item.id);
-              });
+              const instructions = tmpl.instructions.map((instr, i) => `${i + 1}. ${instr.replace(/{id}/g, item.id)}`);
               
-              // Create code block for the proverb JSON
-              const codeBlock = '```json\n{\n' +
-                '  "japanese": "' + item.japanese + '",\n' +
-                '  "romaji": "' + item.romaji + '",\n' +
-                '  "english": "' + item.english + '",\n' +
-                '  "meaning": "' + item.meaning + '"\n' +
-                '}\n```';
+              const codeBlock = `\`\`\`json\n{\n  "japanese": "${item.japanese}",\n  "romaji": "${item.romaji}",\n  "english": "${item.english}",\n  "meaning": "${item.meaning}"\n}\n\`\`\``;
               
-              issueBody = tmpl.header + '\n\n' +
-                '**Category:** ' + tmpl.category + '  \n' +
-                '**Difficulty:** ' + tmpl.difficulty + '  \n' +
-                '**Estimated Time:** ' + tmpl.estimatedTime + '\n\n' +
-                '---\n\n' +
-                '### 🎯 Your Task\n\n' +
-                tmpl.taskDescription + '\n\n' +
-                tmpl.proverbHeader + '\n\n' +
-                '| Japanese | Reading | English |\n|----------|---------|---------|\n' +
-                '| **' + item.japanese + '** | ' + item.romaji + ' | ' + item.english + ' |\n\n' +
-                '> 💡 **Meaning:** ' + item.meaning + '\n\n' +
-                tmpl.instructionsHeader + '\n\n' +
-                instructions[0] + '\n' +
-                instructions[1] + '\n' +
-                instructions[2] + '\n\n' +
-                codeBlock + '\n\n' +
-                instructions[3] + '\n' +
-                instructions[4] + '\n' +
-                instructions[5] + '\n\n' +
-                '---\n\n' +
-                tmpl.footer;
+              issueBody = `${tmpl.header}\n\n**Category:** ${tmpl.category}  \n**Difficulty:** ${tmpl.difficulty}  \n**Estimated Time:** ${tmpl.estimatedTime}\n\n---\n\n### 🎯 Your Task\n\n${tmpl.taskDescription}\n\n${tmpl.proverbHeader}\n\n| Japanese | Reading | English |\n|----------|---------|---------|\n| **${item.japanese}** | ${item.romaji} | ${item.english} |\n\n> 💡 **Meaning:** ${item.meaning}\n\n${tmpl.instructionsHeader}\n\n${instructions[0]}\n${instructions[1]}\n${instructions[2]}\n\n${codeBlock}\n\n${instructions[3]}\n${instructions[4]}\n${instructions[5]}\n\n---\n\n${tmpl.footer}`;
               
               const proverbIndex = proverbs.findIndex(function(p) { return p.id === item.id; });
               proverbs[proverbIndex].issued = true;
               fs.writeFileSync(proverbsBacklogPath, JSON.stringify(proverbs, null, 2));
               backlogChanged = true;
+            }
+
+              if (issueTitle && issueBody && item) {
+                selectedType = nextType;
+                break;
+              }
+            }
+
+            if (!selectedType) {
+              console.log('No available items found across theme/fact/proverb backlogs.');
+              state.lastRun = new Date().toISOString();
+              state.consecutiveNoIssueRuns = (state.consecutiveNoIssueRuns || 0) + 1;
+              fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
+
+              core.setOutput('issue_created', 'false');
+              core.setOutput('reason', 'no_available_items');
+              core.setOutput('consecutive_no_issue_runs', String(state.consecutiveNoIssueRuns));
+              core.setOutput('should_commit', backlogChanged ? 'true' : 'false');
+              core.setOutput('notify_discord', state.consecutiveNoIssueRuns >= 8 ? 'true' : 'false');
+              return;
+            }
+
+            if (dryRun) {
+              console.log(`Dry run enabled; would create a ${selectedType} issue: ${issueTitle}`);
+
+              state.lastType = selectedType;
+              state.lastRun = new Date().toISOString();
+              state.consecutiveNoIssueRuns = 0;
+              fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
+
+              core.setOutput('issue_created', 'false');
+              core.setOutput('reason', 'dry_run');
+              core.setOutput('selected_type', selectedType);
+              core.setOutput('should_commit', backlogChanged ? 'true' : 'false');
+              core.setOutput('notify_discord', 'false');
+              return;
             }
 
             const labels = templates.labels.newIssue;
@@ -372,24 +341,30 @@ jobs:
               labels: labels
             });
 
-            console.log('Created issue #' + response.data.number + ': ' + issueTitle);
+            console.log(`Created issue #${response.data.number}: ${issueTitle}`);
 
-            state.lastType = nextType;
+            state.lastType = selectedType;
             state.lastRun = new Date().toISOString();
             state.totalIssuesCreated = (state.totalIssuesCreated || 0) + 1;
+            state.lastIssueCreatedAt = new Date().toISOString();
+            state.consecutiveNoIssueRuns = 0;
             fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
 
             core.setOutput('issue_number', response.data.number);
-            core.setOutput('issue_type', nextType);
+            core.setOutput('issue_type', selectedType);
             core.setOutput('item_id', item.id);
+            core.setOutput('issue_created', 'true');
+            core.setOutput('reason', 'created');
+            core.setOutput('consecutive_no_issue_runs', String(state.consecutiveNoIssueRuns));
             core.setOutput('should_commit', 'true');
+            core.setOutput('notify_discord', 'false');
 
       - name: Commit backlog updates
         id: commit-backlog
-        if: steps.create-issue.outputs.should_commit == 'true'
+        if: steps.create-issue.outputs.should_commit == 'true' && env.AUTOMATION_PR_TOKEN != ''
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTOMATION_PR_TOKEN }}
           add-paths: |
             data/community/
           commit-message: 'chore(automation): mark item as issued'
@@ -400,7 +375,7 @@ jobs:
           delete-branch: true
 
       - name: Auto-approve and merge automation PR
-        if: steps.create-issue.outputs.should_commit == 'true'
+        if: steps.create-issue.outputs.should_commit == 'true' && env.AUTOMATION_PR_TOKEN != ''
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.AUTOMATION_PR_TOKEN }}
@@ -416,14 +391,6 @@ jobs:
               return;
             }
 
-            await github.rest.pulls.createReview({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: prNumber,
-              event: 'APPROVE',
-              body: 'Automated approval for automation PR.'
-            });
-
             const MAX_RETRIES = 10;
             for (let i = 1; i <= MAX_RETRIES; i += 1) {
               try {
@@ -433,10 +400,29 @@ jobs:
                   pull_number: prNumber,
                   merge_method: 'squash'
                 });
-                console.log('Merged automation PR #' + prNumber);
+                console.log(`Merged automation PR #${prNumber}`);
+
+                try {
+                  const { data: pr } = await github.rest.pulls.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: prNumber
+                  });
+                  const ref = pr && pr.head && pr.head.ref;
+                  if (ref) {
+                    await github.rest.git.deleteRef({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      ref: `heads/${ref}`
+                    });
+                    console.log(`Deleted automation branch: ${ref}`);
+                  }
+                } catch (deleteErr) {
+                  console.log(`Could not delete automation branch: ${deleteErr.message}`);
+                }
                 return;
               } catch (e) {
-                console.log('Merge attempt ' + i + ' failed: ' + e.message);
+                console.log(`Merge attempt ${i} failed: ${e.message}`);
                 if (e.status === 409) {
                   try {
                     await github.rest.pulls.updateBranch({
@@ -444,9 +430,9 @@ jobs:
                       repo: context.repo.repo,
                       pull_number: prNumber
                     });
-                    console.log('Requested branch update for PR #' + prNumber);
+                    console.log(`Requested branch update for PR #${prNumber}`);
                   } catch (updateErr) {
-                    console.log('Could not update branch: ' + updateErr.message);
+                    console.log(`Could not update branch: ${updateErr.message}`);
                   }
                 }
                 if (i < MAX_RETRIES) {
@@ -455,6 +441,33 @@ jobs:
               }
             }
 
-            throw new Error('Failed to merge automation PR #' + prNumber);
+            throw new Error(`Failed to merge automation PR #${prNumber}`);
         env:
           PR_NUMBER: ${{ steps.commit-backlog.outputs.pull-request-number }}
+
+      - name: Notify Discord if no issues are being created
+        if: steps.create-issue.outputs.notify_discord == 'true'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL || secrets.DISCORD_WEBHOOK }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COUNT: ${{ steps.create-issue.outputs.consecutive_no_issue_runs }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "No Discord webhook configured; skipping"
+            exit 0
+          fi
+          python3 << 'PY' > /tmp/payload.json
+          import json
+          import os
+
+          repo = os.environ.get('REPO', 'unknown')
+          run_url = os.environ.get('RUN_URL', '')
+          count = os.environ.get('COUNT', 'unknown')
+
+          payload = {
+            "content": f"⚠️ Community issue creation has not created any issues for {count} consecutive runs in `{repo}`.\n{run_url}" 
+          }
+          print(json.dumps(payload))
+          PY
+          curl -sf -H "Content-Type: application/json" -X POST -d @/tmp/payload.json "$DISCORD_WEBHOOK"

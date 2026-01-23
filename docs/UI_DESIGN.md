@@ -55,13 +55,13 @@ KanaDojo leverages Tailwind CSS as the primary styling solution with a heavy emp
 **✅ DO:**
 
 ```tsx
-<div className="bg-[var(--card-color)] text-[var(--main-color)]">Content</div>
+<div className='bg-[var(--card-color)] text-[var(--main-color)]'>Content</div>
 ```
 
 **❌ DON'T:**
 
 ```tsx
-<div className="bg-gray-100 text-black">Content</div>
+<div className='bg-gray-100 text-black'>Content</div>
 ```
 
 #### 2. Utility Classes with `cn()` Helper
@@ -73,9 +73,9 @@ import { cn } from '@/lib/utils';
 
 <button
   className={cn(
-    'px-4 py-2 rounded-lg',
+    'rounded-lg px-4 py-2',
     isActive && 'bg-[var(--main-color)]',
-    disabled && 'opacity-50 cursor-not-allowed'
+    disabled && 'cursor-not-allowed opacity-50',
   )}
 >
   Click me
@@ -84,10 +84,10 @@ import { cn } from '@/lib/utils';
 
 #### 3. Reusable Style Constants
 
-Common patterns are extracted to `static/styles.ts`:
+Common patterns are extracted to `shared/lib/styles.ts`:
 
 ```typescript
-// static/styles.ts
+// shared/lib/styles.ts
 import clsx from 'clsx';
 
 export const cardBorderStyles = clsx('rounded-xl bg-[var(--card-color)]');
@@ -95,14 +95,14 @@ export const cardBorderStyles = clsx('rounded-xl bg-[var(--card-color)]');
 export const buttonBorderStyles = clsx(
   'rounded-xl bg-[var(--card-color)] hover:cursor-pointer',
   'duration-250 transition-all ease-in-out',
-  'hover:bg-[var(--border-color)]'
+  'hover:bg-[var(--border-color)]',
 );
 ```
 
 **Usage:**
 
 ```tsx
-import { buttonBorderStyles } from '@/static/styles';
+import { buttonBorderStyles } from '@/shared/lib/styles';
 
 <button className={buttonBorderStyles}>Click me</button>;
 ```
@@ -112,7 +112,7 @@ import { buttonBorderStyles } from '@/static/styles';
 Use Tailwind's responsive prefixes consistently:
 
 ```tsx
-<div className="flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8">
+<div className='flex flex-col gap-4 md:flex-row md:gap-6 lg:gap-8'>
   {/* Content adapts to screen size */}
 </div>
 ```
@@ -150,7 +150,7 @@ KanaDojo uses a **5-variable color system** defined in `app/globals.css`:
 
 ### Theme Structure
 
-Themes are defined in `static/themes.ts` with TypeScript interfaces:
+Themes are defined in `features/Preferences/data/themes.ts` with TypeScript interfaces:
 
 ```typescript
 interface Theme {
@@ -165,8 +165,8 @@ interface Theme {
 
 ### How Themes Work
 
-1. **Theme Definition** - Themes are organized into groups (Base, Light, Dark) in `static/themes.ts`
-2. **Theme Storage** - Selected theme ID is persisted via Zustand in `store/useThemeStore.ts`
+1. **Theme Definition** - Themes are organized into groups (Base, Light, Dark) in `features/Preferences/data/themes.ts`
+2. **Theme Storage** - Selected theme ID is persisted via Zustand in `features/Preferences/store/usePreferencesStore.ts`
 3. **Theme Application** - The `applyTheme()` function dynamically updates CSS variables:
 
 ```typescript
@@ -188,7 +188,7 @@ export function applyTheme(themeId: string) {
 
 To add a new theme:
 
-1. **Define the theme** in `static/themes.ts`:
+1. **Define the theme** in `features/Preferences/data/themes.ts`:
 
 ```typescript
 {
@@ -206,9 +206,9 @@ To add a new theme:
 
 #### Sumi Theme (Example)
 
-The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added in `static/themes.ts`. It's designed for low visual distraction, high focus, and a neutral, high-clarity UI where content stands out against an almost-black page background.
+The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added in `features/Preferences/data/themes.ts`. It's designed for low visual distraction, high focus, and a neutral, high-clarity UI where content stands out against an almost-black page background.
 
-- **Palette (from `static/themes.ts`)**:
+- **Palette (from `features/Preferences/data/themes.ts`)**:
 
 ```ts
 {
@@ -222,7 +222,6 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
 ```
 
 - **Usage guidance**:
-
   - Use `--background-color` for large page surfaces and overlays.
   - Use `--card-color` for cards, panels, and elevated UI pieces.
   - Use `--border-color` for separators, subtle hover/backdrop outlines and focus rings when appropriate.
@@ -232,12 +231,12 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
 - **Tailwind example (recommended pattern)**:
 
 ```tsx
-<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+<div className='min-h-screen bg-[var(--background-color)] text-[var(--main-color)]'>
+  <div className='rounded-xl border border-[var(--border-color)] bg-[var(--card-color)] p-6'>
+    <h1 className='text-2xl font-bold text-[var(--main-color)]'>
       Sumi — Focus Mode
     </h1>
-    <p className="text-sm text-[var(--secondary-color)]">
+    <p className='text-sm text-[var(--secondary-color)]'>
       Subtle helper text and accents
     </p>
   </div>
@@ -245,14 +244,12 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
 ```
 
 - **Accessibility / contrast notes**:
-
   - The `sumi` theme is intentionally high-contrast for primary content: `--main-color` (near-white) on `--background-color` (very dark charcoal) is appropriate for body text and passes typical AA thresholds for normal text in most sizes — still run specific checks for bright UI elements and CTA buttons.
   - For smaller UI chrome (icons, borders), ensure `--border-color` on `--card-color` meets at least a 3:1 ratio for interactive affordances, or increase border opacity when used as the primary focus indicator.
   - When using `--secondary-color` for secondary text, verify it maintains adequate contrast on both `--background-color` and `--card-color` for the sizes you use (tooling: WebAIM, axe, Lighthouse).
 
 - **Developer checklist when adding/using `sumi`**:
-
-  - Copy the theme object into `static/themes.ts` exactly (IDs must be kebab-case).
+  - Copy the theme object into `features/Preferences/data/themes.ts` exactly (IDs must be kebab-case).
   - Verify `applyTheme('sumi')` updates CSS variables and `data-theme` attribute correctly.
   - Test interactive components (buttons, inputs, dialogs) visually and via automated contrast checks.
   - Consider providing a slightly lighter variant of `--main-color` for disabled/low-emphasis states to avoid blending with `--card-color`.
@@ -260,8 +257,7 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   #### Momiji Theme (Dark — Autumn Maple)
 
   The `momiji` theme is inspired by autumn maple leaves — warm, cozy, and subtly vibrant. It pairs a deep, neutral page background with amber and yellow-green accents for highlights and CTAs. Use this theme when you want a seasonal, warm-dark aesthetic that still prioritizes readability and clear affordances.
-
-  - **Palette (from `static/themes.ts`):**
+  - **Palette (from `features/Preferences/data/themes.ts`):**
 
   ```ts
   {
@@ -275,7 +271,6 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   ```
 
   - **Usage guidance:**
-
     - Use `--background-color` for full-page backgrounds and large overlays.
     - Use `--card-color` for cards, panels, and elevated UI surfaces to create subtle separation from the page background.
     - Use `--border-color` for separators, subtle hover outlines, and focus affordances.
@@ -285,12 +280,12 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   - **Tailwind example:**
 
   ```tsx
-  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-      <h1 className="text-2xl font-bold text-[var(--main-color)]">
+  <div className='min-h-screen bg-[var(--background-color)] text-[var(--main-color)]'>
+    <div className='rounded-xl border border-[var(--border-color)] bg-[var(--card-color)] p-6'>
+      <h1 className='text-2xl font-bold text-[var(--main-color)]'>
         Momiji — Autumn Warmth
       </h1>
-      <p className="text-sm text-[var(--secondary-color)]">
+      <p className='text-sm text-[var(--secondary-color)]'>
         Accent and supportive text
       </p>
     </div>
@@ -298,13 +293,12 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   ```
 
   - **Accessibility / contrast notes:**
-
     - `--main-color` (warm amber) on `--background-color` (deep charcoal) should provide strong contrast for body text; still validate with WebAIM, axe, or Lighthouse.
     - `--secondary-color` (yellow-green) is an accent — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; reduce saturation or increase lightness if below AA.
     - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; increase opacity if necessary when used as a primary focus indicator.
 
   - **Developer checklist when adding/using `momiji`:**
-    - Add the theme object to `static/themes.ts` under the `Dark` theme group.
+    - Add the theme object to `features/Preferences/data/themes.ts` under the `Dark` theme group.
     - Verify `applyTheme('momiji')` updates CSS variables and `data-theme` attribute correctly.
     - Run automated contrast checks (axe, Lighthouse) and manual spot checks for CTAs and small text.
     - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
@@ -376,7 +370,7 @@ secondaryColor (hsl(180, 60%, 60%)) on backgroundColor (hsl(220, 15%, 10%))
 ```tsx
 // Example from components/ui/button.tsx
 const buttonVariants = cva(
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)]'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)]',
   // ... other styles
 );
 ```
@@ -441,7 +435,7 @@ Follow these patterns for consistency:
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import useThemeStore from '@/store/useThemeStore';
+import { usePreferencesStore } from '@/features/Preferences';
 
 interface MyComponentProps {
   title: string;
@@ -462,10 +456,10 @@ const MyComponent = ({
       className={cn(
         'rounded-xl p-4',
         'bg-[var(--card-color)] text-[var(--main-color)]',
-        isActive && 'border-2 border-[var(--main-color)]'
+        isActive && 'border-2 border-[var(--main-color)]',
       )}
     >
-      <h3 className="text-xl font-semibold">{title}</h3>
+      <h3 className='text-xl font-semibold'>{title}</h3>
       {/* ... */}
     </div>
   );
@@ -479,7 +473,7 @@ export default MyComponent;
 #### 1. Container Layouts
 
 ```tsx
-<div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+<div className='container mx-auto max-w-7xl px-4 md:px-6 lg:px-8'>
   {/* Responsive container with proper padding */}
 </div>
 ```
@@ -487,7 +481,7 @@ export default MyComponent;
 #### 2. Card Components
 
 ```tsx
-<div className="rounded-xl bg-[var(--card-color)] p-6 shadow-sm">
+<div className='rounded-xl bg-[var(--card-color)] p-6 shadow-sm'>
   {/* Card content */}
 </div>
 ```
@@ -497,11 +491,11 @@ export default MyComponent;
 ```tsx
 <button
   className={cn(
-    'px-6 py-3 rounded-lg',
+    'rounded-lg px-6 py-3',
     'bg-[var(--main-color)] text-[var(--background-color)]',
     'hover:brightness-110 active:brightness-95',
     'transition-all duration-200',
-    'focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2'
+    'focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2',
   )}
 >
   Action
@@ -527,10 +521,10 @@ export default MyComponent;
 ```tsx
 <div
   className={cn(
-    'p-4 rounded-lg',
+    'rounded-lg p-4',
     'bg-[var(--card-color)]',
-    'hover:bg-[var(--border-color)] hover:cursor-pointer',
-    'transition-all duration-200'
+    'hover:cursor-pointer hover:bg-[var(--border-color)]',
+    'transition-all duration-200',
   )}
 >
   {/* Hoverable content */}
@@ -556,7 +550,7 @@ import { motion } from 'motion/react';
 Use Tailwind transitions for simple interactions:
 
 ```tsx
-<button className="transition-all duration-200 hover:scale-105 active:scale-95">
+<button className='transition-all duration-200 hover:scale-105 active:scale-95'>
   Click me
 </button>
 ```
@@ -581,7 +575,7 @@ shadcn/ui components are customized to use our CSS variable system:
 ```tsx
 // components/ui/button.tsx
 const buttonVariants = cva(
-  'bg-[var(--main-color)] text-[var(--background-color)]' // Uses our theme
+  'bg-[var(--main-color)] text-[var(--background-color)]', // Uses our theme
   // ...
 );
 ```
@@ -629,7 +623,7 @@ const buttonVariants = cva(
         icon: 'h-10 w-10',
       },
     },
-  }
+  },
 );
 ```
 
@@ -697,8 +691,8 @@ const buttonVariants = cva(
   isActive && "bg-[var(--main-color)]"
 )} />
 
-// Extract repeated patterns to static/styles.ts
-import { buttonBorderStyles } from '@/static/styles';
+// Extract repeated patterns to shared/lib/styles.ts
+import { buttonBorderStyles } from '@/shared/lib/styles';
 
 // Use responsive prefixes consistently
 <div className="flex flex-col md:flex-row lg:gap-8" />
@@ -856,7 +850,7 @@ interface KanaCharacter {} // Already in lib/interfaces.ts
 'use client';
 
 import { cn } from '@/lib/utils';
-import { cardBorderStyles } from '@/static/styles';
+import { cardBorderStyles } from '@/shared/lib/styles';
 
 interface CardProps {
   title: string;
@@ -867,13 +861,13 @@ interface CardProps {
 
 const Card = ({ title, description, children, className }: CardProps) => {
   return (
-    <div className={cn(cardBorderStyles, 'p-6 space-y-4', className)}>
-      <div className="space-y-2">
-        <h3 className="text-xl font-semibold text-[var(--main-color)]">
+    <div className={cn(cardBorderStyles, 'space-y-4 p-6', className)}>
+      <div className='space-y-2'>
+        <h3 className='text-xl font-semibold text-[var(--main-color)]'>
           {title}
         </h3>
         {description && (
-          <p className="text-sm text-[var(--secondary-color)]">{description}</p>
+          <p className='text-sm text-[var(--secondary-color)]'>{description}</p>
         )}
       </div>
       {children}
@@ -890,7 +884,7 @@ export default Card;
 'use client';
 
 import { cn } from '@/lib/utils';
-import { buttonBorderStyles } from '@/static/styles';
+import { buttonBorderStyles } from '@/shared/lib/styles';
 import { useClick } from '@/lib/hooks/useAudio';
 import { Check } from 'lucide-react';
 
@@ -917,18 +911,15 @@ const SelectionButton = ({
       onClick={handleClick}
       className={cn(
         buttonBorderStyles,
-        'p-4 flex items-center justify-between gap-3',
+        'flex items-center justify-between gap-3 p-4',
         'transition-all duration-200',
-        isSelected && 'border-2 border-[var(--main-color)]'
+        isSelected && 'border-2 border-[var(--main-color)]',
       )}
       aria-pressed={isSelected}
     >
-      <span className="text-[var(--main-color)] font-medium">{label}</span>
+      <span className='font-medium text-[var(--main-color)]'>{label}</span>
       {isSelected && (
-        <Check
-          className="text-[var(--secondary-color)]"
-          size={20}
-        />
+        <Check className='text-[var(--secondary-color)]' size={20} />
       )}
     </button>
   );
@@ -940,17 +931,14 @@ export default SelectionButton;
 ### Example 3: Responsive Grid Layout
 
 ```tsx
-<div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
-  <h1 className="text-3xl md:text-4xl font-bold text-[var(--main-color)] mb-8">
+<div className='container mx-auto px-4 py-8 md:px-6 lg:px-8'>
+  <h1 className='mb-8 text-3xl font-bold text-[var(--main-color)] md:text-4xl'>
     Character Selection
   </h1>
 
-  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+  <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4'>
     {characters.map(char => (
-      <CharacterCard
-        key={char.id}
-        character={char}
-      />
+      <CharacterCard key={char.id} character={char} />
     ))}
   </div>
 </div>
@@ -983,7 +971,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 z-40"
+            className='fixed inset-0 z-40 bg-black/50'
           />
 
           {/* Modal */}
@@ -992,15 +980,15 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className={cn(
-              'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50',
-              'w-full max-w-md max-h-[85vh] overflow-y-auto',
-              'bg-[var(--background-color)] rounded-2xl shadow-2xl',
-              'p-6'
+              'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2',
+              'max-h-[85vh] w-full max-w-md overflow-y-auto',
+              'rounded-2xl bg-[var(--background-color)] shadow-2xl',
+              'p-6',
             )}
           >
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-[var(--main-color)]">
+            <div className='mb-6 flex items-center justify-between'>
+              <h2 className='text-2xl font-bold text-[var(--main-color)]'>
                 {title}
               </h2>
               <button
@@ -1009,19 +997,16 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
                   'rounded-lg p-2',
                   'hover:bg-[var(--card-color)]',
                   'transition-colors duration-200',
-                  'focus-visible:ring-2 focus-visible:ring-[var(--main-color)]'
+                  'focus-visible:ring-2 focus-visible:ring-[var(--main-color)]',
                 )}
-                aria-label="Close modal"
+                aria-label='Close modal'
               >
-                <X
-                  className="text-[var(--secondary-color)]"
-                  size={24}
-                />
+                <X className='text-[var(--secondary-color)]' size={24} />
               </button>
             </div>
 
             {/* Content */}
-            <div className="space-y-4">{children}</div>
+            <div className='space-y-4'>{children}</div>
           </motion.div>
         </>
       )}
@@ -1050,7 +1035,9 @@ input[type='checkbox'] {
   position: relative;
   vertical-align: middle;
   cursor: pointer;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
 }
 
 input[type='checkbox']:checked {
@@ -1075,14 +1062,14 @@ input[type='checkbox']:checked::after {
 **Usage in JSX:**
 
 ```tsx
-<label className="flex items-center gap-2 cursor-pointer">
+<label className='flex cursor-pointer items-center gap-2'>
   <input
-    type="checkbox"
+    type='checkbox'
     checked={isSelected}
     onChange={e => setIsSelected(e.target.checked)}
-    className="focus-visible:ring-2 focus-visible:ring-[var(--main-color)]"
+    className='focus-visible:ring-2 focus-visible:ring-[var(--main-color)]'
   />
-  <span className="text-[var(--main-color)]">Option label</span>
+  <span className='text-[var(--main-color)]'>Option label</span>
 </label>
 ```
 
@@ -1128,9 +1115,9 @@ import { Button } from '@/components/ui/button';
 
 - `CLAUDE.md` - Project overview and architecture
 - `CONTRIBUTING.md` - Contribution guidelines and code style
-- `static/themes.ts` - Theme definitions and management
+- `features/Preferences/data/themes.ts` - Theme definitions and management
 - `lib/interfaces.ts` - TypeScript interfaces
-- `static/styles.ts` - Reusable style constants
+- `shared/lib/styles.ts` - Reusable style constants
 
 ### External Resources
 
@@ -1160,7 +1147,7 @@ This document should be updated whenever:
 - New accessibility requirements are identified
 - Major design system changes are implemented
 
-**Last Updated:** [Current Date]  
+**Last Updated:** January 2025
 **Maintained By:** KanaDojo Team
 
 ---

@@ -10,7 +10,7 @@ import {
   Play,
   ArrowLeft,
   CheckCircle2,
-  Zap
+  Zap,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks/useAudio';
@@ -29,7 +29,7 @@ const GameModes = ({
   isOpen,
   onClose,
   currentDojo,
-  mode = 'train'
+  mode = 'train',
 }: GameModesProps) => {
   const { playClick } = useClick();
   const router = useRouter();
@@ -50,7 +50,7 @@ const GameModes = ({
       if (typeof window === 'undefined') return;
       localStorage.setItem(durationStorageKey, duration.toString());
     },
-    [durationStorageKey]
+    [durationStorageKey],
   );
 
   useEffect(() => {
@@ -148,7 +148,7 @@ const GameModes = ({
     router,
     mode,
     challengeDuration,
-    persistDuration
+    persistDuration,
   ]);
 
   const gameModes = [
@@ -156,14 +156,14 @@ const GameModes = ({
       id: 'Pick',
       title: 'Pick',
       description: 'Pick the correct answer from multiple options',
-      icon: MousePointerClick
+      icon: MousePointerClick,
     },
     {
       id: 'Type',
       title: 'Type',
       description: 'Type the correct answer',
-      icon: Keyboard
-    }
+      icon: Keyboard,
+    },
   ];
 
   const dojoLabel =
@@ -233,7 +233,7 @@ const GameModes = ({
                     'flex items-center gap-4 border-2 bg-[var(--card-color)]',
                     isSelected
                       ? 'border-[var(--main-color)]'
-                      : 'border-[var(--border-color)]'
+                      : 'border-[var(--border-color)]',
                   )}
                 >
                   {/* Icon */}
@@ -242,7 +242,7 @@ const GameModes = ({
                       'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl',
                       isSelected
                         ? 'bg-[var(--main-color)] text-[var(--background-color)]'
-                        : 'bg-[var(--border-color)] text-[var(--muted-color)]'
+                        : 'bg-[var(--border-color)] text-[var(--muted-color)]',
                     )}
                   >
                     <Icon
@@ -260,7 +260,7 @@ const GameModes = ({
                     <h3
                       className={clsx(
                         'text-lg font-medium',
-                        'text-[var(--main-color)]'
+                        'text-[var(--main-color)]',
                       )}
                     >
                       {mode.title}
@@ -276,7 +276,7 @@ const GameModes = ({
                       'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2',
                       isSelected
                         ? 'border-[var(--secondary-color)] bg-[var(--secondary-color)]'
-                        : 'border-[var(--border-color)]'
+                        : 'border-[var(--border-color)]',
                     )}
                   >
                     {isSelected && (
@@ -324,7 +324,7 @@ const GameModes = ({
                     borderRadius='3xl'
                     className={clsx(
                       'w-auto px-4 py-2',
-                      challengeDuration !== duration && 'opacity-60'
+                      challengeDuration !== duration && 'opacity-60',
                     )}
                   >
                     {duration < 60 ? `${duration}s` : `${duration / 60}m`}
@@ -342,7 +342,7 @@ const GameModes = ({
                 'bg-[var(--secondary-color)] text-[var(--background-color)]',
                 'rounded-3xl transition-colors duration-200',
                 'border-b-10 border-[var(--secondary-color-accent)]',
-                'hover:cursor-pointer'
+                'hover:cursor-pointer',
               )}
               onClick={() => {
                 playClick();
@@ -383,7 +383,7 @@ const GameModes = ({
                   'hover:cursor-pointer',
                   selectedGameMode
                     ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]'
-                    : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]'
+                    : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]',
                 )}
               >
                 <Play
@@ -410,7 +410,7 @@ const GameModes = ({
 function SelectedLevelsCard({
   currentDojo,
   fullLabel,
-  compactLabel
+  compactLabel,
 }: {
   currentDojo: string;
   fullLabel: string;

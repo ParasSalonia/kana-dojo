@@ -15,7 +15,7 @@ export const preferencesBackup = {
   getCustomThemeState: (): CustomThemeStoreState =>
     useCustomThemeStore.getState(),
   setCustomThemeState: (partial: Partial<CustomThemeStoreState>) =>
-    useCustomThemeStore.setState(partial)
+    useCustomThemeStore.setState(partial),
 };
 
 export type { PreferencesStoreState, CustomThemeStoreState };

@@ -6,7 +6,7 @@ import type { BlogPost, Category, Locale, Heading } from '../types/blog';
 
 // Arbitraries for generating valid BlogPost
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -14,11 +14,11 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 const nonEmptyStringArb = fc
@@ -34,7 +34,7 @@ const tagsArb = fc.array(nonEmptyStringArb, { minLength: 1, maxLength: 5 });
 const headingArb: fc.Arbitrary<Heading> = fc.record({
   id: slugArb,
   text: nonEmptyStringArb,
-  level: fc.constantFrom(2, 3, 4) as fc.Arbitrary<2 | 3 | 4>
+  level: fc.constantFrom(2, 3, 4) as fc.Arbitrary<2 | 3 | 4>,
 });
 
 const blogPostArb: fc.Arbitrary<BlogPost> = fc.record({
@@ -48,19 +48,19 @@ const blogPostArb: fc.Arbitrary<BlogPost> = fc.record({
   tags: tagsArb,
   featuredImage: fc.option(
     fc.constantFrom('/blog/image1.jpg', '/blog/image2.png'),
-    { nil: undefined }
+    { nil: undefined },
   ),
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(
     fc.constantFrom('beginner', 'intermediate', 'advanced'),
-    { nil: undefined }
+    { nil: undefined },
   ),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
   locale: localeArb,
   content: nonEmptyStringArb,
-  headings: fc.array(headingArb, { minLength: 0, maxLength: 5 })
+  headings: fc.array(headingArb, { minLength: 0, maxLength: 5 }),
 });
 
 /**
@@ -79,7 +79,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
         const schema = generateBreadcrumbSchema(post, { baseUrl: BASE_URL });
         expect(schema['@type']).toBe('BreadcrumbList');
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -89,7 +89,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
         const schema = generateBreadcrumbSchema(post, { baseUrl: BASE_URL });
         expect(schema['@context']).toBe('https://schema.org');
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -99,7 +99,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
         const schema = generateBreadcrumbSchema(post, { baseUrl: BASE_URL });
         expect(schema.itemListElement).toHaveLength(3);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -111,7 +111,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
           expect(item.position).toBe(index + 1);
         });
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -123,7 +123,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
           expect(item['@type']).toBe('ListItem');
         });
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -135,7 +135,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
         expect(homeItem.name).toBe('Home');
         expect(homeItem.item).toBe(`${BASE_URL}/${post.locale}`);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -147,7 +147,7 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
         expect(academyItem.name).toBe('Academy');
         expect(academyItem.item).toBe(`${BASE_URL}/${post.locale}/academy`);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -158,10 +158,10 @@ describe('Property 11: Breadcrumb Schema Correctly Structured', () => {
         const postItem = schema.itemListElement[2];
         expect(postItem.name).toBe(post.title);
         expect(postItem.item).toBe(
-          `${BASE_URL}/${post.locale}/academy/${post.slug}`
+          `${BASE_URL}/${post.locale}/academy/${post.slug}`,
         );
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

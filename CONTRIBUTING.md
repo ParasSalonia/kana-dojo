@@ -26,75 +26,62 @@ If you’re new to open source, this is a great place to start. We’ve tagged s
 
 Before you jump in, make sure your environment is ready:
 
-### Prerequisites
-
 - **Node.js 18+**
 - **npm 10+** (comes with Node)
 
-### Setup Steps
+### Quick Setup
 
 ```bash
 # 1. Fork the repo
-https://github.com/lingdojo/kanadojo/fork
+https://github.com/lingdojo/kana-dojo/fork
 
 # 2. Clone your fork
- git clone https://github.com/<your-username>/kanadojo.git
- cd kanadojo
+git clone https://github.com/<your-username>/kana-dojo.git
+cd kana-dojo
 
 # 3. Add the original repo as upstream (to stay in sync)
- git remote add upstream https://github.com/lingdojo/kanadojo.git
+git remote add upstream https://github.com/lingdojo/kana-dojo.git
 
-# 4. Install dependencies
- npm install
-
-# 5. Start the dev server
- npm run dev
+# 4. Install dependencies and start the dev server
+npm install && npm run dev
 ```
 
-Now head to [http://localhost:3000](http://localhost:3000) and you should see KanaDojo running. You can explore the three main dojos — **Kana**, **Kanji**, and **Vocabulary** — and their game modes.
+Open [http://localhost:3000](http://localhost:3000) to see KanaDojo running.
 
-If you run into issues, try clearing the cache with:
+## 🔎 Before You Start
+
+- **Docs**: [Architecture](./docs/ARCHITECTURE.md) · [UI Design](./docs/UI_DESIGN.md) · [Translation Guide](./docs/TRANSLATION_GUIDE.md) · [Troubleshooting](./docs/TROUBLESHOOTING.md)
+- **Good first issues**: https://github.com/lingdojo/kana-dojo/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+
+## 🏷️ Label Glossary (Quick)
+
+- **good first issue**: Beginner-friendly tasks with small surface area
+- **help wanted**: Maintainers would love community help here
+- **community**: Issues suitable for community contribution / automation-generated
+- **documentation**: Docs-only changes
+- **bug**: Something is broken or incorrect
+- **enhancement**: Improvement to an existing feature
+
+### Troubleshooting
+
+If you run into issues, see our [**Troubleshooting Guide**](./docs/TROUBLESHOOTING.md) for solutions to common problems including:
+
+- **Windows**: Firewall settings, antivirus interference, font download issues
+- **macOS**: Permission errors, port conflicts
+- **Linux**: File watcher limits (ENOSPC)
+- **General**: Slow installs, network timeouts, TypeScript errors
+
+**Quick fixes to try:**
 
 ```bash
 rm -rf .next node_modules && npm install
 ```
 
-That usually does the trick.
+For Windows-specific issues, GitHub Codespaces provides a hassle-free alternative that works out of the box.
 
-### 🪟 Windows Users: Common Issues
+### Project Structure
 
-If you're on **Windows 11** and the dev server won't start, this is often due to firewall or network restrictions blocking Google Fonts downloads. See our [**Troubleshooting Guide**](./TROUBLESHOOTING.md#-windows-specific-issues) for detailed solutions.
-
-**Quick fixes to try:**
-
-1. Allow Node.js through Windows Firewall
-2. Temporarily disable antivirus during `npm install` and `npm run dev`
-3. Use [GitHub Codespaces](https://github.com/codespaces) (works out of the box)
-4. Use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) for a Linux environment on Windows
-
-For complete troubleshooting steps, see [**TROUBLESHOOTING.md**](./TROUBLESHOOTING.md).
-
----
-
-## 🧭 How the Project Is Structured
-
-You’ll notice a clean layout when you open the codebase:
-
-```
-kanadojo/
-├── app/                 # Next.js App Router pages
-├── features/            # Feature-based modules
-├── shared/              # Shared resources
-├── core/                # Core infrastructure
-├── public/              # Static assets
-├── docs/                # Documentation
-├── next.config.ts       # Next.js configuration
-├── tailwind.config.js   # Tailwind CSS configuration
-└── tsconfig.json        # TypeScript configuration
-```
-
-If you're here to make code changes, focus on `shared/`.
-If you're here for content (themes, fonts, vocab, kanji), go straight to `public/`.
+You can explore the codebase in the [Architecture Guide](./docs/ARCHITECTURE.md).
 
 ---
 
@@ -122,15 +109,40 @@ Here’s how to keep things tidy:
    docs(readme): update setup instructions
    ```
 
-4. **Run linting before pushing:**
+4. **Pre-commit hooks (automatic):**
+   When you commit, [Husky](https://typicode.github.io/husky/) runs [lint-staged](https://github.com/lint-staged/lint-staged) to automatically:
+   - Run **ESLint** with auto-fix on staged `.ts`, `.tsx`, `.js`, `.jsx` files
+   - Run **Prettier** formatting on all staged files
+   - Run **TypeScript** type-checking when TypeScript files are staged
+
+   This ensures consistent code quality across all contributions. If the checks fail, the commit will be blocked until the issues are resolved.
+
+   > **💡 Need to skip hooks temporarily?** Use `git commit --no-verify` (but please don't abuse this!).
+
+5. **Run linting manually (optional, since hooks run automatically):**
 
    ```bash
    npm run lint
    ```
 
-5. **Test your feature manually.** Make sure all four game modes still behave correctly: Pick, Reverse-Pick, Input, Reverse-Input.
+   For the same checks CI runs, use:
+
+   ```bash
+   npm run check
+   ```
+
+6. **Test your feature manually.** Make sure all four game modes still behave correctly: Pick, Reverse-Pick, Input, Reverse-Input.
 
 If your change affects visuals (themes, fonts, UI), take a quick screenshot or GIF for your PR. Reviewers will love you for it.
+
+## 🌐 Translating the App
+
+KanaDojo is available in English, Spanish, and Japanese — and we're always looking to add more languages! If you're interested in translating the app, see our [**Translation Guide**](./docs/TRANSLATION_GUIDE.md) for detailed instructions on:
+
+- How translations are structured (namespace-based JSON files)
+- How to add a new language
+- Best practices for quality translations
+- Tools for validating translations
 
 ---
 

@@ -17,85 +17,85 @@ const features: Feature[] = [
     kanadojo: true,
     googleTranslate: true,
     deepl: true,
-    microsoft: true
+    microsoft: true,
   },
   {
     name: 'No registration required',
     kanadojo: true,
     googleTranslate: true,
     deepl: false,
-    microsoft: true
+    microsoft: true,
   },
   {
     name: 'Romanization (Romaji)',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Translation history',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Keyboard shortcuts',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Offline detection',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Privacy-focused (local storage)',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Clean, distraction-free UI',
     kanadojo: true,
     googleTranslate: false,
     deepl: true,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Integrated learning platform',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Japanese learning tools',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'JLPT preparation support',
     kanadojo: true,
     googleTranslate: false,
     deepl: false,
-    microsoft: false
+    microsoft: false,
   },
   {
     name: 'Mobile optimized',
     kanadojo: true,
     googleTranslate: true,
     deepl: true,
-    microsoft: true
-  }
+    microsoft: true,
+  },
 ];
 
 const CheckIcon = () => (
@@ -109,7 +109,7 @@ export default function ComparisonTable() {
     <div
       className={cn(
         'mt-8 overflow-hidden rounded-2xl border border-[var(--border-color)]',
-        'bg-[var(--card-color)] shadow-lg shadow-black/5'
+        'bg-[var(--card-color)] shadow-lg shadow-black/5',
       )}
     >
       {/* Header */}
@@ -130,7 +130,7 @@ export default function ComparisonTable() {
             <tr
               className={cn(
                 'border-b border-[var(--border-color)]',
-                'bg-[var(--background-color)]'
+                'bg-[var(--background-color)]',
               )}
             >
               <th className='px-3 py-3 text-left text-xs font-semibold text-[var(--main-color)] sm:px-6 sm:text-sm'>
@@ -139,7 +139,7 @@ export default function ComparisonTable() {
               <th
                 className={cn(
                   'px-3 py-3 text-center text-xs font-bold sm:px-6 sm:text-sm',
-                  'bg-[var(--main-color)]/10 text-[var(--main-color)]'
+                  'bg-[var(--main-color)]/10 text-[var(--main-color)]',
                 )}
               >
                 KanaDojo
@@ -161,7 +161,7 @@ export default function ComparisonTable() {
                 key={index}
                 className={cn(
                   'border-b border-[var(--border-color)] transition-colors duration-150',
-                  'hover:bg-[var(--background-color)]'
+                  'hover:bg-[var(--background-color)]',
                 )}
               >
                 <td className='px-3 py-3 text-xs text-[var(--secondary-color)] sm:px-6 sm:text-sm'>
@@ -169,7 +169,7 @@ export default function ComparisonTable() {
                 </td>
                 <td
                   className={cn(
-                    'bg-[var(--main-color)]/5 px-3 py-3 text-center sm:px-6'
+                    'bg-[var(--main-color)]/5 px-3 py-3 text-center sm:px-6',
                   )}
                 >
                   {feature.kanadojo ? <CheckIcon /> : <XIcon />}
@@ -192,15 +192,17 @@ export default function ComparisonTable() {
       {/* Footer note */}
       <div
         className={cn(
-          'border-t border-[var(--border-color)] bg-[var(--main-color)]/5 p-4'
+          'border-t border-[var(--border-color)] bg-[var(--main-color)]/5 p-4',
         )}
       >
         <p className='text-xs leading-relaxed text-[var(--secondary-color)] sm:text-sm'>
-          <strong className='text-[var(--main-color)]'>When to use each:</strong>{' '}
+          <strong className='text-[var(--main-color)]'>
+            When to use each:
+          </strong>{' '}
           <span className='font-medium'>KanaDojo</span> is best for Japanese
           learners who need romanization, history, and integrated learning
-          tools. <span className='font-medium'>Google Translate</span> excels
-          at multi-language support beyond Japanese.{' '}
+          tools. <span className='font-medium'>Google Translate</span> excels at
+          multi-language support beyond Japanese.{' '}
           <span className='font-medium'>DeepL</span> offers more natural
           translations but requires registration.{' '}
           <span className='font-medium'>Microsoft Translator</span> is great for

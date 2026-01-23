@@ -2,14 +2,14 @@
 import clsx from 'clsx';
 import { useState, useEffect, startTransition } from 'react';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
-import useCrazyModeStore from '@/features/CrazyMode/store/useCrazyModeStore';
+import { useCrazyMode } from '@/features/CrazyMode';
 import { useShallow } from 'zustand/react/shallow';
 import { usePathname } from 'next/navigation';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/shared/components/Modals/WelcomeModal';
 import {
   AchievementNotificationContainer,
-  AchievementIntegration
+  AchievementIntegration,
 } from '@/features/Achievements/components';
 import { applyTheme } from '@/features/Preferences/data/themes';
 import BackToTop from '@/shared/components/navigation/BackToTop';
@@ -47,31 +47,24 @@ const loadFontsModule = async (): Promise<FontObject[]> => {
       fontsCache = module.default;
       fontsLoadingPromise = null;
       return module.default;
-    }
+    },
   );
 
   return fontsLoadingPromise;
 };
 
 export default function ClientLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const { theme, font } = usePreferencesStore(
-    useShallow(state => ({ theme: state.theme, font: state.font }))
+    useShallow(state => ({ theme: state.theme, font: state.font })),
   );
 
   // Crazy Mode Integration
   const { isCrazyMode, activeThemeId, activeFontName, randomize } =
-    useCrazyModeStore(
-      useShallow(state => ({
-        isCrazyMode: state.isCrazyMode,
-        activeThemeId: state.activeThemeId,
-        activeFontName: state.activeFontName,
-        randomize: state.randomize
-      }))
-    );
+    useCrazyMode();
 
   // Determine effective theme and font
   const effectiveTheme = isCrazyMode && activeThemeId ? activeThemeId : theme;
@@ -136,11 +129,11 @@ export default function ClientLayout({
       data-scroll-restoration-id='container'
       className={clsx(
         'min-h-[100dvh] max-w-[100dvw] bg-[var(--background-color)] text-[var(--main-color)]',
-        fontClassName
+        fontClassName,
       )}
       style={{
         height: '100dvh',
-        overflowY: 'auto'
+        overflowY: 'auto',
       }}
     >
       <GlobalAudioController />

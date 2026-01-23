@@ -6,7 +6,7 @@ import type { BlogPostMeta, Category, Locale } from '../types/blog';
 
 // Arbitraries for generating valid BlogPostMeta
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -14,11 +14,11 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 const nonEmptyStringArb = fc
@@ -42,17 +42,17 @@ const blogPostMetaArb: fc.Arbitrary<BlogPostMeta> = fc.record({
   tags: tagsArb,
   featuredImage: fc.option(
     fc.constantFrom('/blog/image1.jpg', '/blog/image2.png'),
-    { nil: undefined }
+    { nil: undefined },
   ),
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.option(
     fc.constantFrom('beginner', 'intermediate', 'advanced'),
-    { nil: undefined }
+    { nil: undefined },
   ),
   relatedPosts: fc.option(fc.array(slugArb, { minLength: 0, maxLength: 3 }), {
-    nil: undefined
+    nil: undefined,
   }),
-  locale: localeArb
+  locale: localeArb,
 });
 
 /**
@@ -71,7 +71,7 @@ describe('Property 9: Metadata Contains Required Fields', () => {
         const metadata = generateBlogMetadata(post, { baseUrl: BASE_URL });
         expect(metadata.title).toBe(post.title);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -81,7 +81,7 @@ describe('Property 9: Metadata Contains Required Fields', () => {
         const metadata = generateBlogMetadata(post, { baseUrl: BASE_URL });
         expect(metadata.description).toBe(post.description);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -92,7 +92,7 @@ describe('Property 9: Metadata Contains Required Fields', () => {
         const expectedUrl = `${BASE_URL}/${post.locale}/academy/${post.slug}`;
         expect(metadata.alternates?.canonical).toBe(expectedUrl);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -107,7 +107,7 @@ describe('Property 9: Metadata Contains Required Fields', () => {
         expect(metadata.openGraph?.description).toBe(post.description);
         expect(metadata.openGraph?.url).toBe(expectedUrl);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -119,7 +119,7 @@ describe('Property 9: Metadata Contains Required Fields', () => {
         // At runtime, we know this is OpenGraphArticle with type: 'article'
         expect((metadata.openGraph as { type?: string })?.type).toBe('article');
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

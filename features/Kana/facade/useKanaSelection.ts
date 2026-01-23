@@ -53,8 +53,8 @@ export function useKanaSelection(): KanaSelection & KanaSelectionActions {
         addGroups(allIndices);
       },
       isGroupSelected: (index: number) => selectedGroupIndices.includes(index),
-      setGameMode
+      setGameMode,
     }),
-    [selectedGroupIndices, gameMode, addGroup, addGroups, setGameMode]
+    [selectedGroupIndices, gameMode, addGroup, addGroups, setGameMode],
   );
 }

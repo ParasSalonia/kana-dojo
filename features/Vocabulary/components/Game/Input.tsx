@@ -30,7 +30,7 @@ interface VocabInputGameProps {
 const VocabInputGame = ({
   selectedWordObjs,
   isHidden,
-  isReverse = false
+  isReverse = false,
 }: VocabInputGameProps) => {
   const { score, setScore } = useStatsDisplay();
   const gameStats = useGameStats();
@@ -68,7 +68,7 @@ const VocabInputGame = ({
     : selectedWordObjs.find(obj => obj.word === correctChar);
 
   const [currentWordObj, setCurrentWordObj] = useState<IVocabObj>(
-    correctWordObj as IVocabObj
+    correctWordObj as IVocabObj,
   );
 
   // Determine target based on quiz type and mode
@@ -89,7 +89,7 @@ const VocabInputGame = ({
 
     const newChar = adaptiveSelector.selectWeightedCharacter(
       sourceArray,
-      correctChar
+      correctChar,
     );
     adaptiveSelector.markCharacterSeen(newChar);
     setCorrectChar(newChar);
@@ -186,7 +186,7 @@ const VocabInputGame = ({
 
     playCorrect();
     gameStats.recordCorrect('vocabulary', correctChar, {
-      timeTaken: answerTimeMs
+      timeTaken: answerTimeMs,
     });
     setScore(score + 1);
 
@@ -207,7 +207,7 @@ const VocabInputGame = ({
       'vocabulary',
       correctChar,
       inputValue.trim(),
-      correctAnswer
+      correctAnswer,
     );
     if (score - 1 < 0) {
       setScore(0);
@@ -246,7 +246,7 @@ const VocabInputGame = ({
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-10 sm:w-4/5',
-        isHidden ? 'hidden' : ''
+        isHidden ? 'hidden' : '',
       )}
     >
       {displayAnswerSummary ? (
@@ -275,7 +275,7 @@ const VocabInputGame = ({
                   stiffness: 150,
                   damping: 20,
                   mass: 1,
-                  duration: 0.5
+                  duration: 0.5,
                 }}
                 key={correctChar + quizType}
                 className='flex flex-row items-center gap-1'
@@ -307,7 +307,7 @@ const VocabInputGame = ({
             value={inputValue}
             placeholder='Type your answer...'
             disabled={showContinue}
-            rows={2}
+            rows={4}
             className={clsx(
               'w-full max-w-xs sm:max-w-sm md:max-w-md',
               'rounded-2xl px-5 py-4',
@@ -316,7 +316,7 @@ const VocabInputGame = ({
               'text-(--secondary-color) placeholder:text-base placeholder:font-normal placeholder:text-(--secondary-color)/40',
               'resize-none focus:outline-none',
               'transition-colors duration-200 ease-out',
-              showContinue && 'cursor-not-allowed opacity-60'
+              showContinue && 'cursor-not-allowed opacity-60',
             )}
             onChange={e => setInputValue(e.target.value)}
             onKeyDown={e => {

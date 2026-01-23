@@ -37,7 +37,7 @@ export const NEEDS_PRACTICE_MAX_ACCURACY = 0.7;
  */
 export function classifyCharacter(
   correct: number,
-  incorrect: number
+  incorrect: number,
 ): MasteryLevel {
   const total = correct + incorrect;
 

@@ -16,8 +16,8 @@ const Game = () => {
         showStats: state.showStats,
         resetStats: state.resetStats,
         recordDojoUsed: state.recordDojoUsed,
-        recordModeUsed: state.recordModeUsed
-      }))
+        recordModeUsed: state.recordModeUsed,
+      })),
     );
 
   const gameMode = useKanjiStore(state => state.selectedGameModeKanji);

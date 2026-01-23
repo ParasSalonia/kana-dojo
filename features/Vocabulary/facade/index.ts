@@ -1,7 +1,7 @@
 export { useVocabSelection } from './useVocabSelection';
 export type {
   VocabSelection,
-  VocabSelectionActions
+  VocabSelectionActions,
 } from './useVocabSelection';
 
 // Re-export types for convenience

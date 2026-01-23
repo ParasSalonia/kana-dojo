@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import useAchievementStore, {
-  type Achievement
+  type Achievement,
 } from '../store/useAchievementStore';
 import { useStatsStore } from '@/features/Progress';
 
@@ -32,14 +32,14 @@ export const useAchievements = (): UseAchievementsReturn => {
     stats.allTimeStats.totalCorrect,
     stats.allTimeStats.bestStreak,
     stats.allTimeStats.totalSessions,
-    checkForNewAchievements
+    checkForNewAchievements,
   ]);
 
   const unlockedCount = Object.keys(
-    achievementStore.unlockedAchievements
+    achievementStore.unlockedAchievements,
   ).length;
   const hasUnseenNotifications = useAchievementStore(
-    state => state.hasUnseenNotifications
+    state => state.hasUnseenNotifications,
   );
 
   return {
@@ -47,7 +47,7 @@ export const useAchievements = (): UseAchievementsReturn => {
     totalPoints: achievementStore.totalPoints,
     level: achievementStore.level,
     unlockedCount,
-    hasUnseenNotifications
+    hasUnseenNotifications,
   };
 };
 

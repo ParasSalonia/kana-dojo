@@ -21,7 +21,7 @@ interface ErrorLog {
 export function logError(
   error: Error,
   errorInfo?: ErrorInfo,
-  additionalInfo?: Record<string, unknown>
+  additionalInfo?: Record<string, unknown>,
 ) {
   const errorLog: ErrorLog = {
     timestamp: new Date(),
@@ -48,11 +48,11 @@ export function logError(
   try {
     const savedErrors = localStorage.getItem('kanadojo_error_logs');
     const errorLogs: ErrorLog[] = savedErrors ? JSON.parse(savedErrors) : [];
-    
+
     // Add new error and keep only last 10
     errorLogs.unshift(errorLog);
     const trimmedLogs = errorLogs.slice(0, 10);
-    
+
     localStorage.setItem('kanadojo_error_logs', JSON.stringify(trimmedLogs));
   } catch (storageError) {
     // Ignore localStorage errors

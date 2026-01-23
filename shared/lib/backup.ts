@@ -52,7 +52,7 @@ function toJSONValue(v: unknown): JSONValue | undefined {
 // Keep only keys from current state that are non-functions and exist in source
 function filterToKnownKeys<T extends object>(
   current: T,
-  source: Record<string, JSONValue>
+  source: Record<string, JSONValue>,
 ): Partial<T> {
   const result: Record<string, JSONValue> = {};
   for (const [k, v] of Object.entries(current as Record<string, unknown>)) {
@@ -80,7 +80,7 @@ export function createBackup(): BackupFile {
     createdAt: new Date().toISOString(),
     theme: toJSONValue(themeState) as Record<string, JSONValue>,
     customTheme: toJSONValue(customThemeState) as Record<string, JSONValue>,
-    stats: toJSONValue(statsState) as Record<string, JSONValue>
+    stats: toJSONValue(statsState) as Record<string, JSONValue>,
   };
 }
 

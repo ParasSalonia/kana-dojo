@@ -19,7 +19,7 @@ const categoryLabels: Record<Category, string> = {
   tutorial: 'Tutorial',
   resources: 'Resources',
   'study-tips': 'Study Tips',
-  jlpt: 'JLPT'
+  jlpt: 'JLPT',
 };
 
 /**
@@ -45,7 +45,7 @@ const categoryColors: Record<Category, string> = {
     'bg-teal-500/20 text-teal-400 border-teal-500/30 hover:bg-teal-500/30',
   'study-tips':
     'bg-lime-500/20 text-lime-400 border-lime-500/30 hover:bg-lime-500/30',
-  jlpt: 'bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30'
+  jlpt: 'bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30',
 };
 
 interface CategoryFilterProps {
@@ -65,7 +65,7 @@ interface CategoryFilterProps {
 export function CategoryFilter({
   selectedCategory,
   onCategoryChange,
-  className
+  className,
 }: CategoryFilterProps) {
   return (
     <nav
@@ -81,7 +81,7 @@ export function CategoryFilter({
           'inline-flex cursor-pointer items-center rounded-full border px-3 py-1.5 text-sm font-medium transition-all duration-200',
           selectedCategory === null
             ? 'border-[var(--main-color)] bg-[var(--main-color)] text-[var(--background-color)]'
-            : 'border-[var(--border-color)] bg-transparent text-[var(--secondary-color)] hover:border-[var(--main-color)] hover:text-[var(--main-color)]'
+            : 'border-[var(--border-color)] bg-transparent text-[var(--secondary-color)] hover:border-[var(--main-color)] hover:text-[var(--main-color)]',
         )}
         aria-pressed={selectedCategory === null}
         data-testid='category-filter-all'
@@ -100,7 +100,7 @@ export function CategoryFilter({
             selectedCategory === category
               ? cn(
                   categoryColors[category],
-                  'ring-2 ring-offset-2 ring-offset-[var(--background-color)]'
+                  'ring-2 ring-offset-2 ring-offset-[var(--background-color)]',
                 )
               : cn(
                   'border-[var(--border-color)] bg-transparent text-[var(--secondary-color)]',
@@ -108,8 +108,8 @@ export function CategoryFilter({
                     .split(' ')
                     .slice(0, 2)
                     .join(' ')
-                    .replace('bg-', 'hover:bg-')
-                )
+                    .replace('bg-', 'hover:bg-'),
+                ),
           )}
           aria-pressed={selectedCategory === category}
           data-testid={`category-filter-${category}`}

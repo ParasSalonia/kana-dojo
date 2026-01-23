@@ -23,6 +23,34 @@ function getPostsDirectory(locale: Locale): string {
 }
 
 /**
+ * Recursively collects all MDX files from a directory and its subdirectories
+ * @param directory - Directory to scan
+ * @returns Array of absolute paths to MDX files
+ */
+function collectMdxFiles(directory: string): string[] {
+  const files: string[] = [];
+
+  if (!fs.existsSync(directory)) {
+    return files;
+  }
+
+  const entries = fs.readdirSync(directory, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      // Recursively collect from subdirectories (category folders)
+      files.push(...collectMdxFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith('.mdx')) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+/**
  * Parses an MDX file and extracts blog post metadata
  * @param filePath - Absolute path to the MDX file
  * @param locale - The locale of the post
@@ -37,7 +65,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPostMeta | null {
     const validation = validateFrontmatter(frontmatter);
     if (!validation.success) {
       console.error(
-        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`
+        `Invalid frontmatter in ${filePath}: missing fields ${validation.missingFields.join(', ')}`,
       );
       return null;
     }
@@ -61,7 +89,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPostMeta | null {
       readingTime,
       difficulty: frontmatter.difficulty as BlogPostMeta['difficulty'],
       relatedPosts: frontmatter.relatedPosts as string[] | undefined,
-      locale
+      locale,
     };
   } catch (error) {
     console.error(`Error parsing post file ${filePath}:`, error);
@@ -71,6 +99,7 @@ function parsePostFile(filePath: string, locale: Locale): BlogPostMeta | null {
 
 /**
  * Fetches all blog posts for a given locale
+ * Posts can be organized in category subdirectories or in the root locale directory
  * @param locale - The locale to fetch posts for (defaults to 'en')
  * @returns Array of BlogPostMeta objects sorted by publishedAt descending
  */
@@ -82,14 +111,12 @@ export function getBlogPosts(locale: Locale = 'en'): BlogPostMeta[] {
     return [];
   }
 
-  // Read all MDX files from the directory
-  const files = fs
-    .readdirSync(postsDirectory)
-    .filter(file => file.endsWith('.mdx'));
+  // Recursively collect all MDX files from the directory and subdirectories
+  const files = collectMdxFiles(postsDirectory);
 
   // Parse each file and filter out any that failed to parse
   const posts = files
-    .map(file => parsePostFile(path.join(postsDirectory, file), locale))
+    .map(file => parsePostFile(file, locale))
     .filter((post): post is BlogPostMeta => post !== null);
 
   // Sort by publishedAt descending (newest first)

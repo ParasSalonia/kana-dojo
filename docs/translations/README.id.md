@@ -565,12 +565,14 @@ core/i18n/locales/
 Ingin membantu memperluas KanaDojo ke bahasa baru untuk visibilitas SEO global yang lebih baik?
 
 **Infrastruktur**: ✅ Lengkap
+
 - Sistem metadata terpusat dengan file spesifik locale
 - Generasi gambar OG otomatis per bahasa
 - Sitemap otomatis dengan tag hreflang
 - Tidak perlu perubahan kode - cukup terjemahkan metadata!
 
 **Bahasa Saat Ini**:
+
 - ✅ Bahasa Inggris (en) - Utama
 - ✅ Spanyol (es) - Sepenuhnya dilokalisasi
 - ✅ Jepang (ja) - Sepenuhnya dilokalisasi
@@ -586,11 +588,13 @@ Ingin membantu memperluas KanaDojo ke bahasa baru untuk visibilitas SEO global y
 5. Uji secara lokal dan kirim PR
 
 **Dampak SEO per Bahasa**:
+
 - 90+ halaman terindeks
 - 50+ halaman subset kana dengan SEO penuh
 - Estimasi +200-400 kunjungan bulanan per bahasa
 
 **Bahasa Prioritas yang Direkomendasikan**:
+
 1. Portugis (pt) - Pasar Brasil (~200M penutur)
 2. Prancis (fr) - Prancis, Kanada, Afrika (~280M penutur)
 3. Jerman (de) - Jerman, Austria, Swiss (~100M penutur)

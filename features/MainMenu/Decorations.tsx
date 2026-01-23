@@ -53,7 +53,7 @@ type AnimState = 'idle' | 'exploding' | 'hidden' | 'fading-in';
 // Grid configuration - matches Tailwind classes
 const GRID_CONFIG = {
   desktop: { cols: 28, cellSize: 36, gap: 2 }, // grid-cols-28, text-4xl ~ 36px
-  mobile: { cols: 10, cellSize: 36, gap: 2 } // grid-cols-10
+  mobile: { cols: 10, cellSize: 36, gap: 2 }, // grid-cols-10
 };
 
 // Calculate how many characters to render based on viewport
@@ -136,7 +136,7 @@ const loadDecorations = async (): Promise<string[]> => {
 
 // Load decoration fonts (lazy, only in production)
 const loadDecorationFonts = async (
-  forceLoad = false
+  forceLoad = false,
 ): Promise<DecorationFont[]> => {
   if (process.env.NODE_ENV !== 'production' && !forceLoad) {
     return [];
@@ -157,7 +157,7 @@ const loadDecorationFonts = async (
 // Pre-compute styles for a specific count of characters
 const precomputeStyles = async (
   count: number,
-  forceShow = false
+  forceShow = false,
 ): Promise<CharacterStyle[]> => {
   // Check cache for this count
   const cached = precomputedStylesCache.get(count);
@@ -165,7 +165,7 @@ const precomputeStyles = async (
 
   const [allChars, fonts] = await Promise.all([
     loadDecorations(),
-    loadDecorationFonts(forceShow)
+    loadDecorationFonts(forceShow),
   ]);
 
   // If we need more chars than available, repeat them
@@ -177,7 +177,7 @@ const precomputeStyles = async (
     chars = [];
     while (chars.length < count) {
       chars.push(
-        ...allChars.slice(0, Math.min(allChars.length, count - chars.length))
+        ...allChars.slice(0, Math.min(allChars.length, count - chars.length)),
       );
     }
   }
@@ -188,7 +188,7 @@ const precomputeStyles = async (
     fontClass:
       fonts.length > 0
         ? fonts[Math.floor(Math.random() * fonts.length)].font.className
-        : ''
+        : '',
   }));
 
   precomputedStylesCache.set(count, styles);
@@ -247,7 +247,7 @@ const InteractiveChar = memo(({ style, onExplode }: InteractiveCharProps) => {
       className={clsx(
         'inline-flex items-center justify-center text-4xl',
         style.fontClass,
-        animState === 'idle' && 'cursor-pointer'
+        animState === 'idle' && 'cursor-pointer',
       )}
       aria-hidden='true'
       style={{
@@ -256,7 +256,7 @@ const InteractiveChar = memo(({ style, onExplode }: InteractiveCharProps) => {
         pointerEvents: animState !== 'idle' ? 'none' : undefined,
         contentVisibility: 'auto',
         containIntrinsicSize: '36px',
-        ...getAnimationStyle()
+        ...getAnimationStyle(),
       }}
       onClick={animState === 'idle' ? handleClick : undefined}
     >
@@ -281,13 +281,13 @@ const StaticChar = memo(({ style }: StaticCharProps) => {
     <span
       className={clsx(
         'inline-flex items-center justify-center text-4xl',
-        style.fontClass
+        style.fontClass,
       )}
       aria-hidden='true'
       style={{
         color: style.color,
         contentVisibility: 'auto',
-        containIntrinsicSize: '36px'
+        containIntrinsicSize: '36px',
       }}
     >
       {style.char}
@@ -304,7 +304,7 @@ StaticChar.displayName = 'StaticChar';
 const Decorations = ({
   expandDecorations,
   forceShow = false,
-  interactive = false
+  interactive = false,
 }: {
   expandDecorations: boolean;
   forceShow?: boolean;
@@ -312,7 +312,7 @@ const Decorations = ({
 }) => {
   const [styles, setStyles] = useState<CharacterStyle[]>([]);
   const [visibleCount, setVisibleCount] = useState<number>(() =>
-    calculateVisibleCount(interactive)
+    calculateVisibleCount(interactive),
   );
   const { playClick } = useClick();
 
@@ -409,13 +409,13 @@ const Decorations = ({
         className={clsx(
           'fixed inset-0 overflow-hidden',
           expandDecorations ? 'opacity-100' : 'opacity-30',
-          interactive ? 'pointer-events-auto' : 'pointer-events-none'
+          interactive ? 'pointer-events-auto' : 'pointer-events-none',
         )}
       >
         <div
           className={clsx(
             'grid h-full w-full gap-0.5 p-2',
-            interactive ? 'grid-cols-10 md:grid-cols-28' : 'grid-cols-28'
+            interactive ? 'grid-cols-10 md:grid-cols-28' : 'grid-cols-28',
           )}
         >
           {gridContent}

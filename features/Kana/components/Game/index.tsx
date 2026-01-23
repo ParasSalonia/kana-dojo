@@ -16,8 +16,8 @@ const Game = () => {
         showStats: state.showStats,
         resetStats: state.resetStats,
         recordDojoUsed: state.recordDojoUsed,
-        recordModeUsed: state.recordModeUsed
-      }))
+        recordModeUsed: state.recordModeUsed,
+      })),
     );
   const gameMode = useKanaStore(state => state.selectedGameModeKana);
 
@@ -31,7 +31,7 @@ const Game = () => {
   return (
     <div
       className={clsx(
-        'flex min-h-[100dvh] max-w-[100dvw] flex-col items-center gap-6 px-4 md:gap-10'
+        'flex min-h-[100dvh] max-w-[100dvw] flex-col items-center gap-6 px-4 md:gap-10',
         // "bg-[url('/wallpapers/neonretrocarcity.jpg')] bg-cover bg-center"
         // "bg-[url('/wallpapers/kanaDojoWallpaper.png')] bg-cover bg-center backdrop-blur-lg"
       )}

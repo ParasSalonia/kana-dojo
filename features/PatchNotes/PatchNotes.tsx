@@ -15,7 +15,7 @@ const PatchNotes = async () => {
   try {
     const response = await fetch(
       'https://api.github.com/repos/lingdojo/kana-dojo/releases?per_page=5',
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 } },
     );
     if (response.ok) {
       patches = await response.json();

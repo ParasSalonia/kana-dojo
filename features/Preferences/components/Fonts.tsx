@@ -6,8 +6,9 @@ import usePreferencesStore from '@/features/Preferences/store/usePreferencesStor
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import fonts from '../data/fonts';
 import { isRecommendedFont } from '../data/recommendedFonts';
-import { Dice5, BookOpen, Sparkles } from 'lucide-react';
+import { Dice5, Star, Type } from 'lucide-react';
 import { Random } from 'random-js';
+import CollapsibleSection from './CollapsibleSection';
 
 const random = new Random();
 
@@ -18,7 +19,7 @@ const Fonts = () => {
   const setFont = usePreferencesStore(state => state.setFont);
 
   const [randomFont, setRandomFont] = useState(
-    fonts.length > 0 ? fonts[random.integer(0, fonts.length - 1)] : null
+    fonts.length > 0 ? fonts[random.integer(0, fonts.length - 1)] : null,
   );
 
   // Separate fonts into recommended and other categories
@@ -36,7 +37,7 @@ const Fonts = () => {
         buttonBorderStyles,
         'border-1 border-[var(--card-color)] px-4 py-4',
         'flex-1 overflow-hidden',
-        fontObj.name === currentFont && 'border-[var(--main-color)]'
+        fontObj.name === currentFont && 'border-[var(--main-color)]',
       )}
       onClick={() => playClick()}
     >
@@ -66,7 +67,7 @@ const Fonts = () => {
           'flex w-1/4 items-center justify-center gap-2 p-6',
           buttonBorderStyles,
           'w-full text-xl',
-          'flex-1 overflow-hidden'
+          'flex-1 overflow-hidden',
         )}
         onClick={() => {
           playClick();
@@ -85,73 +86,63 @@ const Fonts = () => {
       </button>
 
       {/* Recommended Fonts Section */}
-      <div className='flex flex-col gap-3'>
-        <div className='flex items-center gap-2'>
-          <BookOpen size={20} className='text-[var(--success-color)]' />
-          <h3 className='text-xl font-semibold text-[var(--main-color)]'>
-            Recommended for Learning
-          </h3>
-          <span className='text-sm text-[var(--secondary-color)]'>
-            ({recommendedFonts.length})
-          </span>
-        </div>
-        <p className='-mt-1 text-sm text-[var(--secondary-color)]'>
-          Used in real Japanese textbooks, books & media
-        </p>
+      <CollapsibleSection
+        title='Recommended'
+        icon={<Star size={18} />}
+        level='subsubsection'
+        defaultOpen={true}
+        storageKey='prefs-fonts-recommended'
+      >
         <fieldset
           className={clsx(
-            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'
+            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4',
           )}
         >
           {recommendedFonts.map(renderFontCard)}
         </fieldset>
-      </div>
+      </CollapsibleSection>
 
       {/* Other Fonts Section */}
-      <div className='flex flex-col gap-3'>
-        <div className='flex items-center gap-2'>
-          <Sparkles size={20} className='text-[var(--secondary-color)]' />
-          <h3 className='text-xl font-semibold text-[var(--main-color)]'>
-            Other Fonts
-          </h3>
-          <span className='text-sm text-[var(--secondary-color)]'>
-            ({otherFonts.length})
-          </span>
-        </div>
-        <p className='-mt-1 text-sm text-[var(--secondary-color)]'>
-          Fun & decorative fonts for entertainment
-        </p>
+      <CollapsibleSection
+        title='Other'
+        icon={<Type size={18} />}
+        level='subsubsection'
+        defaultOpen={true}
+        storageKey='prefs-fonts-other'
+      >
         <fieldset
           className={clsx(
-            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'
+            'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4',
           )}
         >
           {otherFonts.map(renderFontCard)}
         </fieldset>
-      </div>
+      </CollapsibleSection>
       <div className='flex flex-col gap-2'>
         <h4 className='text-xl'>Hiragana:</h4>
         <p className='text-3xl text-[var(--secondary-color)]' lang='ja'>
           {'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'.slice(
             0,
-            20
+            20,
           )}
         </p>
         <h4 className='text-xl'>Katakana:</h4>
         <p className='text-3xl text-[var(--secondary-color)]' lang='ja'>
           {'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメもヤユヨラリルレロワヲン'.slice(
             0,
-            20
+            20,
           )}
         </p>
         <h4 className='text-xl'>Kanji:</h4>
         <p className='text-3xl text-[var(--secondary-color)]' lang='ja'>
           人日大小学 校生先円上下中外右左名前時分国
         </p>
+        {/* 
         <h4 className='text-xl'>Sample sentence:</h4>
         <p className='text-3xl text-[var(--secondary-color)]' lang='ja'>
           人類社会のすべての構成員の固有の尊厳と平等で譲ることのできない権利とを承認することは
         </p>
+ */}
       </div>
     </div>
   );

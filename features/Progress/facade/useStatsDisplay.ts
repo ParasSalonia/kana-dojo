@@ -49,14 +49,22 @@ export function useStatsDisplay(): StatsDisplay {
   const setScore = useStatsStore(state => state.setScore);
   const setStars = useStatsStore(state => state.setStars);
   const addIconIndex = useStatsStore(state => state.addIconIndex);
-  const setNewTotalMilliseconds = useStatsStore(state => state.setNewTotalMilliseconds);
+  const setNewTotalMilliseconds = useStatsStore(
+    state => state.setNewTotalMilliseconds,
+  );
   const saveSession = useStatsStore(state => state.saveSession);
   const totalMilliseconds = useStatsStore(state => state.totalMilliseconds);
   const correctAnswerTimes = useStatsStore(state => state.correctAnswerTimes);
-  const totalSessions = useStatsStore(state => state.allTimeStats.totalSessions);
+  const totalSessions = useStatsStore(
+    state => state.allTimeStats.totalSessions,
+  );
   const totalCorrect = useStatsStore(state => state.allTimeStats.totalCorrect);
-  const totalIncorrect = useStatsStore(state => state.allTimeStats.totalIncorrect);
-  const characterMastery = useStatsStore(state => state.allTimeStats.characterMastery);
+  const totalIncorrect = useStatsStore(
+    state => state.allTimeStats.totalIncorrect,
+  );
+  const characterMastery = useStatsStore(
+    state => state.allTimeStats.characterMastery,
+  );
 
   return useMemo<StatsDisplay>(
     () => ({
@@ -81,7 +89,7 @@ export function useStatsDisplay(): StatsDisplay {
       totalSessions,
       totalCorrect,
       totalIncorrect,
-      characterMastery
+      characterMastery,
     }),
     [
       correctAnswers,
@@ -105,8 +113,8 @@ export function useStatsDisplay(): StatsDisplay {
       totalSessions,
       totalCorrect,
       totalIncorrect,
-      characterMastery
-    ]
+      characterMastery,
+    ],
   );
 }
 
@@ -128,9 +136,9 @@ export function useSessionStats(): SessionStats {
     () => ({
       sessionCorrect,
       sessionWrong,
-      sessionStreak
+      sessionStreak,
     }),
-    [sessionCorrect, sessionWrong, sessionStreak]
+    [sessionCorrect, sessionWrong, sessionStreak],
   );
 }
 
@@ -145,45 +153,62 @@ export interface TimedStats {
 /**
  * Read-only timed mode stats (Blitz/Gauntlet)
  */
-export function useTimedStats(contentType: 'kana' | 'kanji' | 'vocabulary'): TimedStats {
+export function useTimedStats(
+  contentType: 'kana' | 'kanji' | 'vocabulary',
+): TimedStats {
   // Select based on content type
   const correct = useStatsStore(state => {
     switch (contentType) {
-      case 'kana': return state.timedCorrectAnswers;
-      case 'kanji': return state.timedKanjiCorrectAnswers;
-      case 'vocabulary': return state.timedVocabCorrectAnswers;
+      case 'kana':
+        return state.timedCorrectAnswers;
+      case 'kanji':
+        return state.timedKanjiCorrectAnswers;
+      case 'vocabulary':
+        return state.timedVocabCorrectAnswers;
     }
   });
 
   const wrong = useStatsStore(state => {
     switch (contentType) {
-      case 'kana': return state.timedWrongAnswers;
-      case 'kanji': return state.timedKanjiWrongAnswers;
-      case 'vocabulary': return state.timedVocabWrongAnswers;
+      case 'kana':
+        return state.timedWrongAnswers;
+      case 'kanji':
+        return state.timedKanjiWrongAnswers;
+      case 'vocabulary':
+        return state.timedVocabWrongAnswers;
     }
   });
 
   const streak = useStatsStore(state => {
     switch (contentType) {
-      case 'kana': return state.timedStreak;
-      case 'kanji': return state.timedKanjiStreak;
-      case 'vocabulary': return state.timedVocabStreak;
+      case 'kana':
+        return state.timedStreak;
+      case 'kanji':
+        return state.timedKanjiStreak;
+      case 'vocabulary':
+        return state.timedVocabStreak;
     }
   });
 
   const bestStreak = useStatsStore(state => {
     switch (contentType) {
-      case 'kana': return state.timedBestStreak;
-      case 'kanji': return state.timedKanjiBestStreak;
-      case 'vocabulary': return state.timedVocabBestStreak;
+      case 'kana':
+        return state.timedBestStreak;
+      case 'kanji':
+        return state.timedKanjiBestStreak;
+      case 'vocabulary':
+        return state.timedVocabBestStreak;
     }
   });
 
   const reset = useStatsStore(state => {
     switch (contentType) {
-      case 'kana': return state.resetTimedStats;
-      case 'kanji': return state.resetTimedKanjiStats;
-      case 'vocabulary': return state.resetTimedVocabStats;
+      case 'kana':
+        return state.resetTimedStats;
+      case 'kanji':
+        return state.resetTimedKanjiStats;
+      case 'vocabulary':
+        return state.resetTimedVocabStats;
     }
   });
 
@@ -193,8 +218,8 @@ export function useTimedStats(contentType: 'kana' | 'kanji' | 'vocabulary'): Tim
       wrong,
       streak,
       bestStreak,
-      reset
+      reset,
     }),
-    [correct, wrong, streak, bestStreak, reset]
+    [correct, wrong, streak, bestStreak, reset],
   );
 }

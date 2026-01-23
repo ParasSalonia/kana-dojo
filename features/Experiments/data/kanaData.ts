@@ -92,14 +92,14 @@ export const allKana = [
   { kana: 'ロ', romanji: 'ro' },
   { kana: 'ワ', romanji: 'wa' },
   { kana: 'ヲ', romanji: 'wo' },
-  { kana: 'ン', romanji: 'n' }
+  { kana: 'ン', romanji: 'n' },
 ];
 
 export const hiraganaOnly = allKana.filter(
-  k => k.kana.charCodeAt(0) >= 0x3040 && k.kana.charCodeAt(0) <= 0x309f
+  k => k.kana.charCodeAt(0) >= 0x3040 && k.kana.charCodeAt(0) <= 0x309f,
 );
 export const katakanaOnly = allKana.filter(
-  k => k.kana.charCodeAt(0) >= 0x30a0 && k.kana.charCodeAt(0) <= 0x30ff
+  k => k.kana.charCodeAt(0) >= 0x30a0 && k.kana.charCodeAt(0) <= 0x30ff,
 );
 
 export const getRandomKana = () =>

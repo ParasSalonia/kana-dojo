@@ -6,7 +6,7 @@ import { VALID_CATEGORIES, VALID_LOCALES } from '../types/blog';
 
 // Arbitraries for generating valid BlogPostMeta objects
 const categoryArb: fc.Arbitrary<Category> = fc.constantFrom(
-  ...VALID_CATEGORIES
+  ...VALID_CATEGORIES,
 );
 const localeArb: fc.Arbitrary<Locale> = fc.constantFrom(...VALID_LOCALES);
 
@@ -15,18 +15,18 @@ const dateArb = fc
   .record({
     year: fc.integer({ min: 2020, max: 2030 }),
     month: fc.integer({ min: 1, max: 12 }),
-    day: fc.integer({ min: 1, max: 28 })
+    day: fc.integer({ min: 1, max: 28 }),
   })
   .map(
     ({ year, month, day }) =>
-      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
   );
 
 // Generate valid slugs
 const slugArb = fc
   .array(
     fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz0123456789-'.split('')),
-    { minLength: 1, maxLength: 50 }
+    { minLength: 1, maxLength: 50 },
   )
   .map(chars => chars.join(''))
   .filter(
@@ -34,7 +34,7 @@ const slugArb = fc
       s.length > 0 &&
       !s.startsWith('-') &&
       !s.endsWith('-') &&
-      !s.includes('--')
+      !s.includes('--'),
   );
 
 // Safe characters for strings
@@ -44,7 +44,7 @@ const safeChars =
 const safeStringArb = fc
   .array(fc.constantFrom(...safeChars.split('')), {
     minLength: 1,
-    maxLength: 50
+    maxLength: 50,
   })
   .map(chars => chars.join('').trim())
   .filter(s => s.length > 0);
@@ -56,11 +56,11 @@ const tagsArb = fc.array(
   fc
     .array(fc.constantFrom(...tagChars.split('')), {
       minLength: 1,
-      maxLength: 20
+      maxLength: 20,
     })
     .map(chars => chars.join(''))
     .filter(s => s.length > 0 && !s.startsWith('-') && !s.endsWith('-')),
-  { minLength: 1, maxLength: 5 }
+  { minLength: 1, maxLength: 5 },
 );
 
 // BlogPostMeta arbitrary for testing sorting
@@ -77,7 +77,7 @@ const blogPostMetaArb: fc.Arbitrary<BlogPostMeta> = fc.record({
   readingTime: fc.integer({ min: 1, max: 60 }),
   difficulty: fc.constant(undefined),
   relatedPosts: fc.constant(undefined),
-  locale: localeArb
+  locale: localeArb,
 });
 
 /**
@@ -100,9 +100,9 @@ describe('Property 4: Posts Sorted by Date Descending', () => {
             const nextDate = new Date(sorted[i + 1].publishedAt).getTime();
             expect(currentDate).toBeGreaterThanOrEqual(nextDate);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -119,13 +119,13 @@ describe('Property 4: Posts Sorted by Date Descending', () => {
           // All original posts are present in sorted array
           for (const post of posts) {
             const found = sorted.some(
-              s => s.slug === post.slug && s.publishedAt === post.publishedAt
+              s => s.slug === post.slug && s.publishedAt === post.publishedAt,
             );
             expect(found).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -139,7 +139,7 @@ describe('Property 4: Posts Sorted by Date Descending', () => {
           const postsWithSameDate = posts.map((p, i) => ({
             ...p,
             publishedAt: sameDate,
-            slug: `post-${i}` // Ensure unique slugs
+            slug: `post-${i}`, // Ensure unique slugs
           }));
 
           const sorted = sortPostsByDate(postsWithSameDate);
@@ -151,9 +151,9 @@ describe('Property 4: Posts Sorted by Date Descending', () => {
           for (const post of sorted) {
             expect(post.publishedAt).toBe(sameDate);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -169,7 +169,7 @@ describe('Property 4: Posts Sorted by Date Descending', () => {
         expect(sorted.length).toBe(1);
         expect(sorted[0]).toEqual(post);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

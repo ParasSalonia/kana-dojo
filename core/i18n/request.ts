@@ -19,9 +19,10 @@ const NAMESPACES = [
   'blog',
   'translator',
   'metadata',
+  'practiceLanding',
   'welcome',
   'experiments',
-  'legal'
+  'legal',
 ] as const;
 
 // Cache for loaded messages to avoid re-importing in dev
@@ -31,7 +32,7 @@ export default getRequestConfig(async ({ locale }) => {
   // Ensure locale is always defined and valid
   const validLocale =
     locale &&
-      routing.locales.includes(locale as (typeof routing.locales)[number])
+    routing.locales.includes(locale as (typeof routing.locales)[number])
       ? locale
       : routing.defaultLocale;
 
@@ -40,7 +41,7 @@ export default getRequestConfig(async ({ locale }) => {
   if (messageCache.has(cacheKey)) {
     return {
       locale: validLocale,
-      messages: messageCache.get(cacheKey)!
+      messages: messageCache.get(cacheKey)!,
     };
   }
 
@@ -54,7 +55,7 @@ export default getRequestConfig(async ({ locale }) => {
     } catch (error) {
       console.error(
         `Failed to load namespace "${namespace}" for locale "${validLocale}":`,
-        error
+        error,
       );
       return [namespace, {}] as const;
     }
@@ -68,6 +69,6 @@ export default getRequestConfig(async ({ locale }) => {
 
   return {
     locale: validLocale,
-    messages
+    messages,
   };
 });

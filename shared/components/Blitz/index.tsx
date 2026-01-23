@@ -48,7 +48,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
     generateOptions,
     renderOption,
     getCorrectOption,
-    stats
+    stats,
   } = config;
 
   // Game mode state - use initialGameMode if provided (from store), otherwise use localStorage
@@ -95,7 +95,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
   const [userAnswer, setUserAnswer] = useState('');
   const [isFinished, setIsFinished] = useState(false);
   const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(
-    null
+    null,
   );
   const [showGoalTimers, setShowGoalTimers] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -106,7 +106,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
   // Pick mode state
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
-    []
+    [],
   );
 
   // Elapsed time for goal timers
@@ -119,7 +119,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
     context: goalTimerContext,
     onGoalReached: goal => {
       console.log(`🎯 Goal reached: ${goal.label} at ${elapsedTime}s`);
-    }
+    },
   });
 
   // Refs for stable callbacks
@@ -173,7 +173,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
     goalTimers,
     resetTimer,
     startTimer,
-    stats
+    stats,
   ]);
 
   // Blitz mode always uses normal mode (never reverse)
@@ -186,7 +186,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
         currentQuestion,
         items,
         3,
-        isReverseActive
+        isReverseActive,
       );
       setShuffledOptions(shuffle(options));
       setWrongSelectedAnswers([]);
@@ -203,7 +203,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
       statsTracking.recordBlitzSession({
         score: stats.correct,
         streak: stats.bestStreak,
-        correctAnswers: stats.correct
+        correctAnswers: stats.correct,
       });
     }
   }, [timeLeft, isFinished, stats.correct, stats.bestStreak]);
@@ -239,7 +239,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
         inputRef.current.focus();
         inputRef.current.scrollIntoView({
           behavior: 'smooth',
-          block: 'center'
+          block: 'center',
         });
       }
     }, 100);
@@ -267,7 +267,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
     const isCorrect = checkAnswer(
       currentQuestion,
       userAnswer.trim(),
-      isReverseActive
+      isReverseActive,
     );
 
     if (isCorrect) {
@@ -337,7 +337,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
           goals: goalTimers.goals,
           addGoal: goalTimers.addGoal,
           removeGoal: goalTimers.removeGoal,
-          clearGoals: goalTimers.clearGoals
+          clearGoals: goalTimers.clearGoals,
         }}
         onStart={handleStart}
       />
@@ -352,7 +352,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
         stats={{
           correct: stats.correct,
           wrong: stats.wrong,
-          bestStreak: stats.bestStreak
+          bestStreak: stats.bestStreak,
         }}
         showGoalTimers={showGoalTimers}
         goals={goalTimers.goals}
@@ -385,7 +385,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
       stats={{
         correct: stats.correct,
         wrong: stats.wrong,
-        streak: stats.streak
+        streak: stats.streak,
       }}
       showGoalTimers={showGoalTimers}
       elapsedTime={elapsedTime}
@@ -395,7 +395,7 @@ export default function Blitz<T>({ config }: BlitzProps<T>) {
         removeGoal: goalTimers.removeGoal,
         clearGoals: goalTimers.clearGoals,
         nextGoal: goalTimers.nextGoal,
-        progressToNextGoal: goalTimers.progressToNextGoal
+        progressToNextGoal: goalTimers.progressToNextGoal,
       }}
       onCancel={handleCancel}
     />

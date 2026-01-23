@@ -76,7 +76,7 @@ const DEFAULT_TEMPLATES: GoalTemplate[] = [
     targetSeconds: 60,
     category: 'workout',
     icon: '🔥',
-    color: '#f59e0b'
+    color: '#f59e0b',
   },
   {
     id: 'sprint-5m',
@@ -84,7 +84,7 @@ const DEFAULT_TEMPLATES: GoalTemplate[] = [
     targetSeconds: 300,
     category: 'workout',
     icon: '⚡',
-    color: '#3b82f6'
+    color: '#3b82f6',
   },
   {
     id: 'focus-10m',
@@ -92,7 +92,7 @@ const DEFAULT_TEMPLATES: GoalTemplate[] = [
     targetSeconds: 600,
     category: 'productivity',
     icon: '🎯',
-    color: '#8b5cf6'
+    color: '#8b5cf6',
   },
   {
     id: 'pomodoro-25m',
@@ -100,7 +100,7 @@ const DEFAULT_TEMPLATES: GoalTemplate[] = [
     targetSeconds: 1500,
     category: 'pomodoro',
     icon: '🍅',
-    color: '#ef4444'
+    color: '#ef4444',
   },
   {
     id: 'break-5m',
@@ -108,7 +108,7 @@ const DEFAULT_TEMPLATES: GoalTemplate[] = [
     targetSeconds: 300,
     category: 'pomodoro',
     icon: '☕',
-    color: '#10b981'
+    color: '#10b981',
   },
   {
     id: 'study-30m',
@@ -116,8 +116,8 @@ const DEFAULT_TEMPLATES: GoalTemplate[] = [
     targetSeconds: 1800,
     category: 'study',
     icon: '📚',
-    color: '#6366f1'
-  }
+    color: '#6366f1',
+  },
 ];
 
 /**
@@ -127,7 +127,7 @@ const DEFAULT_SETTINGS: GoalTimersSettings = {
   defaultShowAnimation: true,
   defaultPlaySound: true,
   soundVolume: 50,
-  defaultTemplates: ['warmup-1m', 'sprint-5m', 'focus-10m']
+  defaultTemplates: ['warmup-1m', 'sprint-5m', 'focus-10m'],
 };
 
 /**
@@ -147,11 +147,11 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
         const newTemplate: GoalTemplate = {
           ...template,
           id,
-          category: template.category || 'custom'
+          category: template.category || 'custom',
         };
 
         set(state => ({
-          templates: [...state.templates, newTemplate]
+          templates: [...state.templates, newTemplate],
         }));
 
         return id;
@@ -159,15 +159,15 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
 
       removeTemplate: id => {
         set(state => ({
-          templates: state.templates.filter(t => t.id !== id)
+          templates: state.templates.filter(t => t.id !== id),
         }));
       },
 
       updateTemplate: (id, updates) => {
         set(state => ({
           templates: state.templates.map(t =>
-            t.id === id ? { ...t, ...updates } : t
-          )
+            t.id === id ? { ...t, ...updates } : t,
+          ),
         }));
       },
 
@@ -179,11 +179,11 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
       addToHistory: achievement => {
         const newAchievement: GoalAchievement = {
           ...achievement,
-          achievedAt: new Date()
+          achievedAt: new Date(),
         };
 
         set(state => ({
-          history: [newAchievement, ...state.history]
+          history: [newAchievement, ...state.history],
         }));
       },
 
@@ -198,7 +198,7 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
       // Settings Actions
       updateSettings: newSettings => {
         set(state => ({
-          settings: { ...state.settings, ...newSettings }
+          settings: { ...state.settings, ...newSettings },
         }));
       },
 
@@ -221,12 +221,12 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
 
         // Find most used goal ID
         const mostUsedId = Object.entries(counts).reduce((a, b) =>
-          b[1] > a[1] ? b : a
+          b[1] > a[1] ? b : a,
         )[0];
 
         // Return the template
         return templates.find(t => t.id === mostUsedId);
-      }
+      },
     }),
     {
       name: 'kanadojo-goal-timers', // localStorage key
@@ -235,7 +235,7 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
       partialize: state => ({
         templates: state.templates,
         history: state.history,
-        settings: state.settings
+        settings: state.settings,
       }),
       merge: (persistedState, currentState) => {
         const persisted = persistedState as
@@ -252,12 +252,12 @@ export const useGoalTimersStore = create<GoalTimersStore>()(
             // Ensure array has default if missing from persisted state
             defaultTemplates:
               persisted?.settings?.defaultTemplates ??
-              DEFAULT_SETTINGS.defaultTemplates
-          }
+              DEFAULT_SETTINGS.defaultTemplates,
+          },
         };
-      }
-    }
-  )
+      },
+    },
+  ),
 );
 
 export default useGoalTimersStore;

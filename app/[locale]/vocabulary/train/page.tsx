@@ -11,8 +11,16 @@ export function generateStaticParams() {
 
 export const revalidate = 3600;
 
-export async function generateMetadata(): Promise<Metadata> {
-  return await generatePageMetadata('vocabularyTrain');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return await generatePageMetadata('vocabularyTrain', {
+    locale,
+    pathname: '/vocabulary/train',
+  });
 }
 
 export default function Train() {
@@ -22,7 +30,7 @@ export default function Train() {
         items={[
           { name: 'Home', url: 'https://kanadojo.com' },
           { name: 'Vocabulary', url: 'https://kanadojo.com/vocabulary' },
-          { name: 'Training', url: 'https://kanadojo.com/vocabulary/train' }
+          { name: 'Training', url: 'https://kanadojo.com/vocabulary/train' },
         ]}
       />
       <CourseSchema

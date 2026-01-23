@@ -19,7 +19,7 @@ describe('Property 2: Reading Time Calculation Accuracy', () => {
 
         expect(actualTime).toBe(expectedTime);
       }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -30,9 +30,9 @@ describe('Property 2: Reading Time Calculation Accuracy', () => {
         (emptyContent: string) => {
           const actualTime = calculateReadingTime(emptyContent);
           expect(actualTime).toBe(1);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -43,8 +43,8 @@ describe('Property 2: Reading Time Calculation Accuracy', () => {
           fc.string({ minLength: 1 }).filter(s => !/\s/.test(s)),
           {
             minLength: 1,
-            maxLength: 1000
-          }
+            maxLength: 1000,
+          },
         ),
         (words: string[]) => {
           const content = words.join(' ');
@@ -57,9 +57,9 @@ describe('Property 2: Reading Time Calculation Accuracy', () => {
           const wordCount = words.length;
           const expectedTime = Math.max(Math.ceil(wordCount / 200), 1);
           expect(actualTime).toBe(expectedTime);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

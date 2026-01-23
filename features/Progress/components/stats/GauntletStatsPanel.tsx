@@ -9,7 +9,7 @@ import {
   Zap,
   CheckCircle,
   Activity,
-  Trophy
+  Trophy,
 } from 'lucide-react';
 import type { GauntletOverallStats } from '../../types/stats';
 
@@ -49,7 +49,7 @@ function StatItem({
   label,
   value,
   subValue,
-  index
+  index,
 }: {
   icon: typeof Trophy;
   label: string;
@@ -67,7 +67,7 @@ function StatItem({
         'bg-[var(--background-color)]',
         'border border-transparent',
         'transition-colors duration-300',
-        'hover:border-[var(--main-color)]/20'
+        'hover:border-[var(--main-color)]/20',
       )}
     >
       <div className='flex items-center gap-4'>
@@ -77,7 +77,7 @@ function StatItem({
             'bg-gradient-to-br from-[var(--main-color)]/10 to-[var(--secondary-color)]/5',
             'text-[var(--main-color)]',
             'transition-colors duration-300',
-            'group-hover/item:from-[var(--main-color)]/15 group-hover/item:to-[var(--secondary-color)]/10'
+            'group-hover/item:from-[var(--main-color)]/15 group-hover/item:to-[var(--secondary-color)]/10',
           )}
         >
           <Icon className='h-5 w-5' />
@@ -152,7 +152,7 @@ function EmptyState() {
 export default function GauntletStatsPanel({
   stats,
   isLoading,
-  className
+  className,
 }: GauntletStatsPanelProps) {
   const hasData = stats && stats.totalSessions > 0;
 
@@ -163,21 +163,21 @@ export default function GauntletStatsPanel({
           icon: CheckCircle,
           label: 'Completion',
           value: `${stats.completionRate.toFixed(0)}%`,
-          subValue: `${stats.completedSessions}/${stats.totalSessions}`
+          subValue: `${stats.completedSessions}/${stats.totalSessions}`,
         },
         {
           icon: Clock,
           label: 'Best Time',
-          value: formatTime(stats.fastestTime)
+          value: formatTime(stats.fastestTime),
         },
         {
           icon: Target,
           label: 'Accuracy',
           value: `${stats.accuracy.toFixed(0)}%`,
-          subValue: `${stats.totalCorrect}/${stats.totalCorrect + stats.totalWrong}`
+          subValue: `${stats.totalCorrect}/${stats.totalCorrect + stats.totalWrong}`,
         },
         { icon: Zap, label: 'Best Streak', value: stats.bestStreak },
-        { icon: Trophy, label: 'Correct', value: stats.totalCorrect }
+        { icon: Trophy, label: 'Correct', value: stats.totalCorrect },
       ]
     : [];
 
@@ -190,7 +190,7 @@ export default function GauntletStatsPanel({
         'group relative overflow-hidden rounded-3xl',
         'border border-[var(--border-color)]/50 bg-[var(--card-color)]',
         'p-6',
-        className
+        className,
       )}
     >
       {/* Decorative element */}
@@ -261,6 +261,6 @@ export function getGauntletDisplayValues(stats: GauntletOverallStats): {
     totalWrong: stats.totalWrong,
     bestStreak: stats.bestStreak,
     fastestTime: formatTime(stats.fastestTime),
-    accuracy: `${stats.accuracy.toFixed(1)}%`
+    accuracy: `${stats.accuracy.toFixed(1)}%`,
   };
 }

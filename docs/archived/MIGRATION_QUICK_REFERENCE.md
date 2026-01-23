@@ -6,14 +6,14 @@
 
 ## 5-Phase Timeline
 
-| Phase | Duration | Goal | Key Deliverables |
-|-------|----------|------|-----------------|
-| **0: Preparation** | 2 hours | Backup & baseline | Git checkpoint, test results, screenshots |
-| **1: Facades** | 1.5 days | Abstract store access | Event system, 5 facades (Progress, Kana, Kanji, Vocab, Preferences) |
-| **2: Widgets** | 1.5 days | Unified components | TrainingGame, MenuWidget, GameUIWidget |
-| **3: Shared Migration** | 1 day | Remove violations | Update 15+ shared components to use facades |
-| **4: Enforcement** | 1 day | Public APIs + rules | 16 barrel exports, ESLint import rules |
-| **5: Testing** | 1.5 days | Validation | Automated tests, manual tests, performance |
+| Phase                   | Duration | Goal                  | Key Deliverables                                                    |
+| ----------------------- | -------- | --------------------- | ------------------------------------------------------------------- |
+| **0: Preparation**      | 2 hours  | Backup & baseline     | Git checkpoint, test results, screenshots                           |
+| **1: Facades**          | 1.5 days | Abstract store access | Event system, 5 facades (Progress, Kana, Kanji, Vocab, Preferences) |
+| **2: Widgets**          | 1.5 days | Unified components    | TrainingGame, MenuWidget, GameUIWidget                              |
+| **3: Shared Migration** | 1 day    | Remove violations     | Update 15+ shared components to use facades                         |
+| **4: Enforcement**      | 1 day    | Public APIs + rules   | 16 barrel exports, ESLint import rules                              |
+| **5: Testing**          | 1.5 days | Validation            | Automated tests, manual tests, performance                          |
 
 **Total:** 5-7 days (40-56 hours)
 
@@ -22,6 +22,7 @@
 ## Key Architecture Changes
 
 ### New Directory Structure
+
 ```
 kanadojo/
 ├── widgets/          ✨ NEW - Complex UI compositions
@@ -46,24 +47,28 @@ kanadojo/
 ### Import Pattern Changes
 
 **Before (Violation):**
+
 ```typescript
 // shared/components/Game/Stats.tsx
 import useStatsStore from '@/features/Progress/store/useStatsStore';
 ```
 
 **After (Facade):**
+
 ```typescript
 // shared/components/Game/Stats.tsx
 import { useStatsDisplay } from '@/features/Progress';
 ```
 
 **Before (Direct Store):**
+
 ```typescript
 // shared/components/Menu/GameModes.tsx
 import useKanaStore from '@/features/Kana/store/useKanaStore';
 ```
 
 **After (Facade):**
+
 ```typescript
 // shared/components/Menu/GameModes.tsx
 import { useKanaSelection } from '@/features/Kana';
@@ -76,6 +81,7 @@ import { useKanaSelection } from '@/features/Kana';
 ### Phase 1: Create Facades
 
 **Create these files:**
+
 ```
 shared/events/
   ├── statsEvents.ts         (150 lines) - Event bus + statsApi
@@ -100,6 +106,7 @@ features/Preferences/facade/
 ### Phase 2: Create Widgets
 
 **Create these files:**
+
 ```
 widgets/TrainingGame/
   ├── adapters/
@@ -121,6 +128,7 @@ widgets/GameUI/
 ### Phase 3: Update Shared Components
 
 **Update these files:**
+
 ```
 shared/hooks/
   ├── useStats.tsx           - Replace store with facade
@@ -145,6 +153,7 @@ shared/components/Menu/
 ### Phase 4: Add Barrel Exports
 
 **Create these files:**
+
 ```
 features/Kana/index.ts
 features/Kanji/index.ts
@@ -157,6 +166,7 @@ features/MainMenu/index.ts
 ```
 
 **Update this file:**
+
 ```
 eslint.config.js - Add import/no-restricted-paths rules
 ```
@@ -168,6 +178,7 @@ eslint.config.js - Add import/no-restricted-paths rules
 ### 1. Event-Based Stats Tracking
 
 **Game components emit events:**
+
 ```typescript
 import { statsApi } from '@/shared/events';
 
@@ -179,10 +190,11 @@ statsApi.recordIncorrect('kana', 'あ', userAnswer, correctAnswer);
 ```
 
 **Progress facade subscribes to events:**
+
 ```typescript
 // features/Progress/facade/useGameStats.ts
 useEffect(() => {
-  const unsubscribe = statsEvents.subscribe('correct', (event) => {
+  const unsubscribe = statsEvents.subscribe('correct', event => {
     store.incrementCorrectAnswers();
     store.updateCharacterHistory(event.character, true, event.contentType);
   });
@@ -193,6 +205,7 @@ useEffect(() => {
 ### 2. Facade Pattern
 
 **Facade exposes limited, typed interface:**
+
 ```typescript
 // features/Kana/facade/useKanaSelection.ts
 export function useKanaSelection() {
@@ -204,12 +217,13 @@ export function useKanaSelection() {
     totalSelected: store.kanaGroupIndices.length,
     addGroup: store.addKanaGroupIndices,
     removeGroup: store.removeKanaGroupIndex,
-    clearSelection: store.clearKanaGroupIndices
+    clearSelection: store.clearKanaGroupIndices,
   };
 }
 ```
 
 **Consumers use facade, not store:**
+
 ```typescript
 // widgets/MenuSystem/MenuWidget.tsx
 import { useKanaSelection } from '@/features/Kana';
@@ -221,6 +235,7 @@ selection.addGroup(5); // Type-safe, limited API
 ### 3. ContentAdapter Pattern
 
 **Unified interface for different content types:**
+
 ```typescript
 // widgets/TrainingGame/adapters/ContentAdapter.ts
 export interface ContentAdapter<T> {
@@ -232,6 +247,7 @@ export interface ContentAdapter<T> {
 ```
 
 **Kana-specific implementation:**
+
 ```typescript
 // widgets/TrainingGame/adapters/KanaAdapter.ts
 export const kanaAdapter: ContentAdapter<IKana> = {
@@ -246,6 +262,7 @@ export const kanaAdapter: ContentAdapter<IKana> = {
 ```
 
 **Usage in game:**
+
 ```typescript
 // features/Kana/components/Game/index.tsx
 import { TrainingGame, kanaAdapter } from '@/widgets/TrainingGame';
@@ -263,6 +280,7 @@ import { TrainingGame, kanaAdapter } from '@/widgets/TrainingGame';
 ### 4. Barrel Exports
 
 **Feature public API:**
+
 ```typescript
 // features/Kana/index.ts
 // ============================================================================
@@ -283,6 +301,7 @@ export type { IKana, KanaType } from './data/kana';
 ```
 
 **Consumer imports:**
+
 ```typescript
 // app/[locale]/kana/page.tsx
 import { KanaGame, useKanaSelection } from '@/features/Kana';
@@ -291,6 +310,7 @@ import { KanaGame, useKanaSelection } from '@/features/Kana';
 ### 5. ESLint Enforcement
 
 **Prevent violations:**
+
 ```javascript
 // eslint.config.js
 'import/no-restricted-paths': ['error', {
@@ -335,12 +355,14 @@ npm run dev
 ### Final Validation
 
 **Automated:**
+
 - [ ] All TypeScript checks pass
 - [ ] All ESLint rules pass
 - [ ] All unit tests pass
 - [ ] No console errors in dev mode
 
 **Manual:**
+
 - [ ] Kana: Pick, Reverse-Pick, Input, Reverse-Input
 - [ ] Kanji: Pick, Reverse-Pick, Input, Reverse-Input
 - [ ] Vocabulary: Pick, Reverse-Pick, Input, Reverse-Input
@@ -352,6 +374,7 @@ npm run dev
 - [ ] Gauntlet mode
 
 **Performance:**
+
 - [ ] Build succeeds
 - [ ] Bundle size acceptable (< 5% increase)
 - [ ] Lighthouse score > 90
@@ -360,19 +383,20 @@ npm run dev
 
 ## Success Metrics
 
-| Metric | Before | Target | Status |
-|--------|--------|--------|--------|
-| Layer violations | 27 | 0 | ⬜ |
-| Code duplication | 540 lines | < 100 | ⬜ |
-| Progress imports | 25+ | < 10 | ⬜ |
-| Barrel exports | 2/16 | 16/16 | ⬜ |
-| ESLint violations | ? | 0 | ⬜ |
+| Metric            | Before    | Target | Status |
+| ----------------- | --------- | ------ | ------ |
+| Layer violations  | 27        | 0      | ⬜     |
+| Code duplication  | 540 lines | < 100  | ⬜     |
+| Progress imports  | 25+       | < 10   | ⬜     |
+| Barrel exports    | 2/16      | 16/16  | ⬜     |
+| ESLint violations | ?         | 0      | ⬜     |
 
 ---
 
 ## Rollback Plan
 
 **If critical issues:**
+
 ```bash
 # Emergency rollback
 git reset --hard [pre-migration-commit]
@@ -389,6 +413,7 @@ git revert [phase-2-commits]
 ### Issue: Type errors after facade migration
 
 **Solution:**
+
 ```typescript
 // Ensure facade exports all needed types
 export type { KanaSelection, KanaSelectionActions } from './useKanaSelection';
@@ -397,6 +422,7 @@ export type { KanaSelection, KanaSelectionActions } from './useKanaSelection';
 ### Issue: ESLint rule too strict
 
 **Solution:**
+
 ```javascript
 // Adjust zone rules in eslint.config.js
 {
@@ -409,6 +435,7 @@ export type { KanaSelection, KanaSelectionActions } from './useKanaSelection';
 ### Issue: Performance regression
 
 **Solution:**
+
 - Profile with React DevTools
 - Check for unnecessary re-renders in facades
 - Add `useShallow` or `useMemo` where needed
@@ -416,6 +443,7 @@ export type { KanaSelection, KanaSelectionActions } from './useKanaSelection';
 ### Issue: Achievement system breaks
 
 **Solution:**
+
 - Verify event subscription in useGameStats.ts
 - Check achievementEvents.subscribe() is called
 - Add console.log to debug event flow
@@ -425,6 +453,7 @@ export type { KanaSelection, KanaSelectionActions } from './useKanaSelection';
 ## Phase-by-Phase Commands
 
 ### Phase 0: Preparation
+
 ```bash
 git checkout -b refactor/hybrid-modular-architecture
 npm run test  # Capture baseline
@@ -432,6 +461,7 @@ git commit -m "chore: pre-migration checkpoint"
 ```
 
 ### Phase 1: Facades
+
 ```bash
 # After creating each facade
 npm run check
@@ -440,6 +470,7 @@ git commit -m "feat(facades): add [feature] facade"
 ```
 
 ### Phase 2: Widgets
+
 ```bash
 # After creating each widget
 npm run check
@@ -448,6 +479,7 @@ git commit -m "feat(widgets): add [widget-name]"
 ```
 
 ### Phase 3: Migration
+
 ```bash
 # After updating each component category
 npm run check
@@ -457,6 +489,7 @@ git commit -m "refactor(shared): migrate [category] to facades"
 ```
 
 ### Phase 4: Enforcement
+
 ```bash
 # After adding barrel exports
 npm run lint  # Should show 0 violations
@@ -465,6 +498,7 @@ git commit -m "feat: add barrel exports and ESLint enforcement"
 ```
 
 ### Phase 5: Testing
+
 ```bash
 npm run test
 npm run build

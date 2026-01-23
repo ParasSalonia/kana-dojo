@@ -40,14 +40,17 @@ export function useGameStats(): GameStatsActions {
 
   // Subscribe to stat events and update store
   useEffect(() => {
-    const unsubCorrect = statsEvents.subscribe('correct', (event: StatEvent) => {
-      store.incrementCorrectAnswers();
-      // Update character history based on content type
-      if (event.character) {
-        store.addCharacterToHistory(event.character);
-        store.incrementCharacterScore(event.character, 'correct');
-      }
-    });
+    const unsubCorrect = statsEvents.subscribe(
+      'correct',
+      (event: StatEvent) => {
+        store.incrementCorrectAnswers();
+        // Update character history based on content type
+        if (event.character) {
+          store.addCharacterToHistory(event.character);
+          store.incrementCharacterScore(event.character, 'correct');
+        }
+      },
+    );
 
     const unsubIncorrect = statsEvents.subscribe(
       'incorrect',
@@ -58,7 +61,7 @@ export function useGameStats(): GameStatsActions {
           store.addCharacterToHistory(event.character);
           store.incrementCharacterScore(event.character, 'wrong');
         }
-      }
+      },
     );
 
     const unsubSession = statsEvents.subscribe('session_complete', () => {
@@ -81,8 +84,8 @@ export function useGameStats(): GameStatsActions {
       wrongAnswers: store.numWrongAnswers,
       currentStreak: store.currentStreak,
       bestStreak: store.allTimeStats.bestStreak,
-      totalSessions: store.allTimeStats.totalSessions
+      totalSessions: store.allTimeStats.totalSessions,
     }),
-    resetSessionStats: store.resetStats
+    resetSessionStats: store.resetStats,
   };
 }

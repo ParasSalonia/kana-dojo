@@ -7,7 +7,7 @@ export { useVocabSelection } from './facade';
 export type {
   VocabSelection,
   VocabSelectionActions,
-  IVocabObj
+  IVocabObj,
 } from './facade';
 
 // Components (page-level)

@@ -7,7 +7,7 @@ type StatsStoreState = ReturnType<typeof useStatsStore.getState>;
 export const progressBackup = {
   getStatsState: (): StatsStoreState => useStatsStore.getState(),
   setStatsState: (partial: Partial<StatsStoreState>) =>
-    useStatsStore.setState(partial)
+    useStatsStore.setState(partial),
 };
 
 export type { StatsStoreState };

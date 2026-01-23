@@ -37,6 +37,6 @@ export function useKanaContent(): KanaContent {
     allGroups: kana,
     totalCharacters: selectedCharacters.length,
     getGroupByIndex: (index: number) => kana[index],
-    getAllCharacters: () => allCharacters
+    getAllCharacters: () => allCharacters,
   };
 }

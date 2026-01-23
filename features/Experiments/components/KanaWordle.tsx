@@ -9,14 +9,14 @@ import { allKana } from '../data/kanaData';
  */
 const KanaWordle = () => {
   const [target, setTarget] = useState(
-    () => allKana[Math.floor(Math.random() * allKana.length)]
+    () => allKana[Math.floor(Math.random() * allKana.length)],
   );
   const [guesses, setGuesses] = useState<
     Array<{ kana: string; result: 'correct' | 'wrong' }>
   >([]);
   const [options, setOptions] = useState<typeof allKana>([]);
   const [gameState, setGameState] = useState<'playing' | 'won' | 'lost'>(
-    'playing'
+    'playing',
   );
 
   useEffect(() => {
@@ -43,8 +43,8 @@ const KanaWordle = () => {
       ...guesses,
       {
         kana: kana.kana,
-        result: isCorrect ? ('correct' as const) : ('wrong' as const)
-      }
+        result: isCorrect ? ('correct' as const) : ('wrong' as const),
+      },
     ];
     setGuesses(newGuesses);
 
@@ -88,7 +88,7 @@ const KanaWordle = () => {
                   ? 'border-[var(--border-color)] bg-[var(--card-color)]'
                   : guess.result === 'correct'
                     ? 'scale-110 border-green-500 bg-green-500/20 text-green-400'
-                    : 'border-red-500 bg-red-500/20 text-red-400'
+                    : 'border-red-500 bg-red-500/20 text-red-400',
               )}
             >
               {guess?.kana || '?'}
@@ -115,7 +115,7 @@ const KanaWordle = () => {
                     ? 'border-red-500 bg-red-500/20 opacity-50'
                     : gameState !== 'playing'
                       ? 'border-[var(--border-color)] opacity-50'
-                      : 'border-[var(--border-color)] bg-[var(--card-color)] hover:scale-105 hover:border-[var(--accent-color)]'
+                      : 'border-[var(--border-color)] bg-[var(--card-color)] hover:scale-105 hover:border-[var(--accent-color)]',
               )}
             >
               {opt.kana}
@@ -130,7 +130,7 @@ const KanaWordle = () => {
           <p
             className={clsx(
               'text-xl',
-              gameState === 'won' ? 'text-green-400' : 'text-red-400'
+              gameState === 'won' ? 'text-green-400' : 'text-red-400',
             )}
           >
             {gameState === 'won'

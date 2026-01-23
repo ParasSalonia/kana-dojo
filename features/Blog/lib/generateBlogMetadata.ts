@@ -26,7 +26,7 @@ export interface MetadataOptions {
  */
 export function generateBlogMetadata(
   post: BlogPostMeta,
-  options: MetadataOptions = {}
+  options: MetadataOptions = {},
 ): Metadata {
   const baseUrl = options.baseUrl ?? BASE_URL;
   const canonicalUrl = `${baseUrl}/${post.locale}/academy/${post.slug}`;
@@ -35,7 +35,7 @@ export function generateBlogMetadata(
     title: post.title,
     description: post.description,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
     },
     openGraph: {
       title: post.title,
@@ -45,13 +45,13 @@ export function generateBlogMetadata(
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [post.author],
-      tags: post.tags
+      tags: post.tags,
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.description
-    }
+      description: post.description,
+    },
   };
 
   // Add featured image if present
@@ -62,12 +62,12 @@ export function generateBlogMetadata(
 
     metadata.openGraph = {
       ...metadata.openGraph,
-      images: [{ url: imageUrl }]
+      images: [{ url: imageUrl }],
     };
 
     metadata.twitter = {
       ...metadata.twitter,
-      images: [imageUrl]
+      images: [imageUrl],
     };
   }
 

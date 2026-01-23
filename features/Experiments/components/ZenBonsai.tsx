@@ -23,7 +23,7 @@ const COLORS = [
   '#a29bfe',
   '#fab1a0',
   '#ffeaa7',
-  '#81ecec'
+  '#81ecec',
 ];
 
 export default function ZenBonsai() {
@@ -44,7 +44,7 @@ export default function ZenBonsai() {
         y: -Math.random() * 200 - 50, // Growing upwards
         kana: kanaObj.kana,
         size: Math.random() * 1 + 1,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)]
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
       };
       setElements(prev => [...prev, newElement]);
 
@@ -59,7 +59,7 @@ export default function ZenBonsai() {
         return next;
       });
     },
-    [level, playCorrect]
+    [level, playCorrect],
   );
 
   const handleInteract = (type: 'water' | 'sun' | 'wind') => {
@@ -103,7 +103,7 @@ export default function ZenBonsai() {
                   scale: el.size,
                   opacity: 1,
                   x: el.x,
-                  y: el.y
+                  y: el.y,
                 }}
                 className='absolute flex items-center justify-center select-none'
                 style={{ color: el.color }}

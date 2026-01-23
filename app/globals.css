@@ -59,7 +59,8 @@ input[type='checkbox'] {
   cursor: pointer;
   transition:
     border-color 0.2s,
-    background-color 0.2s;
+    background-color 0.2s,
+    box-shadow 0.2s;
 }
 
 input[type='checkbox']:checked {
@@ -78,6 +79,26 @@ input[type='checkbox']:checked::after {
   border: solid var(--background-color);
   border-width: 0 0.18em 0.18em 0;
   transform: rotate(45deg);
+}
+
+/* Focus styles for checkboxes - accessibility requirement */
+input[type='checkbox']:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--background-color),
+    0 0 0 4px var(--main-color);
+}
+
+/* Global focus-visible styles for better accessibility */
+/* These provide a consistent focus indicator across all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--main-color);
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline when using focus-visible */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 :root {

@@ -28,7 +28,7 @@ const generateConstellation = (): ConstellationPoint[] => {
     x: 15 + Math.random() * 70,
     y: 15 + Math.random() * 60,
     order: i,
-    isConnected: false
+    isConnected: false,
   }));
 
   return points;
@@ -61,7 +61,7 @@ const KanaConstellation = () => {
 
         // Mark as connected
         setPoints(prev =>
-          prev.map((p, i) => (i === index ? { ...p, isConnected: true } : p))
+          prev.map((p, i) => (i === index ? { ...p, isConnected: true } : p)),
         );
 
         // Draw line from previous point
@@ -74,8 +74,8 @@ const KanaConstellation = () => {
                 x1: prevPoint.x,
                 y1: prevPoint.y,
                 x2: point.x,
-                y2: point.y
-              }
+                y2: point.y,
+              },
             ]);
           }
         }
@@ -91,7 +91,7 @@ const KanaConstellation = () => {
         playError();
       }
     },
-    [points, currentIndex, playCorrect, playError]
+    [points, currentIndex, playCorrect, playError],
   );
 
   const resetGame = useCallback(() => {
@@ -107,14 +107,14 @@ const KanaConstellation = () => {
   const currentTarget = points.find(p => p.order === currentIndex);
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4 flex-1 min-h-[80vh]'>
+    <div className='flex min-h-[80vh] flex-1 flex-col items-center justify-center gap-4'>
       {/* Header */}
-      <div className='text-center mb-4'>
-        <h1 className='text-2xl md:text-3xl text-[var(--main-color)] flex items-center gap-2 justify-center'>
+      <div className='mb-4 text-center'>
+        <h1 className='flex items-center justify-center gap-2 text-2xl text-[var(--main-color)] md:text-3xl'>
           <Star size={28} />
           Kana Constellation
         </h1>
-        <p className='text-[var(--secondary-color)] mt-2'>
+        <p className='mt-2 text-[var(--secondary-color)]'>
           Connect the stars in order: {currentTarget?.romanji || 'Complete!'}
         </p>
         <p className='text-sm text-[var(--secondary-color)]'>
@@ -125,13 +125,13 @@ const KanaConstellation = () => {
       {/* Constellation area */}
       <div
         className={clsx(
-          'relative w-full max-w-2xl aspect-[4/3]',
-          'bg-[var(--card-color)] border border-[var(--border-color)]',
-          'rounded-2xl overflow-hidden'
+          'relative aspect-[4/3] w-full max-w-2xl',
+          'border border-[var(--border-color)] bg-[var(--card-color)]',
+          'overflow-hidden rounded-2xl',
         )}
       >
         {/* SVG for lines */}
-        <svg className='absolute inset-0 w-full h-full pointer-events-none'>
+        <svg className='pointer-events-none absolute inset-0 h-full w-full'>
           {lines.map((line, i) => (
             <line
               key={i}
@@ -153,17 +153,17 @@ const KanaConstellation = () => {
             key={index}
             onClick={() => handlePointClick(index)}
             className={clsx(
-              'absolute w-12 h-12 md:w-14 md:h-14 -translate-x-1/2 -translate-y-1/2',
-              'rounded-full flex flex-col items-center justify-center',
+              'absolute h-12 w-12 -translate-x-1/2 -translate-y-1/2 md:h-14 md:w-14',
+              'flex flex-col items-center justify-center rounded-full',
               'transition-all duration-200',
-              'hover:cursor-pointer hover:scale-110',
+              'hover:scale-110 hover:cursor-pointer',
               point.isConnected
                 ? 'bg-[var(--main-color)] text-[var(--background-color)]'
-                : 'bg-[var(--background-color)] border-2 border-[var(--border-color)] hover:border-[var(--main-color)]'
+                : 'border-2 border-[var(--border-color)] bg-[var(--background-color)] hover:border-[var(--main-color)]',
             )}
             style={{
               left: `${point.x}%`,
-              top: `${point.y}%`
+              top: `${point.y}%`,
             }}
           >
             <span lang='ja' className='text-lg md:text-xl'>
@@ -175,19 +175,19 @@ const KanaConstellation = () => {
 
         {/* Complete overlay */}
         {isComplete && (
-          <div className='absolute inset-0 bg-[var(--background-color)]/80 flex items-center justify-center'>
+          <div className='absolute inset-0 flex items-center justify-center bg-[var(--background-color)]/80'>
             <div className='text-center'>
-              <p className='text-2xl text-[var(--main-color)] mb-4'>
+              <p className='mb-4 text-2xl text-[var(--main-color)]'>
                 ✨ Constellation Complete! ✨
               </p>
               <button
                 onClick={resetGame}
                 className={clsx(
-                  'px-6 py-3 rounded-xl flex items-center gap-2 mx-auto',
-                  'bg-[var(--card-color)] border border-[var(--border-color)]',
+                  'mx-auto flex items-center gap-2 rounded-xl px-6 py-3',
+                  'border border-[var(--border-color)] bg-[var(--card-color)]',
                   'text-[var(--main-color)]',
                   'hover:cursor-pointer hover:border-[var(--main-color)]',
-                  'transition-all duration-250 active:scale-95'
+                  'transition-all duration-250 active:scale-95',
                 )}
               >
                 <RotateCcw size={20} />
@@ -203,11 +203,11 @@ const KanaConstellation = () => {
         <button
           onClick={resetGame}
           className={clsx(
-            'mt-4 px-4 py-2 rounded-lg flex items-center gap-2',
-            'bg-[var(--card-color)] border border-[var(--border-color)]',
+            'mt-4 flex items-center gap-2 rounded-lg px-4 py-2',
+            'border border-[var(--border-color)] bg-[var(--card-color)]',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-            'hover:cursor-pointer transition-all duration-250',
-            'active:scale-95'
+            'transition-all duration-250 hover:cursor-pointer',
+            'active:scale-95',
           )}
         >
           <RotateCcw size={16} />

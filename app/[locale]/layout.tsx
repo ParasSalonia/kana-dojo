@@ -15,7 +15,7 @@ interface LocaleLayoutProps {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: LocaleLayoutProps) {
   // Await params in Next.js
   const { locale } = await params;

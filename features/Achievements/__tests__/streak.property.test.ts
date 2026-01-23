@@ -11,13 +11,13 @@ import { ACHIEVEMENTS, type Achievement } from '../store/useAchievementStore';
 
 // Filter streak-based achievements
 const streakAchievements = ACHIEVEMENTS.filter(
-  a => a.requirements.type === 'streak'
+  a => a.requirements.type === 'streak',
 );
 
 // Helper to create stats for streak achievement
 function createStatsForStreakAchievement(
   achievement: Achievement,
-  meetsThreshold: boolean
+  meetsThreshold: boolean,
 ): { allTimeStats: Record<string, unknown> } {
   const { value, additional } = achievement.requirements;
   const targetValue = meetsThreshold ? value : Math.max(0, value - 1);
@@ -36,14 +36,14 @@ function createStatsForStreakAchievement(
       perfectRuns: 0,
       noDeathRuns: 0,
       livesRegenerated: 0,
-      bestStreak: 0
+      bestStreak: 0,
     },
     blitzStats: {
       totalSessions: 0,
       bestSessionScore: 0,
       bestStreak: 0,
-      totalCorrect: 0
-    }
+      totalCorrect: 0,
+    },
   };
 
   // Set the appropriate streak based on game mode
@@ -64,7 +64,7 @@ function createStatsForStreakAchievement(
 // Simplified streak requirement checker
 function checkStreakRequirement(
   achievement: Achievement,
-  stats: { allTimeStats: Record<string, unknown> }
+  stats: { allTimeStats: Record<string, unknown> },
 ): boolean {
   const { value, additional } = achievement.requirements;
   const allTimeStats = stats.allTimeStats;
@@ -90,7 +90,7 @@ describe('Property 4: Streak Achievement Unlocking', () => {
         (achievement: Achievement, meetsThreshold: boolean) => {
           const stats = createStatsForStreakAchievement(
             achievement,
-            meetsThreshold
+            meetsThreshold,
           );
           const isUnlocked = checkStreakRequirement(achievement, stats);
 
@@ -99,9 +99,9 @@ describe('Property 4: Streak Achievement Unlocking', () => {
           } else if (achievement.requirements.value > 1) {
             expect(isUnlocked).toBe(false);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -114,9 +114,9 @@ describe('Property 4: Streak Achievement Unlocking', () => {
           const isUnlocked = checkStreakRequirement(achievement, stats);
 
           expect(isUnlocked).toBe(true);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -147,15 +147,15 @@ describe('Property 4: Streak Achievement Unlocking', () => {
 
           const isUnlocked = checkStreakRequirement(achievement, stats);
           expect(isUnlocked).toBe(true);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('general streak achievements are independent of mode-specific streaks', () => {
     const generalStreakAchievements = streakAchievements.filter(
-      a => !a.requirements.additional?.gameMode
+      a => !a.requirements.additional?.gameMode,
     );
 
     if (generalStreakAchievements.length === 0) {
@@ -170,7 +170,7 @@ describe('Property 4: Streak Achievement Unlocking', () => {
         (
           achievement: Achievement,
           gauntletStreak: number,
-          blitzStreak: number
+          blitzStreak: number,
         ) => {
           const { value } = achievement.requirements;
 
@@ -179,27 +179,27 @@ describe('Property 4: Streak Achievement Unlocking', () => {
             allTimeStats: {
               bestStreak: value - 1, // Below threshold
               gauntletStats: { bestStreak: gauntletStreak },
-              blitzStats: { bestStreak: blitzStreak }
-            }
+              blitzStats: { bestStreak: blitzStreak },
+            },
           };
 
           const isUnlocked = checkStreakRequirement(achievement, stats);
 
           // Should not unlock based on mode-specific streaks
           expect(isUnlocked).toBe(false);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('mode-specific streak achievements only check their mode', () => {
     const gauntletStreakAchievements = streakAchievements.filter(
-      a => a.requirements.additional?.gameMode === 'gauntlet'
+      a => a.requirements.additional?.gameMode === 'gauntlet',
     );
 
     const blitzStreakAchievements = streakAchievements.filter(
-      a => a.requirements.additional?.gameMode === 'blitz'
+      a => a.requirements.additional?.gameMode === 'blitz',
     );
 
     // Test gauntlet streak achievements
@@ -216,15 +216,15 @@ describe('Property 4: Streak Achievement Unlocking', () => {
               allTimeStats: {
                 bestStreak: generalStreak,
                 gauntletStats: { bestStreak: value - 1 },
-                blitzStats: { bestStreak: 0 }
-              }
+                blitzStats: { bestStreak: 0 },
+              },
             };
 
             const isUnlocked = checkStreakRequirement(achievement, stats);
             expect(isUnlocked).toBe(false);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     }
 
@@ -242,15 +242,15 @@ describe('Property 4: Streak Achievement Unlocking', () => {
               allTimeStats: {
                 bestStreak: generalStreak,
                 gauntletStats: { bestStreak: 0 },
-                blitzStats: { bestStreak: value - 1 }
-              }
+                blitzStats: { bestStreak: value - 1 },
+              },
             };
 
             const isUnlocked = checkStreakRequirement(achievement, stats);
             expect(isUnlocked).toBe(false);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     }
   });
@@ -266,11 +266,11 @@ describe('Property 4: Streak Achievement Unlocking', () => {
           // If threshold is met, any higher value should also unlock
           const statsAtThreshold = createStatsForStreakAchievement(
             achievement,
-            true
+            true,
           );
           const statsAboveThreshold = createStatsForStreakAchievement(
             achievement,
-            true
+            true,
           );
 
           // Add additional streak
@@ -293,20 +293,20 @@ describe('Property 4: Streak Achievement Unlocking', () => {
 
           const unlockedAtThreshold = checkStreakRequirement(
             achievement,
-            statsAtThreshold
+            statsAtThreshold,
           );
           const unlockedAboveThreshold = checkStreakRequirement(
             achievement,
-            statsAboveThreshold
+            statsAboveThreshold,
           );
 
           // If unlocked at threshold, must be unlocked above threshold
           if (unlockedAtThreshold) {
             expect(unlockedAboveThreshold).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

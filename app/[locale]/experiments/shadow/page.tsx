@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Shadow - Guess the Silhouette | KanaDojo',
-  description: 'Can you identify the kana from its blurred silhouette?'
+  description: 'Can you identify the kana from its blurred silhouette?',
 };
 
 export default function ShadowPage() {

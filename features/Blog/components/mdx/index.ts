@@ -10,13 +10,13 @@ export {
   KanaChart,
   default as KanaChartDefault,
   BASE_CHARACTER_COUNT,
-  EXTENDED_CHARACTER_COUNT
+  EXTENDED_CHARACTER_COUNT,
 } from './KanaChart';
 export {
   InfoBox,
   default as InfoBoxDefault,
   VALID_INFOBOX_TYPES,
-  type InfoBoxType
+  type InfoBoxType,
 } from './InfoBox';
 export { QuizQuestion, default as QuizQuestionDefault } from './QuizQuestion';
 
@@ -39,5 +39,5 @@ export const mdxComponents = {
   FuriganaText,
   KanaChart,
   InfoBox,
-  QuizQuestion
+  QuizQuestion,
 };

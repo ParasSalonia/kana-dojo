@@ -17,7 +17,7 @@ const BackButton = () => {
           buttonBorderStyles,
           'border-b-4 border-[var(--border-color)] px-16 py-4 text-[var(--main-color)] hover:border-[var(--main-color)]/80',
           'w-full',
-          'flex cursor-pointer items-center justify-center'
+          'flex cursor-pointer items-center justify-center',
         )}
       >
         <ChevronsLeft />

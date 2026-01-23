@@ -36,13 +36,13 @@ const springTransition = {
   type: 'spring',
   stiffness: 450,
   damping: 30,
-  mass: 1
+  mass: 1,
 } as const;
 
 const SetCard = memo(function SetCard({
   set,
   isSelected,
-  onToggle
+  onToggle,
 }: SetCardProps) {
   return (
     <motion.div
@@ -59,7 +59,7 @@ const SetCard = memo(function SetCard({
         borderBottomThickness={10}
         className={clsx(
           'flex w-full flex-col items-center gap-2 p-3 sm:p-4',
-          !isSelected && 'opacity-40'
+          !isSelected && 'opacity-40',
         )}
       >
         {isSelected ? (
@@ -90,7 +90,7 @@ const QuickSelectModal = ({
   onSelectAll,
   onClearAll,
   onSelectRandom,
-  unitName
+  unitName,
 }: QuickSelectModalProps) => {
   const { playClick } = useClick();
   const [searchLevel, setSearchLevel] = useState('');
@@ -112,7 +112,7 @@ const QuickSelectModal = ({
         onClose();
       }
     },
-    [playClick, onClose]
+    [playClick, onClose],
   );
 
   const handleClose = useCallback(() => {
@@ -125,7 +125,7 @@ const QuickSelectModal = ({
       playClick();
       onToggleSet(name);
     },
-    [playClick, onToggleSet]
+    [playClick, onToggleSet],
   );
 
   const handleSelectAll = useCallback(() => {
@@ -159,7 +159,7 @@ const QuickSelectModal = ({
       const value = e.target.value.replace(/\D/g, '');
       setSearchLevel(value);
     },
-    [playClick]
+    [playClick],
   );
 
   const actionButtons = useMemo(
@@ -170,7 +170,7 @@ const QuickSelectModal = ({
         icon: CircleCheck,
         iconOnly: false,
         colorScheme: 'main' as const,
-        borderColorScheme: 'main' as const
+        borderColorScheme: 'main' as const,
       },
       {
         label: 'Clear All',
@@ -178,7 +178,7 @@ const QuickSelectModal = ({
         icon: Trash2,
         iconOnly: true,
         colorScheme: 'main' as const,
-        borderColorScheme: 'main' as const
+        borderColorScheme: 'main' as const,
       },
       {
         label: 'Random 3',
@@ -186,7 +186,7 @@ const QuickSelectModal = ({
         icon: Dices,
         iconOnly: false,
         colorScheme: 'secondary' as const,
-        borderColorScheme: 'secondary' as const
+        borderColorScheme: 'secondary' as const,
       },
       {
         label: 'Random 5',
@@ -194,7 +194,7 @@ const QuickSelectModal = ({
         icon: Dices,
         iconOnly: false,
         colorScheme: 'secondary' as const,
-        borderColorScheme: 'secondary' as const
+        borderColorScheme: 'secondary' as const,
       },
       {
         label: 'Random 10',
@@ -202,16 +202,16 @@ const QuickSelectModal = ({
         icon: Dices,
         iconOnly: false,
         colorScheme: 'secondary' as const,
-        borderColorScheme: 'secondary' as const
-      }
+        borderColorScheme: 'secondary' as const,
+      },
     ],
     [
       handleSelectAll,
       handleClearAll,
       handleRandom3,
       handleRandom5,
-      handleRandom10
-    ]
+      handleRandom10,
+    ],
   );
 
   if (!isOpen) return null;
@@ -250,13 +250,13 @@ const QuickSelectModal = ({
               borderBottomThickness={10}
               className={clsx(
                 'w-auto text-sm',
-                btn.iconOnly ? 'px-4 py-4 sm:px-6' : 'px-3 py-4 sm:px-4'
+                btn.iconOnly ? 'px-4 py-4 sm:px-6' : 'px-3 py-4 sm:px-4',
               )}
             >
               <span
                 className={clsx(
                   'flex items-center',
-                  btn.iconOnly ? 'gap-0' : 'gap-2'
+                  btn.iconOnly ? 'gap-0' : 'gap-2',
                 )}
               >
                 <btn.icon
@@ -281,7 +281,7 @@ const QuickSelectModal = ({
               'rounded-2xl border px-3 py-2 text-sm transition-all sm:px-4',
               'border-(--border-color) hover:bg-(--card-color)',
               'text-(--main-color)',
-              'focus:ring-offset-2-(--secondary-color)/80 focus:ring focus:outline-0'
+              'focus:ring-offset-2-(--secondary-color)/80 focus:ring focus:outline-0',
             )}
           />
         </div>

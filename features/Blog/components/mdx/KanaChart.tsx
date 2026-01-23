@@ -52,7 +52,7 @@ const HIRAGANA_BASE = [
   { kana: 'ろ', romaji: 'ro' },
   { kana: 'わ', romaji: 'wa' },
   { kana: 'を', romaji: 'wo' },
-  { kana: 'ん', romaji: 'n' }
+  { kana: 'ん', romaji: 'n' },
 ];
 
 /**
@@ -83,7 +83,7 @@ const HIRAGANA_DAKUTEN = [
   { kana: 'ぴ', romaji: 'pi' },
   { kana: 'ぷ', romaji: 'pu' },
   { kana: 'ぺ', romaji: 'pe' },
-  { kana: 'ぽ', romaji: 'po' }
+  { kana: 'ぽ', romaji: 'po' },
 ];
 
 /**
@@ -135,7 +135,7 @@ const KATAKANA_BASE = [
   { kana: 'ロ', romaji: 'ro' },
   { kana: 'ワ', romaji: 'wa' },
   { kana: 'ヲ', romaji: 'wo' },
-  { kana: 'ン', romaji: 'n' }
+  { kana: 'ン', romaji: 'n' },
 ];
 
 /**
@@ -166,7 +166,7 @@ const KATAKANA_DAKUTEN = [
   { kana: 'ピ', romaji: 'pi' },
   { kana: 'プ', romaji: 'pu' },
   { kana: 'ペ', romaji: 'pe' },
-  { kana: 'ポ', romaji: 'po' }
+  { kana: 'ポ', romaji: 'po' },
 ];
 
 /** Number of base characters */
@@ -203,7 +203,7 @@ export function KanaChart({
   type,
   showRomaji = true,
   extended = false,
-  className
+  className,
 }: KanaChartProps) {
   const baseChars = type === 'hiragana' ? HIRAGANA_BASE : KATAKANA_BASE;
   const dakutenChars =

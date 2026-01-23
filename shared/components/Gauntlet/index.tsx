@@ -21,7 +21,7 @@ import {
   type GauntletGameMode,
   type GauntletQuestion,
   type GauntletSessionStats,
-  type RepetitionCount
+  type RepetitionCount,
 } from './types';
 
 // Re-export types for external use
@@ -50,7 +50,7 @@ const calculateRegenThreshold = (totalQuestions: number): number => {
 function generateQuestionQueue<T>(
   items: T[],
   repetitions: number,
-  generateQuestion: (items: T[]) => T
+  generateQuestion: (items: T[]) => T,
 ): GauntletQuestion<T>[] {
   const queue: GauntletQuestion<T>[] = [];
 
@@ -60,7 +60,7 @@ function generateQuestionQueue<T>(
       queue.push({
         item,
         index: 0, // Will be set after shuffle
-        repetitionNumber: rep
+        repetitionNumber: rep,
       });
     }
   });
@@ -103,7 +103,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
     generateOptions,
     renderOption,
     getCorrectOption,
-    initialGameMode
+    initialGameMode,
   } = config;
 
   // Game configuration state - initialized from store for all settings
@@ -115,10 +115,10 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
     return storeMode || initialGameMode || 'Pick';
   });
   const [difficulty, setDifficultyState] = useState<GauntletDifficulty>(
-    gauntletSettings.getDifficulty(dojoType)
+    gauntletSettings.getDifficulty(dojoType),
   );
   const [repetitions, setRepetitionsState] = useState<RepetitionCount>(
-    gauntletSettings.getRepetitions(dojoType)
+    gauntletSettings.getRepetitions(dojoType),
   );
 
   // Wrapper setters that also sync to store for persistence across navigation
@@ -127,7 +127,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       setGameModeState(mode);
       gauntletSettings.setGameMode(dojoType, mode);
     },
-    [dojoType, gauntletSettings]
+    [dojoType, gauntletSettings],
   );
 
   const setDifficulty = useCallback(
@@ -135,7 +135,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       setDifficultyState(diff);
       gauntletSettings.setDifficulty(dojoType, diff);
     },
-    [dojoType, gauntletSettings]
+    [dojoType, gauntletSettings],
   );
 
   const setRepetitions = useCallback(
@@ -143,12 +143,12 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       setRepetitionsState(reps);
       gauntletSettings.setRepetitions(dojoType, reps);
     },
-    [dojoType, gauntletSettings]
+    [dojoType, gauntletSettings],
   );
 
   // Game phase state
   const [phase, setPhase] = useState<'pregame' | 'playing' | 'results'>(
-    'pregame'
+    'pregame',
   );
 
   // Game state
@@ -177,7 +177,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
 
   // Answer feedback
   const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(
-    null
+    null,
   );
   const [lifeJustGained, setLifeJustGained] = useState(false);
   const [lifeJustLost, setLifeJustLost] = useState(false);
@@ -186,7 +186,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
   const [userAnswer, setUserAnswer] = useState('');
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
-    []
+    [],
   );
 
   // Session stats for results
@@ -236,7 +236,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
         currentQuestion.item,
         items,
         3,
-        isReverseActive
+        isReverseActive,
       );
       const shuffled = [...options].sort(() => random.real(0, 1) - 0.5);
       setShuffledOptions(shuffled);
@@ -248,7 +248,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
     generateOptions,
     items,
     isReverseActive,
-    phase
+    phase,
   ]);
 
   // Handle game start
@@ -340,7 +340,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
         characterStats,
         totalCharacters: items.length,
         repetitionsPerChar: repetitions,
-        selectedSets: selectedSets || []
+        selectedSets: selectedSets || [],
       };
 
       setSessionStats(stats);
@@ -358,7 +358,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
         isPerfect,
         livesLost,
         livesRegenerated,
-        bestStreak
+        bestStreak,
       });
 
       setPhase('results');
@@ -381,8 +381,8 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       characterStats,
       items.length,
       repetitions,
-      selectedSets
-    ]
+      selectedSets,
+    ],
   );
 
   // Process correct answer
@@ -411,8 +411,8 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
         ...prev,
         [charId]: {
           correct: (prev[charId]?.correct || 0) + 1,
-          wrong: prev[charId]?.wrong || 0
-        }
+          wrong: prev[charId]?.wrong || 0,
+        },
       }));
     }
 
@@ -456,7 +456,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
     currentIndex,
     totalQuestions,
     endGame,
-    bestStreak
+    bestStreak,
   ]);
 
   // Process wrong answer
@@ -475,8 +475,8 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
         ...prev,
         [charId]: {
           correct: prev[charId]?.correct || 0,
-          wrong: (prev[charId]?.wrong || 0) + 1
-        }
+          wrong: (prev[charId]?.wrong || 0) + 1,
+        },
       }));
     }
 
@@ -505,7 +505,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       const isCorrect = checkAnswer(
         currentQuestion.item,
         userAnswer.trim(),
-        isReverseActive
+        isReverseActive,
       );
 
       if (isCorrect) {
@@ -520,8 +520,8 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       checkAnswer,
       isReverseActive,
       processCorrectAnswer,
-      processWrongAnswer
-    ]
+      processWrongAnswer,
+    ],
   );
 
   // Handle option click (Pick mode)
@@ -531,7 +531,7 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
 
       const correctOption = getCorrectOption(
         currentQuestion.item,
-        isReverseActive
+        isReverseActive,
       );
       const isCorrect = selectedOption === correctOption;
 
@@ -547,8 +547,8 @@ export default function Gauntlet<T>({ config, onCancel }: GauntletProps<T>) {
       getCorrectOption,
       isReverseActive,
       processCorrectAnswer,
-      processWrongAnswer
-    ]
+      processWrongAnswer,
+    ],
   );
 
   // Handle cancel

@@ -27,7 +27,7 @@ const NAMESPACES = [
   'errors',
   'menuInfo',
   'translator',
-  'blog'
+  'blog',
 ];
 
 let hasErrors = false;
@@ -136,7 +136,7 @@ function validateNamespace(namespace) {
       }
     } else {
       console.log(
-        `   ✅ ${lang.toUpperCase()}: ${langKeys.length} keys (match)`
+        `   ✅ ${lang.toUpperCase()}: ${langKeys.length} keys (match)`,
       );
     }
   }

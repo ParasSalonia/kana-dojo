@@ -60,7 +60,7 @@ export const useSmartReverseMode = (options: SmartReverseModeOptions = {}) => {
     isReverse,
     decideNextMode,
     recordWrongAnswer,
-    consecutiveSameMode
+    consecutiveSameMode,
   };
 };
 

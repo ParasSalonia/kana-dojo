@@ -22,7 +22,7 @@ export function getKanjiChars(): string[] {
       process.cwd(),
       'public',
       'data-kanji',
-      `${level}.json`
+      `${level}.json`,
     );
     const kanjiData = readFileSync(kanjiPath, 'utf-8');
     const entries = JSON.parse(kanjiData) as RawKanjiEntry[];

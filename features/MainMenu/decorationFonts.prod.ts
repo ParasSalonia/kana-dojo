@@ -6,7 +6,7 @@ import {
   Yuji_Mai,
   RocknRoll_One,
   Yusei_Magic,
-  Mochiy_Pop_One
+  Mochiy_Pop_One,
 } from 'next/font/google';
 
 const zenMaruGothic = Zen_Maru_Gothic({
@@ -14,7 +14,7 @@ const zenMaruGothic = Zen_Maru_Gothic({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const rampartOne = Rampart_One({
@@ -22,7 +22,7 @@ const rampartOne = Rampart_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const kleeOne = Klee_One({
@@ -30,7 +30,7 @@ const kleeOne = Klee_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const hachiMaruPop = Hachi_Maru_Pop({
@@ -38,7 +38,7 @@ const hachiMaruPop = Hachi_Maru_Pop({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const yujiMai = Yuji_Mai({
@@ -46,7 +46,7 @@ const yujiMai = Yuji_Mai({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const rocknRollOne = RocknRoll_One({
@@ -54,17 +54,15 @@ const rocknRollOne = RocknRoll_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
-
-
 
 const yuseiMagic = Yusei_Magic({
   subsets: ['latin'],
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const mochiyPopOne = Mochiy_Pop_One({
@@ -72,40 +70,40 @@ const mochiyPopOne = Mochiy_Pop_One({
   weight: ['400'],
   display: 'swap',
   preload: false,
-  fallback: ['system-ui', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 export const decorationFonts = [
   {
     name: 'Zen Maru Gothic',
-    font: zenMaruGothic
+    font: zenMaruGothic,
   },
   {
     name: 'Rampart One',
-    font: rampartOne
+    font: rampartOne,
   },
   {
     name: 'Klee One',
-    font: kleeOne
+    font: kleeOne,
   },
   {
     name: 'Hachi Maru Pop',
-    font: hachiMaruPop
+    font: hachiMaruPop,
   },
   {
     name: 'Yuji Mai',
-    font: yujiMai
+    font: yujiMai,
   },
   {
     name: 'RocknRoll One',
-    font: rocknRollOne
+    font: rocknRollOne,
   },
   {
     name: 'Yusei Magic',
-    font: yuseiMagic
+    font: yuseiMagic,
   },
   {
     name: 'Mochiy Pop One',
-    font: mochiyPopOne
-  }
+    font: mochiyPopOne,
+  },
 ];

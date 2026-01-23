@@ -8,14 +8,14 @@ import {
   calculateTotalVisits,
   getDaysInPeriod,
   hasVisit,
-  isValidDateFormat
+  isValidDateFormat,
 } from '../lib/streakCalculations';
 
 // Helper to generate valid date strings
 const dateStringArb = fc
   .date({
     min: new Date('2020-01-01'),
-    max: new Date('2030-12-31')
+    max: new Date('2030-12-31'),
   })
   .map(d => formatDate(d));
 
@@ -29,7 +29,7 @@ const consecutiveDatesArb = (length: number) =>
   fc
     .date({
       min: new Date('2020-01-01'),
-      max: new Date('2029-12-31')
+      max: new Date('2029-12-31'),
     })
     .map(startDate => {
       const dates: string[] = [];
@@ -58,9 +58,9 @@ describe('Streak Calculations', () => {
             const formatted = formatDate(date);
             expect(isValidDateFormat(formatted)).toBe(true);
             expect(formatted).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -71,7 +71,7 @@ describe('Streak Calculations', () => {
           const reformatted = formatDate(parsed);
           expect(reformatted).toBe(dateStr);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -101,7 +101,7 @@ describe('Streak Calculations', () => {
           const result = calculateCurrentStreak(visits);
           expect(result).toBe(streakLength);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -113,7 +113,7 @@ describe('Streak Calculations', () => {
           const visits = [formatDate(oldDate)];
           expect(calculateCurrentStreak(visits)).toBe(0);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -134,7 +134,7 @@ describe('Streak Calculations', () => {
         fc.property(dateStringArb, date => {
           expect(calculateLongestStreak([date])).toBe(1);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -150,7 +150,7 @@ describe('Streak Calculations', () => {
           }
           expect(calculateLongestStreak(visits)).toBe(streakLength);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -160,9 +160,9 @@ describe('Streak Calculations', () => {
           fc.array(dateStringArb, { minLength: 1, maxLength: 50 }),
           visits => {
             expect(calculateLongestStreak(visits)).toBeGreaterThanOrEqual(1);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -184,7 +184,7 @@ describe('Streak Calculations', () => {
           const result = calculateTotalVisits(visits);
           expect(result).toBe(visits.length);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -195,9 +195,9 @@ describe('Streak Calculations', () => {
           visits => {
             const uniqueCount = new Set(visits).size;
             expect(calculateTotalVisits(visits)).toBe(uniqueCount);
-          }
+          },
         ),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -214,9 +214,9 @@ describe('Streak Calculations', () => {
             visits => {
               const randomIndex = Math.floor(Math.random() * visits.length);
               expect(hasVisit(visits, visits[randomIndex])).toBe(true);
-            }
+            },
           ),
-          { numRuns: 100 }
+          { numRuns: 100 },
         );
       });
 

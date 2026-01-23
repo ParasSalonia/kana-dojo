@@ -19,7 +19,7 @@ const categoryColors: Record<Category, string> = {
   tutorial: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
   resources: 'bg-teal-500/20 text-teal-400 border-teal-500/30',
   'study-tips': 'bg-lime-500/20 text-lime-400 border-lime-500/30',
-  jlpt: 'bg-red-500/20 text-red-400 border-red-500/30'
+  jlpt: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
 interface BlogCardProps {
@@ -39,14 +39,14 @@ export function BlogCard({ post, className }: BlogCardProps) {
   const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   });
 
   return (
     <article
       className={cn(
         'group relative flex flex-col rounded-xl border border-[var(--border-color)] bg-[var(--card-color)] p-6 transition-all duration-200 hover:border-[var(--main-color)] hover:shadow-lg',
-        className
+        className,
       )}
       data-testid='blog-card'
     >
@@ -63,7 +63,7 @@ export function BlogCard({ post, className }: BlogCardProps) {
         <span
           className={cn(
             'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize',
-            categoryColors[post.category]
+            categoryColors[post.category],
           )}
           data-testid='blog-card-category'
         >

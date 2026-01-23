@@ -9,12 +9,14 @@ This guide helps you resolve common issues when setting up and running KanaDojo 
 ### Issue: Dev Server Won't Start on Windows
 
 **Symptoms:**
+
 - `npm run dev` command hangs or shows errors
 - Build fails with network or font-related errors
 - Terminal shows "Failed to fetch fonts from Google Fonts" errors
 
 **Root Cause:**
 Next.js attempts to download Google Fonts during development, which can be blocked by:
+
 - Windows Firewall
 - Antivirus software (Windows Defender, Norton, McAfee, etc.)
 - Corporate proxy settings
@@ -69,6 +71,7 @@ npm run dev
 ```
 
 **⚠️ Important:** Re-enable after setup:
+
 ```bash
 npm config set strict-ssl true
 ```
@@ -143,6 +146,7 @@ npm run dev
 If issues persist, consider these alternatives:
 
 **Option A: GitHub Codespaces**
+
 1. Go to your forked repository on GitHub
 2. Click **Code** → **Codespaces** → **Create codespace on main**
 3. Wait for the environment to load
@@ -150,6 +154,7 @@ If issues persist, consider these alternatives:
 5. Access via the forwarded port
 
 **Option B: Windows Subsystem for Linux (WSL2)**
+
 ```bash
 # In PowerShell (as Administrator)
 wsl --install
@@ -172,6 +177,7 @@ WSL2 provides a Linux environment on Windows and typically avoids these font-fet
 ### Issue: Permission Denied Errors
 
 **Solution:**
+
 ```bash
 sudo chown -R $USER ~/.npm
 sudo chown -R $USER ./node_modules
@@ -180,6 +186,7 @@ sudo chown -R $USER ./node_modules
 ### Issue: Port Already in Use
 
 **Solution:**
+
 ```bash
 # Find and kill process on port 3000
 lsof -ti:3000 | xargs kill -9
@@ -195,6 +202,7 @@ PORT=3001 npm run dev
 ### Issue: ENOSPC Error (File Watchers)
 
 **Solution:**
+
 ```bash
 # Increase file watcher limit
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
@@ -208,6 +216,7 @@ sudo sysctl -p
 ### Issue: Slow npm install
 
 **Solution:**
+
 ```bash
 # Use a faster registry mirror
 npm config set registry https://registry.npmjs.org/
@@ -219,6 +228,7 @@ npm config set registry https://registry.npmjs.cf/
 ### Issue: npm install Fails with ETIMEDOUT
 
 **Solution:**
+
 ```bash
 # Increase timeout
 npm config set timeout 60000
@@ -234,6 +244,7 @@ npm install --prefer-offline
 ### Issue: TypeScript Errors After npm install
 
 **Solution:**
+
 ```bash
 # Delete TypeScript cache
 rm -rf .next
@@ -247,6 +258,7 @@ npm run build
 ### Issue: ESLint Configuration Errors
 
 **Solution:**
+
 ```bash
 # Reset ESLint cache
 rm -rf .eslintcache
@@ -263,6 +275,7 @@ npm run lint:fix
 
 **Solution:**
 These are usually safe to ignore. If you want to resolve them:
+
 ```bash
 npm install --legacy-peer-deps
 ```
@@ -270,6 +283,7 @@ npm install --legacy-peer-deps
 ### Issue: Package Vulnerabilities
 
 **Solution:**
+
 ```bash
 # Check vulnerabilities
 npm audit

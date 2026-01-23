@@ -33,7 +33,7 @@ export function QuizQuestion({
   options,
   answer,
   explanation,
-  className
+  className,
 }: QuizQuestionProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
@@ -44,7 +44,7 @@ export function QuizQuestion({
       setSelectedIndex(index);
       setHasAnswered(true);
     },
-    [hasAnswered]
+    [hasAnswered],
   );
 
   const isCorrect = selectedIndex === answer;
@@ -69,7 +69,7 @@ export function QuizQuestion({
     <div
       className={cn(
         'my-6 rounded-lg border border-[var(--border-color)] bg-[var(--card-color)] p-4',
-        className
+        className,
       )}
       data-testid='quiz-question'
     >
@@ -90,7 +90,7 @@ export function QuizQuestion({
             disabled={hasAnswered}
             className={cn(
               'flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-colors',
-              getOptionStyles(index)
+              getOptionStyles(index),
             )}
             data-testid='quiz-option'
             data-index={index}
@@ -105,7 +105,7 @@ export function QuizQuestion({
                   ? 'border-green-500 bg-green-500/20 text-green-400'
                   : hasAnswered && index === selectedIndex
                     ? 'border-red-500 bg-red-500/20 text-red-400'
-                    : 'border-[var(--border-color)]'
+                    : 'border-[var(--border-color)]',
               )}
             >
               {String.fromCharCode(65 + index)}
@@ -122,7 +122,7 @@ export function QuizQuestion({
             'mt-4 rounded-lg p-3',
             isCorrect
               ? 'bg-green-500/10 text-green-400'
-              : 'bg-red-500/10 text-red-400'
+              : 'bg-red-500/10 text-red-400',
           )}
           data-testid='quiz-feedback'
           data-correct={isCorrect}

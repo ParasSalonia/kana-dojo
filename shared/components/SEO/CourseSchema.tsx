@@ -22,7 +22,7 @@ export function generateCourseSchema(props: CourseSchemaProps) {
     skillLevel = 'All Levels',
     courseMode = 'online',
     availableLanguage = ['en', 'es', 'ja'],
-    learningResourceType = 'Interactive Exercise'
+    learningResourceType = 'Interactive Exercise',
   } = props;
 
   return {
@@ -34,7 +34,7 @@ export function generateCourseSchema(props: CourseSchemaProps) {
     provider: {
       '@type': 'Organization',
       name: provider,
-      url: 'https://kanadojo.com'
+      url: 'https://kanadojo.com',
     },
     educationalLevel,
     courseMode,
@@ -44,7 +44,7 @@ export function generateCourseSchema(props: CourseSchemaProps) {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock'
+      availability: 'https://schema.org/InStock',
     },
     hasCourseInstance: {
       '@type': 'CourseInstance',
@@ -52,14 +52,14 @@ export function generateCourseSchema(props: CourseSchemaProps) {
       courseWorkload: 'PT1H',
       instructor: {
         '@type': 'Organization',
-        name: provider
-      }
+        name: provider,
+      },
     },
     inLanguage: availableLanguage,
     teaches: name,
     skillLevel,
     isAccessibleForFree: true,
-    educationalCredentialAwarded: 'Completion Certificate'
+    educationalCredentialAwarded: 'Completion Certificate',
   };
 }
 

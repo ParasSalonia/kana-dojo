@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Glow - Interactive Light Display | KanaDojo',
-  description: 'Watch kana illuminate as you move your cursor.'
+  description: 'Watch kana illuminate as you move your cursor.',
 };
 
 export default function GlowPage() {

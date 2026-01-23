@@ -49,7 +49,7 @@ const KanaDNA = () => {
                     hoveredIdx === i
                       ? 'var(--accent-color)'
                       : 'var(--main-color)',
-                  scale: hoveredIdx === i ? '1.5' : '1'
+                  scale: hoveredIdx === i ? '1.5' : '1',
                 }}
                 onMouseEnter={() => setHoveredIdx(i)}
                 onMouseLeave={() => setHoveredIdx(null)}
@@ -71,7 +71,7 @@ const KanaDNA = () => {
                     hoveredIdx === i + 100
                       ? 'var(--accent-color)'
                       : 'var(--main-color)',
-                  scale: hoveredIdx === i + 100 ? '1.5' : '1'
+                  scale: hoveredIdx === i + 100 ? '1.5' : '1',
                 }}
                 onMouseEnter={() => setHoveredIdx(i + 100)}
                 onMouseLeave={() => setHoveredIdx(null)}
@@ -87,7 +87,7 @@ const KanaDNA = () => {
                   top: y,
                   width: xOffset * 2,
                   opacity: 0.3,
-                  zIndex: 0
+                  zIndex: 0,
                 }}
               />
             </div>

@@ -30,7 +30,7 @@ export default function BackToTop() {
     if (typeof document === 'undefined') return;
 
     container.current = document.querySelector(
-      '[data-scroll-restoration-id="container"]'
+      '[data-scroll-restoration-id="container"]',
     );
 
     if (!container.current) return;
@@ -64,13 +64,13 @@ export default function BackToTop() {
     <button
       onClick={handleClick}
       className={clsx(
-        'fixed z-[60] right-2 lg:right-3 top-1/2 -translate-y-1/2',
-        'max-md:border-2 border-[var(--border-color)]',
+        'fixed top-1/2 right-2 z-[60] -translate-y-1/2 lg:right-3',
+        'border-[var(--border-color)] max-md:border-2',
         'inline-flex items-center justify-center rounded-full',
-        'p-2 md:p-3 transition-all duration-200',
+        'p-2 transition-all duration-200 md:p-3',
         'bg-[var(--card-color)] text-[var(--main-color)]',
         'hover:bg-[var(--main-color)] hover:text-[var(--background-color)]',
-        'hover:cursor-pointer'
+        'hover:cursor-pointer',
       )}
     >
       <ChevronsUp size={32} strokeWidth={2.5} />

@@ -78,7 +78,7 @@ export const kanjiDataService = {
     Object.keys(kanjiCache).forEach(key => {
       delete kanjiCache[key as KanjiLevel];
     });
-  }
+  },
 };
 
 export type { KanjiLevel };

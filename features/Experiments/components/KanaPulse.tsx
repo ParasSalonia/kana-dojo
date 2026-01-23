@@ -11,8 +11,8 @@ const KanaPulse = () => {
   const [grid] = useState(() =>
     Array.from({ length: 16 }, (_, i) => ({
       id: i,
-      ...allKana[Math.floor(Math.random() * allKana.length)]
-    }))
+      ...allKana[Math.floor(Math.random() * allKana.length)],
+    })),
   );
 
   const [targetIdx, setTargetIdx] = useState(0);
@@ -74,7 +74,7 @@ const KanaPulse = () => {
                   ? '#22c55e'
                   : timeLeft > 25
                     ? '#eab308'
-                    : '#ef4444'
+                    : '#ef4444',
             }}
           />
         </div>
@@ -91,7 +91,7 @@ const KanaPulse = () => {
               'border-2',
               idx === targetIdx
                 ? 'scale-110 animate-pulse border-[var(--accent-color)] bg-[var(--accent-color)]/20 text-[var(--accent-color)]'
-                : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] hover:scale-105'
+                : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] hover:scale-105',
             )}
           >
             {cell.kana}

@@ -6,7 +6,7 @@
 import {
   REQUIRED_FRONTMATTER_FIELDS,
   VALID_CATEGORIES,
-  type Category
+  type Category,
 } from '../types/blog';
 
 /**
@@ -22,7 +22,7 @@ export type ValidationResult =
  * @returns ValidationResult indicating success or listing missing fields
  */
 export function validateFrontmatter(
-  frontmatter: Record<string, unknown>
+  frontmatter: Record<string, unknown>,
 ): ValidationResult {
   const missingFields: string[] = [];
 

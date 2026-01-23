@@ -3,6 +3,8 @@ name: Vercel Deployment Notifications
 on:
   deployment_status:
 
+permissions: {}
+
 concurrency:
   group: vercel-deployment-status-${{ github.event.deployment.id }}-${{ github.event.deployment_status.state }}
   cancel-in-progress: true
@@ -15,7 +17,7 @@ jobs:
     steps:
       - name: Send Failure Notification to Discord
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL || secrets.DISCORD_WEBHOOK }}
           DEPLOYMENT_ENV: ${{ github.event.deployment.environment }}
           DEPLOYMENT_REF: ${{ github.event.deployment.ref }}
           DEPLOYMENT_SHA: ${{ github.event.deployment.sha }}
@@ -29,6 +31,11 @@ jobs:
           RUN_ID: ${{ github.run_id }}
           ACTOR: ${{ github.actor }}
         run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "No Discord webhook configured; skipping"
+            exit 0
+          fi
+
           python3 << 'PY' > /tmp/payload.json
           import json
           import os
@@ -93,7 +100,7 @@ jobs:
     steps:
       - name: Send Success Notification to Discord
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL || secrets.DISCORD_WEBHOOK }}
           DEPLOYMENT_ENV: ${{ github.event.deployment.environment }}
           DEPLOYMENT_REF: ${{ github.event.deployment.ref }}
           DEPLOYMENT_SHA: ${{ github.event.deployment.sha }}
@@ -104,6 +111,11 @@ jobs:
           SERVER_URL: ${{ github.server_url }}
           RUN_ID: ${{ github.run_id }}
         run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "No Discord webhook configured; skipping"
+            exit 0
+          fi
+
           python3 << 'PY' > /tmp/payload.json
           import json
           import os

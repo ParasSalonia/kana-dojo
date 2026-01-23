@@ -15,7 +15,7 @@ import {
   Clock,
   Activity,
   ChevronsLeft,
-  LucideIcon
+  LucideIcon,
 } from 'lucide-react';
 import { useStatsDisplay } from '@/features/Progress';
 import { findHighestCounts } from '@/shared/lib/helperFunctions';
@@ -97,7 +97,7 @@ const Stats: React.FC = () => {
       highestCorrectChars,
       highestCorrectCharsValue,
       highestWrongChars,
-      highestWrongCharsValue
+      highestWrongCharsValue,
     } = findHighestCounts(characterScores);
 
     return {
@@ -115,7 +115,7 @@ const Stats: React.FC = () => {
       highestCorrectChars,
       highestCorrectCharsValue,
       highestWrongChars,
-      highestWrongCharsValue
+      highestWrongCharsValue,
     };
   }, [
     totalMilliseconds,
@@ -123,12 +123,12 @@ const Stats: React.FC = () => {
     numWrongAnswers,
     correctAnswerTimes,
     characterHistory,
-    characterScores
+    characterScores,
   ]);
 
   const formatValue = (
     value: string | number | null | undefined,
-    suffix: string = ''
+    suffix: string = '',
   ): string => {
     if (value === null || value === undefined) return '~';
     if (value === Infinity) return '∞';
@@ -146,7 +146,8 @@ const Stats: React.FC = () => {
             key={label}
             className={clsx(
               'flex items-center justify-between gap-4 pb-4',
-              i < stats.length - 1 && 'border-b border-[var(--border-color)]/70'
+              i < stats.length - 1 &&
+                'border-b border-[var(--border-color)]/70',
             )}
           >
             <div className='flex min-w-0 flex-1 items-center gap-2'>
@@ -172,55 +173,55 @@ const Stats: React.FC = () => {
     {
       label: 'Correct Answers',
       value: formatValue(numCorrectAnswers),
-      Icon: SquareCheck
+      Icon: SquareCheck,
     },
     {
       label: 'Wrong Answers',
       value: formatValue(numWrongAnswers),
-      Icon: SquareX
+      Icon: SquareX,
     },
     {
       label: 'Accuracy',
       value: formatValue(stats.accuracy.toFixed(1), '%'),
-      Icon: Target
-    }
+      Icon: Target,
+    },
   ];
 
   const answerStats: StatItem[] = [
     {
       label: 'Average Time',
       value: formatValue(stats.avgTime, 's'),
-      Icon: Timer
+      Icon: Timer,
     },
     {
       label: 'Fastest Answer',
       value: formatValue(stats.fastestTime, 's'),
-      Icon: Flame
+      Icon: Flame,
     },
     {
       label: 'Slowest Answer',
       value: formatValue(stats.slowestTime, 's'),
-      Icon: Clock
+      Icon: Clock,
     },
     {
       label: 'Correct/Incorrect Ratio',
       value: formatValue(
-        stats.ciRatio === Infinity ? '∞' : stats.ciRatio.toFixed(2)
+        stats.ciRatio === Infinity ? '∞' : stats.ciRatio.toFixed(2),
       ),
-      Icon: TrendingUp
-    }
+      Icon: TrendingUp,
+    },
   ];
 
   const characterStats: StatItem[] = [
     {
       label: 'Characters Played',
       value: formatValue(characterHistory.length),
-      Icon: Activity
+      Icon: Activity,
     },
     {
       label: 'Unique Characters',
       value: formatValue(stats.uniqueChars),
-      Icon: Shapes
+      Icon: Shapes,
     },
     {
       label: 'Easiest Characters',
@@ -228,7 +229,7 @@ const Stats: React.FC = () => {
         stats.highestCorrectChars.length > 0
           ? `${stats.highestCorrectChars.join(', ')} (${stats.highestCorrectCharsValue})`
           : '~',
-      Icon: Clover
+      Icon: Clover,
     },
     {
       label: 'Hardest Characters',
@@ -236,8 +237,8 @@ const Stats: React.FC = () => {
         stats.highestWrongChars.length > 0
           ? `${stats.highestWrongChars.join(', ')} (${stats.highestWrongCharsValue})`
           : '~',
-      Icon: HeartCrack
-    }
+      Icon: HeartCrack,
+    },
   ];
 
   return (

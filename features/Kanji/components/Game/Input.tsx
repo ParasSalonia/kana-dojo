@@ -33,11 +33,11 @@ interface KanjiInputGameProps {
 const KanjiInputGame = ({
   selectedKanjiObjs,
   isHidden,
-  isReverse = false
+  isReverse = false,
 }: KanjiInputGameProps) => {
   // Get the current JLPT level from the Kanji store
   const selectedKanjiCollection = useKanjiStore(
-    state => state.selectedKanjiCollection
+    state => state.selectedKanjiCollection,
   );
 
   const {
@@ -46,7 +46,7 @@ const KanjiInputGame = ({
     incrementKanjiCorrect,
     recordAnswerTime,
     incrementWrongStreak,
-    resetWrongStreak
+    resetWrongStreak,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -54,8 +54,8 @@ const KanjiInputGame = ({
       incrementKanjiCorrect: state.incrementKanjiCorrect,
       recordAnswerTime: state.recordAnswerTime,
       incrementWrongStreak: state.incrementWrongStreak,
-      resetWrongStreak: state.resetWrongStreak
-    }))
+      resetWrongStreak: state.resetWrongStreak,
+    })),
   );
 
   const speedStopwatch = useStopwatch({ autoStart: false });
@@ -65,7 +65,7 @@ const KanjiInputGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playClick } = useClick();
@@ -98,7 +98,7 @@ const KanjiInputGame = ({
     : selectedKanjiObjs.find(obj => obj.kanjiChar === correctChar);
 
   const [currentKanjiObj, setCurrentKanjiObj] = useState<IKanjiObj>(
-    correctKanjiObj as IKanjiObj
+    correctKanjiObj as IKanjiObj,
   );
 
   const targetChar = isReverse
@@ -106,12 +106,12 @@ const KanjiInputGame = ({
     : [
         ...(correctKanjiObj?.meanings ?? []),
         ...(correctKanjiObj?.kunyomi?.map(k => k.split(' ')[0]) ?? []),
-        ...(correctKanjiObj?.onyomi?.map(k => k.split(' ')[0]) ?? [])
+        ...(correctKanjiObj?.onyomi?.map(k => k.split(' ')[0]) ?? []),
       ];
 
   const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
   const [feedback, setFeedback] = useState<React.ReactElement>(
-    <>{'feedback ~'}</>
+    <>{'feedback ~'}</>,
   );
 
   useEffect(() => {
@@ -226,7 +226,7 @@ const KanjiInputGame = ({
       <>
         <span className='text-[var(--secondary-color)]'>{`${displayText} = ${answerText} `}</span>
         <CircleCheck className='inline text-[var(--main-color)]' />
-      </>
+      </>,
     );
   };
 
@@ -254,7 +254,7 @@ const KanjiInputGame = ({
 
     const newChar = adaptiveSelector.selectWeightedCharacter(
       sourceArray,
-      correctChar
+      correctChar,
     );
     adaptiveSelector.markCharacterSeen(newChar);
     setCorrectChar(newChar);
@@ -291,7 +291,7 @@ const KanjiInputGame = ({
       className={clsx(
         'flex w-full flex-col items-center sm:w-4/5',
         gapSize,
-        isHidden ? 'hidden' : ''
+        isHidden ? 'hidden' : '',
       )}
     >
       {/* <GameIntel gameMode={gameMode} /> */}
@@ -314,7 +314,7 @@ const KanjiInputGame = ({
                 stiffness: 150,
                 damping: 20,
                 mass: 1,
-                duration: 0.5
+                duration: 0.5,
               }}
               key={correctChar}
               className='flex flex-row items-center gap-1'
@@ -345,7 +345,7 @@ const KanjiInputGame = ({
             value={inputValue}
             placeholder='Type your answer...'
             disabled={showContinue}
-            rows={2}
+            rows={4}
             className={clsx(
               'w-full max-w-xs sm:max-w-sm md:max-w-md',
               'rounded-2xl px-5 py-4',
@@ -354,7 +354,7 @@ const KanjiInputGame = ({
               'text-[var(--secondary-color)] placeholder:text-base placeholder:font-normal placeholder:text-[var(--secondary-color)]/40',
               'resize-none focus:outline-none',
               'transition-colors duration-200 ease-out',
-              showContinue && 'cursor-not-allowed opacity-60'
+              showContinue && 'cursor-not-allowed opacity-60',
             )}
             onChange={e => setInputValue(e.target.value)}
             onKeyDown={e => {

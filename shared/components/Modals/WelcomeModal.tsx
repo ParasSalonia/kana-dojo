@@ -12,7 +12,7 @@ import {
   AudioLines,
   VolumeX,
   Joystick,
-  Dice5
+  Dice5,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -20,7 +20,7 @@ import useOnboardingStore from '@/shared/store/useOnboardingStore';
 import {
   themeSets,
   useAudioPreferences,
-  useThemePreferences
+  useThemePreferences,
 } from '@/features/Preferences';
 import { useClick } from '@/shared/hooks/useAudio';
 import { buttonBorderStyles, cardBorderStyles } from '@/shared/lib/styles';
@@ -33,7 +33,7 @@ const WelcomeModal = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const hasSeenWelcome = useOnboardingStore(state => state.hasSeenWelcome);
   const setHasSeenWelcome = useOnboardingStore(
-    state => state.setHasSeenWelcome
+    state => state.setHasSeenWelcome,
   );
 
   const [step, setStep] = useState<
@@ -47,7 +47,7 @@ const WelcomeModal = () => {
     font: currentFont,
     setFont,
     displayKana,
-    setDisplayKana
+    setDisplayKana,
   } = useThemePreferences();
 
   const { silentMode, setSilentMode } = useAudioPreferences();
@@ -59,10 +59,16 @@ const WelcomeModal = () => {
 
   useEffect(() => {
     const isDev = process.env.NODE_ENV === 'development';
+    // In Vercel preview deployments, NEXT_PUBLIC_VERCEL_ENV is 'preview' (not 'production')
+    // This means analytics are disabled in previews, so we show the modal every time like in dev
+    const isPreviewDeployment =
+      process.env.NODE_ENV === 'production' &&
+      process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production';
     const isBaseRoute =
       pathname === '/' || pathname === '/en' || pathname === '/ja';
 
-    if (!hasSeenWelcome || (isDev && isBaseRoute)) {
+    // Show modal if user hasn't seen it, OR in dev/preview mode on home page
+    if (!hasSeenWelcome || ((isDev || isPreviewDeployment) && isBaseRoute)) {
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 1000);
@@ -222,7 +228,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       !localDisplayKana
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -246,7 +252,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       localDisplayKana
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -280,7 +286,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       !localSilentMode
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -305,7 +311,7 @@ const WelcomeModal = () => {
                       'hover:border-[var(--main-color)]/50',
                       localSilentMode
                         ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                        : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                        : 'border-[var(--border-color)] bg-[var(--card-color)]',
                     )}
                     onClick={() => {
                       playClick();
@@ -348,7 +354,7 @@ const WelcomeModal = () => {
                   'w-full cursor-pointer rounded-lg border-2 border-black/30 p-3 transition-colors duration-200',
                   'hover:border-[var(--main-color)] hover:bg-[var(--background-color)]',
                   buttonBorderStyles,
-                  'flex items-center justify-center gap-2 text-[var(--main-color)]'
+                  'flex items-center justify-center gap-2 text-[var(--main-color)]',
                 )}
                 onClick={() => {
                   playClick();
@@ -367,29 +373,27 @@ const WelcomeModal = () => {
               </button>
             </div>
 
-            <div className='max-h-96 space-y-4 overflow-y-auto px-1'>
+            <div className='max-h-96 space-y-6 overflow-y-auto px-1'>
               {themeSets.map(themeSet => (
                 <div key={themeSet.name} className='space-y-3'>
-                  <h3 className='flex items-center gap-2 text-lg font-semibold text-[var(--main-color)]'>
+                  <div className='flex items-center gap-2 text-lg font-medium text-[var(--main-color)]'>
                     <themeSet.icon size={20} />
                     {themeSet.name}
-                  </h3>
-                  <div className='grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6'>
+                    <span className='text-sm font-normal text-[var(--secondary-color)]'>
+                      ({themeSet.themes.length})
+                    </span>
+                  </div>
+                  <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'>
                     {themeSet.themes.map(theme => (
                       <button
                         key={theme.id}
-                        className={clsx(
-                          'cursor-pointer rounded-md border-2 p-1.5 transition-all duration-200',
-                          'overflow-hidden hover:border-[var(--main-color)]/50 active:scale-95',
-                          'h-12 w-full',
-                          localTheme === theme.id
-                            ? 'border-[var(--main-color)]'
-                            : 'border-transparent hover:border-[var(--border-color)]'
-                        )}
+                        className='cursor-pointer rounded-lg p-3 transition-all duration-200 hover:opacity-90 active:scale-95'
                         style={{
                           backgroundColor: theme.backgroundColor,
-                          color: theme.mainColor,
-                          borderColor: theme.borderColor
+                          border:
+                            localTheme === theme.id
+                              ? `1px solid ${theme.mainColor}`
+                              : `1px solid ${theme.borderColor}`,
                         }}
                         onClick={() => {
                           playClick();
@@ -398,13 +402,43 @@ const WelcomeModal = () => {
                         }}
                         title={theme.id}
                       >
-                        <div className='text-center'>
-                          <div className='text-xs font-medium'>
-                            {localTheme === theme.id && '● '}
-                            {theme.id === 'long'
-                              ? 'long'
-                              : theme.id.replace('-', ' ')}
-                          </div>
+                        <div className='mb-2'>
+                          <span
+                            className='text-sm capitalize'
+                            style={{ color: theme.mainColor }}
+                          >
+                            {localTheme === theme.id && '\u2B24 '}
+                            {theme.id.replaceAll('-', ' ')}
+                          </span>
+                        </div>
+                        <div className='flex gap-1.5'>
+                          <div
+                            className='h-4 w-4 rounded-full ring-1'
+                            style={
+                              {
+                                background: theme.backgroundColor,
+                                '--tw-ring-color': theme.borderColor,
+                              } as React.CSSProperties
+                            }
+                          />
+                          <div
+                            className='h-4 w-4 rounded-full ring-1'
+                            style={
+                              {
+                                background: theme.mainColor,
+                                '--tw-ring-color': theme.borderColor,
+                              } as React.CSSProperties
+                            }
+                          />
+                          <div
+                            className='h-4 w-4 rounded-full ring-1'
+                            style={
+                              {
+                                background: theme.secondaryColor,
+                                '--tw-ring-color': theme.borderColor,
+                              } as React.CSSProperties
+                            }
+                          />
                         </div>
                       </button>
                     ))}
@@ -434,7 +468,7 @@ const WelcomeModal = () => {
                   'w-full cursor-pointer rounded-lg border-2 border-black/30 p-3 transition-colors duration-200',
                   'hover:border-[var(--main-color)] hover:bg-[var(--background-color)]',
                   buttonBorderStyles,
-                  'flex items-center justify-center gap-2 text-[var(--main-color)]'
+                  'flex items-center justify-center gap-2 text-[var(--main-color)]',
                 )}
                 onClick={() => {
                   playClick();
@@ -449,38 +483,50 @@ const WelcomeModal = () => {
               </button>
             </div>
 
-            <div className='scrollbar-thin scrollbar-thumb-[var(--border-color)] scrollbar-track-transparent max-h-80 space-y-3 overflow-y-auto p-1 pr-2'>
-              {modalFonts.map((fontObj: (typeof modalFonts)[number]) => (
-                <button
-                  key={fontObj.name}
-                  className={clsx(
-                    'w-full cursor-pointer rounded-lg border-2 p-3 text-left transition-colors duration-200',
-                    'hover:border-[var(--main-color)]/70',
-                    localFont === fontObj.name
-                      ? 'border-[var(--main-color)] bg-[var(--background-color)]'
-                      : 'border-[var(--border-color)] bg-[var(--card-color)]'
-                  )}
-                  onClick={() => {
-                    playClick();
-                    setLocalFont(fontObj.name);
-                    setFont(fontObj.name);
-                  }}
-                >
-                  <div className={clsx('space-y-1', fontObj.font.className)}>
-                    <div className='flex items-center justify-between'>
-                      <span className='text-sm font-medium text-[var(--main-color)]'>
-                        {localFont === fontObj.name && '● '}
+            <div className='scrollbar-thin scrollbar-thumb-[var(--border-color)] scrollbar-track-transparent max-h-80 space-y-4 overflow-y-auto p-1 pr-2'>
+              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                {modalFonts.map((fontObj: (typeof modalFonts)[number]) => (
+                  <button
+                    key={fontObj.name}
+                    className={clsx(
+                      'flex cursor-pointer items-center justify-center overflow-hidden rounded-xl border-0 px-4 py-4 transition-all duration-200 hover:opacity-90 active:scale-95',
+                      localFont === fontObj.name
+                        ? 'bg-[var(--background-color)]'
+                        : 'bg-[var(--card-color)]',
+                    )}
+                    style={{
+                      border:
+                        localFont === fontObj.name
+                          ? '1px solid var(--main-color)'
+                          : '1px solid var(--card-color)',
+                    }}
+                    onClick={() => {
+                      playClick();
+                      setLocalFont(fontObj.name);
+                      setFont(fontObj.name);
+                    }}
+                  >
+                    <p
+                      className={clsx(
+                        'text-center text-xl',
+                        fontObj.font.className,
+                      )}
+                    >
+                      <span className='text-[var(--secondary-color)]'>
+                        {localFont === fontObj.name ? '\u2B24 ' : ''}
+                      </span>
+                      <span className='text-[var(--main-color)]'>
                         {fontObj.name}
                         {fontObj.name === 'Zen Maru Gothic' &&
                           ` ${t('steps.fonts.default')}`}
                       </span>
-                    </div>
-                    <div className='text-lg text-[var(--secondary-color)]'>
-                      かな道場
-                    </div>
-                  </div>
-                </button>
-              ))}
+                      <span className='ml-2 text-[var(--secondary-color)]'>
+                        かな道場
+                      </span>
+                    </p>
+                  </button>
+                ))}
+              </div>
               <div className='mt-4 rounded-lg bg-[var(--background-color)] p-3 text-center'>
                 <p className='text-sm text-[var(--secondary-color)]'>
                   {t('steps.fonts.moreInfo')}{' '}
@@ -545,7 +591,7 @@ const WelcomeModal = () => {
             'max-h-[85vh] w-full overflow-y-auto md:w-4/5 lg:w-3/5',
             'm-3 rounded-2xl bg-[var(--card-color)]',
             'shadow-2xl shadow-black/20',
-            cardBorderStyles
+            cardBorderStyles,
           )}
           onClick={e => e.stopPropagation()}
         >
@@ -562,7 +608,7 @@ const WelcomeModal = () => {
                       'behavior',
                       'themes',
                       'fonts',
-                      'complete'
+                      'complete',
                     ].indexOf(step) + 1
                   }
                   aria-valuemax={5}
@@ -575,7 +621,7 @@ const WelcomeModal = () => {
                           'behavior',
                           'themes',
                           'fonts',
-                          'complete'
+                          'complete',
                         ].indexOf(step) >= index;
                       return (
                         <div
@@ -584,12 +630,12 @@ const WelcomeModal = () => {
                             'h-2 w-2 rounded-full transition-all duration-300',
                             isActive
                               ? 'scale-110 bg-[var(--main-color)]'
-                              : 'scale-100 bg-[var(--border-color)]'
+                              : 'scale-100 bg-[var(--border-color)]',
                           )}
                           title={`Step ${index + 1}: ${stepName}`}
                         />
                       );
-                    }
+                    },
                   )}
                 </div>
               </div>
@@ -599,7 +645,7 @@ const WelcomeModal = () => {
                 className={clsx(
                   'cursor-pointer rounded-lg p-2 transition-colors duration-200',
                   'hover:bg-[var(--background-color)]',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                 )}
               >
                 <X size={20} />
@@ -623,7 +669,7 @@ const WelcomeModal = () => {
                       'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 sm:px-6 sm:py-3',
                       'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
                       'transition-all duration-200 hover:bg-[var(--background-color)]',
-                      'text-sm sm:text-base'
+                      'text-sm sm:text-base',
                     )}
                   >
                     <ChevronLeft
@@ -645,7 +691,7 @@ const WelcomeModal = () => {
                     'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-2 sm:px-8 sm:py-3',
                     'text-sm font-medium text-[var(--main-color)] sm:text-base',
                     buttonBorderStyles,
-                    'transition-all duration-200 hover:bg-[var(--background-color)] active:scale-98'
+                    'transition-all duration-200 hover:bg-[var(--background-color)] active:scale-98',
                   )}
                 >
                   <span>

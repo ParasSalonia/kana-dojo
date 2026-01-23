@@ -18,7 +18,7 @@ const KanaOrbit = () => {
   const rings = [
     { count: 8, radius: 100, duration: 20, direction: 1 },
     { count: 12, radius: 170, duration: 35, direction: -1 },
-    { count: 16, radius: 240, duration: 50, direction: 1 }
+    { count: 16, radius: 240, duration: 50, direction: 1 },
   ];
 
   const orbitals = rings.flatMap((ring, ringIdx) =>
@@ -30,9 +30,9 @@ const KanaOrbit = () => {
         romanji: kana.romanji,
         ring: ringIdx,
         angle: (360 / ring.count) * i,
-        ...ring
+        ...ring,
       };
-    })
+    }),
   );
 
   if (!isMounted) return null;
@@ -52,7 +52,7 @@ const KanaOrbit = () => {
             className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--border-color)] opacity-30'
             style={{
               width: ring.radius * 2,
-              height: ring.radius * 2
+              height: ring.radius * 2,
             }}
           />
         ))}
@@ -64,7 +64,7 @@ const KanaOrbit = () => {
             className='absolute top-1/2 left-1/2 will-change-transform'
             style={{
               animation: `orbit ${o.duration}s linear infinite ${o.direction === -1 ? 'reverse' : ''}`,
-              animationDelay: `-${(o.angle / 360) * o.duration}s`
+              animationDelay: `-${(o.angle / 360) * o.duration}s`,
             }}
           >
             <span
@@ -76,7 +76,7 @@ const KanaOrbit = () => {
                     ? 'var(--accent-color)'
                     : 'var(--main-color)',
                 opacity: hoveredIdx === o.id ? 1 : 0.7,
-                scale: hoveredIdx === o.id ? '1.5' : '1'
+                scale: hoveredIdx === o.id ? '1.5' : '1',
               }}
               onMouseEnter={() => setHoveredIdx(o.id)}
               onMouseLeave={() => setHoveredIdx(null)}

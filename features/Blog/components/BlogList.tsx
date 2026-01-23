@@ -21,7 +21,7 @@ interface BlogListProps {
  */
 export function filterPostsByCategory(
   posts: BlogPostMeta[],
-  category: Category | null
+  category: Category | null,
 ): BlogPostMeta[] {
   if (category === null) {
     return posts;
@@ -36,15 +36,15 @@ export function filterPostsByCategory(
 export function BlogList({
   posts,
   className,
-  showFilter = true
+  showFilter = true,
 }: BlogListProps) {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
+    null,
   );
 
   const filteredPosts = useMemo(
     () => filterPostsByCategory(posts, selectedCategory),
-    [posts, selectedCategory]
+    [posts, selectedCategory],
   );
 
   return (

@@ -47,7 +47,7 @@ const OptionButton = memo(
     isReverse,
     kanjiObjMap,
     onClick,
-    buttonRef
+    buttonRef,
   }: OptionButtonProps) => {
     return (
       <button
@@ -65,7 +65,7 @@ const OptionButton = memo(
           isWrong &&
             'border-[var(--border-color)] hover:bg-[var(--card-color)]',
           !isWrong &&
-            'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]'
+            'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]',
         )}
         onClick={() => onClick(option)}
         lang={isReverse ? 'ja' : undefined}
@@ -87,14 +87,14 @@ const OptionButton = memo(
             isReverse ? '' : 'mr-4',
             isWrong
               ? 'text-[var(--border-color)]'
-              : 'text-[var(--secondary-color)]'
+              : 'text-[var(--secondary-color)]',
           )}
         >
           {index + 1}
         </span>
       </button>
     );
-  }
+  },
 );
 
 OptionButton.displayName = 'OptionButton';
@@ -116,11 +116,11 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
     isWordBuildingMode: isWordBuildingModeFromHook,
     isWordBuildingReverse,
     decideNextMode: decideNextWordBuildingMode,
-    recordWrongAnswer: recordWordBuildingWrong
+    recordWrongAnswer: recordWordBuildingWrong,
   } = useWordBuildingMode({
     minConsecutiveForTrigger: FORCE_WORD_BUILDING_MODE ? 0 : 3,
     baseProbability: FORCE_WORD_BUILDING_MODE ? 1.0 : 0.15,
-    maxProbability: FORCE_WORD_BUILDING_MODE ? 1.0 : 0.4
+    maxProbability: FORCE_WORD_BUILDING_MODE ? 1.0 : 0.4,
   });
 
   // Override with forced mode for testing
@@ -129,7 +129,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
 
   // Get the current JLPT level from the Kanji store
   const selectedKanjiCollection = useKanjiStore(
-    state => state.selectedKanjiCollection
+    state => state.selectedKanjiCollection,
   );
 
   const {
@@ -138,7 +138,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
     incrementKanjiCorrect,
     recordAnswerTime,
     incrementWrongStreak,
-    resetWrongStreak
+    resetWrongStreak,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -146,8 +146,8 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
       incrementKanjiCorrect: state.incrementKanjiCorrect,
       recordAnswerTime: state.recordAnswerTime,
       incrementWrongStreak: state.incrementWrongStreak,
-      resetWrongStreak: state.resetWrongStreak
-    }))
+      resetWrongStreak: state.resetWrongStreak,
+    })),
   );
 
   const speedStopwatch = useStopwatch({ autoStart: false });
@@ -157,7 +157,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -177,14 +177,14 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
   // Create Map for O(1) lookups instead of O(n) find() calls
   const kanjiObjMap = useMemo(
     () => new Map(selectedKanjiObjs.map(obj => [obj.kanjiChar, obj])),
-    [selectedKanjiObjs]
+    [selectedKanjiObjs],
   );
 
   // Find the correct object - O(1) lookup
   const correctKanjiObj = kanjiObjMap.get(correctChar);
 
   const [currentKanjiObj, setCurrentKanjiObj] = useState<IKanjiObj>(
-    correctKanjiObj as IKanjiObj
+    correctKanjiObj as IKanjiObj,
   );
 
   // What to display as the question
@@ -199,7 +199,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
   const getIncorrectOptions = () => {
     // Filter out the current kanji
     const incorrectKanjiObjs = selectedKanjiObjs.filter(
-      obj => obj.kanjiChar !== correctChar
+      obj => obj.kanjiChar !== correctChar,
     );
 
     if (!isReverse) {
@@ -221,22 +221,22 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
 
   const [shuffledOptions, setShuffledOptions] = useState(
     [targetChar, ...randomIncorrectOptions].sort(
-      () => random.real(0, 1) - 0.5
-    ) as string[]
+      () => random.real(0, 1) - 0.5,
+    ) as string[],
   );
 
   const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
   const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
-    []
+    [],
   );
 
   // Update shuffled options when correctChar or isReverse changes
   useEffect(() => {
     setShuffledOptions(
       [targetChar, ...getIncorrectOptions()].sort(
-        () => random.real(0, 1) - 0.5
-      ) as string[]
+        () => random.real(0, 1) - 0.5,
+      ) as string[],
     );
     setWrongSelectedAnswers([]);
   }, [correctChar, isReverse]);
@@ -301,7 +301,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
         <>
           <span className='text-[var(--secondary-color)]'>{`${displayChar} = ${selectedOption} `}</span>
           <CircleCheck className='inline text-[var(--main-color)]' />
-        </>
+        </>,
       );
     } else {
       handleWrongAnswer(selectedOption);
@@ -309,7 +309,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
         <>
           <span className='text-[var(--secondary-color)]'>{`${displayChar} ≠ ${selectedOption} `}</span>
           <CircleX className='inline text-[var(--main-color)]' />
-        </>
+        </>,
       );
     }
   };
@@ -366,7 +366,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
     // Use weighted selection - prioritizes characters user struggles with
     const newChar = adaptiveSelector.selectWeightedCharacter(
       sourceArray,
-      correctChar
+      correctChar,
     );
     adaptiveSelector.markCharacterSeen(newChar);
     setCorrectChar(newChar);
@@ -380,7 +380,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
       className={clsx(
         'flex w-full flex-col items-center gap-8 sm:w-4/5 sm:gap-10',
         isHidden ? 'hidden' : '',
-        !isReverse && ''
+        !isReverse && '',
       )}
     >
       {/* <GameIntel gameMode={gameMode} /> */}
@@ -418,7 +418,7 @@ const KanjiPickGame = ({ selectedKanjiObjs, isHidden }: KanjiPickGameProps) => {
           <div
             className={clsx(
               'flex w-full items-center gap-6',
-              isReverse ? 'flex-row justify-evenly' : 'flex-col'
+              isReverse ? 'flex-row justify-evenly' : 'flex-col',
             )}
           >
             {shuffledOptions.map((option, i) => (

@@ -45,11 +45,11 @@ export const useCustomThemeStore = create<ThemeStore>()(
         const id = template.id;
         const newTemplate: ThemeTemplate = {
           ...template,
-          id
+          id,
         };
 
         set(state => ({
-          themes: [...state.themes, newTemplate]
+          themes: [...state.themes, newTemplate],
         }));
 
         return id;
@@ -57,29 +57,29 @@ export const useCustomThemeStore = create<ThemeStore>()(
 
       removeTheme: id => {
         set(state => ({
-          themes: state.themes.filter(t => t.id !== id)
+          themes: state.themes.filter(t => t.id !== id),
         }));
       },
 
       getTheme: id => {
         return get().themes.find(t => t.id === id);
-      }
+      },
     }),
     {
       name: 'kanadojo-custom-themes', // localStorage key
       storage: createJSONStorage(() => localStorage),
       // Only persist themes
       partialize: state => ({
-        themes: state.themes
+        themes: state.themes,
       }),
       merge: (persistedState, currentState) => {
         const persisted = persistedState as Partial<ThemeStore> | undefined;
 
         return {
           ...currentState,
-          themes: persisted?.themes ?? DEFAULT_THEMES
+          themes: persisted?.themes ?? DEFAULT_THEMES,
         };
-      }
-    }
-  )
+      },
+    },
+  ),
 );

@@ -6,7 +6,7 @@ import {
   getBlogPost,
   extractHeadings,
   generateHeadingId,
-  postExists
+  postExists,
 } from '../lib/getBlogPost';
 import type { Locale, Heading } from '../types/blog';
 import { VALID_LOCALES } from '../types/blog';
@@ -14,7 +14,7 @@ import { VALID_LOCALES } from '../types/blog';
 // Test fixtures directory
 const TEST_FIXTURES_DIR = path.join(
   process.cwd(),
-  'features/Blog/content/posts'
+  'features/Blog/content/posts',
 );
 
 // Sample frontmatter for test posts
@@ -51,8 +51,8 @@ const testPosts = [
   {
     locale: 'en' as Locale,
     slug: 'english-only-post',
-    title: 'English Only Post'
-  }
+    title: 'English Only Post',
+  },
 ];
 
 beforeAll(() => {
@@ -69,11 +69,11 @@ beforeAll(() => {
     const filePath = path.join(
       TEST_FIXTURES_DIR,
       post.locale,
-      `${post.slug}.mdx`
+      `${post.slug}.mdx`,
     );
     fs.writeFileSync(
       filePath,
-      createTestPost(post.locale, post.slug, post.title)
+      createTestPost(post.locale, post.slug, post.title),
     );
   }
 });
@@ -84,7 +84,7 @@ afterAll(() => {
     const filePath = path.join(
       TEST_FIXTURES_DIR,
       post.locale,
-      `${post.slug}.mdx`
+      `${post.slug}.mdx`,
     );
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
@@ -188,22 +188,22 @@ Even more content
     expect(headings[0]).toEqual({
       id: 'heading-2',
       text: 'Heading 2',
-      level: 2
+      level: 2,
     });
     expect(headings[1]).toEqual({
       id: 'heading-3',
       text: 'Heading 3',
-      level: 3
+      level: 3,
     });
     expect(headings[2]).toEqual({
       id: 'heading-4',
       text: 'Heading 4',
-      level: 4
+      level: 4,
     });
     expect(headings[3]).toEqual({
       id: 'another-h2',
       text: 'Another H2',
-      level: 2
+      level: 2,
     });
   });
 
@@ -214,7 +214,7 @@ Even more content
           fc
             .string({ minLength: 1, maxLength: 50 })
             .filter(s => /[a-zA-Z0-9]/.test(s)), // Must have at least one alphanumeric
-          { minLength: 1, maxLength: 10 }
+          { minLength: 1, maxLength: 10 },
         ),
         (headingTexts: string[]) => {
           const content = headingTexts.map(text => `## ${text}`).join('\n\n');
@@ -225,9 +225,9 @@ Even more content
             expect(heading.id).toBeDefined();
             expect(typeof heading.id).toBe('string');
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -281,9 +281,9 @@ describe('generateHeadingId', () => {
 
           // ID should not have consecutive hyphens
           expect(id.includes('--')).toBe(false);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 

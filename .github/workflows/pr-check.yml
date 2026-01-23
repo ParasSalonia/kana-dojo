@@ -2,15 +2,20 @@ name: PR Quality Check
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
-  pull-requests: write
+
+concurrency:
+  group: pr-quality-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     if: ${{ !startsWith(github.head_ref, 'automation/') }}
 
     steps:
@@ -24,89 +29,28 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
-      - name: Run checks
-        id: check
+      - name: Prettier check (changed files only)
+        shell: bash
         run: |
-          npm run check 2>&1 | tee check_output.txt
-          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
-        continue-on-error: true
+          git fetch origin "${{ github.base_ref }}" --depth=1
 
-      - name: Comment on failure
-        if: steps.check.outputs.exit_code != '0'
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs');
-            const templates = require('./.github/templates/messages.cjs');
-            const t = templates.prCheck.failure;
+          changed_files=$(git diff --name-only --diff-filter=ACMRT "origin/${{ github.base_ref }}...HEAD" || true)
+          if [ -z "$changed_files" ]; then
+            echo "No changed files detected."
+            exit 0
+          fi
 
-            const output = fs.readFileSync('check_output.txt', 'utf8');
-            const maxLength = 60000;
-            let truncatedOutput = output.length > maxLength 
-              ? output.substring(0, maxLength) + '\n\n... (output truncated)'
-              : output;
+          prettier_files=$(echo "$changed_files" | grep -E '\\.(ts|tsx|js|jsx|json|md|yaml|yml|css|scss|html)$' || true)
+          if [ -z "$prettier_files" ]; then
+            echo "No Prettier-supported files changed."
+            exit 0
+          fi
 
-            const howToFix = t.howToFix.map(function(step, i) { 
-              return (i + 1) + '. ' + step; 
-            }).join('\n');
+          echo "Running Prettier check on:"
+          echo "$prettier_files"
+          npx prettier --check $prettier_files
 
-            const body = t.title + '\n\n' +
-              t.body + '\n\n' +
-              '<details>\n<summary>View full output</summary>\n\n' +
-              '```\n' + truncatedOutput + '\n```\n\n</details>\n\n' +
-              '**How to fix:**\n' + howToFix + '\n\n' +
-              t.footer;
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: body
-            });
-
-      - name: Fail if check failed
-        if: steps.check.outputs.exit_code != '0'
-        run: exit 1
-
-      - name: Comment on success
-        if: steps.check.outputs.exit_code == '0'
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const templates = require('./.github/templates/messages.cjs');
-            const t = templates.prCheck.success;
-
-            let comments = [];
-            let page = 1;
-            while (true) {
-              const { data: pageItems } = await github.rest.issues.listComments({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                per_page: 100,
-                page: page
-              });
-              comments = comments.concat(pageItems);
-              if (!pageItems || pageItems.length < 100) {
-                break;
-              }
-              page += 1;
-            }
-
-            const hasSuccessComment = comments.some(function(c) {
-              return c.user.login === 'github-actions[bot]' && 
-                     c.body.includes('Quality Check Passed');
-            });
-
-            if (!hasSuccessComment) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                body: t.title + '\n\n' + t.body + '\n\n' + t.footer
-              });
-            }
+      - name: Run full check
+        run: npm run check

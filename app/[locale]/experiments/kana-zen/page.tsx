@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Zen - Peaceful Floating Characters | KanaDojo',
-  description: 'Relax with gently floating kana in a peaceful atmosphere.'
+  description: 'Relax with gently floating kana in a peaceful atmosphere.',
 };
 
 export default function KanaZenPage() {

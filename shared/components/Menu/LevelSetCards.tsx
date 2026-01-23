@@ -10,7 +10,7 @@ import {
   Filter,
   FilterX,
   Loader2,
-  MousePointer
+  MousePointer,
 } from 'lucide-react';
 
 import { chunkArray } from '@/shared/lib/helperFunctions';
@@ -48,7 +48,7 @@ type LevelSetCardsProps<TLevel extends string, TItem> = {
 
   collapsedRows: number[];
   setCollapsedRows: (
-    updater: number[] | ((prev: number[]) => number[])
+    updater: number[] | ((prev: number[]) => number[]),
   ) => void;
 
   masteryByKey: Record<string, MasteryStats>;
@@ -79,7 +79,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
   getMasteryKey,
   renderSetDictionary,
   loadingText,
-  tipText
+  tipText,
 }: LevelSetCardsProps<TLevel, TItem>) => {
   const { playClick } = useClick();
 
@@ -133,8 +133,8 @@ const LevelSetCards = <TLevel extends string, TItem>({
         [selectedUnitName]: {
           data: items,
           name: getCollectionName(selectedUnitName),
-          prevLength: cumulativeCounts[selectedUnitName]
-        }
+          prevLength: cumulativeCounts[selectedUnitName],
+        },
       }));
     };
 
@@ -148,7 +148,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
     cumulativeCounts,
     getCollectionName,
     loadItemsByLevel,
-    selectedUnitName
+    selectedUnitName,
   ]);
 
   const selectedCollection = collections[selectedUnitName];
@@ -168,11 +168,11 @@ const LevelSetCards = <TLevel extends string, TItem>({
       if (!selectedCollection) return false;
       const itemsInSet = selectedCollection.data.slice(
         setStart * itemsPerSet,
-        setEnd * itemsPerSet
+        setEnd * itemsPerSet,
       );
       return itemsInSet.every(item => masteredKeys.has(getMasteryKey(item)));
     },
-    [getMasteryKey, itemsPerSet, masteredKeys, selectedCollection]
+    [getMasteryKey, itemsPerSet, masteredKeys, selectedCollection],
   );
 
   const numColumns = useGridColumns();
@@ -185,12 +185,12 @@ const LevelSetCards = <TLevel extends string, TItem>({
           filteredSets: [] as LevelSetCardsSet[],
           masteredCount: 0,
           allRows: [] as LevelSetCardsSet[][],
-          totalRows: 0
+          totalRows: 0,
         };
       }
 
       const sets: LevelSetCardsSet[] = new Array(
-        Math.ceil(selectedCollection.data.length / itemsPerSet)
+        Math.ceil(selectedCollection.data.length / itemsPerSet),
       )
         .fill({})
         .map((_, i) => ({
@@ -198,7 +198,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
           start: i,
           end: i + 1,
           id: `Set ${i + 1}`,
-          isMastered: isSetMastered(i, i + 1)
+          isMastered: isSetMastered(i, i + 1),
         }));
 
       const filtered = hideMastered
@@ -212,14 +212,14 @@ const LevelSetCards = <TLevel extends string, TItem>({
         filteredSets: filtered,
         masteredCount: sets.filter(set => set.isMastered).length,
         allRows: rows,
-        totalRows: rows.length
+        totalRows: rows.length,
       };
     }, [
       hideMastered,
       isSetMastered,
       itemsPerSet,
       numColumns,
-      selectedCollection
+      selectedCollection,
     ]);
 
   const [visibleRowCount, setVisibleRowCount] = useState(INITIAL_ROWS);
@@ -252,7 +252,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
           loadMoreRows();
         }
       },
-      { rootMargin: '200px' }
+      { rootMargin: '200px' },
     );
 
     observer.observe(loader);
@@ -267,7 +267,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
 
     const setItems = selectedCollection.data.slice(
       set.start * itemsPerSet,
-      set.end * itemsPerSet
+      set.end * itemsPerSet,
     );
 
     if (selectedSets.includes(setName)) {
@@ -300,8 +300,8 @@ const LevelSetCards = <TLevel extends string, TItem>({
       const randomItems = randomSets.flatMap(set =>
         selectedCollection.data.slice(
           set.start * itemsPerSet,
-          set.end * itemsPerSet
-        )
+          set.end * itemsPerSet,
+        ),
       );
       toggleItems(randomItems);
     }
@@ -333,6 +333,8 @@ const LevelSetCards = <TLevel extends string, TItem>({
         className='px-2 py-3 opacity-90'
         borderRadius='3xl'
         borderBottomThickness={14}
+        colorScheme='secondary'
+        borderColorScheme='secondary'
       >
         <MousePointer className={cn('fill-current')} />
         Quick Select
@@ -363,7 +365,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
               'border-2 border-[var(--border-color)]',
               'hover:bg-[var(--card-color)]',
               hideMastered &&
-                'border-[var(--main-color)] bg-[var(--card-color)]'
+                'border-[var(--main-color)] bg-[var(--card-color)]',
             )}
           >
             {hideMastered ? (
@@ -401,12 +403,12 @@ const LevelSetCards = <TLevel extends string, TItem>({
                 setCollapsedRows(prev =>
                   prev.includes(rowIndex)
                     ? prev.filter(i => i !== rowIndex)
-                    : [...prev, rowIndex]
+                    : [...prev, rowIndex],
                 );
               }}
               className={clsx(
                 'group ml-4 flex flex-row items-center gap-2 rounded-xl text-3xl hover:cursor-pointer',
-                collapsedRows.includes(rowIndex) && 'mb-1.5'
+                collapsedRows.includes(rowIndex) && 'mb-1.5',
               )}
             >
               <ChevronUp
@@ -414,7 +416,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
                   'text-[var(--border-color)] duration-250',
                   'max-md:group-active:text-[var(--secondary-color)]',
                   'md:group-hover:text-[var(--secondary-color)]',
-                  collapsedRows.includes(rowIndex) && 'rotate-180'
+                  collapsedRows.includes(rowIndex) && 'rotate-180',
                 )}
                 size={28}
               />
@@ -429,13 +431,13 @@ const LevelSetCards = <TLevel extends string, TItem>({
               <div
                 className={clsx(
                   'flex w-full flex-col',
-                  'md:grid md:items-start lg:grid-cols-2 2xl:grid-cols-3'
+                  'md:grid md:items-start lg:grid-cols-2 2xl:grid-cols-3',
                 )}
               >
                 {rowSets.map((setTemp, i) => {
                   const setItems = selectedCollection.data.slice(
                     setTemp.start * itemsPerSet,
-                    setTemp.end * itemsPerSet
+                    setTemp.end * itemsPerSet,
                   );
                   const isSelected = selectedSets.includes(setTemp.name);
 
@@ -445,7 +447,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
                       className={clsx(
                         'flex h-full flex-col md:px-4',
                         'border-[var(--border-color)]',
-                        i < rowSets.length - 1 && 'md:border-r-1'
+                        i < rowSets.length - 1 && 'md:border-r-1',
                       )}
                     >
                       <button
@@ -456,18 +458,18 @@ const LevelSetCards = <TLevel extends string, TItem>({
                           'border-b-10 px-2 py-3 max-md:mx-4',
                           isSelected
                             ? 'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]'
-                            : 'border-[var(--border-color)] bg-[var(--background-color)] hover:border-[var(--main-color)]/70'
+                            : 'border-[var(--border-color)] bg-[var(--background-color)] hover:border-[var(--main-color)]/70',
                         )}
                         onClick={e => {
                           e.currentTarget.blur();
                           playClick();
                           if (isSelected) {
                             setSelectedSets(
-                              selectedSets.filter(set => set !== setTemp.name)
+                              selectedSets.filter(set => set !== setTemp.name),
                             );
                           } else {
                             setSelectedSets([
-                              ...new Set(selectedSets.concat(setTemp.name))
+                              ...new Set(selectedSets.concat(setTemp.name)),
                             ]);
                           }
                           toggleItems(setItems);

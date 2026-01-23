@@ -32,7 +32,7 @@ const KanaCatch = () => {
       romanji: kana.romanji,
       x: Math.random() * 80 + 10,
       y: -5,
-      speed: 0.3 + Math.random() * 0.3
+      speed: 0.3 + Math.random() * 0.3,
     };
   }, [idCounter]);
 
@@ -127,7 +127,7 @@ const KanaCatch = () => {
           style={{
             left: `${k.x}%`,
             top: `${k.y}%`,
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
           }}
         >
           <span lang='ja' className='text-3xl text-[var(--main-color)]'>
@@ -141,7 +141,7 @@ const KanaCatch = () => {
         className='absolute bottom-[8%] h-12 w-20 rounded-b-xl border-4 border-t-0 border-[var(--accent-color)] bg-[var(--accent-color)]/20'
         style={{
           left: `${basketX}%`,
-          transform: 'translateX(-50%)'
+          transform: 'translateX(-50%)',
         }}
       >
         <span className='absolute -top-6 left-1/2 -translate-x-1/2 text-2xl'>

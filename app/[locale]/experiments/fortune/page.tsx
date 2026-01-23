@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Fortune - Spin the Wheel | KanaDojo',
-  description: 'Spin the fortune wheel and receive your daily kana fortune!'
+  description: 'Spin the fortune wheel and receive your daily kana fortune!',
 };
 
 export default function FortunePage() {

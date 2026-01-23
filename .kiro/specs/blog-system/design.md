@@ -388,14 +388,14 @@ The blog system will use **fast-check** for property-based testing in TypeScript
 export default defineConfig({
   test: {
     // Run 100 iterations per property test
-    testTimeout: 30000 // Allow time for 100 iterations
-  }
+    testTimeout: 30000, // Allow time for 100 iterations
+  },
 });
 
 // Property test configuration
 fc.configureGlobal({
   numRuns: 100, // Minimum 100 iterations per property
-  verbose: true
+  verbose: true,
 });
 ```
 
@@ -422,7 +422,7 @@ describe('calculateReadingTime', () => {
         const expectedTime = Math.ceil(wordCount / 200) || 1;
         const actualTime = calculateReadingTime(content);
         return actualTime === expectedTime;
-      })
+      }),
     );
   });
 });
@@ -459,7 +459,7 @@ const categoryArb = fc.constantFrom(
   'kanji',
   'vocabulary',
   'grammar',
-  'culture'
+  'culture',
 );
 const localeArb = fc.constantFrom('en', 'es', 'ja');
 const difficultyArb = fc.constantFrom('beginner', 'intermediate', 'advanced');
@@ -475,7 +475,7 @@ const blogPostMetaArb = fc.record({
   category: categoryArb,
   tags: fc.array(fc.string({ minLength: 1 }), { minLength: 1, maxLength: 10 }),
   readingTime: fc.integer({ min: 1, max: 60 }),
-  locale: localeArb
+  locale: localeArb,
 });
 ```
 

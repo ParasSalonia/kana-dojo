@@ -4,7 +4,7 @@ import {
   motion,
   AnimatePresence,
   type Variants,
-  type MotionStyle
+  type MotionStyle,
 } from 'framer-motion';
 import clsx from 'clsx';
 import useKanjiStore, { IKanjiObj } from '@/features/Kanji/store/useKanjiStore';
@@ -30,7 +30,7 @@ const springConfig = {
   type: 'spring' as const,
   stiffness: 400,
   damping: 30,
-  mass: 0.8
+  mass: 0.8,
 };
 
 // Premium entry animation variants for option tiles
@@ -39,9 +39,9 @@ const tileContainerVariants = {
   visible: {
     transition: {
       staggerChildren: 0.08,
-      delayChildren: 0.15
-    }
-  }
+      delayChildren: 0.15,
+    },
+  },
 };
 
 const tileEntryVariants = {
@@ -49,7 +49,7 @@ const tileEntryVariants = {
     opacity: 0,
     scale: 0.7,
     y: 20,
-    rotateX: -15
+    rotateX: -15,
   },
   visible: {
     opacity: 1,
@@ -60,16 +60,16 @@ const tileEntryVariants = {
       type: 'spring' as const,
       stiffness: 350,
       damping: 25,
-      mass: 0.8
-    }
-  }
+      mass: 0.8,
+    },
+  },
 };
 
 // Duolingo-like slide animation for game content transitions
 const gameContentVariants = {
   hidden: {
     opacity: 0,
-    x: 80
+    x: 80,
   },
   visible: {
     opacity: 1,
@@ -79,13 +79,13 @@ const gameContentVariants = {
         type: 'spring' as const,
         stiffness: 350,
         damping: 30,
-        mass: 0.7
+        mass: 0.7,
       },
       opacity: {
         duration: 0.25,
-        ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number]
-      }
-    }
+        ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number],
+      },
+    },
   },
   exit: {
     opacity: 0,
@@ -95,14 +95,14 @@ const gameContentVariants = {
         type: 'spring' as const,
         stiffness: 350,
         damping: 30,
-        mass: 0.7
+        mass: 0.7,
       },
       opacity: {
         duration: 0.25,
-        ease: [0.4, 0.0, 1, 1] as [number, number, number, number]
-      }
-    }
-  }
+        ease: [0.4, 0.0, 1, 1] as [number, number, number, number],
+      },
+    },
+  },
 };
 
 // Celebration bounce animation for correct answers - Duolingo-style sequential jump
@@ -111,9 +111,9 @@ const celebrationContainerVariants = {
   celebrate: {
     transition: {
       staggerChildren: 0.18,
-      delayChildren: 0.08
-    }
-  }
+      delayChildren: 0.08,
+    },
+  },
 };
 
 const celebrationBounceVariants = {
@@ -121,7 +121,7 @@ const celebrationBounceVariants = {
     y: 0,
     scaleX: 1,
     scaleY: 1,
-    opacity: 1
+    opacity: 1,
   },
   celebrate: {
     y: [0, -32, -35, 0, -10, 0],
@@ -132,9 +132,9 @@ const celebrationBounceVariants = {
     transition: {
       duration: 1,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      times: [0, 0.25, 0.35, 0.6, 0.8, 1]
-    }
-  }
+      times: [0, 0.25, 0.35, 0.6, 0.8, 1],
+    },
+  },
 };
 
 // Tile styles shared between active and blank tiles
@@ -160,7 +160,7 @@ const ActiveTile = memo(
     isDisabled,
     isKanji,
     variants,
-    motionStyle
+    motionStyle,
   }: TileProps) => {
     return (
       <motion.button
@@ -177,7 +177,7 @@ const ActiveTile = memo(
           'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]',
           isDisabled && 'cursor-not-allowed opacity-50',
           // Larger font for kanji tiles, smaller for meaning tiles
-          isKanji ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'
+          isKanji ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl',
         )}
         transition={springConfig}
         lang={isKanji ? 'ja' : undefined}
@@ -186,7 +186,7 @@ const ActiveTile = memo(
         {char}
       </motion.button>
     );
-  }
+  },
 );
 
 ActiveTile.displayName = 'ActiveTile';
@@ -200,13 +200,13 @@ const BlankTile = memo(
           tileBaseStyles,
           'border-transparent bg-[var(--border-color)]/30',
           'select-none',
-          isKanji ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'
+          isKanji ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl',
         )}
       >
         <span className='opacity-0'>{char}</span>
       </div>
     );
-  }
+  },
 );
 
 BlankTile.displayName = 'BlankTile';
@@ -233,25 +233,25 @@ const KanjiWordBuildingGame = ({
   isReverse: externalIsReverse,
   distractorCount: externalDistractorCount = 3,
   onCorrect: externalOnCorrect,
-  onWrong: externalOnWrong
+  onWrong: externalOnWrong,
 }: KanjiWordBuildingGameProps) => {
   // Smart reverse mode - used when not controlled externally
   const {
     isReverse: internalIsReverse,
     decideNextMode: decideNextReverseMode,
-    recordWrongAnswer: recordReverseModeWrong
+    recordWrongAnswer: recordReverseModeWrong,
   } = useSmartReverseMode();
 
   // Use external isReverse if provided, otherwise use internal smart mode
   const isReverse = externalIsReverse ?? internalIsReverse;
   const distractorCount = Math.min(
     externalDistractorCount,
-    selectedKanjiObjs.length - 1
+    selectedKanjiObjs.length - 1,
   );
 
   // Get the current JLPT level from the Kanji store
   const selectedKanjiCollection = useKanjiStore(
-    state => state.selectedKanjiCollection
+    state => state.selectedKanjiCollection,
   );
 
   // Answer timing for speed achievements
@@ -273,7 +273,7 @@ const KanjiWordBuildingGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     incrementCharacterScore,
-    addCorrectAnswerTime
+    addCorrectAnswerTime,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -286,14 +286,14 @@ const KanjiWordBuildingGame = ({
       incrementWrongAnswers: state.incrementWrongAnswers,
       addCharacterToHistory: state.addCharacterToHistory,
       incrementCharacterScore: state.incrementCharacterScore,
-      addCorrectAnswerTime: state.addCorrectAnswerTime
-    }))
+      addCorrectAnswerTime: state.addCorrectAnswerTime,
+    })),
   );
 
   // Create Map for O(1) lookups
   const kanjiObjMap = useMemo(
     () => new Map(selectedKanjiObjs.map(obj => [obj.kanjiChar, obj])),
-    [selectedKanjiObjs]
+    [selectedKanjiObjs],
   );
 
   const [bottomBarState, setBottomBarState] = useState<BottomBarState>('check');
@@ -335,14 +335,14 @@ const KanjiWordBuildingGame = ({
 
     // Shuffle all tiles
     const allTiles = [correctAnswer, ...distractors].sort(
-      () => random.real(0, 1) - 0.5
+      () => random.real(0, 1) - 0.5,
     );
 
     return {
       kanjiChar: selectedKanji,
       correctAnswer,
       allTiles,
-      displayChar: isReverse ? selectedKanjiObj.meanings[0] : selectedKanji
+      displayChar: isReverse ? selectedKanjiObj.meanings[0] : selectedKanji,
     };
   }, [isReverse, selectedKanjiObjs, distractorCount, kanjiObjMap]);
 
@@ -354,7 +354,7 @@ const KanjiWordBuildingGame = ({
   const [currentKanjiObjForSummary, setCurrentKanjiObjForSummary] =
     useState<IKanjiObj | null>(null);
   const [feedback, setFeedback] = useState<React.ReactElement>(
-    <>{'feedback ~'}</>
+    <>{'feedback ~'}</>,
   );
 
   const resetGame = useCallback(() => {
@@ -443,7 +443,7 @@ const KanjiWordBuildingGame = ({
         <>
           <span className='text-[var(--secondary-color)]'>{`${displayText} = ${questionData.correctAnswer} `}</span>
           <CircleCheck className='inline text-[var(--main-color)]' />
-        </>
+        </>,
       );
 
       // Advance smart reverse mode if not externally controlled
@@ -495,7 +495,7 @@ const KanjiWordBuildingGame = ({
     decideNextReverseMode,
     recordReverseModeWrong,
     addCorrectAnswerTime,
-    recordAnswerTime
+    recordAnswerTime,
   ]);
 
   // Handle Continue button (only for correct answers)
@@ -538,7 +538,7 @@ const KanjiWordBuildingGame = ({
         setPlacedTiles(prev => [...prev, char]);
       }
     },
-    [isChecking, bottomBarState, placedTiles, playClick]
+    [isChecking, bottomBarState, placedTiles, playClick],
   );
 
   // Not enough characters
@@ -566,7 +566,7 @@ const KanjiWordBuildingGame = ({
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-6 sm:w-4/5 sm:gap-10',
-        isHidden && 'hidden'
+        isHidden && 'hidden',
       )}
     >
       <AnimatePresence mode='wait'>
@@ -600,7 +600,7 @@ const KanjiWordBuildingGame = ({
               >
                 <span
                   className={clsx(
-                    isReverse ? 'text-5xl sm:text-6xl' : 'text-8xl sm:text-9xl'
+                    isReverse ? 'text-5xl sm:text-6xl' : 'text-8xl sm:text-9xl',
                   )}
                   lang={!isReverse ? 'ja' : undefined}
                 >
@@ -622,7 +622,7 @@ const KanjiWordBuildingGame = ({
                 className={clsx(
                   'flex w-full items-center border-b-2 border-[var(--border-color)] px-2 pb-2 md:w-3/4 lg:w-2/3 xl:w-1/2',
                   // Use taller min-height when in reverse mode (kanji tiles have larger font size)
-                  isReverse ? 'min-h-[5.5rem]' : 'min-h-[5rem]'
+                  isReverse ? 'min-h-[5.5rem]' : 'min-h-[5rem]',
                 )}
               >
                 <motion.div

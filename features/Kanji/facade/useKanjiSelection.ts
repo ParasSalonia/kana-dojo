@@ -32,12 +32,16 @@ export interface KanjiSelectionActions {
 export function useKanjiSelection(): KanjiSelection & KanjiSelectionActions {
   const selectedKanji = useKanjiStore(state => state.selectedKanjiObjs);
   const selectedSets = useKanjiStore(state => state.selectedKanjiSets);
-  const selectedCollection = useKanjiStore(state => state.selectedKanjiCollection);
+  const selectedCollection = useKanjiStore(
+    state => state.selectedKanjiCollection,
+  );
   const gameMode = useKanjiStore(state => state.selectedGameModeKanji);
   const addKanji = useKanjiStore(state => state.addKanjiObj);
   const addKanjiList = useKanjiStore(state => state.addKanjiObjs);
   const clearKanji = useKanjiStore(state => state.clearKanjiObjs);
-  const setCollection = useKanjiStore(state => state.setSelectedKanjiCollection);
+  const setCollection = useKanjiStore(
+    state => state.setSelectedKanjiCollection,
+  );
   const setSets = useKanjiStore(state => state.setSelectedKanjiSets);
   const clearSets = useKanjiStore(state => state.clearKanjiSets);
   const setGameMode = useKanjiStore(state => state.setSelectedGameModeKanji);
@@ -59,7 +63,7 @@ export function useKanjiSelection(): KanjiSelection & KanjiSelectionActions {
       setCollection,
       setSets,
       clearSets,
-      setGameMode
+      setGameMode,
     }),
     [
       selectedKanji,
@@ -72,7 +76,7 @@ export function useKanjiSelection(): KanjiSelection & KanjiSelectionActions {
       setCollection,
       setSets,
       clearSets,
-      setGameMode
-    ]
+      setGameMode,
+    ],
   );
 }

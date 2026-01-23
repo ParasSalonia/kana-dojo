@@ -4,7 +4,11 @@
 
 // Facades (PRIMARY API - Use these in new code)
 export { useKanjiSelection } from './facade';
-export type { KanjiSelection, KanjiSelectionActions, IKanjiObj } from './facade';
+export type {
+  KanjiSelection,
+  KanjiSelectionActions,
+  IKanjiObj,
+} from './facade';
 
 // Components (page-level)
 export { default as KanjiGame } from './components/Game';

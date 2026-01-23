@@ -13,7 +13,7 @@ import {
   XCircle,
   Trash,
   AlertTriangle,
-  ChartColumn
+  ChartColumn,
 } from 'lucide-react';
 import {
   AlertDialog,
@@ -23,7 +23,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from '@/shared/components/ui/alert-dialog';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
 import { useClick } from '@/shared/hooks/useAudio';
@@ -92,7 +92,7 @@ function EmptyState() {
 export default function StatsPage({ className }: StatsPageProps) {
   const { playClick } = useClick();
   const { clearAllProgress } = useStatsStore(
-    useShallow(state => ({ clearAllProgress: state.clearAllProgress }))
+    useShallow(state => ({ clearAllProgress: state.clearAllProgress })),
   );
   const { stats, isLoading } = useStatsAggregator();
   const [showResetModal, setShowResetModal] = useState(false);
@@ -113,34 +113,34 @@ export default function StatsPage({ className }: StatsPageProps) {
     {
       title: 'Total Sessions',
       value: stats.totalSessions,
-      icon: <TrendingUp className='h-5 w-5' />
+      icon: <TrendingUp className='h-5 w-5' />,
     },
     {
       title: 'Accuracy',
       value: `${stats.overallAccuracy.toFixed(0)}%`,
       subtitle: `${stats.totalCorrect}/${stats.totalCorrect + stats.totalIncorrect}`,
-      icon: <Target className='h-5 w-5' />
+      icon: <Target className='h-5 w-5' />,
     },
     {
       title: 'Best Streak',
       value: stats.bestStreak,
-      icon: <Trophy className='h-5 w-5' />
+      icon: <Trophy className='h-5 w-5' />,
     },
     {
       title: 'Characters',
       value: stats.uniqueCharactersLearned,
-      icon: <Users className='h-5 w-5' />
+      icon: <Users className='h-5 w-5' />,
     },
     {
       title: 'Correct',
       value: stats.totalCorrect,
-      icon: <CheckCircle className='h-5 w-5' />
+      icon: <CheckCircle className='h-5 w-5' />,
     },
     {
       title: 'Incorrect',
       value: stats.totalIncorrect,
-      icon: <XCircle className='h-5 w-5' />
-    }
+      icon: <XCircle className='h-5 w-5' />,
+    },
   ];
 
   return (
@@ -238,8 +238,8 @@ export default function StatsPage({ className }: StatsPageProps) {
                 characterMastery={Object.fromEntries(
                   stats.characterMastery.map(item => [
                     item.character,
-                    { correct: item.correct, incorrect: item.incorrect }
-                  ])
+                    { correct: item.correct, incorrect: item.incorrect },
+                  ]),
                 )}
               />
               <MasteryDistributionChart
@@ -292,6 +292,6 @@ export function getStatsOverviewDisplayValues(stats: {
     uniqueCharactersLearned: stats.uniqueCharactersLearned,
     totalCorrect: stats.totalCorrect,
     totalIncorrect: stats.totalIncorrect,
-    hasAllMetrics: true
+    hasAllMetrics: true,
   };
 }

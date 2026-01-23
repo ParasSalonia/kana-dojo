@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   getTranslateRateLimiter,
   getClientIP,
-  createRateLimitHeaders
+  createRateLimitHeaders,
 } from '@/shared/lib/rateLimit';
 
 // Simple in-memory cache for translations (reduces API calls)
@@ -68,7 +68,7 @@ type KuroshiroInstance = {
       to: 'hiragana' | 'katakana' | 'romaji';
       mode?: 'normal' | 'spaced' | 'okurigana' | 'furigana';
       romajiSystem?: 'nippon' | 'passport' | 'hepburn';
-    }
+    },
   ) => Promise<string>;
 };
 
@@ -95,7 +95,7 @@ async function getKuroshiro(): Promise<KuroshiroInstance> {
     const [{ default: Kuroshiro }, { default: KuromojiAnalyzer }] =
       await Promise.all([
         import('kuroshiro'),
-        import('kuroshiro-analyzer-kuromoji')
+        import('kuroshiro-analyzer-kuromoji'),
       ]);
 
     const kuroshiro = new Kuroshiro();
@@ -124,7 +124,7 @@ async function generateRomanization(japaneseText: string): Promise<string> {
     const romaji = await kuroshiro.convert(japaneseText, {
       to: 'romaji',
       mode: 'spaced',
-      romajiSystem: 'hepburn'
+      romajiSystem: 'hepburn',
     });
     return romaji;
   } catch (error) {
@@ -141,7 +141,7 @@ const ERROR_CODES = {
   RATE_LIMIT: 'RATE_LIMIT',
   API_ERROR: 'API_ERROR',
   AUTH_ERROR: 'AUTH_ERROR',
-  NETWORK_ERROR: 'NETWORK_ERROR'
+  NETWORK_ERROR: 'NETWORK_ERROR',
 } as const;
 
 /**
@@ -160,8 +160,7 @@ export async function POST(request: NextRequest) {
     // Provide specific error message based on reason
     let message: string;
     if (rateLimitResult.reason === 'daily_quota') {
-      message =
-        'Daily translation limit reached. Please try again tomorrow.';
+      message = 'Daily translation limit reached. Please try again tomorrow.';
     } else if (rateLimitResult.reason === 'global_limit') {
       message =
         'Service is experiencing high demand. Please try again in a moment.';
@@ -174,9 +173,9 @@ export async function POST(request: NextRequest) {
         code: ERROR_CODES.RATE_LIMIT,
         message,
         status: 429,
-        retryAfter: rateLimitResult.retryAfter
+        retryAfter: rateLimitResult.retryAfter,
       },
-      { status: 429, headers }
+      { status: 429, headers },
     );
   }
 
@@ -190,9 +189,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.INVALID_INPUT,
           message: 'Please enter valid text to translate.',
-          status: 400
+          status: 400,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -201,9 +200,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.INVALID_INPUT,
           message: 'Please enter text to translate.',
-          status: 400
+          status: 400,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -212,9 +211,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.INVALID_INPUT,
           message: 'Text exceeds maximum length of 5000 characters.',
-          status: 400
+          status: 400,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -228,9 +227,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.INVALID_INPUT,
           message: 'Invalid language selection.',
-          status: 400
+          status: 400,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -242,7 +241,7 @@ export async function POST(request: NextRequest) {
       const response = NextResponse.json({
         translatedText: cached.translatedText,
         romanization: cached.romanization,
-        cached: true
+        cached: true,
       });
       // Allow browser to cache translation results for 1 hour
       response.headers.set('Cache-Control', 'private, max-age=3600');
@@ -261,9 +260,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.AUTH_ERROR,
           message: 'Translation service configuration error.',
-          status: 500
+          status: 500,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -273,14 +272,14 @@ export async function POST(request: NextRequest) {
     const googleResponse = await fetch(googleApiUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         q: text,
         source: sourceLanguage,
         target: targetLanguage,
-        format: 'text'
-      })
+        format: 'text',
+      }),
     });
 
     // Handle rate limiting
@@ -289,9 +288,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.RATE_LIMIT,
           message: 'Too many requests. Please wait a moment and try again.',
-          status: 429
+          status: 429,
         },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
@@ -302,9 +301,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.AUTH_ERROR,
           message: 'Translation service configuration error.',
-          status: googleResponse.status
+          status: googleResponse.status,
         },
-        { status: googleResponse.status }
+        { status: googleResponse.status },
       );
     }
 
@@ -315,9 +314,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.API_ERROR,
           message: 'Translation service is temporarily unavailable.',
-          status: googleResponse.status
+          status: googleResponse.status,
         },
-        { status: googleResponse.status }
+        { status: googleResponse.status },
       );
     }
 
@@ -338,7 +337,7 @@ export async function POST(request: NextRequest) {
     translationCache.set(cacheKey, {
       translatedText: translation.translatedText,
       romanization,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
     cleanupCache();
 
@@ -346,7 +345,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       translatedText: translation.translatedText,
       detectedSourceLanguage: translation.detectedSourceLanguage,
-      romanization
+      romanization,
     });
     // Allow browser to cache translation results for 1 hour
     response.headers.set('Cache-Control', 'private, max-age=3600');
@@ -364,9 +363,9 @@ export async function POST(request: NextRequest) {
         {
           code: ERROR_CODES.NETWORK_ERROR,
           message: 'Unable to connect. Please check your internet connection.',
-          status: 503
+          status: 503,
         },
-        { status: 503 }
+        { status: 503 },
       );
     }
 
@@ -374,9 +373,9 @@ export async function POST(request: NextRequest) {
       {
         code: ERROR_CODES.API_ERROR,
         message: 'Translation service is temporarily unavailable.',
-        status: 500
+        status: 500,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

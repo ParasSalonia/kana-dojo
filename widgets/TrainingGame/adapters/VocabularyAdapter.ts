@@ -26,7 +26,7 @@ export const vocabularyAdapter: ContentAdapter<IVocabObj> = {
     vocab: IVocabObj,
     pool: IVocabObj[],
     mode: GameMode,
-    count: number
+    count: number,
   ): string[] {
     const correct = this.getCorrectAnswer(vocab, mode);
 
@@ -45,7 +45,7 @@ export const vocabularyAdapter: ContentAdapter<IVocabObj> = {
   validateAnswer(
     userAnswer: string,
     vocab: IVocabObj,
-    mode: GameMode
+    mode: GameMode,
   ): boolean {
     const correct = this.getCorrectAnswer(vocab, mode);
     return userAnswer.toLowerCase().trim() === correct.toLowerCase().trim();
@@ -58,7 +58,7 @@ export const vocabularyAdapter: ContentAdapter<IVocabObj> = {
       readings: [vocab.reading],
       meanings: vocab.displayMeanings.length
         ? vocab.displayMeanings
-        : vocab.meanings
+        : vocab.meanings,
     };
-  }
+  },
 };

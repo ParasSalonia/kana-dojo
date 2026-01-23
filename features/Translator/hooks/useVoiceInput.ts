@@ -24,7 +24,7 @@ interface UseVoiceInputReturn {
 export function useVoiceInput({
   language,
   onResult,
-  onError
+  onError,
 }: UseVoiceInputOptions): UseVoiceInputReturn {
   const [isListening, setIsListening] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
@@ -116,10 +116,10 @@ export function useVoiceInput({
         // Clear event listeners to prevent memory leaks
         recognitionRef.current.onstart = null as unknown as () => void;
         recognitionRef.current.onresult = null as unknown as (
-          e: SpeechRecognitionEvent
+          e: SpeechRecognitionEvent,
         ) => void;
         recognitionRef.current.onerror = null as unknown as (
-          e: SpeechRecognitionErrorEvent
+          e: SpeechRecognitionErrorEvent,
         ) => void;
         recognitionRef.current.onend = null as unknown as () => void;
         recognitionRef.current = null;
@@ -158,7 +158,7 @@ export function useVoiceInput({
     error,
     startListening,
     stopListening,
-    transcript
+    transcript,
   };
 }
 

@@ -28,7 +28,7 @@ const KanaSlot = () => {
     const finals = [
       Math.floor(Math.random() * slotKana.length),
       Math.floor(Math.random() * slotKana.length),
-      Math.floor(Math.random() * slotKana.length)
+      Math.floor(Math.random() * slotKana.length),
     ];
 
     // Stop reels at different times
@@ -67,7 +67,7 @@ const KanaSlot = () => {
             }, 200);
           }
         },
-        500 + i * 500
+        500 + i * 500,
       );
     });
   };
@@ -89,14 +89,14 @@ const KanaSlot = () => {
             className={clsx(
               'flex h-24 w-20 items-center justify-center rounded-xl',
               'border-2 border-[var(--border-color)] bg-[var(--bg-color)]',
-              win && 'animate-pulse border-yellow-400'
+              win && 'animate-pulse border-yellow-400',
             )}
           >
             <span
               lang='ja'
               className={clsx(
                 'text-5xl transition-all duration-100',
-                spinning[i] && 'animate-spin-slot'
+                spinning[i] && 'animate-spin-slot',
               )}
             >
               {spinning[i]
@@ -111,7 +111,7 @@ const KanaSlot = () => {
       <p
         className={clsx(
           'h-8 text-xl transition-all',
-          win ? 'text-yellow-400' : 'text-[var(--secondary-color)]'
+          win ? 'text-yellow-400' : 'text-[var(--secondary-color)]',
         )}
       >
         {message}
@@ -125,7 +125,7 @@ const KanaSlot = () => {
           'rounded-xl px-8 py-4 text-xl text-white transition-all',
           spinning.some(s => s) || coins < 10
             ? 'cursor-not-allowed bg-gray-500'
-            : 'bg-[var(--accent-color)] hover:scale-105'
+            : 'bg-[var(--accent-color)] hover:scale-105',
         )}
       >
         {coins < 10 ? '💸 No coins!' : '🎰 Spin! (-10)'}

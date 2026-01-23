@@ -10,13 +10,13 @@ import {
   SquareCheck,
   SquareX,
   MousePointerClick,
-  Keyboard
+  Keyboard,
 } from 'lucide-react';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import {
   DIFFICULTY_CONFIG,
   type GauntletDifficulty,
-  type GauntletGameMode
+  type GauntletGameMode,
 } from './types';
 
 interface ActiveGameProps<T> {
@@ -57,7 +57,7 @@ interface ActiveGameProps<T> {
   renderOption?: (
     option: string,
     items: T[],
-    isReverse?: boolean
+    isReverse?: boolean,
   ) => React.ReactNode;
   items: T[];
 
@@ -78,7 +78,7 @@ interface ActiveGameProps<T> {
 // Stat item component matching ReturnFromGame
 const StatItem = ({
   icon: Icon,
-  value
+  value,
 }: {
   icon: React.ElementType;
   value: number;
@@ -117,7 +117,7 @@ export default function ActiveGame<T>({
   regenThreshold: _regenThreshold,
   correctAnswers,
   wrongAnswers,
-  onCancel
+  onCancel,
 }: ActiveGameProps<T>) {
   const inputRef = useRef<HTMLInputElement>(null);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -142,7 +142,7 @@ export default function ActiveGame<T>({
         Digit3: 2,
         Numpad1: 0,
         Numpad2: 1,
-        Numpad3: 2
+        Numpad3: 2,
       };
       const index = keyMap[event.code];
       if (index !== undefined && index < shuffledOptions.length) {
@@ -160,7 +160,7 @@ export default function ActiveGame<T>({
   return (
     <div
       className={clsx(
-        'flex min-h-[100dvh] flex-col items-center px-4 pt-4 md:pt-8'
+        'flex min-h-[100dvh] flex-col items-center px-4 pt-4 md:pt-8',
       )}
     >
       {/* Header section - matching ReturnFromGame layout */}
@@ -260,7 +260,7 @@ export default function ActiveGame<T>({
                 'w-full text-center text-2xl lg:text-4xl',
                 'border-b-2 bg-transparent pb-2 outline-none',
                 'text-[var(--secondary-color)]',
-                'border-[var(--border-color)] focus:border-[var(--main-color)]'
+                'border-[var(--border-color)] focus:border-[var(--main-color)]',
               )}
               autoComplete='off'
               autoCorrect='off'
@@ -276,7 +276,7 @@ export default function ActiveGame<T>({
                 'border-b-6 font-medium shadow-sm',
                 userAnswer.trim()
                   ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)] hover:cursor-pointer'
-                  : 'cursor-not-allowed border-[var(--border-color)] bg-[var(--card-color)] text-[var(--border-color)]'
+                  : 'cursor-not-allowed border-[var(--border-color)] bg-[var(--card-color)] text-[var(--border-color)]',
               )}
             >
               Submit
@@ -302,7 +302,7 @@ export default function ActiveGame<T>({
                     isWrong &&
                       'border-[var(--border-color)] text-[var(--border-color)] hover:border-[var(--border-color)] hover:bg-[var(--card-color)]',
                     !isWrong &&
-                      'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]'
+                      'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]',
                   )}
                   onClick={() => onOptionClick(option)}
                   lang={isReverseActive ? 'ja' : undefined}
@@ -317,7 +317,7 @@ export default function ActiveGame<T>({
                       'absolute top-1/2 right-4 hidden h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--border-color)] px-1 text-xs leading-none lg:inline-flex',
                       isWrong
                         ? 'text-[var(--border-color)]'
-                        : 'text-[var(--secondary-color)]'
+                        : 'text-[var(--secondary-color)]',
                     )}
                   >
                     {i + 1}
@@ -333,7 +333,7 @@ export default function ActiveGame<T>({
               'flex w-full flex-col items-center gap-6',
               dojoType === 'kanji' &&
                 isReverseActive &&
-                'md:flex-row md:justify-evenly'
+                'md:flex-row md:justify-evenly',
             )}
           >
             {shuffledOptions.map((option, i) => {
@@ -359,7 +359,7 @@ export default function ActiveGame<T>({
                     isWrong &&
                       'border-[var(--border-color)] text-[var(--border-color)] hover:border-[var(--border-color)] hover:bg-[var(--card-color)]',
                     !isWrong &&
-                      'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]'
+                      'border-[var(--secondary-color)]/50 text-[var(--secondary-color)] hover:border-[var(--secondary-color)]',
                   )}
                   onClick={() => onOptionClick(option)}
                   lang={isReverseActive ? 'ja' : undefined}
@@ -368,7 +368,7 @@ export default function ActiveGame<T>({
                     className={clsx(
                       dojoType === 'kanji' && isReverseActive
                         ? ''
-                        : 'flex-1 text-left'
+                        : 'flex-1 text-left',
                     )}
                   >
                     {renderOption
@@ -381,7 +381,7 @@ export default function ActiveGame<T>({
                       dojoType === 'kanji' && isReverseActive ? '' : 'mr-4',
                       isWrong
                         ? 'text-[var(--border-color)]'
-                        : 'text-[var(--secondary-color)]'
+                        : 'text-[var(--secondary-color)]',
                     )}
                   >
                     {i + 1}

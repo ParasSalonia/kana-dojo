@@ -11,14 +11,14 @@ const PHASE_DURATIONS = {
   inhale: 4000,
   hold: 4000,
   exhale: 4000,
-  rest: 2000
+  rest: 2000,
 };
 
 const PHASE_LABELS = {
   inhale: 'Breathe In',
   hold: 'Hold',
   exhale: 'Breathe Out',
-  rest: 'Rest'
+  rest: 'Rest',
 };
 
 const BreathingExercise = () => {
@@ -69,30 +69,30 @@ const BreathingExercise = () => {
     phase === 'inhale' || phase === 'hold' ? 'scale-100' : 'scale-75';
 
   return (
-    <div className='flex flex-col items-center justify-center gap-8 flex-1 min-h-[80vh]'>
+    <div className='flex min-h-[80vh] flex-1 flex-col items-center justify-center gap-8'>
       {/* Breathing circle */}
       <div className='relative flex flex-col items-center gap-8'>
         <div
           className={clsx(
-            'w-64 h-64 md:w-80 md:h-80 rounded-full',
-            'bg-[var(--card-color)] border-4 border-[var(--border-color)]',
+            'h-64 w-64 rounded-full md:h-80 md:w-80',
+            'border-4 border-[var(--border-color)] bg-[var(--card-color)]',
             'flex items-center justify-center',
             'transition-transform ease-in-out',
             scale,
             phase === 'inhale' && 'duration-[4000ms]',
             phase === 'hold' && 'duration-[4000ms]',
             phase === 'exhale' && 'duration-[4000ms]',
-            phase === 'rest' && 'duration-[2000ms]'
+            phase === 'rest' && 'duration-[2000ms]',
           )}
         >
           <div className='text-center'>
             <span
               lang='ja'
-              className='text-6xl md:text-8xl text-[var(--main-color)] block'
+              className='block text-6xl text-[var(--main-color)] md:text-8xl'
             >
               {currentKana.kana}
             </span>
-            <span className='text-xl md:text-2xl text-[var(--secondary-color)]'>
+            <span className='text-xl text-[var(--secondary-color)] md:text-2xl'>
               {currentKana.romanji}
             </span>
           </div>
@@ -100,10 +100,10 @@ const BreathingExercise = () => {
 
         {/* Phase indicator */}
         <div className='text-center'>
-          <p className='text-2xl md:text-3xl text-[var(--main-color)] font-medium'>
+          <p className='text-2xl font-medium text-[var(--main-color)] md:text-3xl'>
             {PHASE_LABELS[phase]}
           </p>
-          <p className='text-sm text-[var(--secondary-color)] mt-2'>
+          <p className='mt-2 text-sm text-[var(--secondary-color)]'>
             Cycle {cycleCount + 1}
           </p>
         </div>
@@ -112,11 +112,11 @@ const BreathingExercise = () => {
         <button
           onClick={togglePlay}
           className={clsx(
-            'p-4 rounded-full',
-            'bg-[var(--card-color)] border border-[var(--border-color)]',
+            'rounded-full p-4',
+            'border border-[var(--border-color)] bg-[var(--card-color)]',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-            'hover:cursor-pointer transition-all duration-250',
-            'active:scale-95'
+            'transition-all duration-250 hover:cursor-pointer',
+            'active:scale-95',
           )}
         >
           {isPlaying ? <Pause size={24} /> : <Play size={24} />}

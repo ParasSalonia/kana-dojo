@@ -226,7 +226,7 @@ interface AggregatedStats {
 ```typescript
 function classifyCharacter(
   correct: number,
-  incorrect: number
+  incorrect: number,
 ): 'mastered' | 'learning' | 'needs-practice' {
   const total = correct + incorrect;
   const accuracy = total > 0 ? correct / total : 0;

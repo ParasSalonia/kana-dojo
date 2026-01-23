@@ -70,7 +70,7 @@ function compressToOpus(wavPath) {
     // -compression_level 10: Max compression effort
     execSync(
       `ffmpeg -i "${wavPath}" -c:a libopus -b:a 96k -vbr on -compression_level 10 "${opusPath}"`,
-      { stdio: 'ignore' }
+      { stdio: 'ignore' },
     );
 
     const newSize = fs.statSync(opusPath).size;
@@ -79,19 +79,19 @@ function compressToOpus(wavPath) {
     console.log(
       `✅ ${path.basename(wavPath)}: ${(originalSize / 1024).toFixed(1)}KB → ${(
         newSize / 1024
-      ).toFixed(1)}KB (${savings}% smaller)`
+      ).toFixed(1)}KB (${savings}% smaller)`,
     );
 
     return {
       original: originalSize,
       compressed: newSize,
       savings: originalSize - newSize,
-      skipped: false
+      skipped: false,
     };
   } catch (error) {
     console.error(
       `❌ Failed to convert ${path.basename(wavPath)}:`,
-      error.message
+      error.message,
     );
     return { error: true };
   }
@@ -100,7 +100,7 @@ function compressToOpus(wavPath) {
 function main() {
   console.log('🎵 Audio Compression Script (Opus)\n');
   console.log(
-    'Opus format provides excellent quality at ~90% smaller file sizes.\n'
+    'Opus format provides excellent quality at ~90% smaller file sizes.\n',
   );
 
   if (!checkFFmpeg()) {
@@ -141,18 +141,18 @@ function main() {
 
   if (convertedCount > 0) {
     const totalSavings = ((1 - totalCompressed / totalOriginal) * 100).toFixed(
-      1
+      1,
     );
     console.log(
-      `📊 Total: ${(totalOriginal / 1024).toFixed(1)}KB → ${(totalCompressed / 1024).toFixed(1)}KB (${totalSavings}% reduction)`
+      `📊 Total: ${(totalOriginal / 1024).toFixed(1)}KB → ${(totalCompressed / 1024).toFixed(1)}KB (${totalSavings}% reduction)`,
     );
     console.log(
-      `💾 Saved: ${((totalOriginal - totalCompressed) / 1024).toFixed(1)}KB`
+      `💾 Saved: ${((totalOriginal - totalCompressed) / 1024).toFixed(1)}KB`,
     );
   }
 
   console.log(
-    '\n📝 The audio system (useAudio.ts) will automatically use Opus files.'
+    '\n📝 The audio system (useAudio.ts) will automatically use Opus files.',
   );
   console.log('   WAV files are kept as fallback for older browsers.');
   console.log('\n🧹 Optional: Delete WAV files after testing to save space:');

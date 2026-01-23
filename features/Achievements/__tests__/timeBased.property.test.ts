@@ -3,7 +3,7 @@ import * as fc from 'fast-check';
 import {
   ACHIEVEMENTS,
   type Achievement,
-  type SessionStats
+  type SessionStats,
 } from '../store/useAchievementStore';
 
 /**
@@ -16,13 +16,13 @@ import {
 
 // Filter speed-based achievements
 const speedAchievements = ACHIEVEMENTS.filter(
-  a => a.requirements.type === 'speed'
+  a => a.requirements.type === 'speed',
 );
 
 // Helper to create stats for speed achievement
 function createStatsForSpeedAchievement(
   achievement: Achievement,
-  meetsRequirement: boolean
+  meetsRequirement: boolean,
 ): {
   allTimeStats: Record<string, unknown>;
   sessionStats?: SessionStats;
@@ -38,7 +38,7 @@ function createStatsForSpeedAchievement(
     bestStreak: 0,
     totalSessions: 0,
     fastestAnswerMs: Infinity,
-    answerTimesMs: [] as number[]
+    answerTimesMs: [] as number[],
   };
 
   let sessionStats: SessionStats | undefined;
@@ -64,7 +64,7 @@ function createStatsForSpeedAchievement(
         : minAccuracy - 5;
       sessionStats = {
         sessionTime: targetTime,
-        sessionAccuracy: targetAccuracy
+        sessionAccuracy: targetAccuracy,
       };
       break;
     }
@@ -85,7 +85,7 @@ function createStatsForSpeedAchievement(
 function checkSpeedRequirement(
   achievement: Achievement,
   stats: { allTimeStats: Record<string, unknown> },
-  sessionStats?: SessionStats
+  sessionStats?: SessionStats,
 ): boolean {
   const { value, additional } = achievement.requirements;
   const speedType = additional?.type;
@@ -134,26 +134,26 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
         (achievement: Achievement, meetsRequirement: boolean) => {
           const { allTimeStats, sessionStats } = createStatsForSpeedAchievement(
             achievement,
-            meetsRequirement
+            meetsRequirement,
           );
           const isUnlocked = checkSpeedRequirement(
             achievement,
             { allTimeStats },
-            sessionStats
+            sessionStats,
           );
 
           if (meetsRequirement) {
             expect(isUnlocked).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('single answer speed achievements check fastest answer time', () => {
     const singleAnswerAchievements = speedAchievements.filter(
-      a => a.requirements.additional?.type === 'single_answer'
+      a => a.requirements.additional?.type === 'single_answer',
     );
 
     if (singleAnswerAchievements.length === 0) {
@@ -170,8 +170,8 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           const stats = {
             allTimeStats: {
               fastestAnswerMs: answerTime,
-              answerTimesMs: []
-            }
+              answerTimesMs: [],
+            },
           };
 
           const isUnlocked = checkSpeedRequirement(achievement, stats);
@@ -181,15 +181,15 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           } else {
             expect(isUnlocked).toBe(false);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('average speed achievements require minimum answers', () => {
     const avgSpeedAchievements = speedAchievements.filter(
-      a => a.requirements.additional?.type === 'average'
+      a => a.requirements.additional?.type === 'average',
     );
 
     if (avgSpeedAchievements.length === 0) {
@@ -207,8 +207,8 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           const stats = {
             allTimeStats: {
               fastestAnswerMs: Infinity,
-              answerTimesMs: Array(Math.max(0, minAnswers - 1)).fill(100) // Fast times but not enough
-            }
+              answerTimesMs: Array(Math.max(0, minAnswers - 1)).fill(100), // Fast times but not enough
+            },
           };
 
           const isUnlocked = checkSpeedRequirement(achievement, stats);
@@ -217,15 +217,15 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           if (minAnswers > 0) {
             expect(isUnlocked).toBe(false);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('session speed achievements require both time and accuracy', () => {
     const sessionSpeedAchievements = speedAchievements.filter(
-      a => a.requirements.additional?.type === 'session'
+      a => a.requirements.additional?.type === 'session',
     );
 
     if (sessionSpeedAchievements.length === 0) {
@@ -240,27 +240,27 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
         (
           achievement: Achievement,
           meetsTime: boolean,
-          meetsAccuracy: boolean
+          meetsAccuracy: boolean,
         ) => {
           const { value, additional } = achievement.requirements;
           const minAccuracy = additional?.minAccuracy ?? 0;
 
           const sessionStats: SessionStats = {
             sessionTime: meetsTime ? value - 1000 : value + 1000,
-            sessionAccuracy: meetsAccuracy ? minAccuracy + 5 : minAccuracy - 5
+            sessionAccuracy: meetsAccuracy ? minAccuracy + 5 : minAccuracy - 5,
           };
 
           const stats = {
             allTimeStats: {
               fastestAnswerMs: Infinity,
-              answerTimesMs: []
-            }
+              answerTimesMs: [],
+            },
           };
 
           const isUnlocked = checkSpeedRequirement(
             achievement,
             stats,
-            sessionStats
+            sessionStats,
           );
 
           // Should only unlock if both criteria are met
@@ -269,15 +269,15 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           } else {
             expect(isUnlocked).toBe(false);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('total time speed achievements sum answer times correctly', () => {
     const totalTimeAchievements = speedAchievements.filter(
-      a => !a.requirements.additional?.type // Default type is total time
+      a => !a.requirements.additional?.type, // Default type is total time
     );
 
     if (totalTimeAchievements.length === 0) {
@@ -289,7 +289,7 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
         fc.constantFrom(...totalTimeAchievements),
         fc.array(fc.integer({ min: 100, max: 10000 }), {
           minLength: 1,
-          maxLength: 50
+          maxLength: 50,
         }),
         (achievement: Achievement, answerTimes: number[]) => {
           const { value, additional } = achievement.requirements;
@@ -303,8 +303,8 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           const stats = {
             allTimeStats: {
               fastestAnswerMs: Infinity,
-              answerTimesMs: answerTimes
-            }
+              answerTimesMs: answerTimes,
+            },
           };
 
           const isUnlocked = checkSpeedRequirement(achievement, stats);
@@ -316,9 +316,9 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
             answerTimes.length >= minAnswers && totalTime <= value;
 
           expect(isUnlocked).toBe(shouldUnlock);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -327,8 +327,8 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
       fc.property(
         fc.constantFrom(
           ...speedAchievements.filter(
-            a => a.requirements.additional?.type === 'single_answer'
-          )
+            a => a.requirements.additional?.type === 'single_answer',
+          ),
         ),
         fc.integer({ min: 1, max: 500 }),
         (achievement: Achievement, improvement: number) => {
@@ -338,34 +338,34 @@ describe('Property 5: Time-Based Achievement Unlocking', () => {
           const statsAtThreshold = {
             allTimeStats: {
               fastestAnswerMs: value,
-              answerTimesMs: []
-            }
+              answerTimesMs: [],
+            },
           };
 
           // Faster time
           const statsFaster = {
             allTimeStats: {
               fastestAnswerMs: value - improvement,
-              answerTimesMs: []
-            }
+              answerTimesMs: [],
+            },
           };
 
           const unlockedAtThreshold = checkSpeedRequirement(
             achievement,
-            statsAtThreshold
+            statsAtThreshold,
           );
           const unlockedFaster = checkSpeedRequirement(
             achievement,
-            statsFaster
+            statsFaster,
           );
 
           // If unlocked at threshold, must be unlocked with faster time
           if (unlockedAtThreshold) {
             expect(unlockedFaster).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

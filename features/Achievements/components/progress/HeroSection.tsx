@@ -21,7 +21,7 @@ const StatCard = ({ value, label, index }: StatCardProps) => (
     transition={{ delay: 0.1 * (index + 1) }}
     className={clsx(
       'border border-[var(--border-color)] p-6 text-center',
-      cardBorderStyles
+      cardBorderStyles,
     )}
   >
     <div className='mb-1 text-3xl font-bold text-[var(--main-color)]'>
@@ -61,7 +61,7 @@ const ProgressBar = ({ percentage }: ProgressBarProps) => (
         className='h-4 rounded-full'
         style={{
           background:
-            'linear-gradient(to right, var(--secondary-color), var(--main-color))'
+            'linear-gradient(to right, var(--secondary-color), var(--main-color))',
         }}
       />
     </div>
@@ -85,13 +85,13 @@ export const HeroSection = ({
   totalCount,
   totalPoints,
   level,
-  completionPercentage
+  completionPercentage,
 }: HeroSectionProps) => {
   const stats = [
     { value: unlockedCount, label: 'Unlocked' },
     { value: totalCount, label: 'Total' },
     { value: totalPoints, label: 'Points' },
-    { value: level, label: 'Level' }
+    { value: level, label: 'Level' },
   ];
 
   return (

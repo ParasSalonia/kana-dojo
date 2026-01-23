@@ -9,7 +9,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/shared/components/ui/select';
 import type { Language } from '../types';
 import { useVoiceInput } from '../hooks/useVoiceInput';
@@ -43,7 +43,7 @@ export default function TranslatorInput({
   onLanguageChange,
   isLoading,
   error,
-  isOffline = false
+  isOffline = false,
 }: TranslatorInputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const characterCount = getCharacterCount(value);
@@ -57,7 +57,7 @@ export default function TranslatorInput({
     error: voiceError,
     startListening,
     stopListening,
-    transcript
+    transcript,
   } = useVoiceInput({
     language: sourceLanguage,
     onResult: text => {
@@ -65,7 +65,7 @@ export default function TranslatorInput({
     },
     onError: err => {
       console.error('Voice input error:', err);
-    }
+    },
   });
 
   // Show transcript in real-time while listening
@@ -85,7 +85,7 @@ export default function TranslatorInput({
         }
       }
     },
-    [isDisabled, isOverLimit, value, onTranslate]
+    [isDisabled, isOverLimit, value, onTranslate],
   );
 
   // Handle text change with character limit
@@ -96,7 +96,7 @@ export default function TranslatorInput({
         onChange(newValue);
       }
     },
-    [onChange]
+    [onChange],
   );
 
   // Handle clear button
@@ -113,15 +113,15 @@ export default function TranslatorInput({
   return (
     <div
       className={cn(
-        'flex flex-col gap-3 w-full p-4 sm:p-5 rounded-2xl',
-        'bg-[var(--card-color)] border border-[var(--border-color)]',
-        'shadow-lg shadow-black/5'
+        'flex w-full flex-col gap-3 rounded-2xl p-4 sm:p-5',
+        'border border-[var(--border-color)] bg-[var(--card-color)]',
+        'shadow-lg shadow-black/5',
       )}
     >
       {/* Header with language selector */}
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='text-xs font-medium text-[var(--secondary-color)] uppercase tracking-wider'>
+          <span className='text-xs font-medium tracking-wider text-[var(--secondary-color)] uppercase'>
             From
           </span>
           <Select
@@ -131,15 +131,15 @@ export default function TranslatorInput({
           >
             <SelectTrigger
               className={cn(
-                'w-[130px] h-9 cursor-pointer',
-                'bg-[var(--background-color)] border-[var(--border-color)]',
-                'text-[var(--main-color)] font-medium',
-                'hover:border-[var(--main-color)] transition-colors duration-200'
+                'h-9 w-[130px] cursor-pointer',
+                'border-[var(--border-color)] bg-[var(--background-color)]',
+                'font-medium text-[var(--main-color)]',
+                'transition-colors duration-200 hover:border-[var(--main-color)]',
               )}
             >
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className='bg-[var(--card-color)] border-[var(--border-color)]'>
+            <SelectContent className='border-[var(--border-color)] bg-[var(--card-color)]'>
               <SelectItem value='en' className='cursor-pointer'>
                 🇺🇸 English
               </SelectItem>
@@ -161,9 +161,9 @@ export default function TranslatorInput({
               borderRadius='xl'
               borderBottomThickness={6}
               className={cn(
-                '!w-9 !min-w-9 h-9 !p-0',
-                'disabled:opacity-50 disabled:cursor-not-allowed',
-                isListening && 'animate-pulse'
+                'h-9 !w-9 !min-w-9 !p-0',
+                'disabled:cursor-not-allowed disabled:opacity-50',
+                isListening && 'animate-pulse',
               )}
               aria-label={isListening ? 'Stop listening' : 'Start voice input'}
               title={isListening ? 'Stop listening' : 'Voice input'}
@@ -186,8 +186,8 @@ export default function TranslatorInput({
               borderRadius='xl'
               borderBottomThickness={6}
               className={cn(
-                '!w-9 !min-w-9 h-9 !p-0',
-                'disabled:opacity-50 disabled:cursor-not-allowed'
+                'h-9 !w-9 !min-w-9 !p-0',
+                'disabled:cursor-not-allowed disabled:opacity-50',
               )}
               aria-label='Clear input'
             >
@@ -211,13 +211,13 @@ export default function TranslatorInput({
               : 'テキストを入力してください...'
           }
           className={cn(
-            'w-full min-h-[180px] sm:min-h-[220px] p-3 sm:p-4 rounded-xl resize-none',
-            'bg-[var(--background-color)] border border-[var(--border-color)]',
-            'text-[var(--main-color)] text-base sm:text-lg placeholder:text-[var(--secondary-color)]/60',
-            'focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:border-transparent',
+            'min-h-[180px] w-full resize-none rounded-xl p-3 sm:min-h-[220px] sm:p-4',
+            'border border-[var(--border-color)] bg-[var(--background-color)]',
+            'text-base text-[var(--main-color)] placeholder:text-[var(--secondary-color)]/60 sm:text-lg',
+            'focus:border-transparent focus:ring-2 focus:ring-[var(--main-color)] focus:outline-none',
             'transition-all duration-200',
             isOverLimit && 'border-red-500 focus:ring-red-500',
-            isDisabled && 'opacity-60 cursor-not-allowed'
+            isDisabled && 'cursor-not-allowed opacity-60',
           )}
           aria-label='Source text input'
           aria-describedby='character-count'
@@ -227,9 +227,9 @@ export default function TranslatorInput({
         <div
           id='character-count'
           className={cn(
-            'absolute bottom-3 right-3 px-2 py-1 rounded-md text-xs font-medium',
+            'absolute right-3 bottom-3 rounded-md px-2 py-1 text-xs font-medium',
             'bg-[var(--card-color)]/80 backdrop-blur-sm',
-            isOverLimit ? 'text-red-500' : 'text-[var(--secondary-color)]'
+            isOverLimit ? 'text-red-500' : 'text-[var(--secondary-color)]',
           )}
         >
           {characterCount.toLocaleString()} / {MAX_CHARACTERS.toLocaleString()}
@@ -240,9 +240,9 @@ export default function TranslatorInput({
       {isListening && (
         <div
           className={cn(
-            'flex items-center gap-2 p-3 rounded-lg',
-            'bg-[var(--main-color)]/10 border border-[var(--main-color)]/30',
-            'text-[var(--main-color)] text-sm'
+            'flex items-center gap-2 rounded-lg p-3',
+            'border border-[var(--main-color)]/30 bg-[var(--main-color)]/10',
+            'text-sm text-[var(--main-color)]',
           )}
         >
           <div className='flex h-4 items-center gap-1'>
@@ -264,11 +264,12 @@ export default function TranslatorInput({
       {(error || voiceError) && (
         <div
           className={cn(
-            'flex items-center gap-2 p-3 rounded-lg',
-            'bg-red-500/10 border border-red-500/30',
-            'text-red-500 text-sm'
+            'flex items-center gap-2 rounded-lg p-3',
+            'border border-red-500/30 bg-red-500/10',
+            'text-sm text-red-500',
           )}
           role='alert'
+          aria-live='polite'
         >
           {error || voiceError}
         </div>
@@ -278,11 +279,12 @@ export default function TranslatorInput({
       {isOverLimit && (
         <div
           className={cn(
-            'flex items-center gap-2 p-3 rounded-lg',
-            'bg-red-500/10 border border-red-500/30',
-            'text-red-500 text-sm'
+            'flex items-center gap-2 rounded-lg p-3',
+            'border border-red-500/30 bg-red-500/10',
+            'text-sm text-red-500',
           )}
           role='alert'
+          aria-live='assertive'
         >
           Text exceeds maximum length of {MAX_CHARACTERS.toLocaleString()}{' '}
           characters
@@ -290,15 +292,15 @@ export default function TranslatorInput({
       )}
 
       {/* Keyboard shortcut hint - hidden on mobile */}
-      <div className='hidden sm:flex items-center gap-2 text-xs text-[var(--secondary-color)]'>
+      <div className='hidden items-center gap-2 text-xs text-[var(--secondary-color)] sm:flex'>
         <Keyboard className='h-3.5 w-3.5' />
         <span>
           Press{' '}
-          <kbd className='px-1.5 py-0.5 rounded bg-[var(--background-color)] font-mono text-[10px]'>
+          <kbd className='rounded bg-[var(--background-color)] px-1.5 py-0.5 font-mono text-[10px]'>
             Ctrl
           </kbd>
           +
-          <kbd className='px-1.5 py-0.5 rounded bg-[var(--background-color)] font-mono text-[10px]'>
+          <kbd className='rounded bg-[var(--background-color)] px-1.5 py-0.5 font-mono text-[10px]'>
             Enter
           </kbd>{' '}
           to translate

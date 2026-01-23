@@ -13,7 +13,7 @@ export function flattenKanaGroups(indices: number[]): KanaCharacter[] {
     return group.kana.map((char, idx) => ({
       kana: char,
       romaji: group.romanji[idx],
-      group: group.groupName
+      group: group.groupName,
     }));
   });
 }

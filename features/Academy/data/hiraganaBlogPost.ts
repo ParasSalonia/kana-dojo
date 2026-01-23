@@ -1,4 +1,3 @@
-
 const hiraganaBlogPost = `
 # Hiragana 101: The Ultimate Beginner’s Guide
 
@@ -185,6 +184,6 @@ Hiragana is your first major milestone on the path to Japanese fluency. By takin
 As you practice hiragana, you'll notice your recognition speed improving, and soon reading these characters will become second nature. Before you know it, you'll be ready to tackle katakana and begin your journey into the fascinating world of kanji.
 
 がんばって！(Ganbatte!) - Good luck with your studies!
-`
+`;
 
-export default hiraganaBlogPost 
+export default hiraganaBlogPost;

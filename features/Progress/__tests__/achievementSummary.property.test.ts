@@ -11,7 +11,7 @@ const achievementSummaryArb = fc
     totalPoints: fc.integer({ min: 0, max: 100000 }),
     level: fc.integer({ min: 1, max: 100 }),
     unlockedCount: fc.integer({ min: 0, max: 100 }),
-    totalAchievements: fc.integer({ min: 1, max: 100 })
+    totalAchievements: fc.integer({ min: 1, max: 100 }),
   })
   .chain(({ totalPoints, level, unlockedCount, totalAchievements }) => {
     // Ensure unlockedCount <= totalAchievements
@@ -21,7 +21,7 @@ const achievementSummaryArb = fc
       totalPoints,
       level,
       unlockedCount: validUnlockedCount,
-      totalAchievements
+      totalAchievements,
     } as AchievementSummary);
   });
 
@@ -49,10 +49,10 @@ describe('Achievement Summary Display', () => {
 
           // Verify total achievements is displayed
           expect(displayValues.totalAchievements).toBe(
-            summary.totalAchievements
+            summary.totalAchievements,
           );
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -67,10 +67,10 @@ describe('Achievement Summary Display', () => {
               : 0;
 
           expect(displayValues.progressPercent).toBe(
-            `${expectedPercent.toFixed(0)}%`
+            `${expectedPercent.toFixed(0)}%`,
           );
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -80,13 +80,13 @@ describe('Achievement Summary Display', () => {
           const displayValues = getAchievementDisplayValues(summary);
           const percentValue = parseInt(
             displayValues.progressPercent.replace('%', ''),
-            10
+            10,
           );
 
           expect(percentValue).toBeGreaterThanOrEqual(0);
           expect(percentValue).toBeLessThanOrEqual(100);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -97,7 +97,7 @@ describe('Achievement Summary Display', () => {
 
           expect(displayValues.level).toBeGreaterThanOrEqual(1);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -107,10 +107,10 @@ describe('Achievement Summary Display', () => {
           const displayValues = getAchievementDisplayValues(summary);
 
           expect(displayValues.unlockedCount).toBeLessThanOrEqual(
-            displayValues.totalAchievements
+            displayValues.totalAchievements,
           );
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -124,7 +124,7 @@ describe('Achievement Summary Display', () => {
         totalPoints: 0,
         level: 1,
         unlockedCount: 0,
-        totalAchievements: 16
+        totalAchievements: 16,
       };
 
       const displayValues = getAchievementDisplayValues(summary);
@@ -139,7 +139,7 @@ describe('Achievement Summary Display', () => {
         totalPoints: 5000,
         level: 10,
         unlockedCount: 16,
-        totalAchievements: 16
+        totalAchievements: 16,
       };
 
       const displayValues = getAchievementDisplayValues(summary);
@@ -152,7 +152,7 @@ describe('Achievement Summary Display', () => {
         totalPoints: 99999,
         level: 50,
         unlockedCount: 15,
-        totalAchievements: 16
+        totalAchievements: 16,
       };
 
       const displayValues = getAchievementDisplayValues(summary);
@@ -166,7 +166,7 @@ describe('Achievement Summary Display', () => {
         totalPoints: 1000,
         level: 3,
         unlockedCount: 8,
-        totalAchievements: 16
+        totalAchievements: 16,
       };
 
       const displayValues = getAchievementDisplayValues(summary);
@@ -179,7 +179,7 @@ describe('Achievement Summary Display', () => {
         totalPoints: 500,
         level: 2,
         unlockedCount: 1,
-        totalAchievements: 3
+        totalAchievements: 3,
       };
 
       const displayValues = getAchievementDisplayValues(summary);

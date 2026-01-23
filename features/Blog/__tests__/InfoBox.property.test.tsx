@@ -35,7 +35,8 @@ const safeStringArb = fc
 const typeClassPatterns: Record<InfoBoxType, RegExp> = {
   tip: /green/,
   warning: /yellow/,
-  note: /blue/
+  note: /blue/,
+  success: /emerald/
 };
 
 /**
@@ -96,7 +97,13 @@ describe('Property 17: InfoBox Renders With Correct Type Styling', () => {
         );
         const titleElement = getByTestId('info-box-title');
         const expectedTitle =
-          type === 'tip' ? 'Tip' : type === 'warning' ? 'Warning' : 'Note';
+          type === 'tip'
+            ? 'Tip'
+            : type === 'warning'
+              ? 'Warning'
+              : type === 'success'
+                ? 'Success'
+                : 'Note';
         expect(titleElement.textContent).toBe(expectedTitle);
         unmount();
       }),

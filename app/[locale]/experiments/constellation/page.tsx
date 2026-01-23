@@ -10,7 +10,8 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Constellation - Connect Kana Stars | KanaDojo',
-  description: 'Connect the stars to form Japanese characters in this relaxing mode.'
+  description:
+    'Connect the stars to form Japanese characters in this relaxing mode.',
 };
 
 export default function ConstellationPage() {

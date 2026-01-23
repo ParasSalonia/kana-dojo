@@ -6,7 +6,7 @@ import { useStatsStore } from '@/features/Progress';
 import VocabSetDictionary from '@/features/Vocabulary/components/SetDictionary';
 import {
   vocabDataService,
-  VocabLevel
+  VocabLevel,
 } from '@/features/Vocabulary/services/vocabDataService';
 import LevelSetCards from '@/shared/components/Menu/LevelSetCards';
 
@@ -20,30 +20,30 @@ const vocabCollectionNames: Record<VocabLevel, string> = {
   n4: 'N4',
   n3: 'N3',
   n2: 'N2',
-  n1: 'N1'
+  n1: 'N1',
 };
 
 const VocabCards = () => {
   const selectedVocabCollectionName = useVocabStore(
-    state => state.selectedVocabCollection
+    state => state.selectedVocabCollection,
   );
 
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
   const setSelectedVocabSets = useVocabStore(
-    state => state.setSelectedVocabSets
+    state => state.setSelectedVocabSets,
   );
   const addWordObjs = useVocabStore(state => state.addVocabObjs);
   const { clearVocabObjs, clearVocabSets } = useVocabStore();
   const collapsedRowsByUnit = useVocabStore(state => state.collapsedRowsByUnit);
   const setCollapsedRowsForUnit = useVocabStore(
-    state => state.setCollapsedRowsForUnit
+    state => state.setCollapsedRowsForUnit,
   );
   const allTimeStats = useStatsStore(state => state.allTimeStats);
 
   // Get collapsed rows for current unit from store
   const collapsedRows = useMemo(
     () => collapsedRowsByUnit[selectedVocabCollectionName] || [],
-    [collapsedRowsByUnit, selectedVocabCollectionName]
+    [collapsedRowsByUnit, selectedVocabCollectionName],
   );
   const setCollapsedRows = useCallback(
     (updater: number[] | ((prev: number[]) => number[])) => {
@@ -51,16 +51,16 @@ const VocabCards = () => {
         typeof updater === 'function' ? updater(collapsedRows) : updater;
       setCollapsedRowsForUnit(selectedVocabCollectionName, newRows);
     },
-    [collapsedRows, selectedVocabCollectionName, setCollapsedRowsForUnit]
+    [collapsedRows, selectedVocabCollectionName, setCollapsedRowsForUnit],
   );
 
   const getCollectionName = useCallback(
     (level: VocabLevel) => vocabCollectionNames[level],
-    []
+    [],
   );
   const loadItemsByLevel = useCallback(
     (level: VocabLevel) => vocabDataService.getVocabByLevel(level),
-    []
+    [],
   );
 
   return (

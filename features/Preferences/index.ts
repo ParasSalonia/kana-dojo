@@ -8,7 +8,7 @@ export {
   useThemePreferences,
   useInputPreferences,
   useGoalTimersPreferences,
-  preferencesBackup
+  preferencesBackup,
 } from './facade';
 export type {
   AudioPreferences,
@@ -17,7 +17,7 @@ export type {
   GoalTimersPreferences,
   GoalTimersPreferencesActions,
   PreferencesStoreState,
-  CustomThemeStoreState
+  CustomThemeStoreState,
 } from './facade';
 
 // Components (page-level)

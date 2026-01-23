@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Mirror - Match Hiragana with Katakana | KanaDojo',
-  description: 'Match hiragana characters with their katakana equivalents.'
+  description: 'Match hiragana characters with their katakana equivalents.',
 };
 
 export default function MirrorPage() {

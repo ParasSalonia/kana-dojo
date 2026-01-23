@@ -27,16 +27,16 @@ export const metadata: Metadata = {
     title: 'Your Page Title',
     description: 'Social media description',
     url: 'https://kanadojo.com/your-page',
-    type: 'website'
+    type: 'website',
   },
   twitter: {
     card: 'summary',
     title: 'Your Page Title',
-    description: 'Twitter description'
+    description: 'Twitter description',
   },
   alternates: {
-    canonical: 'https://kanadojo.com/your-page'
-  }
+    canonical: 'https://kanadojo.com/your-page',
+  },
 };
 ```
 
@@ -363,4 +363,4 @@ For SEO-related questions or suggestions:
 
 ---
 
-Last Updated: November 28, 2025
+Last Updated: January 2025

@@ -10,7 +10,7 @@ export const RECOMMENDED_FONT_NAMES = [
   'Shippori Mincho', // Literature/novels, traditional Japanese serif
   'M PLUS 1', // Modern clean Gothic, widely used in digital media
   'Sawarabi Gothic', // Neutral, clean, good for reading practice
-  'Zen Old Mincho' // Newspapers, formal publications, classic mincho
+  'Zen Old Mincho', // Newspapers, formal publications, classic mincho
 ] as const;
 
 export type RecommendedFontName = (typeof RECOMMENDED_FONT_NAMES)[number];

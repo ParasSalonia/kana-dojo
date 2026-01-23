@@ -21,7 +21,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar = ({
-  max = 20
+  max = 20,
 }: // checkpoints = [10, 25, 50, 75] // Default checkpoints at 25%, 50%, 75%
 ProgressBarProps) => {
   const { score, setScore, stars, setStars, addIconIndex } = useStatsDisplay();
@@ -42,25 +42,25 @@ ProgressBarProps) => {
   }, [score]);
 
   return (
-    <div className='relative w-full flex flex-col items-center'>
+    <div className='relative flex w-full flex-col items-center'>
       {/* Progress Bar Background */}
-      <div className='w-full bg-[var(--card-color)] rounded-full h-4 overflow-hidden relative'>
+      <div className='relative h-4 w-full overflow-hidden rounded-full bg-[var(--card-color)]'>
         {/* Progress Indicator */}
         <div
-          className='h-4 rounded-full transition-all duration-500 z-10 relative'
+          className='relative z-10 h-4 rounded-full transition-all duration-500'
           style={{
             width: `${percentage}%`,
             background:
-              'linear-gradient(to right, var(--secondary-color), var(--main-color))'
+              'linear-gradient(to right, var(--secondary-color), var(--main-color))',
           }}
         />
         {/* Checkpoints */}
         {[25, 50, 75].map(cp => (
           <div
             key={cp}
-            className='absolute top-0 h-4 w-0 bg-[var(--border-color)] z-0'
+            className='absolute top-0 z-0 h-4 w-0 bg-[var(--border-color)]'
             style={{
-              left: `calc(${cp}% - 2px)` // Adjust for marker width
+              left: `calc(${cp}% - 2px)`, // Adjust for marker width
             }}
           />
         ))}

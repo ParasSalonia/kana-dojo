@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana Catch - Catching Game | KanaDojo',
-  description: 'Catch falling kana in your basket before they hit the ground!'
+  description: 'Catch falling kana in your basket before they hit the ground!',
 };
 
 export default function CatchPage() {

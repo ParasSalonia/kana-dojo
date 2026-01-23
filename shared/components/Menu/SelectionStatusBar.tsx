@@ -50,7 +50,7 @@ const SelectionStatusBar = () => {
       isKanji,
       kanaGroupIndices,
       selectedKanjiSets,
-      selectedVocabSets
+      selectedVocabSets,
     ]);
 
   const hasSelection = isKana
@@ -79,7 +79,7 @@ const SelectionStatusBar = () => {
   }>({
     top: 0,
     left: 0,
-    width: '100%'
+    width: '100%',
   });
 
   useEffect(() => {
@@ -150,19 +150,19 @@ const SelectionStatusBar = () => {
             width:
               typeof layout.width === 'number'
                 ? `${layout.width}px`
-                : layout.width
+                : layout.width,
           }}
           className={clsx(
             'fixed z-40',
             'bg-[var(--background-color)]',
-            'w-full border-b-2 border-[var(--border-color)]'
+            'w-full border-b-2 border-[var(--border-color)]',
           )}
         >
           <div
             className={clsx(
               'flex flex-row items-center justify-center gap-2 md:gap-4',
               'w-full',
-              'px-4 py-3'
+              'px-4 py-3',
             )}
           >
             {/* Selected Levels Info */}

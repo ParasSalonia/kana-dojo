@@ -37,14 +37,14 @@ export class GameErrorBoundary extends Component<Props, State> {
   // Log error information
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     const { gameName } = this.props;
-    
+
     // Log to console with game context
     console.error(
       `Game Error Boundary (${gameName || 'Unknown'}) caught an error:`,
       error,
-      errorInfo
+      errorInfo,
     );
-    
+
     // TODO: Send to error tracking service with game context
     // logErrorToService(error, { ...errorInfo, gameName });
   }
@@ -64,7 +64,7 @@ export class GameErrorBoundary extends Component<Props, State> {
         <ErrorFallback
           error={this.state.error}
           resetErrorBoundary={this.resetErrorBoundary}
-          type="game"
+          type='game'
         />
       );
     }

@@ -4,10 +4,15 @@ import React, { ReactNode } from 'react';
 import { cn } from '@/shared/lib/utils';
 
 /** Supported InfoBox types */
-export type InfoBoxType = 'tip' | 'warning' | 'note';
+export type InfoBoxType = 'tip' | 'warning' | 'note' | 'success';
 
 /** All valid InfoBox types */
-export const VALID_INFOBOX_TYPES: InfoBoxType[] = ['tip', 'warning', 'note'];
+export const VALID_INFOBOX_TYPES: InfoBoxType[] = [
+  'tip',
+  'warning',
+  'note',
+  'success',
+];
 
 /**
  * Type-specific styling configurations
@@ -19,18 +24,23 @@ const typeStyles: Record<
   tip: {
     container: 'border-green-500/30 bg-green-500/10 text-green-400',
     icon: 'bg-green-500/20 text-green-400',
-    iconChar: '💡'
+    iconChar: '💡',
   },
   warning: {
     container: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-400',
     icon: 'bg-yellow-500/20 text-yellow-400',
-    iconChar: '⚠️'
+    iconChar: '⚠️',
   },
   note: {
     container: 'border-blue-500/30 bg-blue-500/10 text-blue-400',
     icon: 'bg-blue-500/20 text-blue-400',
-    iconChar: '📝'
-  }
+    iconChar: '📝',
+  },
+  success: {
+    container: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400',
+    icon: 'bg-emerald-500/20 text-emerald-400',
+    iconChar: '✅',
+  },
 };
 
 interface InfoBoxProps {
@@ -56,7 +66,13 @@ interface InfoBoxProps {
 export function InfoBox({ type, children, title, className }: InfoBoxProps) {
   const styles = typeStyles[type];
   const defaultTitle =
-    type === 'tip' ? 'Tip' : type === 'warning' ? 'Warning' : 'Note';
+    type === 'tip'
+      ? 'Tip'
+      : type === 'warning'
+        ? 'Warning'
+        : type === 'success'
+          ? 'Success'
+          : 'Note';
 
   return (
     <aside
@@ -70,7 +86,7 @@ export function InfoBox({ type, children, title, className }: InfoBoxProps) {
         <span
           className={cn(
             'flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-sm',
-            styles.icon
+            styles.icon,
           )}
           data-testid='info-box-icon'
           aria-hidden='true'

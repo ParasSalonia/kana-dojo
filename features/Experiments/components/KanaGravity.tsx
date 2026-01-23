@@ -27,7 +27,7 @@ const KanaGravity = () => {
       kana: allKana[i % allKana.length].kana,
       x: Math.random() * 90 + 5,
       y: Math.random() * 40 + 30,
-      vy: 0
+      vy: 0,
     }));
     setParticles(initial);
   }, []);
@@ -56,9 +56,9 @@ const KanaGravity = () => {
           return {
             ...p,
             y: newY,
-            vy: newVy * friction
+            vy: newVy * friction,
           };
-        })
+        }),
       );
       frameRef.current = requestAnimationFrame(animate);
     };
@@ -94,7 +94,7 @@ const KanaGravity = () => {
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
           }}
         >
           {p.kana}

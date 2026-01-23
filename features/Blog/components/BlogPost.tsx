@@ -5,7 +5,7 @@ import { cn } from '@/shared/lib/utils';
 import type {
   BlogPost as BlogPostType,
   BlogPostMeta,
-  Category
+  Category,
 } from '../types/blog';
 import { TableOfContents } from './TableOfContents';
 import { RelatedPosts } from './RelatedPosts';
@@ -29,7 +29,7 @@ const categoryColors: Record<Category, string> = {
   tutorial: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
   resources: 'bg-teal-500/20 text-teal-400 border-teal-500/30',
   'study-tips': 'bg-lime-500/20 text-lime-400 border-lime-500/30',
-  jlpt: 'bg-red-500/20 text-red-400 border-red-500/30'
+  jlpt: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
 interface BlogPostProps {
@@ -53,21 +53,21 @@ export function BlogPost({
   post,
   relatedPosts = [],
   children,
-  className
+  className,
 }: BlogPostProps) {
   const { playClick } = useClick();
 
   const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   });
 
   const formattedUpdatedDate = post.updatedAt
     ? new Date(post.updatedAt).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
       })
     : null;
 
@@ -96,7 +96,7 @@ export function BlogPost({
           <span
             className={cn(
               'inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium capitalize',
-              categoryColors[post.category]
+              categoryColors[post.category],
             )}
             data-testid='blog-post-category'
           >

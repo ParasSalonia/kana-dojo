@@ -1,4 +1,3 @@
-
 const about = `Welcome to KanaDojo – Your Japanese Training Ground!
 If you've ever studied Japanese, you know that learning the language isn't just about memorizing words and grammar rules—it's about practice, repetition, and real-world application. That's exactly what KanaDojo is all about!
 

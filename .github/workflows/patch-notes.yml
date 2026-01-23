@@ -9,6 +9,9 @@ on:
       - features/PatchNotes/patchNotesData.json
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   notify-discord:
     runs-on: ubuntu-latest
@@ -26,7 +29,7 @@ jobs:
 
       - name: Send patch notes to Discord
         env:
-          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL || secrets.DISCORD_WEBHOOK }}
         run: |
           node << 'EOF'
           const fs = require('fs');
@@ -35,6 +38,11 @@ jobs:
 
           async function sendPatchNotes() {
             try {
+              if (!process.env.WEBHOOK_URL) {
+                console.log('No DISCORD_WEBHOOK secret configured; skipping');
+                process.exit(0);
+              }
+
               const patchNotes = JSON.parse(
                 fs.readFileSync('./features/PatchNotes/patchNotesData.json', 'utf8')
               );
@@ -83,7 +91,7 @@ jobs:
               }
 
               if (description.length > 4096) {
-                description = description.substring(0, 4090) + '...\n\n*See full changelog on GitHub*';
+                description = `${description.substring(0, 4090)}...\n\n*See full changelog on GitHub*`;
               }
 
               const embed = {

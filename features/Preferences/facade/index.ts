@@ -10,7 +10,7 @@ export type { InputPreferences } from './useInputPreferences';
 export { useGoalTimersPreferences } from './useGoalTimersPreferences';
 export type {
   GoalTimersPreferences,
-  GoalTimersPreferencesActions
+  GoalTimersPreferencesActions,
 } from './useGoalTimersPreferences';
 
 export { preferencesBackup } from './backup';

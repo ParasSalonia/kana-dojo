@@ -20,7 +20,7 @@ const COLORS = [
   '#34d399', // emerald-400
   '#60a5fa', // blue-400
   '#a78bfa', // violet-400
-  '#f87171' // red-400
+  '#f87171', // red-400
 ];
 
 export default function Hanabi() {
@@ -52,7 +52,7 @@ export default function Hanabi() {
         x,
         y,
         kana: kanaObj.kana,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)]
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
       };
 
       setFireworks(prev => [...prev, newFirework]);
@@ -62,7 +62,7 @@ export default function Hanabi() {
         setFireworks(prev => prev.filter(f => f.id !== newFirework.id));
       }, 1500);
     },
-    [playCorrect]
+    [playCorrect],
   );
 
   return (
@@ -85,7 +85,7 @@ export default function Hanabi() {
               height: Math.random() * 3,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`
+              animationDelay: `${Math.random() * 5}s`,
             }}
           />
         ))}
@@ -115,7 +115,7 @@ export default function Hanabi() {
             style={{
               left: fw.x,
               top: fw.y,
-              transform: 'translate(-50%, -50%)'
+              transform: 'translate(-50%, -50%)',
             }}
           >
             {/* Exploding particles (simplified visual) */}
@@ -124,7 +124,7 @@ export default function Hanabi() {
                 className='text-6xl font-bold'
                 style={{
                   color: fw.color,
-                  textShadow: `0 0 20px ${fw.color}, 0 0 40px ${fw.color}`
+                  textShadow: `0 0 20px ${fw.color}, 0 0 40px ${fw.color}`,
                 }}
               >
                 {fw.kana}
@@ -138,7 +138,7 @@ export default function Hanabi() {
                   animate={{
                     x: Math.cos(i * (Math.PI / 4)) * 100,
                     y: Math.sin(i * (Math.PI / 4)) * 100,
-                    opacity: 0
+                    opacity: 0,
                   }}
                   className='absolute top-1/2 left-1/2 h-2 w-2 rounded-full'
                   style={{ backgroundColor: fw.color }}

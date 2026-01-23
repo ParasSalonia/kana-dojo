@@ -4,7 +4,7 @@ import bundleAnalyzer from '@next/bundle-analyzer';
 
 const withNextIntl = createNextIntlPlugin('./core/i18n/request.ts');
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true'
+  enabled: process.env.ANALYZE === 'true',
 });
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
 
   // Compiler optimizations
   compiler: {
-    removeConsole: !isDev ? { exclude: ['error', 'warn'] } : false
+    removeConsole: !isDev ? { exclude: ['error', 'warn'] } : false,
   },
 
   // Experimental features for better performance
@@ -36,8 +36,8 @@ const nextConfig: NextConfig = {
     resolveAlias: {
       '@/features': './features',
       '@/shared': './shared',
-      '@/core': './core'
-    }
+      '@/core': './core',
+    },
   },
 
   // Reduce overhead in development
@@ -53,33 +53,59 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
-        pathname: '/u/**'
-      }
-    ]
+        pathname: '/u/**',
+      },
+    ],
   },
 
   // Skip type checking during dev (run separately with `npm run check`)
   typescript: {
-    ignoreBuildErrors: isDev
+    ignoreBuildErrors: isDev,
   },
 
   // Skip ESLint during dev builds
   eslint: {
-    ignoreDuringBuilds: isDev
+    ignoreDuringBuilds: isDev,
   },
 
   // Cache headers for static assets - reduces data transfer and edge requests
   async headers() {
     return [
       {
+        // Security headers for all routes (enhances Bing trust signals)
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'interest-cohort=()',
+          },
+        ],
+      },
+      {
         // Audio files - immutable, cache forever
         source: '/sounds/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       {
         // Kanji JSON data files - cache for 1 week
@@ -87,9 +113,9 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=604800, stale-while-revalidate=86400'
-          }
-        ]
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
       },
       {
         // Vocab JSON data files - cache for 1 week
@@ -97,9 +123,9 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=604800, stale-while-revalidate=86400'
-          }
-        ]
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
       },
       {
         // Japan facts JSON - cache for 1 week
@@ -107,9 +133,9 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=604800, stale-while-revalidate=86400'
-          }
-        ]
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
       },
       {
         // Wallpapers and images - immutable
@@ -117,9 +143,9 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       {
         // Manifest and other static files
@@ -127,12 +153,12 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=86400, stale-while-revalidate=3600'
-          }
-        ]
-      }
+            value: 'public, max-age=86400, stale-while-revalidate=3600',
+          },
+        ],
+      },
     ];
-  }
+  },
 };
 
 export default withBundleAnalyzer(withNextIntl(nextConfig));

@@ -18,7 +18,7 @@ interface ITopBarProps {
 }
 
 const TrainingActionBar: React.FC<ITopBarProps> = ({
-  currentDojo
+  currentDojo,
 }: ITopBarProps) => {
   const { hotkeysOn } = useInputPreferences();
 
@@ -86,7 +86,7 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
   }>({
     bottom: 0,
     left: 0,
-    width: '100%'
+    width: '100%',
   });
 
   const placeholderRef = useRef<HTMLDivElement | null>(null);
@@ -184,20 +184,20 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
               width:
                 typeof layout.width === 'number'
                   ? `${layout.width}px`
-                  : layout.width
+                  : layout.width,
             }}
             id='main-training-action-bar'
             className={clsx(
               'fixed z-40',
               'bg-[var(--background-color)]',
               'border-t-2 border-[var(--border-color)]',
-              'px-2 py-3'
+              'px-2 py-3',
             )}
           >
             <div
               className={clsx(
                 'flex flex-row items-center justify-center gap-2 md:gap-8',
-                'mx-auto w-full max-w-4xl'
+                'mx-auto w-full max-w-4xl',
               )}
             >
               {[
@@ -211,7 +211,7 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
                   onClick: () => {
                     setGameModesMode('blitz');
                     setShowGameModesModal(true);
-                  }
+                  },
                 },
                 {
                   id: 'gauntlet',
@@ -220,7 +220,7 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
                   iconClassName: 'fill-current',
                   show: showBlitz,
                   colorScheme: 'secondary' as const,
-                  onClick: () => setShowGauntletModal(true)
+                  onClick: () => setShowGauntletModal(true),
                 },
                 {
                   id: 'classic',
@@ -233,8 +233,8 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
                     setGameModesMode('train');
                     setShowGameModesModal(true);
                   },
-                  ref: buttonRef
-                }
+                  ref: buttonRef,
+                },
               ]
                 .filter(btn => btn.show)
                 .map(
@@ -245,23 +245,28 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
                     iconClassName,
                     colorScheme,
                     onClick,
-                    ref
+                    ref,
                   }) => (
                     <button
                       key={id}
                       ref={ref}
                       disabled={id === 'classic' && !isFilled}
                       className={cn(
-                        'flex max-w-sm flex-1 flex-row items-center justify-center gap-2 px-2 py-3 sm:px-6',
+                        'flex flex-row items-center justify-center gap-2 py-3',
+                        // Mobile: fixed widths (25% for Blitz/Gauntlet, 50% for Classic), no x-padding
+                        // Desktop (sm+): flex-based sizing with padding
+                        id === 'classic'
+                          ? 'w-1/2 sm:w-auto sm:max-w-sm sm:flex-2 sm:px-6'
+                          : 'w-1/4 sm:w-auto sm:max-w-sm sm:flex-1 sm:px-6',
                         'rounded-3xl transition-colors duration-200',
                         'border-b-10',
                         'hover:cursor-pointer',
                         colorScheme === 'secondary' &&
-                          'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]',
+                          'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)]/90 text-[var(--background-color)]',
                         colorScheme === 'primary' &&
                           (isFilled
                             ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]'
-                            : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]')
+                            : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]'),
                       )}
                       onClick={e => {
                         e.currentTarget.blur();
@@ -269,10 +274,18 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
                         onClick();
                       }}
                     >
-                      <Icon size={20} className={iconClassName} />
-                      <span className='whitespace-nowrap'>{label}</span>
+                      <Icon
+                        size={20}
+                        className={cn(
+                          iconClassName,
+                          id === 'classic' && 'animate-bounce',
+                        )}
+                      />
+                      <span className='hidden whitespace-nowrap sm:inline'>
+                        {label}
+                      </span>
                     </button>
-                  )
+                  ),
                 )}
             </div>
           </motion.div>

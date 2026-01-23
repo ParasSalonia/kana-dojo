@@ -34,6 +34,7 @@
 ## Executive Summary
 
 ### Current State
+
 - **Total Layer Violations:** 27 files in shared/ importing from features/
 - **Code Duplication:** 540+ lines across Kana/Kanji/Vocabulary game components
 - **Hub Pattern Anti-Pattern:** Progress/useStatsStore imported by 25+ files
@@ -41,6 +42,7 @@
 - **Missing Public APIs:** 8 features lack barrel exports (index.ts)
 
 ### Target State
+
 - **Layer Violations:** 0 (enforced by ESLint)
 - **Code Duplication:** < 100 lines (90% reduction via TrainingGame widget)
 - **Decoupled Stats:** Event-based system, < 10 direct imports
@@ -48,7 +50,9 @@
 - **Complete Public APIs:** All features expose clean barrel exports
 
 ### Migration Strategy
+
 **Hybrid Modular Architecture:**
+
 - **Features remain** as primary organizational unit
 - **Widgets layer** added for complex UI compositions
 - **Facades** abstract feature store access for cross-feature needs
@@ -60,6 +64,7 @@
 ## Migration Goals
 
 ### Primary Goals
+
 1. **Eliminate Layer Violations:** shared/ must never import from features/
 2. **Eliminate Duplication:** Abstract game logic into shared widgets
 3. **Decouple Stats System:** Break Progress store hub pattern
@@ -67,6 +72,7 @@
 5. **Enforce Boundaries:** ESLint rules prevent future violations
 
 ### Secondary Goals
+
 6. **Improve DX:** Faster navigation with clear boundaries
 7. **Enable Testing:** Isolated facades easier to mock
 8. **Prepare for Scale:** Architecture supports 50+ features
@@ -78,6 +84,7 @@
 ## Architecture Overview
 
 ### New Directory Structure
+
 ```
 kanadojo/
 ├── app/                    # Next.js App Router (unchanged)
@@ -123,17 +130,17 @@ kanadojo/
 
 ### Layer Rules
 
-| Layer | Can Import From | Cannot Import From | Enforced By |
-|-------|----------------|-------------------|-------------|
-| `app/` | widgets, features (via index.ts), shared, core | feature internals | ESLint |
-| `widgets/` | features (via facade), shared, core | feature stores directly | ESLint |
-| `features/` | other features (via index.ts), shared, core | other feature internals | ESLint |
-| `shared/` | shared, core | features, widgets | ESLint ✅ |
-| `core/` | core only | app, widgets, features, shared | ESLint |
+| Layer       | Can Import From                                | Cannot Import From             | Enforced By |
+| ----------- | ---------------------------------------------- | ------------------------------ | ----------- |
+| `app/`      | widgets, features (via index.ts), shared, core | feature internals              | ESLint      |
+| `widgets/`  | features (via facade), shared, core            | feature stores directly        | ESLint      |
+| `features/` | other features (via index.ts), shared, core    | other feature internals        | ESLint      |
+| `shared/`   | shared, core                                   | features, widgets              | ESLint ✅   |
+| `core/`     | core only                                      | app, widgets, features, shared | ESLint      |
 
 ---
 
-*[Rest of the detailed migration plan continues - see full plan for Phases 1-5]*
+_[Rest of the detailed migration plan continues - see full plan for Phases 1-5]_
 
 ---
 

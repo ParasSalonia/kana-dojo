@@ -4,7 +4,7 @@ import { Button } from '@/shared/components/ui/button';
 import {
   applyBackup,
   createBackup,
-  type BackupFile
+  type BackupFile,
 } from '@/shared/lib/backup';
 
 const Backup: React.FC = () => {
@@ -14,7 +14,7 @@ const Backup: React.FC = () => {
   const onExport = () => {
     const data = createBackup();
     const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: 'application/json'
+      type: 'application/json',
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

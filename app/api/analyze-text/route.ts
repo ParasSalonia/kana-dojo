@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   getAnalyzeRateLimiter,
   getClientIP,
-  createRateLimitHeaders
+  createRateLimitHeaders,
 } from '@/shared/lib/rateLimit';
 
 // Type for kuromoji token
@@ -86,7 +86,7 @@ async function getKuroshiro(): Promise<KuroshiroInstance> {
   const [{ default: Kuroshiro }, { default: KuromojiAnalyzer }] =
     await Promise.all([
       import('kuroshiro'),
-      import('kuroshiro-analyzer-kuromoji')
+      import('kuroshiro-analyzer-kuromoji'),
     ]);
 
   const kuroshiro = new Kuroshiro();
@@ -125,7 +125,7 @@ function getSimplifiedPOS(pos: string, _posDetail1: string): string {
     記号: 'Symbol',
     フィラー: 'Filler',
     接頭詞: 'Prefix',
-    接尾辞: 'Suffix'
+    接尾辞: 'Suffix',
   };
 
   return posMap[pos] || pos;
@@ -180,9 +180,9 @@ export async function POST(request: NextRequest) {
       {
         error: message,
         code: 'RATE_LIMIT',
-        retryAfter: rateLimitResult.retryAfter
+        retryAfter: rateLimitResult.retryAfter,
       },
-      { status: 429, headers }
+      { status: 429, headers },
     );
   }
 
@@ -194,14 +194,14 @@ export async function POST(request: NextRequest) {
     if (!text || typeof text !== 'string' || text.trim().length === 0) {
       return NextResponse.json(
         { error: 'Please provide valid text to analyze.' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (text.length > 5000) {
       return NextResponse.json(
         { error: 'Text exceeds maximum length of 5000 characters.' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -211,7 +211,7 @@ export async function POST(request: NextRequest) {
       const rateLimitHeaders = createRateLimitHeaders(rateLimitResult);
       const response = NextResponse.json({
         tokens: cached.tokens,
-        cached: true
+        cached: true,
       });
       rateLimitHeaders.forEach((value, key) => {
         response.headers.set(key, value);
@@ -231,13 +231,13 @@ export async function POST(request: NextRequest) {
       reading: katakanaToHiragana(token.reading),
       basicForm: token.basic_form !== '*' ? token.basic_form : undefined,
       pos: getSimplifiedPOS(token.pos, token.pos_detail_1),
-      posDetail: getPOSDetail(token)
+      posDetail: getPOSDetail(token),
     }));
 
     // Cache the result
     analysisCache.set(text, {
       tokens: analyzedTokens,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
     cleanupCache();
 
@@ -251,7 +251,7 @@ export async function POST(request: NextRequest) {
     console.error('Text analysis error:', error);
     return NextResponse.json(
       { error: 'Failed to analyze text. Please try again.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

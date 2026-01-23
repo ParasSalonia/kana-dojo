@@ -18,7 +18,7 @@ const KanaGlow = () => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePos({
       x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100
+      y: ((e.clientY - rect.top) / rect.height) * 100,
     });
   };
 
@@ -31,7 +31,7 @@ const KanaGlow = () => {
       x: (i % 5) * 20 + 10,
       y: Math.floor(i / 5) * 25 + 12,
       hue: (i * 18) % 360,
-      delay: i * 0.2
+      delay: i * 0.2,
     };
   });
 
@@ -42,7 +42,7 @@ const KanaGlow = () => {
       className='relative min-h-[80vh] flex-1 cursor-crosshair overflow-hidden'
       onMouseMove={handleMouseMove}
       style={{
-        background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(var(--accent-rgb), 0.1) 0%, transparent 50%)`
+        background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(var(--accent-rgb), 0.1) 0%, transparent 50%)`,
       }}
     >
       {glowers.map(g => {
@@ -67,7 +67,7 @@ const KanaGlow = () => {
                      0 0 ${20 + intensity * 40}px hsl(${g.hue}, 80%, 50%)`
                   : 'none',
               opacity: 0.4 + intensity * 0.6,
-              scale: `${1 + intensity * 0.3}`
+              scale: `${1 + intensity * 0.3}`,
             }}
           >
             {g.kana}

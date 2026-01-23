@@ -121,10 +121,10 @@
     "keywords": "experiments, alternative learning, japanese practice methods"
   },
   "translate": {
-    "title": "Traductor de Japonés a Inglés Gratis | Traducción de Inglés a Japonés con Romaji - KanaDojo",
-    "titleShort": "Traductor de Japonés a Inglés Gratis | KanaDojo",
-    "description": "Traductor de japonés en línea gratis con resultados instantáneos. Traduce japonés a inglés o inglés a japonés con romanización (romaji). Sin registro requerido. Traducciones precisas con la API de Google Translate.",
-    "keywords": "traductor de japonés a inglés, traductor de inglés a japonés, traducir japonés a inglés, traducir inglés a japonés, traductor japonés, traductor japonés gratis, traductor japonés en línea, traducción japonesa, traductor inglés japonés, traductor romaji, romanización japonesa, traducir japonés, traducción de japonés a inglés, traducción de inglés a japonés, traductor de texto japonés, traducción japonesa instantánea, traductor japonés preciso, diccionario inglés japonés, traducir japonés en línea gratis, conversor de japonés a inglés, hiragana a inglés, katakana a inglés, kanji a inglés"
+    "title": "Traducir Inglés a Japonés | Traductor Japonés Gratis - KanaDojo",
+    "titleShort": "Traductor Inglés a Japonés | Gratis e Instantáneo",
+    "description": "Traduce inglés a japonés instantáneamente gratis. Obtén traducción de japonés a inglés con pronunciación romaji. Sin registro. Usado por estudiantes en todo el mundo para traducción precisa de hiragana, katakana y kanji.",
+    "keywords": "traducir inglés a japonés, traductor de inglés a japonés, traductor japonés, traducir japonés a inglés, traductor japonés gratis, traductor de japonés a inglés, traductor japonés en línea, traducción japonesa, traductor inglés japonés, traductor romaji, romanización japonesa, traducir japonés, traducción de japonés a inglés, traducción de inglés a japonés, traductor de texto japonés, traducción japonesa instantánea, traductor japonés preciso, diccionario inglés japonés, traducir japonés en línea gratis, conversor de japonés a inglés, hiragana a inglés, katakana a inglés, kanji a inglés, traductor anime, traductor nombres japoneses"
   },
   "zen": {
     "title": "Zen Mode - Distraction-Free Japanese Practice",
@@ -193,5 +193,23 @@
       "description": "Aprende los caracteres extendidos de Katakana para préstamos extranjeros (ファ, フィ, ウィ, ウェ, etc.). Domina las combinaciones especiales de katakana usadas en japonés moderno.",
       "keywords": "sonidos extranjeros katakana, katakana extendido, préstamos katakana, ファフィ, ウィウェ, katakana especial, katakana moderno, katakana palabras extranjeras"
     }
+  },
+  "hiraganaPractice": {
+    "title": "Práctica de Hiragana - Aprende Hiragana Rápido | KanaDojo",
+    "titleShort": "Práctica de Hiragana",
+    "description": "Practica Hiragana japonés con ejercicios y juegos interactivos. Aprende la tabla de hiragana, mejora tu velocidad de lectura y gana confianza con retroalimentación instantánea.",
+    "keywords": "práctica de hiragana, practicar hiragana, aprender hiragana, tabla hiragana, ejercicios hiragana, quiz hiragana, juegos hiragana, hiragana japonés"
+  },
+  "katakanaPractice": {
+    "title": "Práctica de Katakana - Aprende Katakana Rápido | KanaDojo",
+    "titleShort": "Práctica de Katakana",
+    "description": "Practica Katakana japonés con ejercicios y juegos interactivos. Domina katakana rápidamente con retroalimentación instantánea y seguimiento de progreso.",
+    "keywords": "práctica de katakana, practicar katakana, aprender katakana, tabla katakana, ejercicios katakana, quiz katakana, juegos katakana, katakana japonés"
+  },
+  "kanjiPractice": {
+    "title": "Práctica de Kanji - Aprende Kanji por Nivel JLPT | KanaDojo",
+    "titleShort": "Práctica de Kanji",
+    "description": "Practica kanji japonés por nivel JLPT con entrenamiento interactivo. Mejora reconocimiento y retención con ejercicios rápidos y seguimiento de progreso.",
+    "keywords": "práctica de kanji, practicar kanji, aprender kanji, kanji jlpt, kanji por nivel, ejercicios kanji, quiz kanji, kanji japonés"
   }
 }

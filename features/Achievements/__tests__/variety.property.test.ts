@@ -12,13 +12,13 @@ import { ACHIEVEMENTS, type Achievement } from '../store/useAchievementStore';
 
 // Filter variety-based achievements
 const varietyAchievements = ACHIEVEMENTS.filter(
-  a => a.requirements.type === 'variety'
+  a => a.requirements.type === 'variety',
 );
 
 // Helper to create stats for variety achievement
 function createStatsForVarietyAchievement(
   achievement: Achievement,
-  meetsRequirement: boolean
+  meetsRequirement: boolean,
 ): { allTimeStats: Record<string, unknown> } {
   const { additional } = achievement.requirements;
 
@@ -29,7 +29,7 @@ function createStatsForVarietyAchievement(
     totalSessions: 0,
     dojosUsed: [] as string[],
     modesUsed: [] as string[],
-    challengeModesUsed: [] as string[]
+    challengeModesUsed: [] as string[],
   };
 
   if (additional?.dojos) {
@@ -65,7 +65,7 @@ function createStatsForVarietyAchievement(
 // Simplified variety requirement checker
 function checkVarietyRequirement(
   achievement: Achievement,
-  stats: { allTimeStats: Record<string, unknown> }
+  stats: { allTimeStats: Record<string, unknown> },
 ): boolean {
   const { value, additional } = achievement.requirements;
   const allTimeStats = stats.allTimeStats;
@@ -89,7 +89,7 @@ function checkVarietyRequirement(
       (allTimeStats.challengeModesUsed as string[]) ?? [];
     const requiredChallengeModes = additional.challengeModes;
     const matchedChallengeModes = requiredChallengeModes.filter(cm =>
-      challengeModesUsed.includes(cm)
+      challengeModesUsed.includes(cm),
     );
     return matchedChallengeModes.length >= value;
   }
@@ -106,22 +106,22 @@ describe('Property 6: Variety Achievement Unlocking', () => {
         (achievement: Achievement, meetsRequirement: boolean) => {
           const stats = createStatsForVarietyAchievement(
             achievement,
-            meetsRequirement
+            meetsRequirement,
           );
           const isUnlocked = checkVarietyRequirement(achievement, stats);
 
           if (meetsRequirement) {
             expect(isUnlocked).toBe(true);
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('dojo variety achievements require all specified dojos', () => {
     const dojoAchievements = varietyAchievements.filter(
-      a => a.requirements.additional?.dojos
+      a => a.requirements.additional?.dojos,
     );
 
     if (dojoAchievements.length === 0) {
@@ -140,8 +140,8 @@ describe('Property 6: Variety Achievement Unlocking', () => {
             allTimeStats: {
               dojosUsed: [...requiredDojos],
               modesUsed: [],
-              challengeModesUsed: []
-            }
+              challengeModesUsed: [],
+            },
           };
           expect(checkVarietyRequirement(achievement, statsWithAll)).toBe(true);
 
@@ -151,22 +151,22 @@ describe('Property 6: Variety Achievement Unlocking', () => {
               allTimeStats: {
                 dojosUsed: requiredDojos.slice(0, -1),
                 modesUsed: [],
-                challengeModesUsed: []
-              }
+                challengeModesUsed: [],
+              },
             };
             expect(checkVarietyRequirement(achievement, statsWithMissing)).toBe(
-              false
+              false,
             );
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('mode variety achievements require all specified modes', () => {
     const modeAchievements = varietyAchievements.filter(
-      a => a.requirements.additional?.modes
+      a => a.requirements.additional?.modes,
     );
 
     if (modeAchievements.length === 0) {
@@ -185,8 +185,8 @@ describe('Property 6: Variety Achievement Unlocking', () => {
             allTimeStats: {
               dojosUsed: [],
               modesUsed: [...requiredModes],
-              challengeModesUsed: []
-            }
+              challengeModesUsed: [],
+            },
           };
           expect(checkVarietyRequirement(achievement, statsWithAll)).toBe(true);
 
@@ -196,22 +196,22 @@ describe('Property 6: Variety Achievement Unlocking', () => {
               allTimeStats: {
                 dojosUsed: [],
                 modesUsed: requiredModes.slice(0, -1),
-                challengeModesUsed: []
-              }
+                challengeModesUsed: [],
+              },
             };
             expect(checkVarietyRequirement(achievement, statsWithMissing)).toBe(
-              false
+              false,
             );
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('challenge mode variety achievements require all specified challenge modes', () => {
     const challengeModeAchievements = varietyAchievements.filter(
-      a => a.requirements.additional?.challengeModes
+      a => a.requirements.additional?.challengeModes,
     );
 
     if (challengeModeAchievements.length === 0) {
@@ -230,8 +230,8 @@ describe('Property 6: Variety Achievement Unlocking', () => {
             allTimeStats: {
               dojosUsed: [],
               modesUsed: [],
-              challengeModesUsed: [...requiredChallengeModes]
-            }
+              challengeModesUsed: [...requiredChallengeModes],
+            },
           };
           expect(checkVarietyRequirement(achievement, statsWithAll)).toBe(true);
 
@@ -241,16 +241,16 @@ describe('Property 6: Variety Achievement Unlocking', () => {
               allTimeStats: {
                 dojosUsed: [],
                 modesUsed: [],
-                challengeModesUsed: requiredChallengeModes.slice(0, -1)
-              }
+                challengeModesUsed: requiredChallengeModes.slice(0, -1),
+              },
             };
             expect(checkVarietyRequirement(achievement, statsWithMissing)).toBe(
-              false
+              false,
             );
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -260,7 +260,7 @@ describe('Property 6: Variety Achievement Unlocking', () => {
         fc.constantFrom(...varietyAchievements),
         fc.array(fc.string({ minLength: 1, maxLength: 10 }), {
           minLength: 0,
-          maxLength: 5
+          maxLength: 5,
         }),
         (achievement: Achievement, extraItems: string[]) => {
           const { additional } = achievement.requirements;
@@ -275,17 +275,17 @@ describe('Property 6: Variety Achievement Unlocking', () => {
                 : extraItems,
               challengeModesUsed: additional?.challengeModes
                 ? [...additional.challengeModes, ...extraItems]
-                : extraItems
-            }
+                : extraItems,
+            },
           };
 
           const isUnlocked = checkVarietyRequirement(achievement, stats);
 
           // Should still unlock with extra items
           expect(isUnlocked).toBe(true);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -306,8 +306,8 @@ describe('Property 6: Variety Achievement Unlocking', () => {
             allTimeStats: {
               dojosUsed: [...requiredDojos],
               modesUsed: [...requiredModes],
-              challengeModesUsed: [...requiredChallengeModes]
-            }
+              challengeModesUsed: [...requiredChallengeModes],
+            },
           };
 
           // Create stats with items in reversed order
@@ -315,24 +315,24 @@ describe('Property 6: Variety Achievement Unlocking', () => {
             allTimeStats: {
               dojosUsed: [...requiredDojos].reverse(),
               modesUsed: [...requiredModes].reverse(),
-              challengeModesUsed: [...requiredChallengeModes].reverse()
-            }
+              challengeModesUsed: [...requiredChallengeModes].reverse(),
+            },
           };
 
           const unlockedOriginal = checkVarietyRequirement(
             achievement,
-            statsOriginal
+            statsOriginal,
           );
           const unlockedReversed = checkVarietyRequirement(
             achievement,
-            statsReversed
+            statsReversed,
           );
 
           // Order should not matter
           expect(unlockedOriginal).toBe(unlockedReversed);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
@@ -345,17 +345,17 @@ describe('Property 6: Variety Achievement Unlocking', () => {
             allTimeStats: {
               dojosUsed: [],
               modesUsed: [],
-              challengeModesUsed: []
-            }
+              challengeModesUsed: [],
+            },
           };
 
           const isUnlocked = checkVarietyRequirement(achievement, stats);
 
           // Should not unlock with no usage
           expect(isUnlocked).toBe(false);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

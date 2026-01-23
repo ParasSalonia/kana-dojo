@@ -45,7 +45,7 @@ interface ThemeCardProps {
 const ThemeCard = memo(function ThemeCard({
   theme,
   isSelected,
-  onClick
+  onClick,
 }: ThemeCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const themeName = theme.id.replaceAll('-', ' ');
@@ -57,7 +57,7 @@ const ThemeCard = memo(function ThemeCard({
         backgroundColor: isHovered ? theme.cardColor : theme.backgroundColor,
         border: isSelected
           ? `1px solid ${theme.mainColor}`
-          : `1px solid ${theme.borderColor}`
+          : `1px solid ${theme.borderColor}`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -75,7 +75,7 @@ const ThemeCard = memo(function ThemeCard({
           style={
             {
               background: theme.backgroundColor,
-              '--tw-ring-color': theme.borderColor
+              '--tw-ring-color': theme.borderColor,
             } as React.CSSProperties
           }
         />
@@ -84,7 +84,7 @@ const ThemeCard = memo(function ThemeCard({
           style={
             {
               background: theme.mainColor,
-              '--tw-ring-color': theme.borderColor
+              '--tw-ring-color': theme.borderColor,
             } as React.CSSProperties
           }
         />
@@ -93,7 +93,7 @@ const ThemeCard = memo(function ThemeCard({
           style={
             {
               background: theme.secondaryColor,
-              '--tw-ring-color': theme.borderColor
+              '--tw-ring-color': theme.borderColor,
             } as React.CSSProperties
           }
         />
@@ -126,7 +126,7 @@ export default function ThemesModal({ open, onOpenChange }: ThemesModalProps) {
       setSelectedTheme(themeId);
       applyTheme(themeId);
     },
-    [playClick, setSelectedTheme]
+    [playClick, setSelectedTheme],
   );
 
   const handleClose = useCallback(() => {

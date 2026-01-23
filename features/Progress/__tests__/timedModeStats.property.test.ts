@@ -11,7 +11,7 @@ const timedModeStatsArb = fc
     correct: fc.integer({ min: 0, max: 10000 }),
     wrong: fc.integer({ min: 0, max: 10000 }),
     streak: fc.integer({ min: 0, max: 1000 }),
-    bestStreak: fc.integer({ min: 0, max: 1000 })
+    bestStreak: fc.integer({ min: 0, max: 1000 }),
   })
   .map(({ correct, wrong, streak, bestStreak }) => {
     const total = correct + wrong;
@@ -21,7 +21,7 @@ const timedModeStatsArb = fc
       wrong,
       streak,
       bestStreak,
-      accuracy
+      accuracy,
     } as TimedModeStats;
   });
 
@@ -54,7 +54,7 @@ describe('Timed Mode Stats Display', () => {
           // Verify total is calculated correctly
           expect(displayValues.total).toBe(stats.correct + stats.wrong);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -71,11 +71,11 @@ describe('Timed Mode Stats Display', () => {
             // Accuracy should be (correct / total) * 100
             const expectedAccuracy = (stats.correct / total) * 100;
             expect(displayValues.accuracy).toBe(
-              `${expectedAccuracy.toFixed(1)}%`
+              `${expectedAccuracy.toFixed(1)}%`,
             );
           }
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -84,13 +84,13 @@ describe('Timed Mode Stats Display', () => {
         fc.property(timedModeStatsArb, stats => {
           const displayValues = getTimedModeDisplayValues(stats);
           const accuracyValue = parseFloat(
-            displayValues.accuracy.replace('%', '')
+            displayValues.accuracy.replace('%', ''),
           );
 
           expect(accuracyValue).toBeGreaterThanOrEqual(0);
           expect(accuracyValue).toBeLessThanOrEqual(100);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
 
@@ -102,7 +102,7 @@ describe('Timed Mode Stats Display', () => {
           expect(displayValues.streak).toBeGreaterThanOrEqual(0);
           expect(displayValues.bestStreak).toBeGreaterThanOrEqual(0);
         }),
-        { numRuns: 100 }
+        { numRuns: 100 },
       );
     });
   });
@@ -117,7 +117,7 @@ describe('Timed Mode Stats Display', () => {
         wrong: 0,
         streak: 0,
         bestStreak: 0,
-        accuracy: 0
+        accuracy: 0,
       };
 
       const displayValues = getTimedModeDisplayValues(stats);
@@ -134,7 +134,7 @@ describe('Timed Mode Stats Display', () => {
         wrong: 0,
         streak: 100,
         bestStreak: 100,
-        accuracy: 100
+        accuracy: 100,
       };
 
       const displayValues = getTimedModeDisplayValues(stats);
@@ -148,7 +148,7 @@ describe('Timed Mode Stats Display', () => {
         wrong: 100,
         streak: 0,
         bestStreak: 5,
-        accuracy: 0
+        accuracy: 0,
       };
 
       const displayValues = getTimedModeDisplayValues(stats);
@@ -162,7 +162,7 @@ describe('Timed Mode Stats Display', () => {
         wrong: 1,
         streak: 500,
         bestStreak: 1000,
-        accuracy: 99.99
+        accuracy: 99.99,
       };
 
       const displayValues = getTimedModeDisplayValues(stats);

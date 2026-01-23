@@ -47,7 +47,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     incrementKatakanaCorrect,
     recordAnswerTime,
     incrementWrongStreak,
-    resetWrongStreak
+    resetWrongStreak,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -56,8 +56,8 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
       incrementKatakanaCorrect: state.incrementKatakanaCorrect,
       recordAnswerTime: state.recordAnswerTime,
       incrementWrongStreak: state.incrementWrongStreak,
-      resetWrongStreak: state.resetWrongStreak
-    }))
+      resetWrongStreak: state.resetWrongStreak,
+    })),
   );
 
   const speedStopwatch = useStopwatch({ autoStart: false });
@@ -67,7 +67,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playClick } = useClick();
@@ -86,11 +86,11 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
 
   const selectedKana = useMemo(
     () => kanaGroupIndices.map(i => kana[i].kana).flat(),
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
   const selectedRomaji = useMemo(
     () => kanaGroupIndices.map(i => kana[i].romanji).flat(),
-    [kanaGroupIndices]
+    [kanaGroupIndices],
   );
 
   // Create mapping pairs based on mode
@@ -99,9 +99,9 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
       Object.fromEntries(
         isReverse
           ? selectedRomaji.map((key, i) => [key, selectedKana[i]])
-          : selectedKana.map((key, i) => [key, selectedRomaji[i]])
+          : selectedKana.map((key, i) => [key, selectedRomaji[i]]),
       ),
-    [isReverse, selectedRomaji, selectedKana]
+    [isReverse, selectedRomaji, selectedKana],
   );
 
   // State for characters - uses weighted selection for adaptive learning
@@ -167,7 +167,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     // Use weighted selection - prioritizes characters user struggles with
     const newChar = adaptiveSelector.selectWeightedCharacter(
       sourceArray,
-      correctChar
+      correctChar,
     );
     adaptiveSelector.markCharacterSeen(newChar);
     setCorrectChar(newChar);
@@ -270,7 +270,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-4 sm:w-4/5 sm:gap-10',
-        isHidden ? 'hidden' : ''
+        isHidden ? 'hidden' : '',
       )}
     >
       {/* <GameIntel gameMode={gameMode} /> */}
@@ -284,7 +284,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
             stiffness: 150,
             damping: 20,
             mass: 1,
-            duration: 0.5
+            duration: 0.5,
           }}
           key={correctChar}
         >
@@ -296,7 +296,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
         value={inputValue}
         placeholder='Type your answer...'
         disabled={showContinue}
-        rows={2}
+        rows={4}
         className={clsx(
           'w-full max-w-xs sm:max-w-sm md:max-w-md',
           'rounded-2xl px-5 py-4',
@@ -305,7 +305,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
           'text-[var(--secondary-color)] placeholder:text-base placeholder:font-normal placeholder:text-[var(--secondary-color)]/40',
           'resize-none focus:outline-none',
           'transition-colors duration-200 ease-out',
-          showContinue && 'cursor-not-allowed opacity-60'
+          showContinue && 'cursor-not-allowed opacity-60',
         )}
         onChange={e => setInputValue(e.target.value)}
         onKeyDown={e => {

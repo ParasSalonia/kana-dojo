@@ -20,19 +20,19 @@ const THRESHOLD_REQUIREMENT_TYPES = [
   'blitz_score',
   'streak',
   'days_trained',
-  'total_points'
+  'total_points',
 ] as const;
 
 const thresholdAchievements = ACHIEVEMENTS.filter(a =>
   THRESHOLD_REQUIREMENT_TYPES.includes(
-    a.requirements.type as (typeof THRESHOLD_REQUIREMENT_TYPES)[number]
-  )
+    a.requirements.type as (typeof THRESHOLD_REQUIREMENT_TYPES)[number],
+  ),
 );
 
 // Helper to create stats that meet a threshold achievement's requirements
 function createStatsForThresholdAchievement(
   achievement: Achievement,
-  meetsThreshold: boolean
+  meetsThreshold: boolean,
 ): { allTimeStats: Record<string, unknown> } {
   const { type, value, additional } = achievement.requirements;
   const targetValue = meetsThreshold ? value : Math.max(0, value - 1);
@@ -55,18 +55,18 @@ function createStatsForThresholdAchievement(
       perfectRuns: 0,
       noDeathRuns: 0,
       livesRegenerated: 0,
-      bestStreak: 0
+      bestStreak: 0,
     },
     blitzStats: {
       totalSessions: 0,
       bestSessionScore: 0,
       bestStreak: 0,
-      totalCorrect: 0
+      totalCorrect: 0,
     },
     trainingDays: [] as string[],
     dojosUsed: [] as string[],
     modesUsed: [] as string[],
-    challengeModesUsed: [] as string[]
+    challengeModesUsed: [] as string[],
   };
 
   switch (type) {
@@ -128,7 +128,7 @@ function createStatsForThresholdAchievement(
 // Simplified requirement checker for testing (mirrors the store logic)
 function checkThresholdRequirement(
   achievement: Achievement,
-  stats: { allTimeStats: Record<string, unknown> }
+  stats: { allTimeStats: Record<string, unknown> },
 ): boolean {
   const { type, value, additional } = achievement.requirements;
   const allTimeStats = stats.allTimeStats;
@@ -204,7 +204,7 @@ describe('Property 1: Threshold Achievement Unlocking', () => {
     // Filter to only threshold achievements that don't require total_points
     // (total_points depends on achievement state, not just stats)
     const testableAchievements = thresholdAchievements.filter(
-      a => a.requirements.type !== 'total_points'
+      a => a.requirements.type !== 'total_points',
     );
 
     fc.assert(
@@ -214,7 +214,7 @@ describe('Property 1: Threshold Achievement Unlocking', () => {
         (achievement: Achievement, meetsThreshold: boolean) => {
           const stats = createStatsForThresholdAchievement(
             achievement,
-            meetsThreshold
+            meetsThreshold,
           );
           const isUnlocked = checkThresholdRequirement(achievement, stats);
 
@@ -226,15 +226,15 @@ describe('Property 1: Threshold Achievement Unlocking', () => {
               expect(isUnlocked).toBe(false);
             }
           }
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('threshold achievements unlock at exact threshold value', () => {
     const testableAchievements = thresholdAchievements.filter(
-      a => a.requirements.type !== 'total_points' && a.requirements.value > 0
+      a => a.requirements.type !== 'total_points' && a.requirements.value > 0,
     );
 
     fc.assert(
@@ -246,15 +246,15 @@ describe('Property 1: Threshold Achievement Unlocking', () => {
           const isUnlocked = checkThresholdRequirement(achievement, stats);
 
           expect(isUnlocked).toBe(true);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 
   it('threshold achievements unlock when stats exceed threshold', () => {
     const testableAchievements = thresholdAchievements.filter(
-      a => a.requirements.type !== 'total_points'
+      a => a.requirements.type !== 'total_points',
     );
 
     fc.assert(
@@ -343,9 +343,9 @@ describe('Property 1: Threshold Achievement Unlocking', () => {
 
           const isUnlocked = checkThresholdRequirement(achievement, stats);
           expect(isUnlocked).toBe(true);
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

@@ -3,39 +3,95 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
+/**
+ * OG Image Generation Endpoint
+ * Generates dynamic Open Graph images for social media sharing
+ * URL: /api/og?title=...&description=...&type=...
+ */
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = request.nextUrl;
     const title = searchParams.get('title') || 'KanaDojo';
     const description =
-      searchParams.get('description') || 'Learn Japanese Online';
+      searchParams.get('description') ||
+      'Master Japanese with interactive learning';
     const type = searchParams.get('type') || 'default';
 
-    // Gradient backgrounds based on type
-    const gradients = {
-      default: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      kana: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      kanji: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-      vocabulary: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-      academy: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    // Define colors and gradients based on type
+    const themes = {
+      kana: {
+        gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        icon: 'あ',
+        accentColor: '#667eea',
+      },
+      kanji: {
+        gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        icon: '漢',
+        accentColor: '#f5576c',
+      },
+      vocabulary: {
+        gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        icon: '語',
+        accentColor: '#00f2fe',
+      },
+      academy: {
+        gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+        icon: '学',
+        accentColor: '#fa709a',
+      },
+      default: {
+        gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        icon: '道',
+        accentColor: '#667eea',
+      },
     };
 
-    const gradient =
-      gradients[type as keyof typeof gradients] || gradients.default;
+    const theme = themes[type as keyof typeof themes] || themes.default;
 
     return new ImageResponse(
-      (
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: theme.gradient,
+          fontFamily: 'system-ui, sans-serif',
+          position: 'relative',
+        }}
+      >
+        {/* Background Pattern */}
         <div
           style={{
-            background: gradient,
-            width: '100%',
-            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.1,
+            display: 'flex',
+            fontSize: '200px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'white',
+          }}
+        >
+          {theme.icon}
+        </div>
+
+        {/* Content Container */}
+        <div
+          style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             padding: '80px',
-            fontFamily: 'system-ui, sans-serif'
+            maxWidth: '1100px',
+            position: 'relative',
+            zIndex: 1,
           }}
         >
           {/* Logo/Brand */}
@@ -43,15 +99,16 @@ export async function GET(request: NextRequest) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              marginBottom: '40px'
+              marginBottom: '40px',
             }}
           >
             <div
               style={{
-                fontSize: '72px',
-                fontWeight: 'bold',
+                fontSize: '48px',
+                fontWeight: '900',
                 color: 'white',
-                textShadow: '0 4px 12px rgba(0,0,0,0.2)'
+                letterSpacing: '-0.05em',
+                textShadow: '0 4px 20px rgba(0,0,0,0.3)',
               }}
             >
               KanaDojo
@@ -61,14 +118,19 @@ export async function GET(request: NextRequest) {
           {/* Title */}
           <div
             style={{
-              fontSize: '56px',
-              fontWeight: 'bold',
+              fontSize: '64px',
+              fontWeight: '900',
               color: 'white',
               textAlign: 'center',
-              marginBottom: '24px',
-              maxWidth: '900px',
               lineHeight: 1.2,
-              textShadow: '0 2px 8px rgba(0,0,0,0.15)'
+              marginBottom: '30px',
+              textShadow: '0 4px 30px rgba(0,0,0,0.4)',
+              maxWidth: '900px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
             }}
           >
             {title}
@@ -78,56 +140,56 @@ export async function GET(request: NextRequest) {
           {description && (
             <div
               style={{
-                fontSize: '32px',
-                color: 'rgba(255,255,255,0.9)',
+                fontSize: '30px',
+                color: 'rgba(255, 255, 255, 0.95)',
                 textAlign: 'center',
-                maxWidth: '800px',
                 lineHeight: 1.4,
-                textShadow: '0 1px 4px rgba(0,0,0,0.1)'
+                maxWidth: '800px',
+                textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
               }}
             >
               {description}
             </div>
           )}
+        </div>
 
-          {/* Bottom Badge */}
+        {/* Bottom Badge */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '40px',
+            right: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            background: 'rgba(255, 255, 255, 0.2)',
+            padding: '15px 30px',
+            borderRadius: '50px',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
           <div
             style={{
-              position: 'absolute',
-              bottom: '60px',
-              right: '80px',
-              display: 'flex',
-              alignItems: 'center',
-              background: 'rgba(255,255,255,0.2)',
-              backdropFilter: 'blur(10px)',
-              padding: '16px 28px',
-              borderRadius: '50px',
               fontSize: '24px',
               color: 'white',
-              fontWeight: '600'
+              fontWeight: '600',
             }}
           >
-            🎌 Free Japanese Learning Platform
+            kanadojo.com
           </div>
         </div>
-      ),
+      </div>,
       {
         width: 1200,
         height: 630,
-        // Cache OG images at CDN for 24 hours, allow stale for 7 days
-        headers: {
-          'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800'
-        }
-      }
+      },
     );
-  } catch (e) {
-    const error = e as Error;
-    console.error(error);
-    return new Response(
-      `Failed to generate image: ${error.message || 'Unknown error'}`,
-      {
-        status: 500
-      }
-    );
+  } catch (error) {
+    console.error('OG Image generation error:', error);
+    return new Response('Failed to generate image', { status: 500 });
   }
 }

@@ -22,7 +22,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
   variant = 'default',
   disabled = false,
   onPlay,
-  onStop
+  onStop,
 }) => {
   const { speak, stop, isPlaying, isSupported, refreshVoices } =
     useJapaneseTTS();
@@ -52,7 +52,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
       await speak(text, {
         rate: pronunciationSpeed,
         pitch: pronunciationPitch,
-        volume: 0.8
+        volume: 0.8,
       });
     }
   };
@@ -60,13 +60,13 @@ const AudioButton: React.FC<AudioButtonProps> = ({
   const sizeClasses = {
     sm: 'p-2 text-sm',
     md: 'p-3 text-base',
-    lg: 'p-4 text-lg'
+    lg: 'p-4 text-lg',
   };
 
   const iconSizes = {
     sm: 16,
     md: 20,
-    lg: 24
+    lg: 24,
   };
 
   // Don't render if pronunciation is disabled
@@ -84,7 +84,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
           'active:scale-95',
           'flex items-center justify-center',
           sizeClasses[size],
-          className
+          className,
         )}
         title='Try pronunciation (may work in some browsers)'
       >
@@ -111,7 +111,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
           'disabled:cursor-not-allowed disabled:opacity-50',
           'flex items-center justify-center',
           sizeClasses[size],
-          className
+          className,
         )}
         title={`${isPlaying ? 'Stop' : 'Play'} pronunciation: ${text}`}
       >
@@ -130,7 +130,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
           'hover:opacity-80 active:opacity-60',
           'disabled:cursor-not-allowed disabled:opacity-50',
           sizeClasses[size],
-          className
+          className,
         )}
         title={`${isPlaying ? 'Stop' : 'Play'} pronunciation: ${text}`}
       >
@@ -153,7 +153,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
         'text-[var(--secondary-color)]',
         'flex-1 overflow-hidden',
         sizeClasses[size],
-        className
+        className,
       )}
       title={`${isPlaying ? 'Stop' : 'Play'} pronunciation: ${text}`}
     >

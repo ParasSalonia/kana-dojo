@@ -5,11 +5,11 @@ import {
   loadHistory,
   saveEntry,
   deleteEntry,
-  clearAll
+  clearAll,
 } from '../services/historyService';
 import {
   translate as translateAPI,
-  getErrorMessage
+  getErrorMessage,
 } from '../services/translationAPI';
 import { detectLanguage } from '../lib/languageDetection';
 
@@ -49,7 +49,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
         sourceLanguage: detection.language,
         targetLanguage: targetLang,
         detectedLanguage: detection,
-        error: null
+        error: null,
       });
     } else {
       set({ sourceText: text, detectedLanguage: null, error: null });
@@ -63,7 +63,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
       targetLanguage: targetLang,
       autoDetect: false,
       detectedLanguage: null,
-      error: null
+      error: null,
     });
   },
 
@@ -82,7 +82,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
         autoDetect: newAutoDetect,
         sourceLanguage: detection.language,
         targetLanguage: targetLang,
-        detectedLanguage: detection
+        detectedLanguage: detection,
       });
     } else {
       set({ autoDetect: newAutoDetect, detectedLanguage: null });
@@ -97,7 +97,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
       targetLanguage: sourceLanguage,
       sourceText: translatedText,
       translatedText: sourceText,
-      error: null
+      error: null,
     });
   },
 
@@ -116,7 +116,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
       const response = await translateAPI(
         sourceText,
         sourceLanguage,
-        targetLanguage
+        targetLanguage,
       );
 
       // Generate unique ID for history entry
@@ -128,7 +128,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
         sourceLanguage,
         targetLanguage,
         romanization: response.romanization,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       // Update state with translation result
@@ -136,7 +136,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
         translatedText: response.translatedText,
         romanization: response.romanization || null,
         isLoading: false,
-        error: null
+        error: null,
       });
 
       // Add to history
@@ -149,7 +149,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
 
       set({
         isLoading: false,
-        error: errorMessage
+        error: errorMessage,
       });
     }
   },
@@ -159,7 +159,7 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
       sourceText: '',
       translatedText: '',
       romanization: null,
-      error: null
+      error: null,
     }),
 
   loadHistory: async () => {
@@ -205,9 +205,40 @@ const useTranslatorStore = create<TranslatorState>()((set, get) => ({
       sourceLanguage: entry.sourceLanguage,
       targetLanguage: entry.targetLanguage,
       romanization: entry.romanization || null,
-      error: null
+      error: null,
     });
-  }
+  },
+
+  // Initialize from URL parameters for sharable translations
+  initFromUrlParams: (params: {
+    text?: string;
+    from?: string;
+    to?: string;
+    q?: string;
+  }) => {
+    const text = params.text || params.q;
+    if (!text) return false;
+
+    const validLanguages = ['en', 'ja'];
+    const sourceLanguage = validLanguages.includes(params.from || '')
+      ? (params.from as Language)
+      : 'en';
+    const targetLanguage = validLanguages.includes(params.to || '')
+      ? (params.to as Language)
+      : sourceLanguage === 'en'
+        ? 'ja'
+        : 'en';
+
+    set({
+      sourceText: decodeURIComponent(text),
+      sourceLanguage,
+      targetLanguage,
+      autoDetect: false,
+      error: null,
+    });
+
+    return true;
+  },
 }));
 
 // Set up online/offline listeners

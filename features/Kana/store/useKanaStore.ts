@@ -78,7 +78,7 @@ const useKanaStore = create<IKanaState>(set => ({
       return sameArray(next, state.kanaGroupIndices)
         ? state
         : { kanaGroupIndices: next };
-    })
+    }),
 }));
 
 export default useKanaStore;

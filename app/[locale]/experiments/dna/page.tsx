@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Kana DNA - Double Helix Animation | KanaDojo',
-  description: 'Watch a mesmerizing double helix of rotating kana!'
+  description: 'Watch a mesmerizing double helix of rotating kana!',
 };
 
 export default function DNAPage() {

@@ -9,7 +9,7 @@ const subsets = [
   'katakana-base',
   'katakana-dakuon',
   'katakana-yoon',
-  'katakana-foreign'
+  'katakana-foreign',
 ] as const;
 
 export function generateStaticParams() {
@@ -21,14 +21,14 @@ interface PageProps {
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: PageProps): Promise<Metadata> {
   const { subset, locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
 
   // Convert subset to key (e.g., hiragana-base -> hiraganaBase)
   const subsetKey = subset.replace(/-([a-z])/g, (_, letter) =>
-    letter.toUpperCase()
+    letter.toUpperCase(),
   );
 
   const title = t(`kanaSubset.${subsetKey}.title`);
@@ -52,24 +52,24 @@ export async function generateMetadata({
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: titleShort
-        }
-      ]
+          alt: titleShort,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: titleShort,
       description,
-      images: [ogImageUrl]
+      images: [ogImageUrl],
     },
     alternates: {
       canonical: `https://kanadojo.com/${locale}/kana/${subset}`,
       languages: {
         en: `https://kanadojo.com/en/kana/${subset}`,
         es: `https://kanadojo.com/es/kana/${subset}`,
-        ja: `https://kanadojo.com/ja/kana/${subset}`
-      }
-    }
+        ja: `https://kanadojo.com/ja/kana/${subset}`,
+      },
+    },
   };
 }
 

@@ -4,11 +4,11 @@ import {
   motion,
   AnimatePresence,
   type Variants,
-  type MotionStyle
+  type MotionStyle,
 } from 'framer-motion';
 import clsx from 'clsx';
 import useVocabStore, {
-  IVocabObj
+  IVocabObj,
 } from '@/features/Vocabulary/store/useVocabStore';
 import { Random } from 'random-js';
 import { useCorrect, useError, useClick } from '@/shared/hooks/useAudio';
@@ -39,7 +39,7 @@ const springConfig = {
   type: 'spring' as const,
   stiffness: 400,
   damping: 30,
-  mass: 0.8
+  mass: 0.8,
 };
 
 // Premium entry animation variants for option tiles
@@ -48,9 +48,9 @@ const tileContainerVariants = {
   visible: {
     transition: {
       staggerChildren: 0.08,
-      delayChildren: 0.15
-    }
-  }
+      delayChildren: 0.15,
+    },
+  },
 };
 
 const tileEntryVariants = {
@@ -58,7 +58,7 @@ const tileEntryVariants = {
     opacity: 0,
     scale: 0.7,
     y: 20,
-    rotateX: -15
+    rotateX: -15,
   },
   visible: {
     opacity: 1,
@@ -69,16 +69,16 @@ const tileEntryVariants = {
       type: 'spring' as const,
       stiffness: 350,
       damping: 25,
-      mass: 0.8
-    }
-  }
+      mass: 0.8,
+    },
+  },
 };
 
 // Duolingo-like slide animation for game content transitions
 const gameContentVariants = {
   hidden: {
     opacity: 0,
-    x: 80
+    x: 80,
   },
   visible: {
     opacity: 1,
@@ -88,13 +88,13 @@ const gameContentVariants = {
         type: 'spring' as const,
         stiffness: 350,
         damping: 30,
-        mass: 0.7
+        mass: 0.7,
       },
       opacity: {
         duration: 0.25,
-        ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number]
-      }
-    }
+        ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number],
+      },
+    },
   },
   exit: {
     opacity: 0,
@@ -104,14 +104,14 @@ const gameContentVariants = {
         type: 'spring' as const,
         stiffness: 350,
         damping: 30,
-        mass: 0.7
+        mass: 0.7,
       },
       opacity: {
         duration: 0.25,
-        ease: [0.4, 0.0, 1, 1] as [number, number, number, number]
-      }
-    }
-  }
+        ease: [0.4, 0.0, 1, 1] as [number, number, number, number],
+      },
+    },
+  },
 };
 
 // Celebration bounce animation for correct answers - Duolingo-style sequential jump
@@ -120,9 +120,9 @@ const celebrationContainerVariants = {
   celebrate: {
     transition: {
       staggerChildren: 0.18,
-      delayChildren: 0.08
-    }
-  }
+      delayChildren: 0.08,
+    },
+  },
 };
 
 const celebrationBounceVariants = {
@@ -130,7 +130,7 @@ const celebrationBounceVariants = {
     y: 0,
     scaleX: 1,
     scaleY: 1,
-    opacity: 1
+    opacity: 1,
   },
   celebrate: {
     y: [0, -32, -35, 0, -10, 0],
@@ -141,9 +141,9 @@ const celebrationBounceVariants = {
     transition: {
       duration: 1,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      times: [0, 0.25, 0.35, 0.6, 0.8, 1]
-    }
-  }
+      times: [0, 0.25, 0.35, 0.6, 0.8, 1],
+    },
+  },
 };
 
 // Tile styles shared between active and blank tiles
@@ -169,7 +169,7 @@ const ActiveTile = memo(
     isDisabled,
     isJapanese,
     variants,
-    motionStyle
+    motionStyle,
   }: TileProps) => {
     return (
       <motion.button
@@ -186,7 +186,7 @@ const ActiveTile = memo(
           'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]',
           isDisabled && 'cursor-not-allowed opacity-50',
           // Larger font for Japanese tiles, smaller for meaning tiles
-          isJapanese ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'
+          isJapanese ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl',
         )}
         transition={springConfig}
         lang={isJapanese ? 'ja' : undefined}
@@ -195,7 +195,7 @@ const ActiveTile = memo(
         {char}
       </motion.button>
     );
-  }
+  },
 );
 
 ActiveTile.displayName = 'ActiveTile';
@@ -209,13 +209,13 @@ const BlankTile = memo(
           tileBaseStyles,
           'border-transparent bg-[var(--border-color)]/30',
           'select-none',
-          isJapanese ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'
+          isJapanese ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl',
         )}
       >
         <span className='opacity-0'>{char}</span>
       </div>
     );
-  }
+  },
 );
 
 BlankTile.displayName = 'BlankTile';
@@ -242,25 +242,25 @@ const VocabWordBuildingGame = ({
   isReverse: externalIsReverse,
   distractorCount: externalDistractorCount = 3,
   onCorrect: externalOnCorrect,
-  onWrong: externalOnWrong
+  onWrong: externalOnWrong,
 }: VocabWordBuildingGameProps) => {
   // Smart reverse mode - used when not controlled externally
   const {
     isReverse: internalIsReverse,
     decideNextMode: decideNextReverseMode,
-    recordWrongAnswer: recordReverseModeWrong
+    recordWrongAnswer: recordReverseModeWrong,
   } = useSmartReverseMode();
 
   // Use external isReverse if provided, otherwise use internal smart mode
   const isReverse = externalIsReverse ?? internalIsReverse;
   const distractorCount = Math.min(
     externalDistractorCount,
-    selectedWordObjs.length - 1
+    selectedWordObjs.length - 1,
   );
 
   // Get the current vocabulary collection from the Vocab store
   const selectedVocabCollection = useVocabStore(
-    state => state.selectedVocabCollection
+    state => state.selectedVocabCollection,
   );
 
   // Answer timing for speed achievements
@@ -286,7 +286,7 @@ const VocabWordBuildingGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     incrementCharacterScore,
-    addCorrectAnswerTime
+    addCorrectAnswerTime,
   } = useStatsStore(
     useShallow(state => ({
       score: state.score,
@@ -299,14 +299,14 @@ const VocabWordBuildingGame = ({
       incrementWrongAnswers: state.incrementWrongAnswers,
       addCharacterToHistory: state.addCharacterToHistory,
       incrementCharacterScore: state.incrementCharacterScore,
-      addCorrectAnswerTime: state.addCorrectAnswerTime
-    }))
+      addCorrectAnswerTime: state.addCorrectAnswerTime,
+    })),
   );
 
   // Create Map for O(1) lookups
   const wordObjMap = useMemo(
     () => new Map(selectedWordObjs.map(obj => [obj.word, obj])),
-    [selectedWordObjs]
+    [selectedWordObjs],
   );
 
   const [bottomBarState, setBottomBarState] = useState<BottomBarState>('check');
@@ -323,7 +323,7 @@ const VocabWordBuildingGame = ({
           wordObj: null as IVocabObj | null,
           correctAnswer: '',
           allTiles: [] as string[],
-          quizType: currentQuizType
+          quizType: currentQuizType,
         };
       }
 
@@ -339,7 +339,7 @@ const VocabWordBuildingGame = ({
           wordObj: null as IVocabObj | null,
           correctAnswer: '',
           allTiles: [] as string[],
-          quizType: currentQuizType
+          quizType: currentQuizType,
         };
       }
 
@@ -383,7 +383,7 @@ const VocabWordBuildingGame = ({
 
       // Shuffle all tiles
       const allTiles = [correctAnswer, ...distractors].sort(
-        () => random.real(0, 1) - 0.5
+        () => random.real(0, 1) - 0.5,
       );
 
       return {
@@ -392,14 +392,14 @@ const VocabWordBuildingGame = ({
         correctAnswer,
         allTiles,
         displayChar: isReverse ? selectedWordObj.meanings[0] : selectedWord,
-        quizType: effectiveQuizType // Use the effective quiz type (adjusted for kana words)
+        quizType: effectiveQuizType, // Use the effective quiz type (adjusted for kana words)
       };
     },
-    [isReverse, selectedWordObjs, distractorCount, wordObjMap]
+    [isReverse, selectedWordObjs, distractorCount, wordObjMap],
   );
 
   const [questionData, setQuestionData] = useState(() =>
-    generateQuestion(quizType)
+    generateQuestion(quizType),
   );
   const [placedTiles, setPlacedTiles] = useState<string[]>([]);
   const [isChecking, setIsChecking] = useState(false);
@@ -408,14 +408,14 @@ const VocabWordBuildingGame = ({
   const [currentWordObjForSummary, setCurrentWordObjForSummary] =
     useState<IVocabObj | null>(null);
   const [feedback, setFeedback] = useState<React.ReactElement>(
-    <>{'feedback ~'}</>
+    <>{'feedback ~'}</>,
   );
 
   // Determine next quiz type based on word content
   const getNextQuizType = useCallback(
     (
       word: string,
-      currentType: 'meaning' | 'reading'
+      currentType: 'meaning' | 'reading',
     ): 'meaning' | 'reading' => {
       // Only toggle to reading quiz if the word contains kanji
       // Pure kana words skip reading quiz since reading === word
@@ -425,7 +425,7 @@ const VocabWordBuildingGame = ({
       // For pure kana words, always use meaning quiz
       return 'meaning';
     },
-    []
+    [],
   );
 
   const resetGame = useCallback(
@@ -442,7 +442,7 @@ const VocabWordBuildingGame = ({
       speedStopwatch.reset();
       speedStopwatch.start();
     },
-    [generateQuestion, quizType]
+    [generateQuestion, quizType],
   );
 
   // Only reset game on isReverse change if we're NOT showing the answer summary
@@ -537,7 +537,7 @@ const VocabWordBuildingGame = ({
         <>
           <span className='text-[var(--secondary-color)]'>{`${displayText} = ${questionData.correctAnswer} `}</span>
           <CircleCheck className='inline text-[var(--main-color)]' />
-        </>
+        </>,
       );
 
       // Advance smart reverse mode if not externally controlled
@@ -590,7 +590,7 @@ const VocabWordBuildingGame = ({
     addCorrectAnswerTime,
     recordAnswerTime,
     isReverse,
-    quizType
+    quizType,
   ]);
 
   // Handle Continue button (only for correct answers)
@@ -614,7 +614,7 @@ const VocabWordBuildingGame = ({
     questionData.word,
     resetGame,
     getNextQuizType,
-    quizType
+    quizType,
   ]);
 
   // Handle Try Again button (for wrong answers)
@@ -654,7 +654,7 @@ const VocabWordBuildingGame = ({
         setPlacedTiles(prev => [...prev, char]);
       }
     },
-    [isChecking, bottomBarState, placedTiles, playClick]
+    [isChecking, bottomBarState, placedTiles, playClick],
   );
 
   // Not enough words
@@ -673,7 +673,7 @@ const VocabWordBuildingGame = ({
     <div
       className={clsx(
         'flex w-full flex-col items-center gap-6 sm:w-4/5 sm:gap-10',
-        isHidden && 'hidden'
+        isHidden && 'hidden',
       )}
     >
       <AnimatePresence mode='wait'>
@@ -740,7 +740,7 @@ const VocabWordBuildingGame = ({
                         questionData.quizType === 'meaning' && isReverse
                           ? 'text-5xl sm:text-6xl'
                           : 'text-6xl sm:text-8xl',
-                        'text-center'
+                        'text-center',
                       )}
                       lang='ja'
                     />
@@ -766,7 +766,7 @@ const VocabWordBuildingGame = ({
                   // Use taller min-height when tiles are Japanese (reverse mode OR reading quiz)
                   isReverse || questionData.quizType === 'reading'
                     ? 'min-h-[5.5rem]'
-                    : 'min-h-[5rem]'
+                    : 'min-h-[5rem]',
                 )}
               >
                 <motion.div

@@ -11,7 +11,7 @@ import {
   hslToRgb,
   rgbToHsl,
   meetsWcagAA,
-  getHueDifference
+  getHueDifference,
 } from './colorUtils';
 import { validateTheme, validateAllThemes } from './themeValidator';
 import themeSets from '../data/themes';
@@ -28,13 +28,13 @@ describe('Color Parsing', () => {
     expect(parseColor('rgb(255, 255, 255)')).toEqual({
       r: 255,
       g: 255,
-      b: 255
+      b: 255,
     });
     expect(parseColor('rgb(0, 0, 0)')).toEqual({ r: 0, g: 0, b: 0 });
     expect(parseColor('rgba(128, 64, 32, 0.5)')).toEqual({
       r: 128,
       g: 64,
-      b: 32
+      b: 32,
     });
   });
 
@@ -137,7 +137,7 @@ describe('Theme Validation', () => {
       cardColor: 'hsl(0, 0%, 18%)',
       borderColor: 'hsl(0, 0%, 40%)',
       mainColor: 'hsl(0, 0%, 90%)',
-      secondaryColor: 'hsl(0, 0%, 80%)'
+      secondaryColor: 'hsl(0, 0%, 80%)',
     };
 
     const result = validateTheme(compliantTheme);
@@ -152,7 +152,7 @@ describe('Theme Validation', () => {
       cardColor: 'hsl(0, 0%, 55%)',
       borderColor: 'hsl(0, 0%, 70%)',
       mainColor: 'hsl(0, 0%, 60%)', // Too close to background
-      secondaryColor: 'hsl(0, 0%, 90%)'
+      secondaryColor: 'hsl(0, 0%, 90%)',
     };
 
     const result = validateTheme(lowContrastTheme);
@@ -201,7 +201,7 @@ describe('Theme Audit - All Existing Themes', () => {
           console.log(`\n${r.themeId}:`);
           r.issues.forEach(issue => {
             console.log(
-              `  - ${issue.property} on ${issue.background}: ${issue.actualRatio}:1 (need ${issue.requiredRatio}:1)`
+              `  - ${issue.property} on ${issue.background}: ${issue.actualRatio}:1 (need ${issue.requiredRatio}:1)`,
             );
           });
         });
@@ -220,7 +220,7 @@ describe('Theme Audit - All Existing Themes', () => {
         console.log(`\n[FAIL] ${theme.id}:`);
         result.issues.forEach(issue => {
           console.log(
-            `  ${issue.property} on ${issue.background}: ${issue.actualRatio}:1 < ${issue.requiredRatio}:1`
+            `  ${issue.property} on ${issue.background}: ${issue.actualRatio}:1 < ${issue.requiredRatio}:1`,
           );
         });
       }

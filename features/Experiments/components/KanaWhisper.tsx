@@ -10,7 +10,7 @@ import { allKana } from '../data/kanaData';
 const KanaWhisper = () => {
   const [phase, setPhase] = useState<'show' | 'hide' | 'guess'>('show');
   const [target, setTarget] = useState(
-    () => allKana[Math.floor(Math.random() * allKana.length)]
+    () => allKana[Math.floor(Math.random() * allKana.length)],
   );
   const [options, setOptions] = useState<typeof allKana>([]);
   const [score, setScore] = useState(0);
@@ -101,7 +101,7 @@ const KanaWhisper = () => {
                   ? 'border-green-500 bg-green-500/20 text-green-400'
                   : result === 'wrong'
                     ? 'opacity-50'
-                    : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] hover:scale-105'
+                    : 'border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] hover:scale-105',
               )}
             >
               {opt.kana}
