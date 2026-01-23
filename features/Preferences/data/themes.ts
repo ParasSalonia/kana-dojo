@@ -242,6 +242,12 @@ const baseThemeSets: BaseThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: 'seaside-udon',
+        backgroundColor: 'oklch(92.0% 0.015 210.0 / 1)',
+        mainColor: 'oklch(60.0% 0.130 215.0 / 1)',
+        secondaryColor: 'oklch(85.0% 0.155 95.0 / 1)'
+      },
+      {
         id: 'koi-pond',
         backgroundColor: 'oklch(20.0% 0.048 240.0 / 1)',
         mainColor: 'oklch(80.0% 0.175 55.0 / 1)',
