@@ -276,8 +276,10 @@
     "backgroundColor": "oklch(17.0% 0.028 280.0 / 1)",
     "mainColor": "oklch(75.0% 0.145 5.0 / 1)",
     "secondaryColor": "oklch(85.0% 0.095 350.0 / 1)",
-    "issued": true,
-    "completed": false
+    "issued": false,
+    "completed": true,
+    "completedBy": "Sigmabrogz",
+    "completedPR": 9249
   },
   {
     "id": "okinawa-sea",
