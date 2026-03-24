@@ -640,5 +640,11 @@
     "backgroundColor": "oklch(20.0% 0.018 210.0 / 1)",
     "mainColor": "oklch(80.0% 0.085 200.0 / 1)",
     "secondaryColor": "oklch(68.0% 0.105 160.0 / 1)"
+  },
+  {
+  id: 'sumi-coal',
+  backgroundColor: 'oklch(13.0% 0.015 260.0 / 1)',
+  mainColor: 'oklch(68.0% 0.035 220.0 / 1)',
+  secondaryColor: 'oklch(45.0% 0.025 260.0 / 1)'
   }
 ]
