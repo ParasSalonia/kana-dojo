@@ -41,6 +41,15 @@ const levelStyles = {
   },
 };
 
+const newIconClassesByLevel = {
+  section:
+    'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-b-6 border-(--secondary-color-accent) bg-(--secondary-color) leading-none text-(--background-color) animate-float [--float-distance:-4px] [&>svg]:h-7 [&>svg]:w-7',
+  subsection:
+    'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-b-6 border-(--secondary-color-accent) bg-(--secondary-color) leading-none text-(--background-color) animate-float [--float-distance:-3.5px] [&>svg]:h-5 [&>svg]:w-5',
+  subsubsection:
+    'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-b-6 border-(--secondary-color-accent) bg-(--secondary-color) leading-none text-(--background-color) animate-float [--float-distance:-3px] [&>svg]:h-[18px] [&>svg]:w-[18px]',
+} as const;
+
 const CollapsibleSection = ({
   title,
   icon,
@@ -118,7 +127,7 @@ const CollapsibleSection = ({
           <span
             className={clsx(
               useNewIconDesign
-                ? 'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-b-6 border-(--secondary-color-accent) bg-(--secondary-color) leading-none text-(--background-color) animate-float [--float-distance:-4px]'
+                ? newIconClassesByLevel[level]
                 : 'flex h-11 w-11 items-center justify-center rounded-xl bg-(--card-color) text-(--secondary-color)',
               !useNewIconDesign && 'transition-colors duration-300',
               !useNewIconDesign && 'group-active:bg-(--background-color)',

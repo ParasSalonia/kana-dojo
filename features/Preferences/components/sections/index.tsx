@@ -61,7 +61,7 @@ const Settings = () => {
             defaultOpen={true}
             storageKey='prefs-themes'
           >
-            <Themes />
+            <Themes useNewIconDesign={USE_NEW_PREFERENCES_ICON_DESIGN} />
           </CollapsibleSection>
 
           {/* Fonts Subsection */}
@@ -73,7 +73,7 @@ const Settings = () => {
             defaultOpen={true}
             storageKey='prefs-fonts'
           >
-            <Fonts />
+            <Fonts useNewIconDesign={USE_NEW_PREFERENCES_ICON_DESIGN} />
           </CollapsibleSection>
         </div>
       </CollapsibleSection>
@@ -89,7 +89,7 @@ const Settings = () => {
         defaultOpen={true}
         storageKey='prefs-effects'
       >
-        <Effects />
+        <Effects useNewIconDesign={USE_NEW_PREFERENCES_ICON_DESIGN} />
       </CollapsibleSection>
 
       {/* Goal Timers section - commented out
